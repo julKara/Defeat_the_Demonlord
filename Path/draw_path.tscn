@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cats61ytkbbvj"]
+
+[ext_resource type="Script" uid="uid://ceagbi5r74ksm" path="res://Path/draw_path.gd" id="1_joe3k"]
+
+[node name="DrawPath" type="Node2D"]
+script = ExtResource("1_joe3k")
