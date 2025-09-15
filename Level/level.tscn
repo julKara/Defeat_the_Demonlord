@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bmmx3beh2xbpv"]
+[gd_scene load_steps=7 format=3 uid="uid://bmmx3beh2xbpv"]
 
 [ext_resource type="Texture2D" uid="uid://derq8l0w3lfuv" path="res://Textures/test_map2.png" id="1_uawph"]
 [ext_resource type="PackedScene" uid="uid://cats61ytkbbvj" path="res://Path/draw_path.tscn" id="2_uawph"]
 [ext_resource type="PackedScene" uid="uid://yujvqsthne04" path="res://Character/character.tscn" id="3_iincs"]
+[ext_resource type="PackedScene" uid="uid://cb0r0gyeijrsu" path="res://grid.tscn" id="4_52x1o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0b4ue"]
 texture = ExtResource("1_uawph")
@@ -28,3 +29,9 @@ layer_0/tile_data = PackedInt32Array(0, 1, 0, 65536, 1, 0, 131072, 1, 0, 196608,
 
 [node name="Character" parent="." instance=ExtResource("3_iincs")]
 position = Vector2(32, 32)
+
+[node name="GridContainer" parent="." instance=ExtResource("4_52x1o")]
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 42.0
+offset_bottom = 42.0
