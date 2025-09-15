@@ -5,4 +5,5 @@
 [node name="GridContainer" type="GridContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
+columns = 5
 script = ExtResource("1_ebq2e")

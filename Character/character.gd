@@ -9,6 +9,8 @@ var is_moving: bool
 var current_point_path: PackedVector2Array
 var tile_size: int = 64
 
+var mobility: int = 3
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -44,8 +46,12 @@ func _ready() -> void:
 # Function that creates a path towards the selected tile
 func _input(event):
 	# Don't do anything unless the mouse is pressed
-	if event.is_action_pressed("move") == false:
+	if event.is_action_pressed("select") == false:
 		return
+	
+	for n in range(-mobility, mobility+1):
+		tile_map.set_cell(1, tile_map.local_to_map(global_position) + Vector2i(n,0), 0, Vector2i(0,1), 0)
+		tile_map.set_cell(1, tile_map.local_to_map(global_position) + Vector2i(0,n), 0, Vector2i(0,1), 0)
 	
 	var id_path
 	

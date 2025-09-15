@@ -1,10 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://yujvqsthne04"]
+[gd_scene load_steps=4 format=3 uid="uid://yujvqsthne04"]
 
 [ext_resource type="Script" uid="uid://bx8aho3tlkxwi" path="res://Character/character.gd" id="1_pjt0s"]
 [ext_resource type="Texture2D" uid="uid://dsgwwf0cbvbe5" path="res://Textures/character.jpg" id="2_wa5vi"]
+[ext_resource type="PackedScene" uid="uid://cb0r0gyeijrsu" path="res://grid.tscn" id="3_jkkns"]
 
 [node name="Character" type="Node2D"]
 script = ExtResource("1_pjt0s")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_wa5vi")
+
+[node name="GridContainer" parent="." instance=ExtResource("3_jkkns")]
+visible = false
+offset_left = -30.0
+offset_top = -30.0
+offset_right = 286.0
+offset_bottom = 286.0
+height = 17

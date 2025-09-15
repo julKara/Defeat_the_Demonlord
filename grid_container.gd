@@ -34,7 +34,7 @@ func _ready():
 func _create_grid():
 	columns = width
 	
-	for i in width * height:
+	for i in height:
 		var grid_cell_node = grid_cell.instantiate()
 		grid_cell_node.custom_minimum_size = Vector2(cell_width, cell_height)
 		add_child(grid_cell_node.duplicate())
