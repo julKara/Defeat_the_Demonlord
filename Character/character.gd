@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var tile_map = $"../TileMap"
+@onready var draw_path = $"../DrawPath"
 
 var astar_grid: AStarGrid2D
 var current_id_path: Array[Vector2i]
@@ -8,6 +9,7 @@ var target_position: Vector2
 var is_moving: bool
 var current_point_path: PackedVector2Array
 var tile_size: int = 64
+var selected: bool = false
 
 var mobility: int = 3
 
@@ -30,7 +32,7 @@ func _ready() -> void:
 	astar_grid.update()
 	
 	# Go through all tiles and disables the tiles in the A* grid that are
-	# not deined as "walkable" in the tilemap
+	# not defined as "walkable" in the tilemap
 	for x in tile_map.get_used_rect().size.x:
 		for y in tile_map.get_used_rect().size.y:
 			var tile_position = Vector2i(
@@ -49,34 +51,70 @@ func _input(event):
 	if event.is_action_pressed("select") == false:
 		return
 	
-	for n in range(-mobility, mobility+1):
-		tile_map.set_cell(1, tile_map.local_to_map(global_position) + Vector2i(n,0), 0, Vector2i(0,1), 0)
-		tile_map.set_cell(1, tile_map.local_to_map(global_position) + Vector2i(0,n), 0, Vector2i(0,1), 0)
+	# Variable used to calculate the tiles withing moving rang
+	var mobility_path
 	
-	var id_path
+	# Click to select a character and display move range
+	if (selected == false and
+	tile_map.local_to_map(get_global_mouse_position()) == tile_map.local_to_map(global_position)):		
+		# Go through the entire grid and highlight the tiles that are possible to move to
+		# depending on the characters mobility	
+		for x in astar_grid.get_size().x:
+			for y in astar_grid.get_size().y:
+				# Skip tiles that are not "walkable"
+				if astar_grid.is_point_solid(Vector2i(x,y)):
+					continue
+				# Calculate the path from the character to the current tile (x,y)
+				mobility_path = astar_grid.get_id_path(
+					tile_map.local_to_map(global_position),
+					Vector2i(x,y)
+				)
+				
+				# Draw tiles with a path to it that is within the range
+				if mobility_path.size() <= (mobility + 1): # mobility+1 since path includes start position
+					tile_map.set_cell(1, Vector2i(x,y), 0, Vector2i(0,1), 0)
+				
+		selected = true
 	
-	if is_moving:
-		id_path = astar_grid.get_id_path(
-			tile_map.local_to_map(target_position),
-			tile_map.local_to_map(get_global_mouse_position())
-		)
-	else:
-		# Finds the coordinates on the grid of the selected tile and the path to get there
-		id_path = astar_grid.get_id_path(
-			tile_map.local_to_map(global_position),
-			tile_map.local_to_map(get_global_mouse_position())
-		).slice(1) # Removes the first coordinates, since they are the current position, which is irrelevant
+
+	# Click to deselect character and hide move range
+	elif (selected == true and
+	tile_map.local_to_map(get_global_mouse_position()) == tile_map.local_to_map(global_position)):
+		tile_map.clear_layer(1)
+		selected = false
+		draw_path.hide()
 	
-	if id_path.is_empty() == false:
-		current_id_path = id_path
+	# If the character is selected, perform the movement	
+	elif (selected == true and
+	tile_map.local_to_map(get_global_mouse_position()) != tile_map.local_to_map(global_position)):
+
+		draw_path.show()
+
+		var id_path
 		
-		current_point_path = astar_grid.get_point_path(
-			tile_map.local_to_map(target_position),
-			tile_map.local_to_map(get_global_mouse_position())
-		)
+		if is_moving:
+			id_path = astar_grid.get_id_path(
+				tile_map.local_to_map(target_position),
+				tile_map.local_to_map(get_global_mouse_position())
+			)
+		else:
+			# Finds the coordinates on the grid of the selected tile and the path to get there
+			id_path = astar_grid.get_id_path(
+				tile_map.local_to_map(global_position),
+				tile_map.local_to_map(get_global_mouse_position())
+			).slice(1) # Removes the first coordinates, since they are the current position, which is irrelevant
 		
-		for i in current_point_path.size():
-			current_point_path[i] += Vector2(tile_size/2, tile_size/2)
+		# Only perform the movement if the path is valid and within range
+		if id_path.is_empty() == false and id_path.size() <= mobility:
+			current_id_path = id_path
+			
+			current_point_path = astar_grid.get_point_path(
+				tile_map.local_to_map(target_position),
+				tile_map.local_to_map(get_global_mouse_position())
+			)
+			
+			for i in current_point_path.size():
+				current_point_path[i] += Vector2(tile_size/2, tile_size/2)
 
 # This function perform the movement and loops constantly(important to remember)	
 func _physics_process(_delta):

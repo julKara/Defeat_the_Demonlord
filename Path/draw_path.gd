@@ -10,5 +10,5 @@ func _process(_delta):
 func _draw():
 	if character.current_point_path.is_empty():
 		return
-		
+	
 	draw_polyline(character.current_point_path, Color.RED)
