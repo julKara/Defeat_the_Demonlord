@@ -11,4 +11,5 @@ func _draw():
 	if character.current_point_path.is_empty():
 		return
 	
-	draw_polyline(character.current_point_path, Color.RED)
+	if character.current_point_path.size() > 1:
+		draw_polyline(character.current_point_path, Color.RED)

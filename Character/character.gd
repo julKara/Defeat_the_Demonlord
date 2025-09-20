@@ -10,6 +10,7 @@ var is_moving: bool
 var current_point_path: PackedVector2Array
 var tile_size: int = 64
 var selected: bool = false
+var start_position: Vector2i
 
 var mobility: int = 3
 
@@ -30,6 +31,8 @@ func _ready() -> void:
 	
 	# Apply the changes made above to the A* grid
 	astar_grid.update()
+	
+	start_position = tile_map.local_to_map(global_position)
 	
 	# Go through all tiles and disables the tiles in the A* grid that are
 	# not defined as "walkable" in the tilemap
@@ -54,9 +57,11 @@ func _input(event):
 	# Variable used to calculate the tiles withing moving rang
 	var mobility_path
 	
+	
 	# Click to select a character and display move range
 	if (selected == false and
 	tile_map.local_to_map(get_global_mouse_position()) == tile_map.local_to_map(global_position)):		
+		
 		# Go through the entire grid and highlight the tiles that are possible to move to
 		# depending on the characters mobility	
 		for x in astar_grid.get_size().x:
@@ -66,7 +71,7 @@ func _input(event):
 					continue
 				# Calculate the path from the character to the current tile (x,y)
 				mobility_path = astar_grid.get_id_path(
-					tile_map.local_to_map(global_position),
+					start_position,
 					Vector2i(x,y)
 				)
 				
@@ -83,6 +88,7 @@ func _input(event):
 		tile_map.clear_layer(1)
 		selected = false
 		draw_path.hide()
+		global_position = tile_map.map_to_local(start_position)
 	
 	# If the character is selected, perform the movement	
 	elif (selected == true and
@@ -100,16 +106,17 @@ func _input(event):
 		else:
 			# Finds the coordinates on the grid of the selected tile and the path to get there
 			id_path = astar_grid.get_id_path(
-				tile_map.local_to_map(global_position),
+				start_position,
 				tile_map.local_to_map(get_global_mouse_position())
-			).slice(1) # Removes the first coordinates, since they are the current position, which is irrelevant
+			)
 		
 		# Only perform the movement if the path is valid and within range
-		if id_path.is_empty() == false and id_path.size() <= mobility:
+		if id_path.is_empty() == false and id_path.size() <= mobility + 1:
 			current_id_path = id_path
 			
+			# Used for drawing the line for the path
 			current_point_path = astar_grid.get_point_path(
-				tile_map.local_to_map(target_position),
+				tile_map.local_to_map(start_position),
 				tile_map.local_to_map(get_global_mouse_position())
 			)
 			
