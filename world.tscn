@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bh2fc3h58cc00"]
+
+[ext_resource type="PackedScene" uid="uid://dijjspgi8x8sv" path="res://playable_unit.tscn" id="1_f3sb7"]
+
+[node name="World" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+
+[node name="Playable Unit" parent="TileMapLayer" instance=ExtResource("1_f3sb7")]

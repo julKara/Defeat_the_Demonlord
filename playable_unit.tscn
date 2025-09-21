@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dijjspgi8x8sv"]
+
+[ext_resource type="Texture2D" uid="uid://d1i60lf1ycih2" path="res://assets/character_art/mage/Mage_48x48.png" id="1_bsu0c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gkf61"]
+size = Vector2(48, 48)
+
+[node name="Playable Unit" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gkf61")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(-24, -24)
+texture = ExtResource("1_bsu0c")
