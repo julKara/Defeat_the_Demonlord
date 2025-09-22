@@ -8,4 +8,3 @@ func _pressed() -> void:
 	tile_map.clear_layer(1)
 	character.selected = false
 	draw_path.hide()
-	print(character.start_position)

@@ -33,7 +33,7 @@ layer_1/modulate = Color(1, 1, 1, 0.5)
 [node name="DrawPath" parent="." instance=ExtResource("2_uawph")]
 
 [node name="Character" parent="." instance=ExtResource("3_iincs")]
-position = Vector2(32, 32)
+position = Vector2(352, 288)
 
 [node name="StandButton" type="Button" parent="."]
 unique_name_in_owner = true
