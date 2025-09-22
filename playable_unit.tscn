@@ -6,10 +6,13 @@
 size = Vector2(48, 48)
 
 [node name="Playable Unit" type="CharacterBody2D"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_gkf61")
+position = Vector2(72, 72)
 
 [node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(-24, -24)
+self_modulate = Color(0, 0.917647, 0.372549, 1)
+position = Vector2(-48, -48)
 texture = ExtResource("1_bsu0c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-48, -48)
+shape = SubResource("RectangleShape2D_gkf61")

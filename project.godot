@@ -14,6 +14,15 @@ config/name="Defeat_The_Demonlord"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=500
+window/size/viewport_height=600
+window/size/borderless=true
+window/size/window_width_override=1500
+window/size/window_height_override=1800
+window/stretch/mode="viewport"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
