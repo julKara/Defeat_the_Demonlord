@@ -116,11 +116,12 @@ position = Vector2(24, 24)
 
 [node name="Background" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(500, 600)
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 800.0
+offset_bottom = 600.0
 color = Color(0.121569, 0.392157, 0.0980392, 1)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_f3sb7")
 
 [node name="Playable Unit" parent="TileMapLayer" instance=ExtResource("1_f3sb7")]
+position = Vector2(24, 72)
