@@ -121,7 +121,7 @@ func _input(event):
 		if tile_map.local_to_map(global_position) != tile_map.local_to_map(start_position):
 			changed_id_path = astar_grid.get_id_path(
 				tile_map.local_to_map(global_position),
-				tile_map.local_to_map(get_global_mouse_position())
+				start_position
 			)
 		
 		# Only perform the movement if the path is valid and within range
@@ -130,6 +130,7 @@ func _input(event):
 			if tile_map.local_to_map(global_position) == tile_map.local_to_map(start_position):
 				current_id_path = id_path
 			else:
+				changed_id_path.append_array(id_path)
 				current_id_path = changed_id_path
 			
 			# Used for drawing the line for the path
