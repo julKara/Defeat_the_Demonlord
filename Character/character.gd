@@ -8,7 +8,7 @@ var current_id_path: Array[Vector2i]
 var target_position: Vector2
 var is_moving: bool
 var current_point_path: PackedVector2Array
-var tile_size: int = 64
+var tile_size: int = 48
 var selected: bool = false
 var start_position: Vector2i
 
@@ -84,7 +84,7 @@ func _input(event):
 				
 				# Draw tiles with a path to it that is within the range
 				if mobility_path.size() <= (mobility + 1): # mobility+1 since path includes start position
-					tile_map.set_cell(1, Vector2i(x,y), 0, Vector2i(0,1), 0)
+					tile_map.set_cell(1, Vector2i(x,y), 2, Vector2i(0,1), 0)
 				
 		selected = true
 	
