@@ -1,0 +1,3 @@
+class_name playable_unit extends Actor
+
+# Playable elements...
