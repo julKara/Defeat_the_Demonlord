@@ -1,7 +1,8 @@
 extends Node2D
+class_name Character
 
-@onready var tile_map = $"../TileMap"
-@onready var draw_path = $"../DrawPath"
+@onready var tile_map = $"../../TileMap"
+@onready var draw_path = $"../../DrawPath"
 
 var astar_grid: AStarGrid2D
 var current_id_path: Array[Vector2i]

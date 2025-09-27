@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://butv6o2w6hcxr"]
+
+[ext_resource type="Script" uid="uid://bx8aho3tlkxwi" path="res://Characters/character.gd" id="1_710xo"]
+[ext_resource type="Texture2D" uid="uid://ceecte1aehpj1" path="res://Textures/Mage_48x48.png" id="2_d7c3s"]
+
+[node name="Character" type="Node2D"]
+script = ExtResource("1_710xo")
+metadata/_custom_type_script = "uid://bx8aho3tlkxwi"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(2.98411e-06, 0.916882, 0.4375, 1)
+texture = ExtResource("2_d7c3s")
+offset = Vector2(-24, -24)

@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var character = $"../Character"
+@onready var character_manager = $"../CharacterManager"
 
 # Update drawing
 func _process(_delta):
@@ -8,8 +8,8 @@ func _process(_delta):
 
 # Draw a line along the selected path of the character
 func _draw():
-	if character.current_point_path.is_empty():
+	if character_manager.current_character.current_point_path.is_empty():
 		return
 	
-	if character.current_point_path.size() > 1:
-		draw_polyline(character.current_point_path, Color.RED)
+	if character_manager.current_character.current_point_path.size() > 1:
+		draw_polyline(character_manager.current_character.current_point_path, Color.RED)
