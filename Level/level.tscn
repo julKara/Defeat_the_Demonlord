@@ -53,4 +53,5 @@ text = "Stand"
 script = ExtResource("4_52x1o")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(962, 542)
+position = Vector2(640, 360)
+zoom = Vector2(1.5, 1.5)
