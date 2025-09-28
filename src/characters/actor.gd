@@ -9,6 +9,7 @@ class_name Actor extends CharacterBody2D
 const CELL_SIZE: Vector2 = Vector2(48,48)	# TAG : MOVEMENT
 
 var active: bool = false	# Says if unit can act
+var cells_traveled: Array[Vector2] = []	# Stores the cells traveled by an actor
 
 # Executes every frame
 func _process(delta: float) -> void:	# Delta not used
@@ -25,14 +26,30 @@ func _process(delta: float) -> void:	# Delta not used
 	
 	# Checking inputs and returns a movement-vector (pressing up gives (0, -1) bc up iss negative y-axis)
 	var movement: Vector2 = Vectors.get_four_direction_vector(false);	# From Utils/Static, Vector is a static script from Tampopo Interactive Media (will be replaced)	# TAG : MOVEMENT
+	if movement.is_zero_approx():
+		return
+	
+	# Move one pixel per frame
+	if move_and_collide(movement, true):
+		return
 	
 	# Update postion target with movement
-	position_target = position + movement * CELL_SIZE	# TAG : MOVEMENT
-	# Move one pixel per frame
-	#move_and_collide(movement * 48)
+	movement *= CELL_SIZE
+	position_target = position + movement	# TAG : MOVEMENT
+	
+	# Add movement to cells_traveled, act as a log # TAG : MOVEMENT & BACKTRACKING
+	#cells_traveled.append(position_target / CELL_SIZE)
 	
 	# Start timer
 	input_delay.start()	# TAG : MOVEMENT
+	
+	# For debugging
+	#print(cells_traveled)
+	queue_redraw()	#  After prints _draw()	# TAG : MOVEMENT
+	
+func _draw() -> void:	# TAG : MOVEMENT
+	if active:
+		draw_string(ThemeDB.fallback_font, Vector2(42,42), str(cells_traveled.size()))
 
 ######################
 # Handles setting playable and enemy
