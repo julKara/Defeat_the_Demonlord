@@ -3,6 +3,8 @@ class_name Character
 
 @onready var tile_map = $"../../TileMap"
 @onready var draw_path = $"../../DrawPath"
+@onready var character_manager = $".."
+@onready var stand_button = %StandButton
 
 var astar_grid: AStarGrid2D
 var current_id_path: Array[Vector2i]
@@ -15,7 +17,7 @@ var start_position: Vector2i
 
 @export var move_speed: float = 3.0
 
-var mobility: int = 3
+@export var mobility: int = 3
 
 
 # Called when the node enters the scene tree for the first time.
@@ -63,32 +65,15 @@ func _input(event):
 	tile_map.local_to_map(get_global_mouse_position()).y > (tile_map.get_used_rect().size.y - 1)):
 		return
 	
-	# Variable used to calculate the tiles withing moving rang
-	var mobility_path
 	
 	# Click to select a character and display move range
 	if (selected == false and
 	tile_map.local_to_map(get_global_mouse_position()) == tile_map.local_to_map(global_position)):	
+		character_manager.current_character = self
+		stand_button.counter = character_manager.character_list.find(self,0) + 1
+		highlight_mobility_range()
 		
-		# Go through the entire grid and highlight the tiles that are possible to move to
-		# depending on the characters mobility	
-		for x in astar_grid.get_size().x:
-			for y in astar_grid.get_size().y:
-				# Skip tiles that are not "walkable"
-				if astar_grid.is_point_solid(Vector2i(x,y)):
-					continue
-				# Calculate the path from the character to the current tile (x,y)
-				mobility_path = astar_grid.get_id_path(
-					start_position,
-					Vector2i(x,y)
-				)
-				
-				# Draw tiles with a path to it that is within the range
-				if mobility_path.size() <= (mobility + 1): # mobility+1 since path includes start position
-					tile_map.set_cell(1, Vector2i(x,y), 2, Vector2i(0,1), 0)
-				
-		selected = true
-	
+		
 	# Click to deselect character and hide move range
 	elif (selected == true and
 	tile_map.local_to_map(get_global_mouse_position()) == tile_map.local_to_map(global_position)):
@@ -167,3 +152,30 @@ func _physics_process(_delta):
 			target_position = tile_map.map_to_local(current_id_path.front())
 		else:
 			is_moving = false
+			
+			
+func highlight_mobility_range():
+	# Variable used to calculate the tiles withing moving rang
+	var mobility_path
+	
+	# Reset prevoius highlight. Prevents highlighting several characters at once
+	tile_map.clear_layer(1)
+		
+	# Go through the entire grid and highlight the tiles that are possible to move to
+	# depending on the characters mobility	
+	for x in astar_grid.get_size().x:
+		for y in astar_grid.get_size().y:
+			# Skip tiles that are not "walkable"
+			if astar_grid.is_point_solid(Vector2i(x,y)):
+				continue
+			# Calculate the path from the character to the current tile (x,y)
+			mobility_path = astar_grid.get_id_path(
+				start_position,
+				Vector2i(x,y)
+			)
+				
+			# Draw tiles with a path to it that is within the range
+			if mobility_path.size() <= (mobility + 1): # mobility+1 since path includes start position
+				tile_map.set_cell(1, Vector2i(x,y), 2, Vector2i(0,1), 0)
+				
+	selected = true

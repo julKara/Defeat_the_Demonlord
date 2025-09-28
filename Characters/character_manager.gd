@@ -5,13 +5,17 @@ extends Node2D
 
 var character_list: Array
 var current_character
+var num_characters: int
 
 func _ready() -> void:
-	current_character = character2
+	# Default value for starting character
+	current_character = character1
 	
+	# Array storing all characters
 	character_list = [character1, character2]
-		
-	print(character_list[1])
+	
+	num_characters = character_list.size()
+
 
 func set_current_character(character) -> void:
 	current_character = character
