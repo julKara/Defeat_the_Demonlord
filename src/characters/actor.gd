@@ -8,8 +8,10 @@ class_name Actor extends CharacterBody2D
 # Constants
 const CELL_SIZE: Vector2 = Vector2(48,48)	# TAG : MOVEMENT
 
+# Gameplay variables
 var active: bool = false	# Says if unit can act
 var cells_traveled: Array[Vector2] = []	# Stores the cells traveled by an actor
+@export var stats: CharacterStats	# All stats to particular unit
 
 # Executes every frame
 func _process(delta: float) -> void:	# Delta not used
@@ -38,32 +40,38 @@ func _process(delta: float) -> void:	# Delta not used
 	position_target = position + movement	# TAG : MOVEMENT
 	
 	# Add movement to cells_traveled, act as a log # TAG : MOVEMENT & BACKTRACKING
-	#cells_traveled.append(position_target / CELL_SIZE)
+	cells_traveled.append(position_target / CELL_SIZE)
 	
 	# Start timer
 	input_delay.start()	# TAG : MOVEMENT
 	
 	# For debugging
 	#print(cells_traveled)
-	queue_redraw()	#  After prints _draw()	# TAG : MOVEMENT
+	#print(stats.mag_attack)
+	queue_redraw()
 	
-func _draw() -> void:	# TAG : MOVEMENT
+func _draw() -> void:
 	if active:
 		draw_string(ThemeDB.fallback_font, Vector2(42,42), str(cells_traveled.size()))
 
 ######################
-# Handles setting playable and enemy
-###
+# Handles setting stats and colors
+
 const FRIENDLY_COLOR: Color = Color("00a78f")
 const ENEMY_COLOR: Color = Color.CRIMSON
 
 func _ready() -> void:
 	is_friendly = is_friendly
-
 # Sets color based on bool (friendly/enemy) - may change to like healthbar or something else than collisionshape
 @export var is_friendly: bool = false :
 	set(value):
 		is_friendly = value
-		$CollisionShape2D.self_modulate = FRIENDLY_COLOR if is_friendly else ENEMY_COLOR
-		name = "playble_Unit" if is_friendly else "enemy_unit"	# Set "type"-name in scene
+		
+		if is_friendly:
+			$CollisionShape2D.self_modulate = FRIENDLY_COLOR
+			name = "playble_Unit"
+		else:
+			$CollisionShape2D.self_modulate = ENEMY_COLOR
+			name = "enemy_unit"
+			
 #####################

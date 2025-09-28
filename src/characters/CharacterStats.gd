@@ -1,5 +1,4 @@
 # Numerically represents stats to all instances of the class [Character]
-
 class_name CharacterStats extends Resource
 
 # Non-modifiable aspects of Character
@@ -15,7 +14,7 @@ class_name CharacterStats extends Resource
 @export var mag_defense : int
 @export var crit_chance : int
 @export var level : int
-@export var mobility : int
+@export var mobility : int	# How many blocks a unit can move
 
 # List of all stats that can be modified
 const MODIFIABLE_STATS = [

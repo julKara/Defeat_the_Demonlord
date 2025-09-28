@@ -6,7 +6,7 @@
 script = ExtResource("1_nj5x8")
 character_name = "John"
 battle_class_type = "Mage"
-curr_health = 100
+curr_health = 99
 max_health = 100
 phys_attack = 20
 mag_attack = 80
