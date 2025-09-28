@@ -110,8 +110,17 @@ func _input(event):
 				start_position
 			)
 		
+		var destination_occupied: bool = false
+		for x in character_manager.character_list:
+			if tile_map.local_to_map(get_global_mouse_position()) == tile_map.local_to_map(x.global_position):
+				destination_occupied = true
+				x.selected = false
+				character_manager.current_character = self
+				#stand_button.counter = character_manager.character_list.find(self,0) + 1
+				highlight_mobility_range()
+		
 		# Only perform the movement if the path is valid and within range
-		if id_path.is_empty() == false and id_path.size() <= mobility + 1:
+		if id_path.is_empty() == false and id_path.size() <= mobility + 1 and destination_occupied == false:
 			# Assign path depending on if it is the first move or the player changed their mind
 			if tile_map.local_to_map(global_position) == tile_map.local_to_map(start_position):
 				current_id_path = id_path

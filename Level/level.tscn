@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bmmx3beh2xbpv"]
+[gd_scene load_steps=10 format=3 uid="uid://bmmx3beh2xbpv"]
 
 [ext_resource type="Texture2D" uid="uid://6nlq6ed1jh0" path="res://Textures/test_map4.png" id="1_52x1o"]
 [ext_resource type="PackedScene" uid="uid://cats61ytkbbvj" path="res://Path/draw_path.tscn" id="2_uawph"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bplm5dcrccd48" path="res://Characters/character_manager.gd" id="3_nk1il"]
 [ext_resource type="Script" uid="uid://n7kvt7sjqiwi" path="res://Level/stand_button.gd" id="4_52x1o"]
 [ext_resource type="PackedScene" uid="uid://butv6o2w6hcxr" path="res://Characters/character2.tscn" id="4_iincs"]
+[ext_resource type="PackedScene" uid="uid://cq4pu0n212o01" path="res://Characters/character3.tscn" id="5_d6qko"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iincs"]
 texture = ExtResource("1_52x1o")
@@ -40,6 +41,10 @@ position = Vector2(120, 216)
 
 [node name="Character2" parent="CharacterManager" instance=ExtResource("4_iincs")]
 position = Vector2(216, 120)
+mobility = 2
+
+[node name="Character3" parent="CharacterManager" instance=ExtResource("5_d6qko")]
+position = Vector2(120, 408)
 mobility = 2
 
 [node name="DrawPath" parent="." instance=ExtResource("2_uawph")]
