@@ -1,19 +1,20 @@
 [gd_scene load_steps=4 format=3 uid="uid://dijjspgi8x8sv"]
 
 [ext_resource type="Texture2D" uid="uid://d1i60lf1ycih2" path="res://assets/character_art/mage/Mage_48x48.png" id="1_bsu0c"]
-[ext_resource type="Script" uid="uid://c4p20ocops6" path="res://src/characters/playable_unit.gd" id="1_kpkqe"]
+[ext_resource type="Script" uid="uid://7mgltwn5kw4v" path="res://src/characters/actor.gd" id="1_xjefa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gkf61"]
 size = Vector2(48, 48)
 
 [node name="Actor" type="CharacterBody2D"]
-script = ExtResource("1_kpkqe")
+script = ExtResource("1_xjefa")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_bsu0c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(48, 48)
+self_modulate = Color(0.862745, 0.0784314, 0.235294, 1)
+position = Vector2(24, 24)
 shape = SubResource("RectangleShape2D_gkf61")
 debug_color = Color(0.92, 0.92, 0.92, 0.756863)
 

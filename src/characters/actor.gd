@@ -1,3 +1,4 @@
+@tool # Can execute in editor
 class_name Actor extends CharacterBody2D
 
 # Refrences that executes before ready
@@ -7,13 +8,19 @@ class_name Actor extends CharacterBody2D
 # Constants
 const CELL_SIZE: Vector2 = Vector2(48,48)	# TAG : MOVEMENT
 
+var active: bool = false	# Says if unit can act
+
 # Executes every frame
 func _process(delta: float) -> void:	# Delta not used
+	
+	# Check if current unit is active (aka allowed to act)
+	if not active:
+		return
 	
 	position = position.move_toward(position_target, 2)	# Linear interpolation between postions	# TAG : MOVEMENT
 	
 	# If input-delay is running, code bellow doesnt run (timer is started after)	# TAG : MOVEMENT
-	if not input_delay.is_stopped():
+	if not input_delay.is_stopped() or not position.is_equal_approx(position_target):
 		return
 	
 	# Checking inputs and returns a movement-vector (pressing up gives (0, -1) bc up iss negative y-axis)
@@ -26,3 +33,20 @@ func _process(delta: float) -> void:	# Delta not used
 	
 	# Start timer
 	input_delay.start()	# TAG : MOVEMENT
+
+######################
+# Handles setting playable and enemy
+###
+const FRIENDLY_COLOR: Color = Color("00a78f")
+const ENEMY_COLOR: Color = Color.CRIMSON
+
+func _ready() -> void:
+	is_friendly = is_friendly
+
+# Sets color based on bool (friendly/enemy) - may change to like healthbar or something else than collisionshape
+@export var is_friendly: bool = false :
+	set(value):
+		is_friendly = value
+		$CollisionShape2D.self_modulate = FRIENDLY_COLOR if is_friendly else ENEMY_COLOR
+		name = "playble_Unit" if is_friendly else "enemy_unit"	# Set "type"-name in scene
+#####################
