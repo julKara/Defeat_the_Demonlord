@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gkf61"]
 size = Vector2(48, 48)
 
-[node name="Actor" type="CharacterBody2D"]
+[node name="enemy_unit" type="CharacterBody2D"]
 script = ExtResource("1_xjefa")
 
 [node name="Sprite" type="Sprite2D" parent="."]

@@ -13,6 +13,9 @@ var active: bool = false	# Says if unit can act
 var cells_traveled: Array[Vector2] = []	# Stores the cells traveled by an actor
 @export var stats: CharacterStats	# All stats to particular unit
 
+# Signals
+signal ready_to_act(actor: Actor)
+
 # Executes every frame
 func _process(delta: float) -> void:	# Delta not used
 	
@@ -49,6 +52,9 @@ func _process(delta: float) -> void:	# Delta not used
 	#print(cells_traveled)
 	#print(stats.mag_attack)
 	queue_redraw()
+	
+	# After moving, set ready to act so unit can use skills, attack...	TAG: MOVMENT
+	ready_to_act.emit(self)
 	
 func _draw() -> void:
 	if active:

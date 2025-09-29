@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=2 format=3 uid="uid://ioqq5nerr7f3"]
+
+[ext_resource type="Script" uid="uid://dfeqtmcp7uacl" path="res://src/characters/CharacterStats.gd" id="1_5edjx"]
+
+[resource]
+script = ExtResource("1_5edjx")
+character_name = ""
+battle_class_type = "Swordsman"
+curr_health = 199
+max_health = 200
+phys_attack = 90
+mag_attack = 10
+phys_defense = 80
+mag_defense = 20
+crit_chance = 5
+level = 1
+mobility = 3
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"

@@ -4,9 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://bdy0m0gr2tme3" path="res://assets/level_art/48x48_Tileset/pipo-map001.png" id="1_fj7yv"]
 [ext_resource type="Script" uid="uid://ddloxiitok8uo" path="res://world.gd" id="1_tlwt5"]
 [ext_resource type="Resource" uid="uid://cksht0d3f8feb" path="res://characters/mage.tres" id="4_036b0"]
-[ext_resource type="Script" uid="uid://b17q5h7rfuxb7" path="res://src/Level/GUI/gui.gd" id="4_aqk2v"]
+[ext_resource type="Script" uid="uid://b17q5h7rfuxb7" path="res://gui.gd" id="4_aqk2v"]
 [ext_resource type="Resource" uid="uid://ioqq5nerr7f3" path="res://characters/knight.tres" id="5_dwbse"]
-[ext_resource type="Script" uid="uid://lvdowlbqk6fe" path="res://src/Level/GUI/actions_menu.gd" id="7_pkg7o"]
+[ext_resource type="Script" uid="uid://lvdowlbqk6fe" path="res://actions_menu.gd" id="7_pkg7o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tlwt5"]
 texture = ExtResource("1_fj7yv")

@@ -2,10 +2,11 @@ extends CanvasLayer
 
 # Refrences
 @onready var actor_info: PanelContainer = $Margin/ActorInfo
+@onready var actions_menu: PanelContainer = $Margin/ActionsMenu
 
 func set_highlighted_actor(actor: Actor) -> void:
 	
-	# Stop showing info is player clicks on other than actor
+	# Stop showing info is player clicks on other than actor (not implemented yet)
 	if not actor:
 		actor_info.hide()
 		return
@@ -15,3 +16,6 @@ func set_highlighted_actor(actor: Actor) -> void:
 	actor_info.show()
 	info_vbox.get_child(0).text = actor.stats.character_name + " the " + actor.stats.battle_class_type
 	info_vbox.get_child(1).text = str(actor.stats.curr_health) + "/" + str(actor.stats.max_health)
+	
+func open_actions_menu() -> void:
+	actions_menu.show_actions_menu()

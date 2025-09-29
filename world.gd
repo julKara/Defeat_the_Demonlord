@@ -13,3 +13,11 @@ extends Node2D
 func _ready() -> void:
 	actors.get_child(0).active = true
 	gui.set_highlighted_actor(actors.get_child(0))	# Call gui on selceted unit
+	
+	for actor: Actor in actors.get_children():
+		# actor.selected.connect(_on_actor_selcted)
+		# actor.deselected.connect(on_actor_deselected)
+		actor.ready_to_act.connect(_on_actor_ready_to_act)
+		
+func _on_actor_ready_to_act(actor: Actor) -> void:
+	gui.open_actions_menu()
