@@ -16,7 +16,6 @@ var selected: bool = false
 var start_position: Vector2i
 
 @export var move_speed: float = 3.0
-
 @export var mobility: int = 3
 
 
@@ -65,14 +64,21 @@ func _input(event):
 	tile_map.local_to_map(get_global_mouse_position()).y > (tile_map.get_used_rect().size.y - 1)):
 		return
 	
-	
 	# Click to select a character and display move range
 	if (selected == false and
 	tile_map.local_to_map(get_global_mouse_position()) == tile_map.local_to_map(global_position)):	
-		character_manager.current_character = self
-		stand_button.counter = character_manager.character_list.find(self,0) + 1
-		highlight_mobility_range()
-		
+		# Prevents multiple characters being selected at once
+		var all_characters_deselected: bool = true
+		for x in character_manager.character_list:
+			if x.selected:
+				all_characters_deselected = false
+				
+		# This part is only meant to be run when no characters are selected
+		# Above check ensures that
+		if all_characters_deselected:
+			character_manager.current_character = self
+			stand_button.counter = character_manager.character_list.find(self,0) + 1
+			highlight_mobility_range()
 		
 	# Click to deselect character and hide move range
 	elif (selected == true and
@@ -136,6 +142,7 @@ func _input(event):
 
 			for i in current_point_path.size():
 				current_point_path[i] += Vector2(tile_size/2, tile_size/2)
+
 
 
 # This function perform the movement and loops constantly(important to remember)	
