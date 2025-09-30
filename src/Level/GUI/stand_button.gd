@@ -2,6 +2,8 @@ extends Button
 @onready var character_manager: Node2D = $"../../../../../TileMapLayer/CharacterManager"
 @onready var tile_map: TileMap = $"../../../../../TileMap"
 @onready var draw_path: Node2D = $"../../../../../DrawPath"
+@onready var actor_info: PanelContainer = $"../../../ActorInfo"
+@onready var actions_menu: PanelContainer = $"../.."
 
 var counter: int = 0
 
@@ -15,8 +17,10 @@ func _pressed() -> void:
 	# Deselect character
 	character_manager.current_character.selected = false
 	
-	# Hidde movement path
+	# Hidde movement path, actions-menu and actor info
 	draw_path.hide()
+	actions_menu.hide()
+	actor_info.hide_actor_info()
 
 	# Update the current character to the next in the array
 	character_manager.set_current_character(character_manager.character_list[counter%character_manager.num_characters])

@@ -9,11 +9,14 @@ signal ready_to_act(actor: Actor)
 const FRIENDLY_COLOR: Color = Color("00a78f")
 const ENEMY_COLOR: Color = Color.CRIMSON
 
-# --- Mir ---
+# Refrences to objects
 @onready var tile_map: TileMap = $"../../../TileMap"
 @onready var draw_path: Node2D = $"../../../DrawPath"
 @onready var character_manager: Node2D = $"../../CharacterManager"
 @onready var pass_turn: Button = $"../../../GUI/Margin/ActionsMenu/VBoxContainer/Pass_Turn"
+@onready var actions_menu: PanelContainer = $"../../../GUI/Margin/ActionsMenu"
+@onready var actor_info: PanelContainer = $"../../../GUI/Margin/ActorInfo"
+
 
 var astar_grid: AStarGrid2D
 var current_id_path: Array[Vector2i]
@@ -63,6 +66,7 @@ func _ready() -> void:
 	# Set friendly/enemy
 	is_friendly = is_friendly
 # Sets color based on bool (friendly/enemy) - may change to like healthbar or something else than collisionshape
+
 @export var is_friendly: bool = false :
 	set(value):
 		is_friendly = value
@@ -100,6 +104,9 @@ func _input(event):
 			character_manager.current_character = self
 			pass_turn.counter = character_manager.character_list.find(self,0) + 1
 			highlight_mobility_range()
+			actions_menu.show()	# Show actions-menu when selecting actor
+			actor_info.display_actor_info(character_manager.current_character) # Show actor info
+			
 		
 	# Click to deselect character and hide move range
 	elif (selected == true and
@@ -108,6 +115,8 @@ func _input(event):
 		selected = false
 		draw_path.hide()
 		global_position = tile_map.map_to_local(start_position)
+		actions_menu.hide()	# Hide actions-menu when deselecting actor
+		actor_info.hide_actor_info()
 	
 	# If the character is selected, perform the movement	
 	elif (selected == true and
@@ -213,4 +222,3 @@ func highlight_mobility_range():
 				tile_map.set_cell(1, Vector2i(x,y), 0, Vector2i(0,1), 0)
 	
 	selected = true
-	ready_to_act.emit(self)

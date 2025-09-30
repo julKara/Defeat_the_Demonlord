@@ -1,6 +1,9 @@
 extends Node2D
 
+# Refrences world-objects
 @onready var actors: Node2D = $"../Actors"
+@onready var actions_menu: PanelContainer = $"../../GUI/Margin/ActionsMenu"
+@onready var actor_info: PanelContainer = $"../../GUI/Margin/ActorInfo"
 
 var character_list: Array
 var current_character
@@ -19,3 +22,5 @@ func _ready() -> void:
 
 func set_current_character(character) -> void:
 	current_character = character
+	actions_menu.show()
+	actor_info.display_actor_info(current_character)
