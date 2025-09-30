@@ -11,7 +11,7 @@ extends Node2D
 @onready var gui: CanvasLayer = $GUI
 
 func _ready() -> void:
-	actors.get_child(0).active = true
+	actors.get_child(0).selected = true
 	gui.set_highlighted_actor(actors.get_child(0))	# Call gui on selceted unit
 	
 	for actor: Actor in actors.get_children():
