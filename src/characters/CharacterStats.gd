@@ -1,4 +1,4 @@
-# Numerically represents stats to all instances of the class [Character]
+# Handles and stores all stats beloning to a unit
 class_name CharacterStats extends Resource
 
 # Non-modifiable aspects of Character
