@@ -12,7 +12,6 @@ const CELL_SIZE: Vector2 = Vector2(48,48)	# TAG : MOVEMENT
 var active: bool = false	# Says if unit can act
 var cells_traveled: Array[Vector2] = []	# Stores the cells traveled by an actor
 @export var stats: CharacterStats	# All stats to particular unit
-
 # Signals
 signal ready_to_act(actor: Actor)
 
