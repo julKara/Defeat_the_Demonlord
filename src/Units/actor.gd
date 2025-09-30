@@ -2,8 +2,6 @@
 class_name Actor extends CharacterBody2D
 
 @export var stats: CharacterStats	# All stats to particular unit
-# Signals
-signal ready_to_act(actor: Actor)
 
 # Handles setting stats and colors
 const FRIENDLY_COLOR: Color = Color("00a78f")
