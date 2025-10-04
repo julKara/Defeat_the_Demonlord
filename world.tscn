@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=4 uid="uid://fr5vqykbi54o"]
 
-[ext_resource type="PackedScene" uid="uid://dijjspgi8x8sv" path="res://src/Units/playable_unit.tscn" id="1_f3sb7"]
+[ext_resource type="PackedScene" uid="uid://dijjspgi8x8sv" path="res://src/Units/actor.tscn" id="1_f3sb7"]
 [ext_resource type="Texture2D" uid="uid://bdy0m0gr2tme3" path="res://assets/level_art/48x48_Tileset/pipo-map001.png" id="1_fj7yv"]
 [ext_resource type="Texture2D" uid="uid://b17b8wvpkkqbj" path="res://assets/test_map4.png" id="2_gbfbk"]
 [ext_resource type="Resource" uid="uid://cksht0d3f8feb" path="res://characters/mage.tres" id="4_036b0"]

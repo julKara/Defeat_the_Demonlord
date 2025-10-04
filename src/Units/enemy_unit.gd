@@ -1,3 +1,5 @@
+@tool	# Execute in editor
+
 class_name enemy_unit extends Actor
 
 # Maybe enemy AI will be stored here...

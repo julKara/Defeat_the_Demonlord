@@ -15,7 +15,7 @@ const ENEMY_COLOR: Color = Color.CRIMSON
 @onready var actions_menu: PanelContainer = $"../../../GUI/Margin/ActionsMenu"
 @onready var actor_info: PanelContainer = $"../../../GUI/Margin/ActorInfo"
 
-
+# Variables for movement
 var astar_grid: AStarGrid2D
 var current_id_path: Array[Vector2i]
 var target_position: Vector2
@@ -25,7 +25,8 @@ var tile_size: int = 48
 var selected: bool = false
 var start_position: Vector2i
 
-@export var move_speed: float = 3.0	# 3.0 is considered default speed
+# Stat-variables
+var move_speed: float = 3.0	# 3.0 is considered default speed
 var mobility: int = 3	# 3 is considered default mobility
 
 # Sets up AstarGrid for pathfinding, walkable tiles and sets friendly/enemy color/name
