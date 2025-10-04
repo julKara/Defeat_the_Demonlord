@@ -1,3 +1,5 @@
+@tool	# Remove near end (heavy on performance)
+
 class_name Actor extends CharacterBody2D
 
 @export var stats: CharacterStats	# All stats to particular unit
@@ -116,6 +118,7 @@ func _set_stat_variables():
 
 # Function that creates a path towards the selected tile
 func _input(event):
+	
 	# Don't do anything unless the mouse is pressed
 	if event.is_action_pressed("left_mouse_button") == false:
 		return
@@ -154,9 +157,9 @@ func _input(event):
 		actions_menu.hide()	# Hide actions-menu when deselecting actor
 		actor_info.hide_actor_info()
 	
-	# If the character is selected, perform the movement	
+	# If a playable character is selected, perform the movement	
 	elif (selected == true and
-	tile_map.local_to_map(get_global_mouse_position()) != tile_map.local_to_map(global_position)):
+	tile_map.local_to_map(get_global_mouse_position()) != tile_map.local_to_map(global_position) and is_friendly):
 
 		draw_path.show()
 
