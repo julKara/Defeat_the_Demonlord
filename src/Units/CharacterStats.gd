@@ -15,6 +15,7 @@ class_name CharacterStats extends Resource
 @export var crit_chance : int
 @export var level : int
 @export var mobility : int	# How many blocks a unit can move
+@export var speed: float	# How fast each unit moves/attack??
 
 # List of all stats that can be modified
 const MODIFIABLE_STATS = [

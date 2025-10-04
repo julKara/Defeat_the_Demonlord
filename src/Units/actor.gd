@@ -25,11 +25,14 @@ var tile_size: int = 48
 var selected: bool = false
 var start_position: Vector2i
 
-@export var move_speed: float = 3.0
-@export var mobility: int = 3
+@export var move_speed: float = 3.0	# 3.0 is considered default speed
+var mobility: int = 3	# 3 is considered default mobility
 
 # Sets up AstarGrid for pathfinding, walkable tiles and sets friendly/enemy color/name
 func _ready() -> void:	
+	
+	# Intialize all stat-variables through the CharacterStats resource
+	_set_stat_variables()
 	
 	# Create an A* grid that will be used for pathfinding
 	astar_grid = AStarGrid2D.new()
@@ -63,8 +66,13 @@ func _ready() -> void:
 				astar_grid.set_point_solid(tile_position)
 	# Set friendly/enemy
 	is_friendly = is_friendly
-# Sets color based on bool (friendly/enemy) - may change to like healthbar or something else than collisionshape
 
+# Intialize all stat-variables through the CharacterStats resource (NEW from Julia)
+func _set_stat_variables():
+	mobility = stats.mobility
+	move_speed = stats.speed
+
+# Sets color based on bool (friendly/enemy) - may change to like healthbar or something else than collisionshape
 @export var is_friendly: bool = false :
 	set(value):
 		is_friendly = value

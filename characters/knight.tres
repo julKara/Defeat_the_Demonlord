@@ -14,5 +14,6 @@ phys_defense = 80
 mag_defense = 20
 crit_chance = 5
 level = 1
-mobility = 3
+mobility = 4
+speed = 4.0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"

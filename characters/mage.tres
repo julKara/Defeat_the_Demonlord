@@ -15,4 +15,5 @@ mag_defense = 90
 crit_chance = 15
 level = 1
 mobility = 3
+speed = 3.0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
