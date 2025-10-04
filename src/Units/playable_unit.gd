@@ -1,5 +1,5 @@
-@tool	# Execute in editor
-
-class_name playable_unit extends Actor
+class_name playable_unit extends Node
 
 # Playable elements...
+func _ready():
+	print("Playable unit ready — player-controlled!")	# TESTING

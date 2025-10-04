@@ -196,12 +196,12 @@ script = ExtResource("4_ioo17")
 
 [node name="Actors" type="Node2D" parent="TileMapLayer"]
 
-[node name="playble_Unit" parent="TileMapLayer/Actors" instance=ExtResource("1_f3sb7")]
+[node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("1_f3sb7")]
 position = Vector2(120, 120)
 stats = ExtResource("4_036b0")
 is_friendly = true
 
-[node name="playble_Unit2" parent="TileMapLayer/Actors" instance=ExtResource("1_f3sb7")]
+[node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("1_f3sb7")]
 position = Vector2(360, 264)
 stats = ExtResource("5_dwbse")
 is_friendly = true

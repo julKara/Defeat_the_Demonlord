@@ -1,4 +1,3 @@
-@tool # Can execute in editor
 class_name Actor extends CharacterBody2D
 
 @export var stats: CharacterStats	# All stats to particular unit
@@ -6,6 +5,8 @@ class_name Actor extends CharacterBody2D
 # Handles setting stats and colors
 const FRIENDLY_COLOR: Color = Color("00a78f")
 const ENEMY_COLOR: Color = Color.CRIMSON
+@onready var shape = $CollisionShape2D
+var behavior: Node = null	# Decides behavior based on if unit is playable, enemy, npc...
 
 # Refrences to objects
 @onready var tile_map: TileMap = $"../../../TileMap"
@@ -28,6 +29,13 @@ var start_position: Vector2i
 # Stat-variables
 var move_speed: float = 3.0	# 3.0 is considered default speed
 var mobility: int = 3	# 3 is considered default mobility
+
+# Export lets you toggle this in the inspector
+@export var is_friendly: bool = false:
+	set(value):
+		is_friendly = value
+		if is_node_ready():	# Must check if modulate should work
+			_reload_behavior()	# Set/Toggles behavior
 
 # Sets up AstarGrid for pathfinding, walkable tiles and sets friendly/enemy color/name
 func _ready() -> void:	
@@ -65,25 +73,46 @@ func _ready() -> void:
 			
 			if tile_data == null or tile_data.get_custom_data("walkable") == false:
 				astar_grid.set_point_solid(tile_position)
+	
 	# Set friendly/enemy
 	is_friendly = is_friendly
+
+# Dynamically set or switch behaviour, can be done at runtime (very felixable and lightweight) (NEW from Julia)
+func _reload_behavior():
+	
+	print("Reloading behavior for:", name)	# TESTING
+	
+	# Remove old behavior if one exists
+	if behavior and is_instance_valid(behavior):
+		behavior.queue_free()
+		behavior = null
+
+	# Choose the behavior scene path, can be added more if needed
+	var behavior_path = (
+		"res://src/Units/playable_unit.gd"
+		if is_friendly
+		else "res://src/Units/enemy_unit.gd"
+	)
+
+	# Load and attach the correct script dynamically
+	var behavior_script = load(behavior_path)
+	behavior = Node.new()	# Behavior of the actor gets attached as a child to the actor
+	behavior.set_script(behavior_script)
+	add_child(behavior)
+
+	# Set name and color
+	if shape:
+		if is_friendly:
+			shape.self_modulate = FRIENDLY_COLOR
+			name = "playable_unit"
+		else:
+			shape.self_modulate = ENEMY_COLOR
+			name = "enemy_unit"
 
 # Intialize all stat-variables through the CharacterStats resource (NEW from Julia)
 func _set_stat_variables():
 	mobility = stats.mobility
 	move_speed = stats.speed
-
-# Sets color based on bool (friendly/enemy) - may change to like healthbar or something else than collisionshape
-@export var is_friendly: bool = false :
-	set(value):
-		is_friendly = value
-		
-		if is_friendly:
-			$CollisionShape2D.self_modulate = FRIENDLY_COLOR
-			name = "playble_Unit"
-		else:
-			$CollisionShape2D.self_modulate = ENEMY_COLOR
-			name = "enemy_unit"
 
 # Function that creates a path towards the selected tile
 func _input(event):
