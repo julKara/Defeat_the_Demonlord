@@ -14,6 +14,7 @@ class_name CharacterStats extends Resource
 @export var mag_defense : int
 @export var crit_chance : int
 @export var level : int
+@export var attack_range : int	# How many blocks away unit can attack
 @export var mobility : int	# How many blocks a unit can move
 @export var speed: float	# How fast each unit moves/attack??
 
