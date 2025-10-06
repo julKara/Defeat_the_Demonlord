@@ -27,6 +27,10 @@ var current_point_path: PackedVector2Array
 var tile_size: int = 48
 var selected: bool = false
 var start_position: Vector2i
+var destination_occupied: bool = false
+
+# Variables for attacks
+var attack_target: CharacterBody2D
 
 # Stat-variables
 var move_speed: float = 3.0	# 3.0 is considered default speed
@@ -79,6 +83,9 @@ func _ready() -> void:
 	
 	# Set friendly/enemy
 	is_friendly = is_friendly
+	
+	# No attack target by default
+	attack_target = null
 
 # Dynamically set or switch behaviour, can be done at runtime (very felixable and lightweight) (NEW from Julia)
 func _reload_behavior():
@@ -130,6 +137,8 @@ func _input(event):
 	tile_map.local_to_map(get_global_mouse_position()).y > (tile_map.get_used_rect().size.y - 1)):
 		return
 	
+	destination_occupied = false
+	
 	# Click to select a character and display move range
 	if (selected == false and
 	tile_map.local_to_map(get_global_mouse_position()) == tile_map.local_to_map(global_position)):	
@@ -159,6 +168,7 @@ func _input(event):
 		global_position = tile_map.map_to_local(start_position)
 		actions_menu.hide()	# Hide actions-menu when deselecting actor
 		actor_info.hide_actor_info()
+
 	
 	# If a playable character is selected, perform the movement	
 	elif (selected == true and
@@ -188,7 +198,7 @@ func _input(event):
 				start_position
 			)
 		
-		var destination_occupied: bool = false
+		
 		for x in character_manager.character_list:
 			if tile_map.local_to_map(get_global_mouse_position()) == tile_map.local_to_map(x.global_position):
 				destination_occupied = true
@@ -214,6 +224,19 @@ func _input(event):
 
 			for i in current_point_path.size():
 				current_point_path[i] += Vector2(tile_size/2, tile_size/2)
+	
+	# Attack target selection			
+	if selected == true and destination_occupied == true:
+		for x in character_manager.character_list:
+			if tile_map.local_to_map(get_global_mouse_position()) == tile_map.local_to_map(x.global_position):
+				var attack_path = astar_grid.get_id_path(
+				tile_map.local_to_map(global_position),
+				tile_map.local_to_map(x.global_position))
+				
+				if attack_path.size() <= (attack_range + 1):
+					attack_target = x
+					print(attack_target)
+		
 
 # This function perform the movement and loops constantly(important to remember)	
 func _physics_process(_delta):
