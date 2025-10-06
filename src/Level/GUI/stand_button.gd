@@ -11,8 +11,9 @@ func _pressed() -> void:
 	# Update the startposision of the current character to be where it ended its move
 	character_manager.current_character.start_position = tile_map.local_to_map(character_manager.current_character.global_position)
 	
-	# Hide mobility range
+	# Hide mobility and attack range
 	tile_map.clear_layer(1)
+	tile_map.clear_layer(2)
 	
 	# Deselect character
 	character_manager.current_character.selected = false
@@ -27,4 +28,4 @@ func _pressed() -> void:
 	counter = counter + 1
 	
 	# Highlight and select the updated current character
-	character_manager.current_character.highlight_mobility_range()
+	character_manager.current_character.highlight_range()

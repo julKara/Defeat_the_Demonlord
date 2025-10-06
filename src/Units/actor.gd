@@ -31,6 +31,7 @@ var start_position: Vector2i
 # Stat-variables
 var move_speed: float = 3.0	# 3.0 is considered default speed
 var mobility: int = 3	# 3 is considered default mobility
+var attack_range: int = 1 # 1 is considered default attack range
 
 # Export lets you toggle this in the inspector
 @export var is_friendly: bool = false:
@@ -115,6 +116,7 @@ func _reload_behavior():
 func _set_stat_variables():
 	mobility = stats.mobility
 	move_speed = stats.speed
+	attack_range = stats.attack_range
 
 # Function that creates a path towards the selected tile
 func _input(event):
@@ -142,7 +144,7 @@ func _input(event):
 		if all_characters_deselected:
 			character_manager.current_character = self
 			pass_turn.counter = character_manager.character_list.find(self,0) + 1
-			highlight_mobility_range()
+			highlight_range()
 			actions_menu.show()	# Show actions-menu when selecting actor
 			actor_info.display_actor_info(character_manager.current_character) # Show actor info
 			
@@ -151,6 +153,7 @@ func _input(event):
 	elif (selected == true and
 	tile_map.local_to_map(get_global_mouse_position()) == tile_map.local_to_map(global_position)):
 		tile_map.clear_layer(1)
+		tile_map.clear_layer(2)
 		selected = false
 		draw_path.hide()
 		global_position = tile_map.map_to_local(start_position)
@@ -192,7 +195,7 @@ func _input(event):
 				x.selected = false
 				character_manager.current_character = self
 				#stand_button.counter = character_manager.character_list.find(self,0) + 1
-				highlight_mobility_range()
+				highlight_range()
 		
 		# Only perform the movement if the path is valid and within range
 		if id_path.is_empty() == false and id_path.size() <= mobility + 1 and destination_occupied == false:
@@ -236,15 +239,16 @@ func _physics_process(_delta):
 		else:
 			is_moving = false
 
-func highlight_mobility_range():
+func highlight_range():
 	# Variable used to calculate the tiles withing moving rang
 	var mobility_path
 	
 	# Reset prevoius highlight. Prevents highlighting several characters at once
 	tile_map.clear_layer(1)
+	tile_map.clear_layer(2)
 		
 	# Go through the entire grid and highlight the tiles that are possible to move to
-	# depending on the characters mobility	
+	# depending on the characters mobility and the tiles that are within attack range
 	for x in astar_grid.get_size().x:
 		for y in astar_grid.get_size().y:
 			# Skip tiles that are not "walkable"
@@ -256,8 +260,12 @@ func highlight_mobility_range():
 				Vector2i(x,y)
 			)
 				
-			# Draw tiles with a path to it that is within the range
+			# Draw tiles with a path to it that is within the mobility range
 			if mobility_path.size() <= (mobility + 1): # mobility+1 since path includes start position
-				tile_map.set_cell(1, Vector2i(x,y), 0, Vector2i(0,1), 0)
+				tile_map.set_cell(2, Vector2i(x,y), 0, Vector2i(0,1), 0)
+			
+			# Draw tiles with a path to it that is within the attack range
+			if mobility_path.size() <= (mobility + attack_range + 1): # mobility+1 since path includes start position
+				tile_map.set_cell(1, Vector2i(x,y), 0, Vector2i(1,1), 0)
 	
 	selected = true
