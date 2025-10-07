@@ -168,6 +168,7 @@ func _input(event):
 		global_position = tile_map.map_to_local(start_position)
 		actions_menu.hide()	# Hide actions-menu when deselecting actor
 		actor_info.hide_actor_info()
+		attack_target = null # Remove target after deselecting
 
 	
 	# If a playable character is selected, perform the movement	

@@ -18,6 +18,9 @@ func _pressed() -> void:
 	# Deselect character
 	character_manager.current_character.selected = false
 	
+	# Remove selected attack target
+	character_manager.current_character.attack_target = null
+	
 	# Hidde movement path, actions-menu and actor info
 	draw_path.hide()
 	actions_menu.hide()
