@@ -86,6 +86,7 @@ func _ready() -> void:
 	
 	# No attack target by default
 	attack_target = null
+	
 
 # Dynamically set or switch behaviour, can be done at runtime (very felixable and lightweight) (NEW from Julia)
 func _reload_behavior():

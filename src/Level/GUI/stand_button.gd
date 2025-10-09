@@ -30,5 +30,8 @@ func _pressed() -> void:
 	character_manager.set_current_character(character_manager.character_list[counter%character_manager.num_characters])
 	counter = counter + 1
 	
-	# Highlight and select the updated current character
-	character_manager.current_character.highlight_range()
+	if character_manager.current_character.is_friendly == true:	
+		# Highlight and select the updated current character
+		character_manager.current_character.highlight_range()
+	else:
+		character_manager.current_character.get_child(3).move()
