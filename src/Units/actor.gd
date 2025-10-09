@@ -168,8 +168,9 @@ func _input(event):
 			character_manager.current_character = self
 			pass_turn.counter = character_manager.character_list.find(self,0) + 1
 			highlight_mobility_range()
-			actions_menu.show()	# Show actions-menu when selecting actor
 			actor_info.display_actor_info(character_manager.current_character) # Show actor info
+			if is_friendly:
+				actions_menu.show()	# Show actions-menu when selecting playable actor
 			
 		
 	# Click to deselect character and hide move range

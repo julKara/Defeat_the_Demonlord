@@ -22,5 +22,6 @@ func _ready() -> void:
 
 func set_current_character(character) -> void:
 	current_character = character
-	actions_menu.show()
 	actor_info.display_actor_info(current_character)
+	if character.is_friendly:
+				actions_menu.show()	# Show actions-menu when selecting playable actor
