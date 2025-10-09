@@ -1,4 +1,4 @@
-# Numerically represents stats to all instances of the class [Character]
+# Numerically represents stats to all instances of the class [actor]
 class_name CharacterStats extends Resource
 
 # Character Stats
