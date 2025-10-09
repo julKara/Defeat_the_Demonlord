@@ -2,15 +2,21 @@
 
 class_name Actor extends CharacterBody2D
 
+""" Unit-Unique Reasources """
 @export var stats: CharacterStats	# All stats to particular unit
+@export var profile: UnitProfile	# All other unique aspects of a unit (name, skills, talent...)
 
-# Handles setting stats and colors
+# CONSTANTS
 const FRIENDLY_COLOR: Color = Color("00a78f")
 const ENEMY_COLOR: Color = Color.CRIMSON
-@onready var shape = $CollisionShape2D
-var behavior: Node = null	# Decides behavior based on if unit is playable, enemy, npc...
 
-# Refrences to objects
+# Refrences to objects in actor
+@onready var shape = $CollisionShape2D	# TODO: Will be changed to healthbar instead
+var behavior: Node = null	# Decides behavior based on if unit is playable, enemy, npc...
+@onready var sprite_2d: Sprite2D = $Sprite
+@onready var anim_player: AnimationPlayer = $AnimationPlayer
+
+# Refrences to objects in World
 @onready var tile_map: TileMap = $"../../../TileMap"
 @onready var draw_path: Node2D = $"../../../DrawPath"
 @onready var character_manager: Node2D = $"../../CharacterManager"
@@ -44,6 +50,9 @@ func _ready() -> void:
 	
 	# Intialize all stat-variables through the CharacterStats resource
 	_set_stat_variables()
+	
+	# Apply unit profile to current instance of actor
+	_apply_profile()
 	
 	# Create an A* grid that will be used for pathfinding
 	astar_grid = AStarGrid2D.new()
@@ -113,8 +122,24 @@ func _reload_behavior():
 
 # Intialize all stat-variables through the CharacterStats resource (NEW from Julia)
 func _set_stat_variables():
+	if stats == null:
+		return
+	
 	mobility = stats.mobility
 	move_speed = stats.speed
+
+# Apply unit profile to current instance of actor
+func _apply_profile() -> void:
+	if profile == null:
+		return
+
+	# Apply sprite of unit if there is one
+	if sprite_2d and profile.sprite:
+		sprite_2d.texture = profile.sprite
+
+	# Apply idle-animation of unit if there is one
+	if anim_player and profile.animation:
+		anim_player.add_animation_library("default", profile.animation)
 
 # Function that creates a path towards the selected tile
 func _input(event):

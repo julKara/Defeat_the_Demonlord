@@ -18,6 +18,4 @@ self_modulate = Color(0.862745, 0.0784314, 0.235294, 1)
 shape = SubResource("RectangleShape2D_gkf61")
 debug_color = Color(0.92, 0.92, 0.92, 0.756863)
 
-[node name="InputDelay" type="Timer" parent="."]
-wait_time = 0.1
-one_shot = true
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

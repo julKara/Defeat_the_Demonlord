@@ -1,10 +1,6 @@
 # Numerically represents stats to all instances of the class [Character]
 class_name CharacterStats extends Resource
 
-# Non-modifiable aspects of Character
-@export var character_name : String = "John"
-@export var battle_class_type : String = "Class"
-
 # Character Stats
 @export var curr_health : int
 @export var max_health : int

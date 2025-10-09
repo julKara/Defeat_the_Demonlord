@@ -1,15 +1,17 @@
-[gd_scene load_steps=17 format=4 uid="uid://fr5vqykbi54o"]
+[gd_scene load_steps=19 format=4 uid="uid://fr5vqykbi54o"]
 
 [ext_resource type="PackedScene" uid="uid://dijjspgi8x8sv" path="res://src/Units/actor.tscn" id="1_f3sb7"]
 [ext_resource type="Texture2D" uid="uid://bdy0m0gr2tme3" path="res://assets/level_art/48x48_Tileset/pipo-map001.png" id="1_fj7yv"]
 [ext_resource type="Texture2D" uid="uid://b17b8wvpkkqbj" path="res://assets/test_map4.png" id="2_gbfbk"]
-[ext_resource type="Resource" uid="uid://cksht0d3f8feb" path="res://characters/mage.tres" id="4_036b0"]
+[ext_resource type="Resource" uid="uid://cksht0d3f8feb" path="res://characters/Mage/mageStats.tres" id="4_036b0"]
 [ext_resource type="Script" uid="uid://t1qdqjubkhud" path="res://src/Units/character_manager.gd" id="4_ioo17"]
-[ext_resource type="Resource" uid="uid://ioqq5nerr7f3" path="res://characters/knight.tres" id="5_dwbse"]
+[ext_resource type="Resource" uid="uid://ioqq5nerr7f3" path="res://characters/Knight/knightStats.tres" id="5_dwbse"]
+[ext_resource type="Resource" uid="uid://mwedg6ttx2lp" path="res://characters/Mage/mageProfile.tres" id="6_ic0uy"]
 [ext_resource type="Script" uid="uid://lvdowlbqk6fe" path="res://src/Level/GUI/actions_menu.gd" id="7_pkg7o"]
+[ext_resource type="Resource" uid="uid://bu2f1ylnrxljm" path="res://characters/Knight/knightProfile.tres" id="8_k3n1d"]
 [ext_resource type="Script" uid="uid://b6oemt0bk5jyw" path="res://src/Level/GUI/stand_button.gd" id="10_wse8f"]
 [ext_resource type="PackedScene" uid="uid://cats61ytkbbvj" path="res://src/PathVisuals/draw_path.tscn" id="11_ic0uy"]
-[ext_resource type="Script" uid="uid://dso7okpirndht" path="res://actor_info.gd" id="11_k3n1d"]
+[ext_resource type="Script" uid="uid://dso7okpirndht" path="res://src/Level/GUI/actor_info.gd" id="11_k3n1d"]
 
 [sub_resource type="GDScript" id="GDScript_ic0uy"]
 script/source = "extends Node2D
@@ -199,16 +201,19 @@ script = ExtResource("4_ioo17")
 [node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("1_f3sb7")]
 position = Vector2(120, 120)
 stats = ExtResource("4_036b0")
+profile = ExtResource("6_ic0uy")
 is_friendly = true
 
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("1_f3sb7")]
 position = Vector2(360, 264)
 stats = ExtResource("5_dwbse")
+profile = ExtResource("8_k3n1d")
 is_friendly = true
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("1_f3sb7")]
 position = Vector2(168, 312)
 stats = ExtResource("4_036b0")
+profile = ExtResource("6_ic0uy")
 
 [node name="GUI" type="CanvasLayer" parent="."]
 script = SubResource("GDScript_wse8f")

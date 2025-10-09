@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="UnitProfile" load_steps=3 format=3 uid="uid://bu2f1ylnrxljm"]
+
+[ext_resource type="Script" uid="uid://5kg8ybina31b" path="res://src/Units/Unit_Profile.gd" id="1_js022"]
+[ext_resource type="Texture2D" uid="uid://cwlh5dxsrb6vv" path="res://assets/character_art/knight/Knight_still.png" id="2_5d5y0"]
+
+[resource]
+script = ExtResource("1_js022")
+character_name = "Lennart"
+battle_class_type = "Swordsman"
+sprite = ExtResource("2_5d5y0")
+metadata/_custom_type_script = "uid://5kg8ybina31b"

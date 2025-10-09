@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="UnitProfile" load_steps=3 format=3 uid="uid://mwedg6ttx2lp"]
+
+[ext_resource type="Script" uid="uid://5kg8ybina31b" path="res://src/Units/Unit_Profile.gd" id="1_1kl1b"]
+[ext_resource type="Texture2D" uid="uid://d1i60lf1ycih2" path="res://assets/character_art/mage/Mage_48x48.png" id="2_g5auo"]
+
+[resource]
+script = ExtResource("1_1kl1b")
+character_name = "John"
+battle_class_type = "Mage"
+sprite = ExtResource("2_g5auo")
+metadata/_custom_type_script = "uid://5kg8ybina31b"
