@@ -3,20 +3,35 @@ class_name enemy_unit extends Node
 @onready var character_manager: Node2D = $"../../../CharacterManager"
 @onready var tile_map: TileMap = $"../../../../TileMap"
 @onready var pass_turn: Button = $"../../../../GUI/Margin/ActionsMenu/VBoxContainer/Pass_Turn"
+@onready var default_attack: Button = $"../../../../GUI/Margin/ActionsMenu/VBoxContainer/Default_Attack"
 
 var astar_grid
 var attack_target: CharacterBody2D
 
+# Keeps track of what moves are performed
+var attack_used: bool = false
+var skill_used: bool = false
+
+# Stat-variables
+var mobility
+var move_speed
+var attack_range
+
 # Maybe enemy AI will be stored here...
 func _ready():
 	print("Enemy unit ready — AI active.")	# TESTING
-	
+	_set_stat_variables()
 	astar_grid = character_manager.current_character.astar_grid
 
 # func _process(delta):
 	# Simple AI behavior
 	# print("Enemy thinking...")	# TESTING
 
+# Intialize all stat-variables through the CharacterStats resource
+func _set_stat_variables():
+	mobility = get_parent().stats.mobility
+	move_speed = get_parent().stats.speed
+	attack_range = get_parent().stats.attack_range
 
 func find_closest_player() -> CharacterBody2D:
 		
@@ -47,10 +62,6 @@ func find_closest_player() -> CharacterBody2D:
 	
 	return closest_player
 	
-	
-func select_attack_target():
-	attack_target = find_closest_player() # Closest player character is chosen as target
-
 
 func move():
 	
@@ -59,8 +70,6 @@ func move():
 	# Create a path from the enemy to the closest player
 	var id_path = (astar_grid.get_id_path(tile_map.local_to_map(get_parent().global_position),
 			tile_map.local_to_map(closest_player.global_position)))
-			
-	var mobility = get_parent().stats.mobility
 	
 	# Shrink path down to be in the mobility range
 	while id_path.size() > mobility + 1:
@@ -73,22 +82,43 @@ func move():
 		target_position = tile_map.map_to_local(id_path.front())
 	
 		# Move towards target
-		get_parent().global_position = get_parent().global_position.move_toward(target_position, get_parent().move_speed)
-	
+		get_parent().global_position = get_parent().global_position.move_toward(target_position, move_speed)
+
 		# Remove the tile from the path
 		if get_parent().global_position == target_position:
 			id_path.pop_front()
 			
+
+	
+func select_attack_target():
+	attack_target = find_closest_player() # Closest player character is chosen as target
+
+
+func attack():
+	select_attack_target()
+	
+	var attack_path = (astar_grid.get_id_path(tile_map.local_to_map(get_parent().global_position),
+			tile_map.local_to_map(attack_target.global_position)))
 			
+	if attack_path.size() <= attack_range + 1:
+		default_attack._pressed()
+	
+	attack_used = true
+	
+				
 func play_turn():
+	
+	attack_used = false
+	
 	# Move towards the closest player
 	move()
 	
 	# Attack
-	# TO BE IMPLEMENTED
+	attack()
 	
 	# Skill
 	# TO BE IMPLEMENTED
 	
 	# If no attack or skill was used -> end turn
-	pass_turn._pressed()
+	if attack_used == false and skill_used == false:
+		pass_turn._pressed()
