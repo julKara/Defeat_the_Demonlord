@@ -41,4 +41,4 @@ func _pressed() -> void:
 			if x is Node:
 				behaviour_node = x
 				
-		behaviour_node.move()
+		behaviour_node.play_turn()

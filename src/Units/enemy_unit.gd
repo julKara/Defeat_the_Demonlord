@@ -2,6 +2,7 @@ class_name enemy_unit extends Node
 
 @onready var character_manager: Node2D = $"../../../CharacterManager"
 @onready var tile_map: TileMap = $"../../../../TileMap"
+@onready var pass_turn: Button = $"../../../../GUI/Margin/ActionsMenu/VBoxContainer/Pass_Turn"
 
 var astar_grid
 var attack_target: CharacterBody2D
@@ -77,3 +78,17 @@ func move():
 		# Remove the tile from the path
 		if get_parent().global_position == target_position:
 			id_path.pop_front()
+			
+			
+func play_turn():
+	# Move towards the closest player
+	move()
+	
+	# Attack
+	# TO BE IMPLEMENTED
+	
+	# Skill
+	# TO BE IMPLEMENTED
+	
+	# If no attack or skill was used -> end turn
+	pass_turn._pressed()

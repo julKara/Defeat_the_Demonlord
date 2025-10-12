@@ -181,10 +181,8 @@ func _input(event):
 		var id_path
 		
 		if is_moving:
-			id_path = astar_grid.get_id_path(
-				tile_map.local_to_map(target_position),
-				tile_map.local_to_map(get_global_mouse_position())
-			)
+			# Prevents spam clicking
+			return
 		else:
 			# Finds the coordinates on the grid of the selected tile and the path to get there
 			id_path = astar_grid.get_id_path(
@@ -237,7 +235,6 @@ func _input(event):
 				
 				if attack_path.size() <= (attack_range + 1):
 					attack_target = x
-					print(attack_target)
 		
 
 # This function perform the movement and loops constantly(important to remember)	
