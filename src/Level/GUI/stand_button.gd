@@ -34,4 +34,11 @@ func _pressed() -> void:
 		# Highlight and select the updated current character
 		character_manager.current_character.highlight_range()
 	else:
-		character_manager.current_character.get_child(3).move()
+		var all_children = character_manager.current_character.get_children()
+		var behaviour_node
+		
+		for x in all_children:
+			if x is Node:
+				behaviour_node = x
+				
+		behaviour_node.move()

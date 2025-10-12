@@ -68,7 +68,7 @@ func move():
 	var target_position
 	
 	# Perform the movement
-	while id_path.is_empty() == false:
+	while id_path.size() > 1: # >1 prevents enemies from standing on top of players
 		target_position = tile_map.map_to_local(id_path.front())
 	
 		# Move towards target
