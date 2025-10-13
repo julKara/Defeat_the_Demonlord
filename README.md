@@ -6,4 +6,7 @@
 
 **Issues (not really bugs, more structural issues):**
 * `TileMap`: Currently, the movement-range is drawn upon the `TileMap` instead of the `TileMapLayer`. This makes the range invisible behind the `Background` or "too visible" in the sense that the red blocks are not supposed to be visible in-game.
-* Dephending on the postioning of the orginal `Sprite`, it will not apear in the middle of a tile. This is a needed art-fix. 
+* Dephending on the postioning of the orginal `Sprite`, it will not apear in the middle of a tile. This is a needed art-fix.
+
+**Annoying features**
+* You have to click on a unit to deselect them intead of just not clikcing on anything else.
