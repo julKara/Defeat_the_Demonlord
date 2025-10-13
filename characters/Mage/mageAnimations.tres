@@ -1,0 +1,64 @@
+[gd_resource type="AnimationLibrary" load_steps=9 format=3 uid="uid://db35i1b3vs4xd"]
+
+[ext_resource type="Texture2D" uid="uid://cf8weowpmed" path="res://assets/character_art/mage/Mage_attack_f1.png" id="1_phc3d"]
+[ext_resource type="Texture2D" uid="uid://834u0ejvh4nc" path="res://assets/character_art/mage/Mage_attack_f2.png" id="2_w7ikt"]
+[ext_resource type="Texture2D" uid="uid://plvyx02rvm1l" path="res://assets/character_art/mage/Mage_attack_f3.png" id="3_vxxqd"]
+[ext_resource type="Texture2D" uid="uid://d1i60lf1ycih2" path="res://assets/character_art/mage/Mage_48x48.png" id="4_5yjkd"]
+[ext_resource type="Texture2D" uid="uid://dbbdi0bgi7vac" path="res://assets/character_art/mage/Mage_idle_f2.png" id="6_nieqx"]
+
+[sub_resource type="Animation" id="Animation_hwpfo"]
+resource_name = "attack"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_phc3d"), ExtResource("2_w7ikt"), ExtResource("3_vxxqd")]
+}
+
+[sub_resource type="Animation" id="Animation_k3yh3"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("4_5yjkd"), ExtResource("6_nieqx")]
+}
+
+[sub_resource type="Animation" id="Animation_xskcs"]
+resource_name = "selected"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("4_5yjkd"), ExtResource("6_nieqx")]
+}
+
+[resource]
+_data = {
+&"attack": SubResource("Animation_hwpfo"),
+&"idle": SubResource("Animation_k3yh3"),
+&"selected": SubResource("Animation_xskcs")
+}

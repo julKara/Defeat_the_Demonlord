@@ -5,16 +5,26 @@ class_name Actor extends CharacterBody2D
 """ Unit-Unique Reasources """
 @export var stats: CharacterStats	# All stats to particular unit
 @export var profile: UnitProfile	# All other unique aspects of a unit (name, skills, talent...)
+var anim_library_name := "default"	# Liberary name for unit-animations, is the .tres file attached to profile
 
 # CONSTANTS
 const FRIENDLY_COLOR: Color = Color("00a78f")
 const ENEMY_COLOR: Color = Color.CRIMSON
+enum UnitState { IDLE, SELECTED, MOVING, ATTACKING, DEAD }	# Possible unit-states
+var state_to_anim = {	# For animation filepaths
+		UnitState.IDLE: "idle",
+		UnitState.SELECTED: "selected",
+		UnitState.MOVING: "move",
+		UnitState.ATTACKING: "attack",
+		UnitState.DEAD: "dead"
+	}
 
 # Refrences to objects in actor
 @onready var shape = $CollisionShape2D	# TODO: Will be changed to healthbar instead
 var behavior: Node = null	# Decides behavior based on if unit is playable, enemy, npc...
 @onready var sprite_2d: Sprite2D = $Sprite
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
+
 
 # Refrences to objects in World
 @onready var tile_map: TileMap = $"../../../TileMap"
@@ -31,13 +41,15 @@ var target_position: Vector2
 var is_moving: bool
 var current_point_path: PackedVector2Array
 var tile_size: int = 48
-var selected: bool = false
 var start_position: Vector2i
 
 # Stat-variables
 var move_speed: float = 3.0	# 3.0 is considered default speed
 var mobility: int = 3	# 3 is considered default mobility
 
+""" Unit info while in gameplay: """
+var selected: bool = false	# True if unit is selected
+var current_state: UnitState = UnitState.IDLE	# Current state of unit
 # Export lets you toggle this in the inspector
 @export var is_friendly: bool = false:
 	set(value):
@@ -53,6 +65,9 @@ func _ready() -> void:
 	
 	# Apply unit profile to current instance of actor
 	_apply_profile()
+	
+	# Start idle-state animation
+	_update_state_animation()
 	
 	# Create an A* grid that will be used for pathfinding
 	astar_grid = AStarGrid2D.new()
@@ -137,9 +152,38 @@ func _apply_profile() -> void:
 	if sprite_2d and profile.sprite:
 		sprite_2d.texture = profile.sprite
 
-	# Apply idle-animation of unit if there is one
+	# Connect profiles `animation` to anim_player here which is the object AnimationPlayer
 	if anim_player and profile.animation:
-		anim_player.add_animation_library("default", profile.animation)
+		# Use the resource's name (if it has one), or default
+		anim_library_name = profile.animation.resource_name if profile.animation.resource_name != "" else "default"
+		anim_player.add_animation_library(anim_library_name, profile.animation)
+		print("Added animation library:", anim_library_name)	# For TESTING
+
+# Updates current_state and calls update-animation
+func set_state(new_state: UnitState) -> void:
+	if new_state == current_state:
+		return
+	current_state = new_state
+	_update_state_animation()
+
+# Updates the animation of the unit based on its state
+func _update_state_animation() -> void:
+	
+	# Test unit
+	if anim_player == null or profile == null:
+		return
+
+	# Get the current state name and test it
+	var anim_name = state_to_anim.get(current_state, null)
+	if anim_name == null:
+		return
+
+	# Dynamically put together filepath of animation (e.g default/idle)
+	var full_name = "%s/%s" % [anim_library_name, anim_name]
+	if anim_player.has_animation(full_name):
+		anim_player.play(full_name)
+		# print("full_name:", full_name)	# TESTING
+		
 
 # Function that creates a path towards the selected tile
 func _input(event):

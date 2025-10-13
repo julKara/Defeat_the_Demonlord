@@ -1,17 +1,98 @@
-[gd_scene load_steps=4 format=3 uid="uid://dijjspgi8x8sv"]
+[gd_scene load_steps=14 format=3 uid="uid://dijjspgi8x8sv"]
 
 [ext_resource type="Texture2D" uid="uid://d1i60lf1ycih2" path="res://assets/character_art/mage/Mage_48x48.png" id="1_bsu0c"]
 [ext_resource type="Script" uid="uid://7mgltwn5kw4v" path="res://src/Units/actor.gd" id="1_xjefa"]
+[ext_resource type="Texture2D" uid="uid://plvyx02rvm1l" path="res://assets/character_art/mage/Mage_attack_f3.png" id="4_g0rg7"]
+[ext_resource type="Texture2D" uid="uid://cf8weowpmed" path="res://assets/character_art/mage/Mage_attack_f1.png" id="4_kj6bn"]
+[ext_resource type="Texture2D" uid="uid://834u0ejvh4nc" path="res://assets/character_art/mage/Mage_attack_f2.png" id="5_jg2tr"]
+[ext_resource type="Texture2D" uid="uid://dbbdi0bgi7vac" path="res://assets/character_art/mage/Mage_idle_f2.png" id="7_jg2tr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gkf61"]
 size = Vector2(48, 48)
+
+[sub_resource type="Animation" id="Animation_kj6bn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_jg2tr")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a5lvk"]
+_data = {
+&"RESET": SubResource("Animation_kj6bn")
+}
+
+[sub_resource type="Animation" id="Animation_hwpfo"]
+resource_name = "attack"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_kj6bn"), ExtResource("5_jg2tr"), ExtResource("4_g0rg7")]
+}
+
+[sub_resource type="Animation" id="Animation_k3yh3"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("1_bsu0c"), ExtResource("7_jg2tr")]
+}
+
+[sub_resource type="Animation" id="Animation_xskcs"]
+resource_name = "selected"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("1_bsu0c"), ExtResource("7_jg2tr")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jg2tr"]
+_data = {
+&"attack": SubResource("Animation_hwpfo"),
+&"idle": SubResource("Animation_k3yh3"),
+&"selected": SubResource("Animation_xskcs")
+}
 
 [node name="enemy_unit" type="CharacterBody2D"]
 script = ExtResource("1_xjefa")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(-24, -24)
-texture = ExtResource("1_bsu0c")
+texture = ExtResource("7_jg2tr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 self_modulate = Color(0.862745, 0.0784314, 0.235294, 1)
@@ -19,3 +100,7 @@ shape = SubResource("RectangleShape2D_gkf61")
 debug_color = Color(0.92, 0.92, 0.92, 0.756863)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_a5lvk"),
+&"mageAnimations": SubResource("AnimationLibrary_jg2tr")
+}
