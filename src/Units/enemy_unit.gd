@@ -103,8 +103,7 @@ func attack():
 			
 	if attack_path.size() <= attack_range + 1:
 		default_attack._pressed()
-	
-	attack_used = true
+		attack_used = true
 	
 				
 func play_turn():
