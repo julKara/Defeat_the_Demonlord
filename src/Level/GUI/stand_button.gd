@@ -16,6 +16,7 @@ func _pressed() -> void:
 	
 	# Deselect character
 	character_manager.current_character.selected = false
+	character_manager.current_character.set_state(character_manager.current_character.UnitState.IDLE)	# Update state to selected
 	
 	# Hidde movement path, actions-menu and actor info
 	draw_path.hide()

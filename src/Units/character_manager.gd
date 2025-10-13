@@ -23,5 +23,6 @@ func _ready() -> void:
 func set_current_character(character) -> void:
 	current_character = character
 	actor_info.display_actor_info(current_character)
+	current_character.set_state(current_character.UnitState.SELECTED)	# Update state to selected
 	if character.is_friendly:
 				actions_menu.show()	# Show actions-menu when selecting playable actor

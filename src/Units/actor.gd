@@ -183,7 +183,6 @@ func _update_state_animation() -> void:
 	if anim_player.has_animation(full_name):
 		anim_player.play(full_name)
 		# print("full_name:", full_name)	# TESTING
-		
 
 # Function that creates a path towards the selected tile
 func _input(event):
@@ -222,6 +221,7 @@ func _input(event):
 	tile_map.local_to_map(get_global_mouse_position()) == tile_map.local_to_map(global_position)):
 		tile_map.clear_layer(1)
 		selected = false
+		set_state(UnitState.IDLE)	# Update state to IDLE
 		draw_path.hide()
 		global_position = tile_map.map_to_local(start_position)
 		actions_menu.hide()	# Hide actions-menu when deselecting actor
@@ -330,4 +330,5 @@ func highlight_mobility_range():
 			if mobility_path.size() <= (mobility + 1): # mobility+1 since path includes start position
 				tile_map.set_cell(1, Vector2i(x,y), 0, Vector2i(0,1), 0)
 	
+	set_state(UnitState.SELECTED)	# Update state to SELECTED
 	selected = true
