@@ -75,13 +75,13 @@ func move():
 			tile_map.local_to_map(closest_player.global_position)))
 	
 	# Shrink path down to be in the mobility range
-	while id_path.size() > mobility + 1:
+	while id_path.size() > mobility + attack_range + 1: # attack_range+1 allows enemy to move full distance
 		id_path.pop_back() # Remove last element
 		
 	var target_position
 	
 	# Perform the movement
-	while id_path.size() > 1: # >1 prevents enemies from standing on top of players
+	while id_path.size() > attack_range: # >attack_range stops enemies when in range
 		target_position = tile_map.map_to_local(id_path.front())
 	
 		# Move towards target

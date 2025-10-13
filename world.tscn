@@ -211,7 +211,7 @@ is_friendly = true
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("1_f3sb7")]
 position = Vector2(168, 312)
-stats = ExtResource("4_036b0")
+stats = ExtResource("5_dwbse")
 
 [node name="GUI" type="CanvasLayer" parent="."]
 script = SubResource("GDScript_wse8f")
