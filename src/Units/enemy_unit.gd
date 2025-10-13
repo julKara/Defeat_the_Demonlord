@@ -7,6 +7,7 @@ class_name enemy_unit extends Node
 
 var astar_grid
 var attack_target: CharacterBody2D
+var selected:bool = false
 
 # Keeps track of what moves are performed
 var attack_used: bool = false
