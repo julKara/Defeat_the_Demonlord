@@ -18,6 +18,8 @@ var mobility
 var move_speed
 var attack_range
 
+signal ai_movement_finished
+
 # Maybe enemy AI will be stored here...
 func _ready():
 	print("Enemy unit ready — AI active.")	# TESTING
@@ -84,11 +86,12 @@ func move():
 	
 		# Move towards target
 		get_parent().global_position = get_parent().global_position.move_toward(target_position, move_speed)
-
+		await get_tree().create_timer(0.01).timeout # Adds a delay which lets the move animation play
 		# Remove the tile from the path
 		if get_parent().global_position == target_position:
 			id_path.pop_front()
-			
+
+	emit_signal("ai_movement_finished")	
 
 	
 func select_attack_target():
@@ -97,7 +100,7 @@ func select_attack_target():
 
 func attack():
 	select_attack_target()
-	
+
 	var attack_path = (astar_grid.get_id_path(tile_map.local_to_map(get_parent().global_position),
 			tile_map.local_to_map(attack_target.global_position)))
 			
@@ -113,6 +116,7 @@ func play_turn():
 	# Move towards the closest player
 	move()
 	
+	await ai_movement_finished
 	# Attack
 	attack()
 	
