@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://dijjspgi8x8sv"]
+[gd_scene load_steps=19 format=3 uid="uid://dijjspgi8x8sv"]
 
 [ext_resource type="Texture2D" uid="uid://d1i60lf1ycih2" path="res://assets/character_art/mage/Mage_48x48.png" id="1_bsu0c"]
 [ext_resource type="Script" uid="uid://7mgltwn5kw4v" path="res://src/Units/actor.gd" id="1_xjefa"]
 [ext_resource type="Texture2D" uid="uid://plvyx02rvm1l" path="res://assets/character_art/mage/Mage_attack_f3.png" id="4_g0rg7"]
 [ext_resource type="Texture2D" uid="uid://cf8weowpmed" path="res://assets/character_art/mage/Mage_attack_f1.png" id="4_kj6bn"]
 [ext_resource type="Texture2D" uid="uid://834u0ejvh4nc" path="res://assets/character_art/mage/Mage_attack_f2.png" id="5_jg2tr"]
+[ext_resource type="Script" uid="uid://lv7bihs01ua5" path="res://src/Level/healthbar.gd" id="7_a5lvk"]
 [ext_resource type="Texture2D" uid="uid://dbbdi0bgi7vac" path="res://assets/character_art/mage/Mage_idle_f2.png" id="7_jg2tr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gkf61"]
@@ -87,6 +88,23 @@ _data = {
 &"selected": SubResource("Animation_xskcs")
 }
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kj6bn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jg2tr"]
+bg_color = Color(0, 0.713539, 0.434725, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kj6bn"]
+bg_color = Color(0.158472, 0.158472, 0.158472, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+shadow_color = Color(0, 0, 0, 0.27451)
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a5lvk"]
+bg_color = Color(0.662452, 0.662452, 0.662452, 1)
+
 [node name="enemy_unit" type="CharacterBody2D"]
 script = ExtResource("1_xjefa")
 
@@ -104,3 +122,32 @@ libraries = {
 &"": SubResource("AnimationLibrary_a5lvk"),
 &"mageAnimations": SubResource("AnimationLibrary_jg2tr")
 }
+
+[node name="Healthbar" type="ProgressBar" parent="."]
+z_index = 1
+offset_left = -18.0
+offset_top = 24.0
+offset_right = 18.0
+offset_bottom = 29.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_kj6bn")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jg2tr")
+value = 60.0
+show_percentage = false
+script = ExtResource("7_a5lvk")
+
+[node name="Damagebar" type="ProgressBar" parent="Healthbar"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_kj6bn")
+theme_override_styles/fill = SubResource("StyleBoxFlat_a5lvk")
+value = 80.0
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="Healthbar"]
+wait_time = 0.4
+one_shot = true
