@@ -26,7 +26,6 @@ func _pressed() -> void:
 	# Perform attack if the target is valid and the attacker and the target are on different teams
 	if target != null and attacker.is_friendly != target.is_friendly:
 		target.stats.take_damage(damage)
-		behaviour_node.attack_target = null # Reset target
 		
 		pass_turn._pressed() # Attacking ends turn
 	

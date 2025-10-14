@@ -12,9 +12,9 @@ func _pressed() -> void:
 	var all_children = character_manager.current_character.get_children()
 	var behaviour_node
 		
-	for x in all_children:
-		if x is Node:
-			behaviour_node = x
+	for child in all_children:
+		if child is Node:
+			behaviour_node = child
 	
 	# Update the startposision of the current playable character to be where it ended its move
 	if character_manager.current_character.is_friendly == true:
@@ -26,6 +26,15 @@ func _pressed() -> void:
 	
 	# Deselect character
 	behaviour_node.selected = false
+	
+	# Remove highlight from attack target
+	if behaviour_node.attack_target != null:
+		all_children = behaviour_node.attack_target.get_children()
+		var sprite
+		for child in all_children:
+			if child is Sprite2D:
+				sprite = child
+		sprite.material.set("shader_parameter/width", 0.0)
 	
 	# Remove selected attack target
 	behaviour_node.attack_target = null
@@ -41,9 +50,9 @@ func _pressed() -> void:
 	
 	# Update behaviour node to the new character
 	all_children = character_manager.current_character.get_children()
-	for x in all_children:
-		if x is Node:
-			behaviour_node = x
+	for child in all_children:
+		if child is Node:
+			behaviour_node = child
 	
 	if character_manager.current_character.is_friendly == true:	
 		# Highlight and select the updated current character

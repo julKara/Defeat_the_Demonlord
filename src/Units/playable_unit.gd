@@ -158,9 +158,32 @@ func _input(event):
 
 			for i in current_point_path.size():
 				current_point_path[i] += Vector2(get_parent().tile_size/2, get_parent().tile_size/2)
+				
+			# Reset attack target after moving
+			# Remove highlight from previous target
+			if attack_target != null:
+				var all_children = attack_target.get_children()
+				var sprite
+		
+				for child in all_children:
+					if child is Sprite2D:
+						sprite = child
+				sprite.material.set("shader_parameter/width", 0.0)
+				attack_target = null
 	
 	# Attack target selection			
 	if selected == true and destination_occupied == true:
+		# Remove highlight from previous target
+		if attack_target != null:
+			var all_children = attack_target.get_children()
+			var sprite
+		
+			for child in all_children:
+				if child is Sprite2D:
+					sprite = child
+			sprite.material.set("shader_parameter/width", 0.0)
+		
+		# Find new target and assign it
 		for x in character_manager.character_list:
 			if tile_map.local_to_map(get_parent().get_global_mouse_position()) == tile_map.local_to_map(x.global_position):
 				var attack_path = get_parent().astar_grid.get_id_path(
@@ -169,6 +192,15 @@ func _input(event):
 				
 				if attack_path.size() <= (attack_range + 1):
 					attack_target = x
+					
+					# Highlight the new target
+					var all_children = attack_target.get_children()
+					var sprite
+		
+					for child in all_children:
+						if child is Sprite2D:
+							sprite = child
+					sprite.material.set("shader_parameter/width", 1.0)
 
 
 # This function perform the movement and loops constantly(important to remember)	
