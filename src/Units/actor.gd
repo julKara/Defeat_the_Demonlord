@@ -1,6 +1,12 @@
 @tool	# Remove near end (heavy on performance)
 
 class_name Actor extends CharacterBody2D
+"""
+This class manages everything concerning the units in the level (both playable and enemies). 
+It stores important information such as state and is_friendly but also setters and initialzers
+for most info.
+"""
+
 
 """ Unit-Unique Reasources """
 @export var stats: CharacterStats	# All stats to particular unit
@@ -22,8 +28,9 @@ var state_to_anim = {	# For animation filepaths
 # Refrences to objects in actor
 @onready var shape = $CollisionShape2D	# TODO: Will be changed to healthbar instead
 var behavior: Node = null	# Decides behavior based on if unit is playable, enemy, npc...
-@onready var sprite_2d: Sprite2D = $Sprite
-@onready var anim_player: AnimationPlayer = $AnimationPlayer
+@onready var sprite_2d: Sprite2D = $Sprite	# Just the default sprite to all characters
+@onready var anim_player: AnimationPlayer = $AnimationPlayer	# Used to play animations
+@onready var healthbar: ProgressBar = $Healthbar	# The units healthbar, gets set up in _ready()
 
 
 # Refrences to objects in World
@@ -68,6 +75,9 @@ func _ready() -> void:
 	
 	# Start idle-state animation
 	_update_state_animation()
+	
+	# Initialize healthbar at start of level to max-health
+	healthbar.init_health(stats.max_health)
 	
 	# Create an A* grid that will be used for pathfinding
 	astar_grid = AStarGrid2D.new()
