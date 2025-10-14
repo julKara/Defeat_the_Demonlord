@@ -10,3 +10,4 @@
 
 **Annoying features**
 * You have to click on a unit to deselect them intead of just not clikcing on anything else.
+* All animations are not uniform in size -> need to fix so all are centered
