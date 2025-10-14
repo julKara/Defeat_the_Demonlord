@@ -18,6 +18,10 @@ class_name CharacterStats extends Resource
 @export var mobility : int	# How many blocks a unit can move
 @export var speed: float	# How fast each unit moves/attack??
 
+# Signals
+signal health_changed
+signal health_depleated
+
 # List of all stats that can be modified
 const MODIFIABLE_STATS = [
 	"curr_health", "max_health", "phys_attack", "mag_attack", "phys_defense", "mag_defense", "crit_chance", "level", "mobility"
