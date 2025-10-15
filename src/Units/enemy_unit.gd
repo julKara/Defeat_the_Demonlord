@@ -83,14 +83,15 @@ func move():
 	# Perform the movement
 	while id_path.size() > attack_range: # >attack_range stops enemies when in range
 		target_position = tile_map.map_to_local(id_path.front())
-	
+		
 		# Move towards target
 		get_parent().global_position = get_parent().global_position.move_toward(target_position, move_speed)
 		await get_tree().create_timer(0.01).timeout # Adds a delay which lets the move animation play
 		# Remove the tile from the path
 		if get_parent().global_position == target_position:
 			id_path.pop_front()
-
+	
+	await get_tree().create_timer(0.01).timeout
 	emit_signal("ai_movement_finished")	
 
 	
@@ -119,7 +120,7 @@ func play_turn():
 	await ai_movement_finished
 	# Attack
 	attack()
-	
+
 	# Skill
 	# TO BE IMPLEMENTED
 	

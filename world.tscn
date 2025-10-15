@@ -1,11 +1,10 @@
-[gd_scene load_steps=18 format=4 uid="uid://fr5vqykbi54o"]
+[gd_scene load_steps=20 format=4 uid="uid://fr5vqykbi54o"]
 
 [ext_resource type="PackedScene" uid="uid://dijjspgi8x8sv" path="res://src/Units/actor.tscn" id="1_f3sb7"]
 [ext_resource type="Texture2D" uid="uid://bdy0m0gr2tme3" path="res://assets/level_art/48x48_Tileset/pipo-map001.png" id="1_fj7yv"]
 [ext_resource type="Texture2D" uid="uid://cdqubede380q0" path="res://assets/test_map5.png" id="1_wse8f"]
-[ext_resource type="Resource" uid="uid://cksht0d3f8feb" path="res://characters/mage.tres" id="4_036b0"]
 [ext_resource type="Script" uid="uid://t1qdqjubkhud" path="res://src/Units/character_manager.gd" id="4_ioo17"]
-[ext_resource type="Resource" uid="uid://ioqq5nerr7f3" path="res://characters/knight.tres" id="5_dwbse"]
+[ext_resource type="Script" uid="uid://dfeqtmcp7uacl" path="res://src/Units/CharacterStats.gd" id="5_wse8f"]
 [ext_resource type="Script" uid="uid://lvdowlbqk6fe" path="res://src/Level/GUI/actions_menu.gd" id="7_pkg7o"]
 [ext_resource type="Script" uid="uid://dvdvwjv0g5hi1" path="res://src/Level/GUI/default_attack.gd" id="8_ic0uy"]
 [ext_resource type="Script" uid="uid://b6oemt0bk5jyw" path="res://src/Level/GUI/stand_button.gd" id="10_wse8f"]
@@ -151,6 +150,60 @@ texture_region_size = Vector2i(48, 48)
 tile_size = Vector2i(48, 48)
 sources/1 = SubResource("TileSetAtlasSource_tlwt5")
 
+[sub_resource type="Resource" id="Resource_ic0uy"]
+resource_local_to_scene = true
+script = ExtResource("5_wse8f")
+character_name = "John"
+battle_class_type = "Mage"
+curr_health = 99
+max_health = 100
+phys_attack = 20
+mag_attack = 80
+phys_defense = 30
+mag_defense = 90
+crit_chance = 15
+level = 1
+attack_range = 2
+mobility = 3
+speed = 3.0
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
+[sub_resource type="Resource" id="Resource_k3n1d"]
+resource_local_to_scene = true
+script = ExtResource("5_wse8f")
+character_name = "Lennart"
+battle_class_type = "Swordsman"
+curr_health = 199
+max_health = 200
+phys_attack = 90
+mag_attack = 10
+phys_defense = 80
+mag_defense = 20
+crit_chance = 5
+level = 1
+attack_range = 1
+mobility = 4
+speed = 4.0
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
+[sub_resource type="Resource" id="Resource_2o6r5"]
+resource_local_to_scene = true
+script = ExtResource("5_wse8f")
+character_name = "John"
+battle_class_type = "Mage"
+curr_health = 99
+max_health = 100
+phys_attack = 20
+mag_attack = 80
+phys_defense = 30
+mag_defense = 90
+crit_chance = 15
+level = 1
+attack_range = 2
+mobility = 3
+speed = 3.0
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
 [sub_resource type="GDScript" id="GDScript_wse8f"]
 script/source = "extends CanvasLayer
 
@@ -201,17 +254,17 @@ script = ExtResource("4_ioo17")
 
 [node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("1_f3sb7")]
 position = Vector2(120, 120)
-stats = ExtResource("4_036b0")
+stats = SubResource("Resource_ic0uy")
 is_friendly = true
 
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("1_f3sb7")]
 position = Vector2(360, 264)
-stats = ExtResource("5_dwbse")
+stats = SubResource("Resource_k3n1d")
 is_friendly = true
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("1_f3sb7")]
 position = Vector2(168, 312)
-stats = ExtResource("4_036b0")
+stats = SubResource("Resource_2o6r5")
 
 [node name="GUI" type="CanvasLayer" parent="."]
 script = SubResource("GDScript_wse8f")
