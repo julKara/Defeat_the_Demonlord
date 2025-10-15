@@ -33,10 +33,7 @@ func perform_battle(attacker: Actor, defender: Actor) -> void:
 	var damage: int = _calculate_damage(atk_stats, def_stats)
 
 	# 3. Apply Damage to Defender
-	var hit := {
-		"damage": damage
-	}
-	def_stats.take_damage(hit)
+	def_stats.take_damage(damage)
 	
 	# 4. Update Health Bar
 	defender.healthbar._set_health(def_stats.curr_health)

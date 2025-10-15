@@ -25,10 +25,9 @@ func set_max_health(value):
 
 # Basic combat functions
 func take_damage(hit):
-	curr_health -= hit.damage
+	curr_health -= hit
 	curr_health = max(0, curr_health)	# Make sure health is 0 or more
 		
 func recieve_healing(amount):
 	curr_health += amount
 	curr_health = min(curr_health, max_health)
-	emit_signal("health_changed", amount)
