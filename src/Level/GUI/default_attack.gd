@@ -19,3 +19,4 @@ func _pressed() -> void:
 	
 	battle_handler.perform_battle(attacker, target)
 	
+	pass_turn._pressed()

@@ -1,12 +1,22 @@
-[gd_scene load_steps=18 format=3 uid="uid://dijjspgi8x8sv"]
+[gd_scene load_steps=20 format=3 uid="uid://dijjspgi8x8sv"]
 
 [ext_resource type="Texture2D" uid="uid://d1i60lf1ycih2" path="res://assets/character_art/mage/Mage_48x48.png" id="1_bsu0c"]
 [ext_resource type="Script" uid="uid://7mgltwn5kw4v" path="res://src/Units/actor.gd" id="1_xjefa"]
+[ext_resource type="Shader" uid="uid://54clig0upyxr" path="res://src/Units/highlight.gdshader" id="2_a5lvk"]
 [ext_resource type="Texture2D" uid="uid://plvyx02rvm1l" path="res://assets/character_art/mage/Mage_attack_f3.png" id="4_g0rg7"]
 [ext_resource type="Texture2D" uid="uid://cf8weowpmed" path="res://assets/character_art/mage/Mage_attack_f1.png" id="4_kj6bn"]
 [ext_resource type="Texture2D" uid="uid://834u0ejvh4nc" path="res://assets/character_art/mage/Mage_attack_f2.png" id="5_jg2tr"]
 [ext_resource type="Script" uid="uid://lv7bihs01ua5" path="res://src/Level/healthbar.gd" id="7_a5lvk"]
 [ext_resource type="Texture2D" uid="uid://dbbdi0bgi7vac" path="res://assets/character_art/mage/Mage_idle_f2.png" id="7_jg2tr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s4pr6"]
+resource_local_to_scene = true
+shader = ExtResource("2_a5lvk")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
 
 [sub_resource type="Animation" id="Animation_kj6bn"]
 length = 0.001
@@ -106,6 +116,7 @@ bg_color = Color(0.662452, 0.662452, 0.662452, 1)
 script = ExtResource("1_xjefa")
 
 [node name="Sprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_s4pr6")
 position = Vector2(-24, -24)
 texture = ExtResource("7_jg2tr")
 

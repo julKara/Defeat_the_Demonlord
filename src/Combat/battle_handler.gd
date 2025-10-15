@@ -9,6 +9,7 @@ extends Node
 @onready var character_manager: Node2D = $"../TileMapLayer/CharacterManager"
 @onready var animation_timer: Timer = $AnimationTimer
 
+
 # Can be preloaded globally or add it as a child of World scene
 # Like: `var battle_handler = BattleHandler.new()` or keep it as an autoload singleton.
 # Probably connect it to default_attack button
@@ -50,6 +51,7 @@ func perform_battle(attacker: Actor, defender: Actor) -> void:
 	print("%s attacked %s for %d damage!" % [
 		atk_prof.character_name, def_prof.character_name, damage
 	])
+	
 
 func _play_animation(attacker: Actor) -> void:
 	
@@ -95,3 +97,4 @@ func _handle_death(dead_actor: Actor) -> void:
 	dead_actor.set_state(dead_actor.UnitState.DEAD)	# Dead state - updates animation
 	character_manager.character_list.erase(dead_actor)	# Remove character from list in manager
 	dead_actor.queue_free()	# Remove actor from world
+	character_manager.num_characters -= 1
