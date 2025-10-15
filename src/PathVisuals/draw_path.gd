@@ -8,8 +8,15 @@ func _process(_delta):
 
 # Draw a line along the selected path of the character
 func _draw():
-	if character_manager.current_character.current_point_path.is_empty():
+	var all_children = character_manager.current_character.get_children()
+	var behaviour_node
+		
+	for x in all_children:
+		if x is Node:
+			behaviour_node = x
+	
+	if behaviour_node.current_point_path.is_empty():
 		return
 	
-	if character_manager.current_character.current_point_path.size() > 1:
-		draw_polyline(character_manager.current_character.current_point_path, Color.RED)
+	if behaviour_node.current_point_path.size() > 1:
+		draw_polyline(behaviour_node.current_point_path, Color.RED)
