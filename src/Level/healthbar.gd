@@ -12,8 +12,8 @@ It gets updated when recieving healing or taking damage.
 var health = 0 : set = _set_health
 
 # Set the health to full in both bars
-func init_health(health):
-	health = health
+func init_health(in_health):
+	health = in_health
 	max_value = health
 	value = health
 	damagebar.max_value = health
@@ -25,11 +25,13 @@ func _set_health(new_health):
 	
 	# If healed
 	health = min(max_value, new_health)
-	value = health
 	
 	# If unit is dead, remove
 	if health <= 0:
 		queue_free()	# Ques healthbar and all its children to be deleted
+	
+	# Set value of healthbar to health
+	value = health
 	
 	# If taking damage (but not dying)
 	if health < prev_health:

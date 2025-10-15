@@ -4,9 +4,7 @@
 
 [resource]
 script = ExtResource("1_5edjx")
-character_name = "Lennart"
-battle_class_type = "Swordsman"
-curr_health = 199
+curr_health = 200
 max_health = 200
 phys_attack = 90
 mag_attack = 10

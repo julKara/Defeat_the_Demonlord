@@ -27,11 +27,6 @@ func set_max_health(value):
 func take_damage(hit):
 	curr_health -= hit.damage
 	curr_health = max(0, curr_health)	# Make sure health is 0 or more
-	
-	emit_signal("health_changed", curr_health)
-	
-	if(curr_health == 0):	# Death
-		emit_signal("health_depleated")
 		
 func recieve_healing(amount):
 	curr_health += amount

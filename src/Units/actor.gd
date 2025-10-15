@@ -1,10 +1,10 @@
-@tool	# Remove near end (heavy on performance)
+#@tool	# Remove near end (heavy on performance)
 
 class_name Actor extends CharacterBody2D
 """
-This class manages everything concerning the units in the level (both playable and enemies). 
-It stores important information such as state and is_friendly but also setters and initialzers
-for most info.
+# This class manages everything concerning the units in the level (both playable and enemies). 
+# It stores important information such as state and is_friendly but also setters and initialzers
+# for most info.
 """
 
 

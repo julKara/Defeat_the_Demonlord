@@ -17,4 +17,4 @@ class_name UnitProfile extends Resource
 
 # TODO:
 # @export var skills: Array[Resource] = []    # Each skill can be its own Resource later
-# @export var talent: Resource                # Example: a Talent resource (passive ability)
+# @export var talent: Resource                # Talent resource (passive ability)
