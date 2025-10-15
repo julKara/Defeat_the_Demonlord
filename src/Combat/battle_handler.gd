@@ -7,6 +7,7 @@ extends Node
 
 # Refrences
 @onready var character_manager: Node2D = $"../TileMapLayer/CharacterManager"
+@onready var animation_timer: Timer = $AnimationTimer
 
 # Can be preloaded globally or add it as a child of World scene
 # Like: `var battle_handler = BattleHandler.new()` or keep it as an autoload singleton.
@@ -16,7 +17,7 @@ func perform_battle(attacker: Actor, defender: Actor) -> void:
 	
 	# Check if actors are valid
 	if attacker == null or defender == null:
-		print("BattleHandler: Invalid attacker or defender.")
+		push_warning("BattleHandler: Invalid attacker or defender.")
 		return
 	
 	var atk_stats: CharacterStats = attacker.stats
@@ -26,8 +27,8 @@ func perform_battle(attacker: Actor, defender: Actor) -> void:
 	var atk_prof: UnitProfile = attacker.profile
 	var def_prof: UnitProfile = defender.profile
 
-	# 1. Update attacker state
-	#attacker.set_state(attacker.UnitState.ATTACKING)
+	# 1. Play attack animation and wait for it to finish
+	await _play_animation(attacker)
 	
 	# 2. Calculate Damage
 	var damage: int = _calculate_damage(atk_stats, def_stats)
@@ -37,7 +38,7 @@ func perform_battle(attacker: Actor, defender: Actor) -> void:
 	
 	# 4. Update Health Bar
 	defender.healthbar._set_health(def_stats.curr_health)
-	attacker.healthbar._set_health(atk_stats.curr_health)
+	#attacker.healthbar._set_health(atk_stats.curr_health)
 	
 	# 5. Check for death
 	if def_stats.curr_health <= 0:
@@ -45,10 +46,29 @@ func perform_battle(attacker: Actor, defender: Actor) -> void:
 	elif atk_stats.curr_health <= 0:
 		_handle_death(attacker)
 
-	# 6. TESTING 5 Debug Output
+	# 6. TESTING Debug Output
 	print("%s attacked %s for %d damage!" % [
 		atk_prof.character_name, def_prof.character_name, damage
 	])
+
+func _play_animation(attacker: Actor) -> void:
+	
+	# 1. Update state and play animation
+	attacker.set_state(attacker.UnitState.ATTACKING)
+	
+	# 2. Get lenght of animation in seconds
+	var anim_length: float = 1.0  # fallback default if test fails, usually an attack last 1s
+	var anim_player = attacker.anim_player
+	if anim_player and anim_player.has_animation("attack"):
+		anim_length = anim_player.get_animation("attack").length
+
+	# 3. Start the timer to wait for animation completion
+	animation_timer.wait_time = anim_length
+	animation_timer.start()
+	await animation_timer.timeout  # Wait until finished
+
+	# 4. Return to idle state
+	attacker.set_state(attacker.UnitState.IDLE)
 
 # Calculates base damage between two CharacterStats
 func _calculate_damage(atk: CharacterStats, def: CharacterStats) -> int:
