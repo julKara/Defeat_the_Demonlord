@@ -141,7 +141,7 @@ value = 80.0
 show_percentage = false
 
 [node name="Timer" type="Timer" parent="Healthbar"]
-wait_time = 0.3
+wait_time = 0.35
 one_shot = true
 
 [connection signal="timeout" from="Healthbar/Timer" to="Healthbar" method="_on_timer_timeout"]
