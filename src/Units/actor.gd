@@ -1,4 +1,4 @@
-#@tool	# Remove near end (heavy on performance)
+@tool	# Remove near end (heavy on performance)
 
 class_name Actor extends CharacterBody2D
 """
@@ -26,7 +26,6 @@ var state_to_anim = {	# For animation filepaths
 	}
 
 # Refrences to objects in actor
-@onready var shape = $CollisionShape2D	# TODO: Will be changed to healthbar instead
 var behavior: Node = null	# Decides behavior based on if unit is playable, enemy, npc...
 @onready var sprite_2d: Sprite2D = $Sprite	# Just the default sprite to all characters
 @onready var anim_player: AnimationPlayer = $AnimationPlayer	# Used to play animations
@@ -136,14 +135,25 @@ func _reload_behavior():
 	behavior.set_script(behavior_script)
 	add_child(behavior)
 
-	# Set name and color
-	if shape:
+	# Change name and healthbar based on friendly
+	if healthbar:
+		
+		# Fetch the shared stylebox from the healthbar
+		var shared_style = healthbar.get("theme_override_styles/fill")
+		
+		# Duplicate the shared stylebox (deep copy) so we don't mutate the shared resource
+		var local_sb : StyleBoxFlat = shared_style.duplicate(true)
+		
+		# Set name and color
 		if is_friendly:
-			shape.self_modulate = FRIENDLY_COLOR
+			local_sb.bg_color = FRIENDLY_COLOR
 			name = "playable_unit"
 		else:
-			shape.self_modulate = ENEMY_COLOR
+			local_sb.bg_color = ENEMY_COLOR
 			name = "enemy_unit"
+		
+		# Apply override only to this healthbar instance
+		healthbar.add_theme_stylebox_override("fill", local_sb)
 
 # Intialize all stat-variables through the CharacterStats resource (NEW from Julia)
 func _set_stat_variables():
