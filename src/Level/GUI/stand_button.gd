@@ -1,6 +1,7 @@
 extends Button
 @onready var character_manager: Node2D = $"../../../../../TileMapLayer/CharacterManager"
 @onready var tile_map: TileMap = $"../../../../../TileMap"
+@onready var range_tile_map: TileMap = $"../../../../../RangeTileMap"
 @onready var draw_path: Node2D = $"../../../../../DrawPath"
 @onready var actor_info: PanelContainer = $"../../../ActorInfo"
 @onready var actions_menu: PanelContainer = $"../.."
@@ -21,8 +22,8 @@ func _pressed() -> void:
 		behaviour_node.start_position = tile_map.local_to_map(character_manager.current_character.global_position)
 	
 	# Hide mobility and attack range
-	tile_map.clear_layer(1)
-	tile_map.clear_layer(2)
+	range_tile_map.clear_layer(0)
+	range_tile_map.clear_layer(1)
 	
 	# Deselect character
 	behaviour_node.selected = false

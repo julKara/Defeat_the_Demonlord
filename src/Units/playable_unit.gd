@@ -2,6 +2,7 @@ class_name playable_unit extends Node
 
 # Refrences to objects
 @onready var tile_map: TileMap = $"../../../../TileMap"
+@onready var range_tile_map: TileMap = $"../../../../RangeTileMap"
 @onready var draw_path: Node2D = $"../../../../DrawPath"
 @onready var character_manager: Node2D = $"../../../CharacterManager"
 @onready var pass_turn: Button = $"../../../../GUI/Margin/ActionsMenu/VBoxContainer/Pass_Turn"
@@ -88,8 +89,8 @@ func _input(event):
 	# Click to deselect character and hide move range
 	elif (selected == true and
 	tile_map.local_to_map(get_parent().get_global_mouse_position()) == tile_map.local_to_map(get_parent().global_position)):
-		tile_map.clear_layer(1)
-		tile_map.clear_layer(2)
+		range_tile_map.clear_layer(0)
+		range_tile_map.clear_layer(1)
 		selected = false
 		draw_path.hide()
 		get_parent().global_position = tile_map.map_to_local(start_position)
@@ -235,8 +236,8 @@ func highlight_range():
 	var mobility_path
 	
 	# Reset prevoius highlight. Prevents highlighting several characters at once
-	tile_map.clear_layer(1)
-	tile_map.clear_layer(2)
+	range_tile_map.clear_layer(0)
+	range_tile_map.clear_layer(1)
 		
 	# Go through the entire grid and highlight the tiles that are possible to move to
 	# depending on the characters mobility and the tiles that are within attack range
@@ -253,11 +254,11 @@ func highlight_range():
 				
 			# Draw tiles with a path to it that is within the mobility range
 			if mobility_path.size() <= (mobility + 1): # mobility+1 since path includes start position
-				tile_map.set_cell(2, Vector2i(x,y), 0, Vector2i(0,1), 0)
+				range_tile_map.set_cell(1, Vector2i(x,y), 1, Vector2i(0,1), 0)
 			
 			# Draw tiles with a path to it that is within the attack range
 			if mobility_path.size() <= (mobility + attack_range + 1): # mobility+1 since path includes start position
-				tile_map.set_cell(1, Vector2i(x,y), 0, Vector2i(1,1), 0)
+				range_tile_map.set_cell(0, Vector2i(x,y), 1, Vector2i(1,1), 0)
 	
 	selected = true
 	get_parent().set_state(get_parent().UnitState.SELECTED)	# Update state to SELECTED

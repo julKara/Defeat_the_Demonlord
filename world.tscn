@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://fr5vqykbi54o"]
+[gd_scene load_steps=26 format=4 uid="uid://fr5vqykbi54o"]
 
 [ext_resource type="Texture2D" uid="uid://bqmtavn12rhj2" path="res://assets/test_map5.png" id="1_70uel"]
 [ext_resource type="PackedScene" uid="uid://dijjspgi8x8sv" path="res://src/Units/actor.tscn" id="1_f3sb7"]
@@ -45,6 +45,18 @@ tile_size = Vector2i(48, 48)
 custom_data_layer_0/name = "walkable"
 custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_hiqwa")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_70uel"]
+texture = ExtResource("1_70uel")
+texture_region_size = Vector2i(48, 48)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_hiqwa"]
+tile_size = Vector2i(48, 48)
+sources/1 = SubResource("TileSetAtlasSource_70uel")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tlwt5"]
 texture = ExtResource("1_fj7yv")
@@ -154,7 +166,7 @@ texture_region_size = Vector2i(48, 48)
 tile_size = Vector2i(48, 48)
 sources/1 = SubResource("TileSetAtlasSource_tlwt5")
 
-[sub_resource type="Resource" id="Resource_70uel"]
+[sub_resource type="Resource" id="Resource_2u3nc"]
 resource_local_to_scene = true
 script = ExtResource("5_70uel")
 curr_health = 100
@@ -170,7 +182,7 @@ mobility = 3
 speed = 3.0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_hiqwa"]
+[sub_resource type="Resource" id="Resource_udxuc"]
 resource_local_to_scene = true
 script = ExtResource("5_70uel")
 curr_health = 200
@@ -186,13 +198,13 @@ mobility = 4
 speed = 4.0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_2u3nc"]
+[sub_resource type="Resource" id="Resource_ikiii"]
 resource_local_to_scene = true
 script = ExtResource("5_70uel")
 curr_health = 100
 max_health = 100
 phys_attack = 20
-mag_attack = 50
+mag_attack = 60
 phys_defense = 10
 mag_defense = 30
 crit_chance = 10
@@ -234,12 +246,17 @@ layer_1/name = "Effects1"
 layer_2/name = "Effects2"
 
 [node name="Background" type="ColorRect" parent="."]
-visible = false
 custom_minimum_size = Vector2(600, 400)
 offset_right = 600.0
 offset_bottom = 400.0
 color = Color(0.405487, 0.46665, 0.0850288, 1)
 metadata/_edit_use_anchors_ = true
+
+[node name="RangeTileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_hiqwa")
+format = 2
+layer_0/name = "Effects1"
+layer_1/name = "Effects2"
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAHAAAAAQACAAEAAAAHAAEAAQACAAEAAAAGAAEAAQAFAAUAAAAHAAIAAQACAAEAAAAIAAAAAQACAAEAAAAJAAAAAQACAAEAAAAKAAAAAQAAAAUAAAALAAAAAQABAAUAAAACAAAAAQABAAUAAAABAAAAAQAAAAUAAAAAAAAAAQABAAQAAAABAAEAAQACAAEAAAABAAYAAQAAAAEAAAAFAAUAAQABAAEAAAAIAAEAAQACAAEAAAALAAYAAQACAAEAAAAKAAYAAQAAAAEAAAAAAAEAAQABAAUAAAAAAAIAAQABAAQAAAAAAAUAAQABAAUAAAAAAAYAAQABAAQAAAABAAcAAQABAAEAAAACAAcAAQAAAAEAAAADAAAAAQACAAEAAAAEAAAAAQACAAEAAAAFAAAAAQAEAAQAAAAGAAAAAQAFAAQAAAAKAAcAAQACAAEAAAAJAAcAAQAAAAEAAAAIAAcAAQAAAAEAAAAKAAUAAQAAAAEAAAALAAIAAQAAAAEAAAAFAAEAAQAEAAUAAAAEAAUAAQABAAEAAAAHAAgAAQAAAAQAAAAIAAgAAQABAAQAAAAJAAgAAQAAAAQAAAAKAAgAAQABAAQAAAALAAgAAQAAAAQAAAAMAAcAAQAAAAQAAAAMAAYAAQAAAAUAAAAMAAgAAQACAAQAAAALAAcAAQAEAAEAAAAMAAUAAQAAAAQAAAAAAAcAAQABAAUAAAAAAAgAAQADAAQAAAABAAgAAQABAAUAAAAJAAQAAQAAAAEAAAAFAAQAAQAAAAEAAAAEAAQAAQACAAEAAAAAAAQAAQABAAQAAAAAAAMAAQABAAUAAAAKAAQAAQAGAAEAAAA=")
@@ -252,19 +269,19 @@ script = ExtResource("4_ioo17")
 
 [node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("1_f3sb7")]
 position = Vector2(120, 120)
-stats = SubResource("Resource_70uel")
+stats = SubResource("Resource_2u3nc")
 profile = ExtResource("6_ic0uy")
 is_friendly = true
 
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("1_f3sb7")]
 position = Vector2(360, 264)
-stats = SubResource("Resource_hiqwa")
+stats = SubResource("Resource_udxuc")
 profile = ExtResource("8_k3n1d")
 is_friendly = true
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("1_f3sb7")]
 position = Vector2(168, 312)
-stats = SubResource("Resource_2u3nc")
+stats = SubResource("Resource_ikiii")
 profile = ExtResource("10_udxuc")
 
 [node name="GUI" type="CanvasLayer" parent="."]
