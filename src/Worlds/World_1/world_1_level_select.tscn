@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cyd4u6ytap7wh"]
+[gd_scene load_steps=6 format=3 uid="uid://cyd4u6ytap7wh"]
 
 [ext_resource type="Script" uid="uid://c0dbybntiql1x" path="res://src/Worlds/level_select.gd" id="1_bqi3m"]
 [ext_resource type="PackedScene" uid="uid://m2ygs7vhnqnr" path="res://src/Worlds/level_button.tscn" id="1_dmrxl"]
 [ext_resource type="Script" uid="uid://ol07ourtj03u" path="res://src/Worlds/back_button.gd" id="3_bbea6"]
+[ext_resource type="Script" uid="uid://sehkuo2xbwos" path="res://src/Worlds/world_tracker.gd" id="4_alxpp"]
+[ext_resource type="Resource" uid="uid://b7d426jw88wxl" path="res://src/Worlds/world_num.tres" id="5_4182p"]
 
 [node name="LevelSelect" type="Control"]
 layout_mode = 3
@@ -72,3 +74,7 @@ offset_right = 45.0
 grow_vertical = 0
 text = "Back"
 script = ExtResource("3_bbea6")
+
+[node name="WorldTracker" type="Node" parent="."]
+script = ExtResource("4_alxpp")
+world_tracker = ExtResource("5_4182p")

@@ -1,6 +1,8 @@
 extends Control
 
 @onready var world_container: HBoxContainer = $WorldContainer
+@onready var world_tracker: Node = $WorldTracker
+
 
 func _ready() -> void:
 	setup_world_button()
@@ -25,3 +27,4 @@ func change_to_scene(world_num: int):
 	if FileAccess.file_exists(next_world):
 		get_tree().change_scene_to_file(next_world)
 		print("Changed to world " + str(world_num))
+		world_tracker.world_tracker.world_num = world_num
