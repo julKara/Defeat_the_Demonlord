@@ -1,3 +1,3 @@
 extends Node
 
-@export var world_tracker: world_tracker
+@export var world_script: world_tracker

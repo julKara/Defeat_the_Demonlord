@@ -57,4 +57,4 @@ disabled = true
 
 [node name="WorldTracker" type="Node" parent="."]
 script = ExtResource("3_p3fju")
-world_tracker = ExtResource("4_clij8")
+world_script = ExtResource("4_clij8")

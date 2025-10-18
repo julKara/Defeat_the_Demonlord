@@ -77,4 +77,4 @@ script = ExtResource("3_cyqcq")
 
 [node name="WorldTracker" type="Node" parent="."]
 script = ExtResource("4_xoohk")
-world_tracker = ExtResource("5_aqxto")
+world_script = ExtResource("5_aqxto")

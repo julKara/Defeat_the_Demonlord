@@ -1,14 +1,14 @@
 extends Control
 
 @onready var level_container: HBoxContainer = $LevelContainer
-@onready var world_tracker: Node = $WorldTracker
+@onready var world: Node = $WorldTracker
 
 var world_num: int
 
 func _ready() -> void:
 	setup_level_button()
 	connect_selected_level_to_level_button()
-	world_num = world_tracker.world_tracker.world_num
+	world_num = world.world_script.world_num
 	
 func setup_level_button():
 	for button in level_container.get_children():
