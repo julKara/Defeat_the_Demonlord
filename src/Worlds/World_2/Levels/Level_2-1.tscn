@@ -1,19 +1,19 @@
-[gd_scene load_steps=26 format=4 uid="uid://fr5vqykbi54o"]
+[gd_scene load_steps=26 format=4 uid="uid://ddacdpv1f5knn"]
 
-[ext_resource type="Texture2D" uid="uid://bqmtavn12rhj2" path="res://assets/test_map5.png" id="1_6fba8"]
-[ext_resource type="Texture2D" uid="uid://bdy0m0gr2tme3" path="res://assets/level_art/48x48_Tileset/pipo-map001.png" id="2_yaehp"]
-[ext_resource type="Script" uid="uid://t1qdqjubkhud" path="res://src/Units/character_manager.gd" id="3_d1osm"]
-[ext_resource type="PackedScene" uid="uid://dijjspgi8x8sv" path="res://src/Units/actor.tscn" id="4_ie7uf"]
-[ext_resource type="Script" uid="uid://dfeqtmcp7uacl" path="res://src/Units/CharacterStats.gd" id="5_gwx4l"]
-[ext_resource type="Resource" uid="uid://mwedg6ttx2lp" path="res://characters/Mage/mageProfile.tres" id="6_fkbji"]
-[ext_resource type="Resource" uid="uid://bu2f1ylnrxljm" path="res://characters/Knight/knightProfile.tres" id="7_6eo5x"]
-[ext_resource type="Resource" uid="uid://b5bmi1atp4dnb" path="res://characters/Mage/mageEnemyProfile.tres" id="8_3fa85"]
-[ext_resource type="Script" uid="uid://lvdowlbqk6fe" path="res://src/Level/GUI/actions_menu.gd" id="9_8xl1m"]
-[ext_resource type="Script" uid="uid://duw38t7v0nrgf" path="res://src/Level/GUI/default_attack.gd" id="10_bwsuy"]
-[ext_resource type="Script" uid="uid://b6oemt0bk5jyw" path="res://src/Level/GUI/stand_button.gd" id="11_nvhjt"]
-[ext_resource type="Script" uid="uid://dso7okpirndht" path="res://src/Level/GUI/actor_info.gd" id="12_mc16d"]
-[ext_resource type="PackedScene" uid="uid://cats61ytkbbvj" path="res://src/PathVisuals/draw_path.tscn" id="13_7hqok"]
-[ext_resource type="Script" uid="uid://bjl544x2g0v72" path="res://src/Combat/battle_handler.gd" id="14_n1eyc"]
+[ext_resource type="Texture2D" uid="uid://bqmtavn12rhj2" path="res://assets/test_map5.png" id="1_vgxp4"]
+[ext_resource type="Texture2D" uid="uid://bdy0m0gr2tme3" path="res://assets/level_art/48x48_Tileset/pipo-map001.png" id="2_n0njb"]
+[ext_resource type="Script" uid="uid://t1qdqjubkhud" path="res://src/Units/character_manager.gd" id="3_21gwj"]
+[ext_resource type="PackedScene" uid="uid://dijjspgi8x8sv" path="res://src/Units/actor.tscn" id="4_2aopv"]
+[ext_resource type="Script" uid="uid://dfeqtmcp7uacl" path="res://src/Units/CharacterStats.gd" id="5_amq2v"]
+[ext_resource type="Resource" uid="uid://mwedg6ttx2lp" path="res://characters/Mage/mageProfile.tres" id="6_544mx"]
+[ext_resource type="Resource" uid="uid://bu2f1ylnrxljm" path="res://characters/Knight/knightProfile.tres" id="7_in3vx"]
+[ext_resource type="Resource" uid="uid://b5bmi1atp4dnb" path="res://characters/Mage/mageEnemyProfile.tres" id="8_0bmnd"]
+[ext_resource type="Script" uid="uid://lvdowlbqk6fe" path="res://src/Level/GUI/actions_menu.gd" id="9_j4nfy"]
+[ext_resource type="Script" uid="uid://duw38t7v0nrgf" path="res://src/Level/GUI/default_attack.gd" id="10_pdlty"]
+[ext_resource type="Script" uid="uid://b6oemt0bk5jyw" path="res://src/Level/GUI/stand_button.gd" id="11_sx24n"]
+[ext_resource type="Script" uid="uid://dso7okpirndht" path="res://src/Level/GUI/actor_info.gd" id="12_sbocg"]
+[ext_resource type="PackedScene" uid="uid://cats61ytkbbvj" path="res://src/PathVisuals/draw_path.tscn" id="13_hogbk"]
+[ext_resource type="Script" uid="uid://bjl544x2g0v72" path="res://src/Combat/battle_handler.gd" id="14_xt0ay"]
 
 [sub_resource type="GDScript" id="GDScript_ic0uy"]
 script/source = "extends Node2D
@@ -30,7 +30,7 @@ script/source = "extends Node2D
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hiqwa"]
-texture = ExtResource("1_6fba8")
+texture = ExtResource("1_vgxp4")
 texture_region_size = Vector2i(48, 48)
 0:0/0 = 0
 0:0/0/custom_data_0 = true
@@ -47,7 +47,7 @@ custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_hiqwa")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_70uel"]
-texture = ExtResource("1_6fba8")
+texture = ExtResource("1_vgxp4")
 texture_region_size = Vector2i(48, 48)
 0:0/0 = 0
 1:0/0 = 0
@@ -59,7 +59,7 @@ tile_size = Vector2i(48, 48)
 sources/1 = SubResource("TileSetAtlasSource_70uel")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tlwt5"]
-texture = ExtResource("2_yaehp")
+texture = ExtResource("2_n0njb")
 texture_region_size = Vector2i(48, 48)
 0:0/0 = 0
 0:1/0 = 0
@@ -166,9 +166,9 @@ texture_region_size = Vector2i(48, 48)
 tile_size = Vector2i(48, 48)
 sources/1 = SubResource("TileSetAtlasSource_tlwt5")
 
-[sub_resource type="Resource" id="Resource_4lrq2"]
+[sub_resource type="Resource" id="Resource_8b0p0"]
 resource_local_to_scene = true
-script = ExtResource("5_gwx4l")
+script = ExtResource("5_amq2v")
 curr_health = 100
 max_health = 100
 phys_attack = 20
@@ -182,9 +182,9 @@ mobility = 3
 speed = 3.0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_spdtl"]
+[sub_resource type="Resource" id="Resource_6yfhb"]
 resource_local_to_scene = true
-script = ExtResource("5_gwx4l")
+script = ExtResource("5_amq2v")
 curr_health = 200
 max_health = 200
 phys_attack = 90
@@ -198,9 +198,9 @@ mobility = 4
 speed = 4.0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_w7la1"]
+[sub_resource type="Resource" id="Resource_sfn4v"]
 resource_local_to_scene = true
-script = ExtResource("5_gwx4l")
+script = ExtResource("5_amq2v")
 curr_health = 100
 max_health = 100
 phys_attack = 20
@@ -234,7 +234,7 @@ script/source = "extends CanvasLayer
 	#info_vbox.get_child(1).text = \"HP: \" + str(actor.stats.curr_health) + \"/\" + str(actor.stats.max_health)
 "
 
-[node name="Level_1" type="Node2D"]
+[node name="Level_1-1" type="Node2D"]
 script = SubResource("GDScript_ic0uy")
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -249,7 +249,7 @@ layer_2/name = "Effects2"
 custom_minimum_size = Vector2(600, 400)
 offset_right = 600.0
 offset_bottom = 400.0
-color = Color(0.405487, 0.46665, 0.0850288, 1)
+color = Color(0.215194, 0.250972, 0.0297835, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="RangeTileMap" type="TileMap" parent="."]
@@ -263,26 +263,26 @@ tile_map_data = PackedByteArray("AAAHAAAAAQACAAEAAAAHAAEAAQACAAEAAAAGAAEAAQAFAAU
 tile_set = SubResource("TileSet_f3sb7")
 
 [node name="CharacterManager" type="Node2D" parent="TileMapLayer"]
-script = ExtResource("3_d1osm")
+script = ExtResource("3_21gwj")
 
 [node name="Actors" type="Node2D" parent="TileMapLayer"]
 
-[node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_ie7uf")]
+[node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_2aopv")]
 position = Vector2(120, 120)
-stats = SubResource("Resource_4lrq2")
-profile = ExtResource("6_fkbji")
+stats = SubResource("Resource_8b0p0")
+profile = ExtResource("6_544mx")
 is_friendly = true
 
-[node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_ie7uf")]
+[node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_2aopv")]
 position = Vector2(360, 264)
-stats = SubResource("Resource_spdtl")
-profile = ExtResource("7_6eo5x")
+stats = SubResource("Resource_6yfhb")
+profile = ExtResource("7_in3vx")
 is_friendly = true
 
-[node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_ie7uf")]
+[node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_2aopv")]
 position = Vector2(168, 312)
-stats = SubResource("Resource_w7la1")
-profile = ExtResource("8_3fa85")
+stats = SubResource("Resource_sfn4v")
+profile = ExtResource("8_0bmnd")
 
 [node name="GUI" type="CanvasLayer" parent="."]
 script = SubResource("GDScript_wse8f")
@@ -295,7 +295,7 @@ offset_bottom = 400.0
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-script = ExtResource("9_8xl1m")
+script = ExtResource("9_j4nfy")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GUI/Margin/ActionsMenu"]
 layout_mode = 2
@@ -303,7 +303,7 @@ layout_mode = 2
 [node name="Default_Attack" type="Button" parent="GUI/Margin/ActionsMenu/VBoxContainer"]
 layout_mode = 2
 text = "Attack"
-script = ExtResource("10_bwsuy")
+script = ExtResource("10_pdlty")
 
 [node name="Use_Skill" type="Button" parent="GUI/Margin/ActionsMenu/VBoxContainer"]
 layout_mode = 2
@@ -312,13 +312,13 @@ text = "Skill"
 [node name="Pass_Turn" type="Button" parent="GUI/Margin/ActionsMenu/VBoxContainer"]
 layout_mode = 2
 text = "Pass"
-script = ExtResource("11_nvhjt")
+script = ExtResource("11_sx24n")
 
 [node name="ActorInfo" type="PanelContainer" parent="GUI/Margin"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
-script = ExtResource("12_mc16d")
+script = ExtResource("12_sbocg")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GUI/Margin/ActorInfo"]
 layout_mode = 2
@@ -331,10 +331,10 @@ text = "Name: John"
 layout_mode = 2
 text = "HP: 00/00"
 
-[node name="DrawPath" parent="." instance=ExtResource("13_7hqok")]
+[node name="DrawPath" parent="." instance=ExtResource("13_hogbk")]
 
 [node name="BattleHandler" type="Node2D" parent="."]
-script = ExtResource("14_n1eyc")
+script = ExtResource("14_xt0ay")
 
 [node name="AnimationTimer" type="Timer" parent="BattleHandler"]
 one_shot = true

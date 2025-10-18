@@ -1,10 +1,14 @@
 extends Control
 
 @onready var level_container: HBoxContainer = $LevelContainer
+@onready var label: Label = $Label
+
+var world_num: int
 
 func _ready() -> void:
 	setup_level_button()
 	connect_selected_level_to_level_button()
+	world_num = int(label.text[label.text.length() - 1])
 	
 func setup_level_button():
 	for button in level_container.get_children():
@@ -17,9 +21,10 @@ func connect_selected_level_to_level_button():
 	for button in level_container.get_children():
 		button.connect("level_selected", change_to_scene) # Sends level_num from button to change_to_scene
 		
-func change_to_scene(level_num: int):
-	var next_level: String = "res://src/Level/Levels/Level_" + str(level_num) + ".tscn" # Filepath to selected level
-	
+func change_to_scene(level_num:int):
+	var next_level: String = ("res://src/Worlds/World_" + str(world_num) + 
+	"/Levels/Level_" + str(world_num) + "-" + str(level_num) + ".tscn") # Filepath to selected level
+
 	# If the filepath is valid, change scene to the selected level
 	if FileAccess.file_exists(next_level):
 		get_tree().change_scene_to_file(next_level)
