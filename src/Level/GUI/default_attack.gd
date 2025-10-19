@@ -19,4 +19,7 @@ func _pressed() -> void:
 	
 	battle_handler.perform_battle(attacker, target)
 	
+	# TEMPORARY solution for turn ending before attack was done, causing enemies to attack while dead
+	await get_tree().create_timer(1.00).timeout
+	
 	pass_turn._pressed()

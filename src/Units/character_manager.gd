@@ -9,6 +9,8 @@ var character_list: Array
 var current_character
 var selected_target	# FIX TARGETING
 var num_characters: int
+var player_list: Array
+var enemy_list: Array
 
 func _ready() -> void:
 	# Default value for starting character
@@ -20,6 +22,14 @@ func _ready() -> void:
 		character_list.append(actor)
 	
 	num_characters = character_list.size()
+	
+	# Set up player and enemy lists
+	for character in character_list:
+		if character.is_friendly == true:
+			player_list.append(character)
+		else:
+			enemy_list.append(character)
+
 
 
 func set_current_character(character) -> void:

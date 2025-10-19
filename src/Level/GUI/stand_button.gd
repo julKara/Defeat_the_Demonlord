@@ -5,10 +5,15 @@ extends Button
 @onready var draw_path: Node2D = $"../../../../../DrawPath"
 @onready var actor_info: PanelContainer = $"../../../ActorInfo"
 @onready var actions_menu: PanelContainer = $"../.."
+@onready var win_loss_condition: Node2D = $"../../../../../WinLossCondition"
+
 
 var counter: int = 0
 
 func _pressed() -> void:
+	# Check if a win/loss condition has been met
+	win_loss_condition.check_conditions()
+	
 	# Find the behaviour node of the current character
 	var all_children = character_manager.current_character.get_children()
 	var behaviour_node

@@ -95,6 +95,12 @@ func _handle_death(dead_actor: Actor) -> void:
 	
 	# Death behavoiur
 	dead_actor.set_state(dead_actor.UnitState.DEAD)	# Dead state - updates animation
-	character_manager.character_list.erase(dead_actor)	# Remove character from list in manager
+	character_manager.character_list.erase(dead_actor)	# Remove character from character_list in manager
 	dead_actor.queue_free()	# Remove actor from world
 	character_manager.num_characters -= 1
+	
+	# Removes character from player/enemy list
+	if dead_actor.is_friendly == true:
+		character_manager.player_list.erase(dead_actor)
+	else:
+		character_manager.enemy_list.erase(dead_actor)
