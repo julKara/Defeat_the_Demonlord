@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://ddacdpv1f5knn"]
+[gd_scene load_steps=27 format=4 uid="uid://ddacdpv1f5knn"]
 
 [ext_resource type="Texture2D" uid="uid://bqmtavn12rhj2" path="res://assets/test_map5.png" id="1_vgxp4"]
 [ext_resource type="Texture2D" uid="uid://bdy0m0gr2tme3" path="res://assets/level_art/48x48_Tileset/pipo-map001.png" id="2_n0njb"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://dso7okpirndht" path="res://src/Level/GUI/actor_info.gd" id="12_sbocg"]
 [ext_resource type="PackedScene" uid="uid://cats61ytkbbvj" path="res://src/PathVisuals/draw_path.tscn" id="13_hogbk"]
 [ext_resource type="Script" uid="uid://bjl544x2g0v72" path="res://src/Combat/battle_handler.gd" id="14_xt0ay"]
+[ext_resource type="Script" uid="uid://nm7v2oerrihf" path="res://src/Level/win_loss_condition.gd" id="15_6yfhb"]
 
 [sub_resource type="GDScript" id="GDScript_ic0uy"]
 script/source = "extends Node2D
@@ -166,7 +167,7 @@ texture_region_size = Vector2i(48, 48)
 tile_size = Vector2i(48, 48)
 sources/1 = SubResource("TileSetAtlasSource_tlwt5")
 
-[sub_resource type="Resource" id="Resource_8b0p0"]
+[sub_resource type="Resource" id="Resource_sfn4v"]
 resource_local_to_scene = true
 script = ExtResource("5_amq2v")
 curr_health = 100
@@ -182,7 +183,7 @@ mobility = 3
 speed = 3.0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_6yfhb"]
+[sub_resource type="Resource" id="Resource_g3wur"]
 resource_local_to_scene = true
 script = ExtResource("5_amq2v")
 curr_health = 200
@@ -198,7 +199,7 @@ mobility = 4
 speed = 4.0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_sfn4v"]
+[sub_resource type="Resource" id="Resource_rp0ce"]
 resource_local_to_scene = true
 script = ExtResource("5_amq2v")
 curr_health = 100
@@ -269,19 +270,19 @@ script = ExtResource("3_21gwj")
 
 [node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_2aopv")]
 position = Vector2(120, 120)
-stats = SubResource("Resource_8b0p0")
+stats = SubResource("Resource_sfn4v")
 profile = ExtResource("6_544mx")
 is_friendly = true
 
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_2aopv")]
 position = Vector2(360, 264)
-stats = SubResource("Resource_6yfhb")
+stats = SubResource("Resource_g3wur")
 profile = ExtResource("7_in3vx")
 is_friendly = true
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_2aopv")]
 position = Vector2(168, 312)
-stats = SubResource("Resource_sfn4v")
+stats = SubResource("Resource_rp0ce")
 profile = ExtResource("8_0bmnd")
 
 [node name="GUI" type="CanvasLayer" parent="."]
@@ -338,3 +339,6 @@ script = ExtResource("14_xt0ay")
 
 [node name="AnimationTimer" type="Timer" parent="BattleHandler"]
 one_shot = true
+
+[node name="WinLossCondition" type="Node2D" parent="."]
+script = ExtResource("15_6yfhb")

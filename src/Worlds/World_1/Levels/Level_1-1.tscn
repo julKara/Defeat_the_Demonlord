@@ -167,7 +167,7 @@ texture_region_size = Vector2i(48, 48)
 tile_size = Vector2i(48, 48)
 sources/1 = SubResource("TileSetAtlasSource_tlwt5")
 
-[sub_resource type="Resource" id="Resource_iucr1"]
+[sub_resource type="Resource" id="Resource_6mxkn"]
 resource_local_to_scene = true
 script = ExtResource("5_n0kbp")
 curr_health = 100
@@ -183,7 +183,7 @@ mobility = 3
 speed = 3.0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_e1a87"]
+[sub_resource type="Resource" id="Resource_iucr1"]
 resource_local_to_scene = true
 script = ExtResource("5_n0kbp")
 curr_health = 200
@@ -199,7 +199,7 @@ mobility = 4
 speed = 4.0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_n0kbp"]
+[sub_resource type="Resource" id="Resource_e1a87"]
 resource_local_to_scene = true
 script = ExtResource("5_n0kbp")
 curr_health = 100
@@ -270,19 +270,19 @@ script = ExtResource("3_iucr1")
 
 [node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
 position = Vector2(120, 120)
-stats = SubResource("Resource_iucr1")
+stats = SubResource("Resource_6mxkn")
 profile = ExtResource("6_hhk72")
 is_friendly = true
 
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
 position = Vector2(360, 264)
-stats = SubResource("Resource_e1a87")
+stats = SubResource("Resource_iucr1")
 profile = ExtResource("7_8y1rk")
 is_friendly = true
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
 position = Vector2(168, 312)
-stats = SubResource("Resource_n0kbp")
+stats = SubResource("Resource_e1a87")
 profile = ExtResource("8_na0ed")
 
 [node name="GUI" type="CanvasLayer" parent="."]
@@ -331,6 +331,57 @@ text = "Name: John"
 [node name="HP" type="Label" parent="GUI/Margin/ActorInfo/VBoxContainer"]
 layout_mode = 2
 text = "HP: 00/00"
+
+[node name="VictoryScreen" type="PanelContainer" parent="GUI/Margin"]
+visible = false
+custom_minimum_size = Vector2(400, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="GUI/Margin/VictoryScreen"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 40
+text = "Victory!"
+horizontal_alignment = 1
+
+[node name="Continue" type="Button" parent="GUI/Margin/VictoryScreen"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Continue"
+
+[node name="GameOverScreen" type="PanelContainer" parent="GUI/Margin"]
+visible = false
+custom_minimum_size = Vector2(400, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="GUI/Margin/GameOverScreen"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 40
+text = "Game Over!"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/Margin/GameOverScreen"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="Retry" type="Button" parent="GUI/Margin/GameOverScreen/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Retry"
+
+[node name="Return" type="Button" parent="GUI/Margin/GameOverScreen/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Return"
 
 [node name="DrawPath" parent="." instance=ExtResource("13_jamn3")]
 
