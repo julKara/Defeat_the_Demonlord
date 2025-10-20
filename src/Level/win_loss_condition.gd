@@ -20,8 +20,10 @@ func check_conditions():
 
 func win():
 	print("victory :3")
+	get_tree().paused = true
 	victory_screen.show()
 	
 func lose():
 	print("game over :(")
+	get_tree().paused = true
 	game_over_screen.show()
