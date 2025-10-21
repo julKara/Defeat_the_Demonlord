@@ -6,6 +6,7 @@ extends Node2D
 @onready var actor_info: PanelContainer = $"../../GUI/Margin/ActorInfo"
 
 var character_list: Array
+var character_list_copy: Array
 var current_character
 var selected_target	# FIX TARGETING
 var num_characters: int
@@ -20,6 +21,9 @@ func _ready() -> void:
 	# Array storing all characters
 	for actor: Actor in actors.get_children():
 		character_list.append(actor)
+	
+	# Create copy of character_list to keep track of all character that were in the level before the game started
+	character_list_copy = character_list
 	
 	num_characters = character_list.size()
 	

@@ -31,12 +31,22 @@ func check_conditions():
 
 func win():
 	print("victory :3")
+	
+	# Pause game so that no more moves can be made
 	get_tree().paused = true
+	
+	# Show victory screen
 	victory_screen.show()
 	
 	# If this was the latest level -> unlock the next one
 	if current_world == worlds_unlocked and current_level == levels_unlocked:
 		world_handler.world_script.unlock_next_level()
+		
+	# Characters level up
+	for character in character_manager.character_list_copy:
+		if character.is_friendly == true:
+			character.stats.level += 1
+			print(character.profile.character_name + " reached level " + str(character.stats.level))
 	
 func lose():
 	print("game over :(")
