@@ -22,6 +22,6 @@
 * Level select -- Mirijam
 * Save files -- Mirijam
 * Character talent (Knight: pass turn -> guard for allies (become attack_target), Mage: Apply burn (damage over time)) -- Julia
-* Counter attack -- Julia
+* <del>Counter attack</del> -- Julia
 * Art (Demon Lord, slime, goblin, skeleton) -- Both
 * Music -- Mirijam
