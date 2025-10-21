@@ -74,14 +74,16 @@ func _calculate_damage(atk: CharacterStats, def: CharacterStats) -> int:
 	var damage: int = 0
 	
 	# Simple logic using magical or physical damage
-	if atk.phys_attack > atk.mag_attack:
+	if atk.phys_attack >= atk.mag_attack:
+		print("Using Physical")
 		damage = max(1, atk.phys_attack - def.phys_defense)
 	else:
+		print("Using magic")
 		damage = max(1, atk.mag_attack - def.mag_defense)
 	
 	# Doubles damage if preforming a crit
 	if randf() < float(atk.crit_chance) / 100.0:
-		damage *= 2
+		damage *= 1.4
 		print("Critical hit!")
 	
 	return damage
