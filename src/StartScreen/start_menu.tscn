@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5un78p84uik2"]
+
+[ext_resource type="Script" uid="uid://bsi7hvfmcwssu" path="res://src/StartScreen/new_game.gd" id="1_ilsnu"]
+[ext_resource type="Script" uid="uid://0ad1m7m8j7ba" path="res://src/StartScreen/quit.gd" id="1_x5plg"]
+[ext_resource type="Script" uid="uid://mbi46648c8lx" path="res://src/StartScreen/continue.gd" id="1_yevbf"]
+
+[node name="StartMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 608.0
+offset_bottom = 407.0
+color = Color(0.106595, 0.303704, 0.245012, 1)
+
+[node name="GameTitle" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -75.0
+offset_right = 75.0
+offset_bottom = 35.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 25
+text = "Defeat The Demonlord (working title)"
+
+[node name="ButtonContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = -50.5
+offset_right = 76.0
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NewGame" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+text = "New Game"
+script = ExtResource("1_ilsnu")
+
+[node name="Continue" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+text = "Continue"
+script = ExtResource("1_yevbf")
+
+[node name="Quit" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+text = "Quit"
+script = ExtResource("1_x5plg")

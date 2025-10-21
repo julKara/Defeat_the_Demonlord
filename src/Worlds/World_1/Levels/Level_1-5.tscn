@@ -193,7 +193,7 @@ script/source = "extends CanvasLayer
 	#info_vbox.get_child(1).text = \"HP: \" + str(actor.stats.curr_health) + \"/\" + str(actor.stats.max_health)
 "
 
-[node name="Level_1-1" type="Node2D"]
+[node name="Level_1-5" type="Node2D"]
 script = SubResource("GDScript_ic0uy")
 
 [node name="TileMap" type="TileMap" parent="."]
