@@ -155,8 +155,8 @@ func _apply_profile() -> void:
 		if not anim_player.has_animation_library(anim_library_name):
 			anim_player.add_animation_library(anim_library_name, profile.animation)
 			print("Added animation library:", anim_library_name)
-		else:
-			print("Library already exists:", anim_library_name)
+		#else:
+			#print("Library already exists:", anim_library_name)
 
 # Updates current_state and calls update-animation
 func set_state(new_state: UnitState) -> void:

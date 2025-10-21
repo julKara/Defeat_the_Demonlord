@@ -39,18 +39,15 @@ func perform_battle(attacker: Actor, defender: Actor) -> void:
 	
 	# 4. Update Health Bar
 	defender.healthbar._set_health(def_stats.curr_health)
-	#attacker.healthbar._set_health(atk_stats.curr_health)
 	
-	# 5. Check for death
-	if def_stats.curr_health <= 0:
-		_handle_death(defender)
-	#elif atk_stats.curr_health <= 0:
-		#_handle_death(attacker)
-
-	# 6. TESTING Debug Output
+	# 5. TESTING Debug Output
 	print("%s attacked %s for %d damage!" % [
 		atk_prof.character_name, def_prof.character_name, damage
 	])
+	
+	# 6. Check for death
+	if def_stats.curr_health <= 0:
+		_handle_death(defender)
 	
 
 func _play_animation(attacker: Actor) -> void:
