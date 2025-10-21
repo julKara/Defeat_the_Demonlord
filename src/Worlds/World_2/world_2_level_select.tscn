@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://m2ygs7vhnqnr" path="res://src/Worlds/level_button.tscn" id="2_svo87"]
 [ext_resource type="Script" uid="uid://ol07ourtj03u" path="res://src/Worlds/back_button.gd" id="3_cyqcq"]
 [ext_resource type="Script" uid="uid://sehkuo2xbwos" path="res://src/Worlds/world_tracker.gd" id="4_xoohk"]
-[ext_resource type="Resource" uid="uid://b7d426jw88wxl" path="res://src/Worlds/world_num.tres" id="5_aqxto"]
+[ext_resource type="Resource" uid="uid://b7d426jw88wxl" path="res://src/Worlds/world_handler.tres" id="5_aqxto"]
 
 [node name="LevelSelect" type="Control"]
 layout_mode = 3
@@ -75,6 +75,6 @@ grow_vertical = 0
 text = "Back"
 script = ExtResource("3_cyqcq")
 
-[node name="WorldTracker" type="Node" parent="."]
+[node name="WorldHandler" type="Node" parent="."]
 script = ExtResource("4_xoohk")
 world_script = ExtResource("5_aqxto")

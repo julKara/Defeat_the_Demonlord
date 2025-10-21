@@ -1,7 +1,7 @@
 extends Control
 
 @onready var world_container: HBoxContainer = $WorldContainer
-@onready var world: Node = $WorldTracker
+@onready var world_handler: Node = $WorldHandler
 
 
 func _ready() -> void:
@@ -13,8 +13,8 @@ func setup_world_button():
 		button.world_num = button.get_index() + 1 # Assign world number to the button
 		button.text = "World " + str(button.world_num) # Update text on button (World number)
 		button.locked = true # All world are originally locked
-	world_container.get_child(0).locked = false # First world is unlocked
-	world_container.get_child(1).locked = false # For testing
+		if button.world_num <= world_handler.world_script.worlds_unlocked:
+			button.locked = false
 
 func connect_selected_world_to_world_button():
 	for button in world_container.get_children():
@@ -27,4 +27,4 @@ func change_to_scene(world_num: int):
 	if FileAccess.file_exists(next_world):
 		get_tree().change_scene_to_file(next_world)
 		print("Changed to world " + str(world_num))
-		world.world_script.world_num = world_num
+		world_handler.world_script.set_current_world(world_num)

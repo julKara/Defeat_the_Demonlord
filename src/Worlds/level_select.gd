@@ -1,21 +1,29 @@
 extends Control
 
 @onready var level_container: HBoxContainer = $LevelContainer
-@onready var world: Node = $WorldTracker
+@onready var world_handler: Node = $WorldHandler
 
 var world_num: int
 
 func _ready() -> void:
 	setup_level_button()
 	connect_selected_level_to_level_button()
-	world_num = world.world_script.world_num
+	world_num = world_handler.world_script.current_world
 	
 func setup_level_button():
 	for button in level_container.get_children():
 		button.level_num = button.get_index() + 1 # Assign level number to the button
 		button.text = "Level " + str(button.level_num) # Update text on button (Level number)
 		button.locked = true # All levels are originally locked
-	level_container.get_child(0).locked = false # First level is unlocked
+		
+		# If this is the latest unlocked world -> set which levels are unlocked according to levels_unlocked
+		if (button.level_num <= world_handler.world_script.levels_unlocked and 
+		world_handler.world_script.current_world == world_handler.world_script.worlds_unlocked):
+			button.locked = false
+		# If this is not the latest unlocked world -> set all levels as unlocked
+		elif world_handler.world_script.current_world < world_handler.world_script.worlds_unlocked:
+			button.locked = false
+
 
 func connect_selected_level_to_level_button():
 	for button in level_container.get_children():
@@ -28,3 +36,4 @@ func change_to_scene(level_num:int):
 	# If the filepath is valid, change scene to the selected level
 	if FileAccess.file_exists(next_level):
 		get_tree().change_scene_to_file(next_level)
+		world_handler.world_script.set_current_level(level_num)

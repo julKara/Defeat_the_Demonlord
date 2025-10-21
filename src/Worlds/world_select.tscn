@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://0vsjfsxaqhg7" path="res://src/Worlds/world_select.gd" id="1_64sqw"]
 [ext_resource type="PackedScene" uid="uid://pood72nr4l6o" path="res://src/Worlds/world_button.tscn" id="2_64sqw"]
 [ext_resource type="Script" uid="uid://sehkuo2xbwos" path="res://src/Worlds/world_tracker.gd" id="3_p3fju"]
-[ext_resource type="Resource" uid="uid://b7d426jw88wxl" path="res://src/Worlds/world_num.tres" id="4_clij8"]
+[ext_resource type="Resource" uid="uid://b7d426jw88wxl" path="res://src/Worlds/world_handler.tres" id="4_clij8"]
 
 [node name="WorldSelect" type="Control"]
 layout_mode = 3
@@ -55,6 +55,6 @@ layout_mode = 2
 layout_mode = 2
 disabled = true
 
-[node name="WorldTracker" type="Node" parent="."]
+[node name="WorldHandler" type="Node" parent="."]
 script = ExtResource("3_p3fju")
 world_script = ExtResource("4_clij8")
