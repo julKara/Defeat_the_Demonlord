@@ -17,16 +17,19 @@ func _pressed() -> void:
 	var attacker: Actor = character_manager.current_character
 	var target: Actor = behaviour_node.attack_target
 	
+	# Distance between attacker and target, influences damage
+	var dist: float = attacker.position.distance_to(target.position)
+	
 	# Perform battle and wait for it to finish
-	await battle_handler.perform_battle(attacker, target)
+	await battle_handler.perform_battle(attacker, target, dist)
 	
 	# Do a counter-attack if target is still alive and withing range
 	if target.stats.curr_health > 0:
-		var attacker_range = attacker.stats.attack_range
 		var target_range = target.stats.attack_range
-
+		
 		# Only counterattack if attacker is within target’s range
-		if target_range >= attacker_range:
-			await battle_handler.perform_battle(target, attacker)
+		if target_range * attacker.tile_size >= dist:
+			#print("Counter Attack!")
+			await battle_handler.perform_battle(target, attacker, dist)
 	
 	pass_turn._pressed()

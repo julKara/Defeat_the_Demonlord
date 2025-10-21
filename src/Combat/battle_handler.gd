@@ -14,7 +14,7 @@ extends Node
 # Like: `var battle_handler = BattleHandler.new()` or keep it as an autoload singleton.
 # Probably connect it to default_attack button
 
-func perform_battle(attacker: Actor, defender: Actor) -> void:
+func perform_battle(attacker: Actor, defender: Actor, distance: float) -> void:
 	
 	# Check if actors are valid
 	if attacker == null or defender == null:
@@ -36,12 +36,9 @@ func perform_battle(attacker: Actor, defender: Actor) -> void:
 	
 	# 3. If a unit with longer range (2 or more), they do less damage close up
 	#print("Range: ", atk_stats.attack_range)
-	if atk_stats.attack_range >= 2:
-		var dist: float = attacker.position.distance_to(defender.position)
-		#print("Dist: ", dist)
-		if dist <= 48.0:
-			#print("Range Penalty!")
-			damage *= 0.6
+	if atk_stats.attack_range >= 2 && distance <= 48.0:
+		print("Range Penalty!")
+		damage *= 0.6
 
 	# 4. Apply Damage to Defender
 	def_stats.take_damage(int(damage))
