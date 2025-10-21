@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://5kg8ybina31b" path="res://src/Units/Unit_Profile.gd" id="1_i27r2"]
 [ext_resource type="AnimationLibrary" uid="uid://db35i1b3vs4xd" path="res://characters/Mage/mageAnimations.tres" id="1_v4vic"]
-[ext_resource type="Texture2D" uid="uid://d1i60lf1ycih2" path="res://assets/character_art/mage/Mage_48x48.png" id="3_0u0qi"]
+[ext_resource type="Texture2D" uid="uid://bnghiadolb7x8" path="res://assets/character_art/mage/Mage_Sprite.png" id="3_v4vic"]
 
 [resource]
 script = ExtResource("1_i27r2")
 character_name = "Gustaf"
 battle_class_type = "Mage"
-sprite = ExtResource("3_0u0qi")
+sprite = ExtResource("3_v4vic")
 animation = ExtResource("1_v4vic")
 metadata/_custom_type_script = "uid://5kg8ybina31b"

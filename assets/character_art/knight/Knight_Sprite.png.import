@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0dmqxyexre4v"
-path="res://.godot/imported/Mage_Idle_f2.png-671371153572dbd5a7f747427c540bc7.ctex"
+uid="uid://yurcgjacxewa"
+path="res://.godot/imported/Knight_Sprite.png-cdffb62f0d88bed886b90d09b0b4d311.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/character_art/mage/Mage_Idle_f2.png"
-dest_files=["res://.godot/imported/Mage_Idle_f2.png-671371153572dbd5a7f747427c540bc7.ctex"]
+source_file="res://assets/character_art/knight/Knight_Sprite.png"
+dest_files=["res://.godot/imported/Knight_Sprite.png-cdffb62f0d88bed886b90d09b0b4d311.ctex"]
 
 [params]
 

@@ -19,9 +19,9 @@ const MODIFIABLE_STATS = [
 	"curr_health", "max_health", "phys_attack", "mag_attack", "phys_defense", "mag_defense", "crit_chance", "level", "mobility"
 ]
 
-# Set-functions
-func set_max_health(value):
-	max_health = max(0, value)
+## Set-functions
+#func set_max_health(value):
+	#max_health = max(0, value)
 
 # Basic combat functions
 func take_damage(hit):
