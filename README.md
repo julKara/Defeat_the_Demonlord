@@ -8,6 +8,7 @@
 * `TileMap`: Currently, the movement-range is drawn upon the `TileMap` instead of the `TileMapLayer`. This makes the range invisible behind the `Background` or "too visible" in the sense that the red blocks are not supposed to be visible in-game.
 * Changing `healthbar` color is not memory-efficient at all since it dublicates per character.
 * Sprites should flip when moving/attacking to the left.
+* Ranged units should move to a beneficial range to avoid range-penalty.
 
 **Annoying features**
 * You have to click on a unit to deselect them intead of just not clicking on anything else.
