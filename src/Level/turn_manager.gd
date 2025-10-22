@@ -27,6 +27,7 @@ var player_queue: Array = []
 var enemy_queue: Array = []
 
 func _ready() -> void:
+	await get_tree().create_timer(0.01).timeout
 	_initialize_turn_order()
 	start_phase(Phase.PLAYER)
 
@@ -108,6 +109,7 @@ func _next_player_unit() -> void:
 	else:
 		character_manager.set_current_character(next_unit)
 		print("\tPlayer unit turn: ", next_unit.profile.character_name)
+		_pass_button()
 
 func end_player_unit_turn(unit: Actor) -> void:
 	unit.acted = true
@@ -137,7 +139,7 @@ func _next_enemy_unit() -> void:
 		# Get behaviour to play_turn
 		var behaviour = next_unit.get_child(0)
 		if behaviour.has_method("play_turn"):
-			# await behaviour.play_turn()  # if play_turn() is async
+			await behaviour.play_turn()  # if play_turn() is async
 			await get_tree().create_timer(0.8).timeout  # delay between enemy actions
 		
 		next_unit.acted = true
@@ -147,3 +149,50 @@ func _next_enemy_unit() -> void:
 func _reset_acted_flag(list: Array) -> void:
 	for unit in list:
 		unit.acted = false
+
+func _pass_button() -> void:
+	# Find the behaviour node of the current character
+	var all_children = character_manager.current_character.get_children()
+	var behaviour_node
+		
+	for child in all_children:
+		if child is Node:
+			behaviour_node = child
+	
+	# Update the startposision of the current playable character to be where it ended its move
+	if character_manager.current_character.is_friendly == true:
+		behaviour_node.start_position = tile_map.local_to_map(character_manager.current_character.global_position)
+	
+	# Hide mobility and attack range
+	tile_map.clear_layer(1)
+	tile_map.clear_layer(2)
+	
+	# Deselect character
+	behaviour_node.selected = false
+	
+	# Remove highlight from attack target
+	if behaviour_node.attack_target != null:
+		all_children = behaviour_node.attack_target.get_children()
+		var sprite
+		for child in all_children:
+			if child is Sprite2D:
+				sprite = child
+		sprite.material.set("shader_parameter/width", 0.0)
+	
+	# Remove selected attack target
+	behaviour_node.attack_target = null
+	
+	# Hidde movement path, actions-menu and actor info
+	draw_path.hide()
+	actions_menu.hide()
+	actor_info.hide_actor_info()
+	
+	# Update behaviour node to the new character
+	all_children = character_manager.current_character.get_children()
+	for child in all_children:
+		if child is Node:
+			behaviour_node = child
+	
+	if character_manager.current_character.is_friendly == true:	
+		# Highlight and select the updated current character
+		behaviour_node.highlight_range()
