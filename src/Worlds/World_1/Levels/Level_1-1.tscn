@@ -1,8 +1,9 @@
-[gd_scene load_steps=30 format=4 uid="uid://fr5vqykbi54o"]
+[gd_scene load_steps=31 format=4 uid="uid://fr5vqykbi54o"]
 
 [ext_resource type="Texture2D" uid="uid://bqmtavn12rhj2" path="res://assets/test_map5.png" id="1_bq4wg"]
 [ext_resource type="Texture2D" uid="uid://bdy0m0gr2tme3" path="res://assets/level_art/48x48_Tileset/pipo-map001.png" id="2_6mxkn"]
 [ext_resource type="Script" uid="uid://t1qdqjubkhud" path="res://src/Units/character_manager.gd" id="3_iucr1"]
+[ext_resource type="Script" uid="uid://cjlatyxuwhq1n" path="res://src/Level/turn_manager.gd" id="4_0yevp"]
 [ext_resource type="PackedScene" uid="uid://dijjspgi8x8sv" path="res://src/Units/actor.tscn" id="4_e1a87"]
 [ext_resource type="Resource" uid="uid://cksht0d3f8feb" path="res://characters/Mage/mageStats.tres" id="5_8y1rk"]
 [ext_resource type="Resource" uid="uid://mwedg6ttx2lp" path="res://characters/Mage/mageProfile.tres" id="6_hhk72"]
@@ -223,6 +224,9 @@ tile_set = SubResource("TileSet_f3sb7")
 
 [node name="CharacterManager" type="Node2D" parent="TileMapLayer"]
 script = ExtResource("3_iucr1")
+
+[node name="TurnManager" type="Node2D" parent="TileMapLayer"]
+script = ExtResource("4_0yevp")
 
 [node name="Actors" type="Node2D" parent="TileMapLayer"]
 

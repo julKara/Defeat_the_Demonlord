@@ -1,14 +1,15 @@
-[gd_scene load_steps=21 format=3 uid="uid://dijjspgi8x8sv"]
+[gd_scene load_steps=22 format=3 uid="uid://dijjspgi8x8sv"]
 
-[ext_resource type="Texture2D" uid="uid://d1i60lf1ycih2" path="res://assets/character_art/mage/Mage_48x48.png" id="1_bsu0c"]
 [ext_resource type="Script" uid="uid://7mgltwn5kw4v" path="res://src/Units/actor.gd" id="1_xjefa"]
 [ext_resource type="Shader" uid="uid://54clig0upyxr" path="res://src/Units/highlight.gdshader" id="2_a5lvk"]
-[ext_resource type="Texture2D" uid="uid://plvyx02rvm1l" path="res://assets/character_art/mage/Mage_attack_f3.png" id="4_g0rg7"]
-[ext_resource type="Texture2D" uid="uid://cf8weowpmed" path="res://assets/character_art/mage/Mage_attack_f1.png" id="4_kj6bn"]
-[ext_resource type="Texture2D" uid="uid://834u0ejvh4nc" path="res://assets/character_art/mage/Mage_attack_f2.png" id="5_jg2tr"]
+[ext_resource type="Texture2D" uid="uid://bnghiadolb7x8" path="res://assets/character_art/mage/Mage_Sprite.png" id="3_jg2tr"]
+[ext_resource type="Texture2D" uid="uid://crgdfnt7qqlqa" path="res://assets/character_art/mage/Mage_Default_Attack_f1.png" id="3_wehan"]
+[ext_resource type="Texture2D" uid="uid://dif34ntuabmcx" path="res://assets/character_art/mage/Mage_Default_Attack_f2.png" id="4_fjflg"]
+[ext_resource type="Texture2D" uid="uid://c54ef10fblnoy" path="res://assets/character_art/mage/Mage_Default_Attack_f3.png" id="5_4k5mr"]
 [ext_resource type="Script" uid="uid://lv7bihs01ua5" path="res://src/Level/healthbar.gd" id="7_a5lvk"]
-[ext_resource type="Texture2D" uid="uid://dbbdi0bgi7vac" path="res://assets/character_art/mage/Mage_idle_f2.png" id="7_jg2tr"]
+[ext_resource type="Texture2D" uid="uid://d0dmqxyexre4v" path="res://assets/character_art/mage/Mage_idle_f2.png" id="7_jg2tr"]
 [ext_resource type="AnimationLibrary" uid="uid://cbet0ylfotgqd" path="res://characters/Slime/slimeAnimations.tres" id="8_s4pr6"]
+[ext_resource type="Texture2D" uid="uid://d0dmqxyexre4v" path="res://assets/character_art/mage/Mage_Idle_f2.png" id="8_wehan"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s4pr6"]
 resource_local_to_scene = true
@@ -33,6 +34,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ExtResource("7_jg2tr")]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -24)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a5lvk"]
 _data = {
@@ -49,10 +62,22 @@ tracks/0/path = NodePath("Sprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.233333, 0.5),
+"times": PackedFloat32Array(0, 0.23, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ExtResource("4_kj6bn"), ExtResource("5_jg2tr"), ExtResource("4_g0rg7")]
+"values": [ExtResource("3_wehan"), ExtResource("4_fjflg"), ExtResource("5_4k5mr")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -76)]
 }
 
 [sub_resource type="Animation" id="Animation_k3yh3"]
@@ -69,7 +94,19 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("1_bsu0c"), ExtResource("7_jg2tr")]
+"values": [ExtResource("3_jg2tr"), ExtResource("8_wehan")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -24)]
 }
 
 [sub_resource type="Animation" id="Animation_xskcs"]
@@ -83,10 +120,22 @@ tracks/0/path = NodePath("Sprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.233333),
+"times": PackedFloat32Array(0, 0.23),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("1_bsu0c"), ExtResource("7_jg2tr")]
+"values": [ExtResource("3_jg2tr"), ExtResource("8_wehan")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -24)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jg2tr"]
@@ -118,7 +167,7 @@ script = ExtResource("1_xjefa")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_s4pr6")
-position = Vector2(-24, -24)
+position = Vector2(0, -24)
 texture = ExtResource("7_jg2tr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

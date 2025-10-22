@@ -41,6 +41,7 @@ var tile_size: int = 48
 
 """ Unit info while in gameplay: """
 var selected: bool = false	# True if unit is selected
+var acted: bool = false    # True if the unit has acted this turn
 var current_state: UnitState = UnitState.IDLE	# Current state of unit
 # Export lets you toggle this in the inspector
 @export var is_friendly: bool = false:

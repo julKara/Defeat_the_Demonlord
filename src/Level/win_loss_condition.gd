@@ -4,6 +4,7 @@ extends Node2D
 @onready var victory_screen: PanelContainer = $"../GUI/Margin/VictoryScreen"
 @onready var game_over_screen: PanelContainer = $"../GUI/Margin/GameOverScreen"
 @onready var world_handler: Node = $"../WorldHandler"
+@onready var turn_manager: Node2D = $"../TileMapLayer/TurnManager"
 
 
 var current_world
@@ -19,11 +20,11 @@ func _ready() -> void:
 
 func check_conditions():
 	# If all enemy characters are dead -> win
-	if character_manager.enemy_list.is_empty():
+	if turn_manager.enemy_queue.is_empty():
 		win()
 	
 	# If all player characters are dead -> lose
-	if character_manager.player_list.is_empty():
+	if turn_manager.player_queue.is_empty():
 		lose()
 		
 	# Custom conditions can be added as child nodes and therefor be unique per level

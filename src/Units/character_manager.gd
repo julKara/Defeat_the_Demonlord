@@ -8,15 +8,11 @@ extends Node2D
 var character_list: Array
 var character_list_copy: Array
 var current_character
-var selected_target	# FIX TARGETING
 var num_characters: int
-var player_list: Array
-var enemy_list: Array
 
 func _ready() -> void:
 	# Default value for starting character
 	current_character = actors.get_child(0)
-	selected_target = actors.get_child(1)	# FIX TARGETING
 	
 	# Array storing all characters
 	for actor: Actor in actors.get_children():
@@ -27,12 +23,6 @@ func _ready() -> void:
 	
 	num_characters = character_list.size()
 	
-	# Set up player and enemy lists
-	for character in character_list:
-		if character.is_friendly == true:
-			player_list.append(character)
-		else:
-			enemy_list.append(character)
 
 
 
