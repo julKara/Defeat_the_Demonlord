@@ -8,6 +8,7 @@
 * Dephending on the postioning of the orginal `Sprite`, it will not apear in the middle of a tile. This is a needed art-fix.
 * All animations are not uniform in size -> need to fix so all are centered
 * Changing `healthbar` color is not memory-efficient at all since it dublicates per character.
+* Enemies can probably occupy the same space
 
 **Annoying features**
 * You have to click on a unit to deselect them intead of just not clicking on anything else.

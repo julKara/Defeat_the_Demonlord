@@ -5,6 +5,7 @@ class_name world_tracker extends Resource
 @export var worlds_unlocked: int = 1
 @export var levels_unlocked: int = 1
 
+
 func set_current_world(value):
 	current_world = value
 

@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://b5un78p84uik2"]
+[gd_scene load_steps=6 format=3 uid="uid://b5un78p84uik2"]
 
 [ext_resource type="Script" uid="uid://bsi7hvfmcwssu" path="res://src/StartScreen/new_game.gd" id="1_ilsnu"]
 [ext_resource type="Script" uid="uid://0ad1m7m8j7ba" path="res://src/StartScreen/quit.gd" id="1_x5plg"]
 [ext_resource type="Script" uid="uid://mbi46648c8lx" path="res://src/StartScreen/continue.gd" id="1_yevbf"]
+[ext_resource type="Script" uid="uid://sehkuo2xbwos" path="res://src/Worlds/world_tracker.gd" id="4_1l0fv"]
+[ext_resource type="Resource" uid="uid://b7d426jw88wxl" path="res://src/Worlds/world_handler.tres" id="5_lva2g"]
 
 [node name="StartMenu" type="Control"]
 layout_mode = 3
@@ -58,3 +60,7 @@ script = ExtResource("1_yevbf")
 layout_mode = 2
 text = "Quit"
 script = ExtResource("1_x5plg")
+
+[node name="WorldHandler" type="Node" parent="."]
+script = ExtResource("4_1l0fv")
+world_script = ExtResource("5_lva2g")
