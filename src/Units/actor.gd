@@ -41,7 +41,6 @@ var tile_size: int = 48
 
 """ Unit info while in gameplay: """
 var selected: bool = false	# True if unit is selected
-var acted: bool = false    # True if the unit has acted this turn
 var current_state: UnitState = UnitState.IDLE	# Current state of unit
 # Export lets you toggle this in the inspector
 @export var is_friendly: bool = false:
@@ -52,8 +51,6 @@ var current_state: UnitState = UnitState.IDLE	# Current state of unit
 
 # Sets up AstarGrid for pathfinding, walkable tiles and sets friendly/enemy color/name
 func _ready() -> void:	
-	
-	print(stats.level)
 	
 	# Apply unit profile to current instance of actor
 	_apply_profile()
@@ -150,22 +147,10 @@ func _apply_profile() -> void:
 
 	# Connect profiles `animation` to anim_player here which is the object AnimationPlayer
 	if anim_player and profile.animation:
-<<<<<<< Updated upstream
 		# Use the resource's name (if it has one), or default
 		anim_library_name = profile.animation.resource_name if profile.animation.resource_name != "" else "default"
 		anim_player.add_animation_library(anim_library_name, profile.animation)
 		print("Added animation library:", anim_library_name)	# For TESTING
-=======
-		var lib_path := profile.animation.resource_path
-		# Use the filename (without .tres) as library name
-		anim_library_name = lib_path.get_file().get_basename() if lib_path != "" else "default"
-
-		# Only add if not already present
-		if not anim_player.has_animation_library(anim_library_name):
-			anim_player.add_animation_library(anim_library_name, profile.animation)
-			print("Added animation library:", anim_library_name)
-
->>>>>>> Stashed changes
 
 # Updates current_state and calls update-animation
 func set_state(new_state: UnitState) -> void:

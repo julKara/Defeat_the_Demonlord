@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0dmqxyexre4v"
-path="res://.godot/imported/Mage_Idle_f2.png-671371153572dbd5a7f747427c540bc7.ctex"
+uid="uid://dbbdi0bgi7vac"
+path="res://.godot/imported/Mage_idle_f2.png-ec390c18c458058e54d5d5634e37e850.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/character_art/mage/Mage_Idle_f2.png"
-dest_files=["res://.godot/imported/Mage_Idle_f2.png-671371153572dbd5a7f747427c540bc7.ctex"]
+source_file="res://assets/character_art/mage/Mage_idle_f2.png"
+dest_files=["res://.godot/imported/Mage_idle_f2.png-ec390c18c458058e54d5d5634e37e850.ctex"]
 
 [params]
 

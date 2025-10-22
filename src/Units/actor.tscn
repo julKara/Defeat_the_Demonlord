@@ -1,23 +1,13 @@
-<<<<<<< Updated upstream
 [gd_scene load_steps=20 format=3 uid="uid://dijjspgi8x8sv"]
-=======
-[gd_scene load_steps=25 format=3 uid="uid://dijjspgi8x8sv"]
->>>>>>> Stashed changes
 
+[ext_resource type="Texture2D" uid="uid://d1i60lf1ycih2" path="res://assets/character_art/mage/Mage_48x48.png" id="1_bsu0c"]
 [ext_resource type="Script" uid="uid://7mgltwn5kw4v" path="res://src/Units/actor.gd" id="1_xjefa"]
 [ext_resource type="Shader" uid="uid://54clig0upyxr" path="res://src/Units/highlight.gdshader" id="2_a5lvk"]
-[ext_resource type="Texture2D" uid="uid://bnghiadolb7x8" path="res://assets/character_art/mage/Mage_Sprite.png" id="3_jg2tr"]
-[ext_resource type="Texture2D" uid="uid://crgdfnt7qqlqa" path="res://assets/character_art/mage/Mage_Default_Attack_f1.png" id="3_wehan"]
-[ext_resource type="Texture2D" uid="uid://d0dmqxyexre4v" path="res://assets/character_art/mage/Mage_Idle_f2.png" id="4_a5lvk"]
-[ext_resource type="Texture2D" uid="uid://dif34ntuabmcx" path="res://assets/character_art/mage/Mage_Default_Attack_f2.png" id="4_fjflg"]
-[ext_resource type="Texture2D" uid="uid://c54ef10fblnoy" path="res://assets/character_art/mage/Mage_Default_Attack_f3.png" id="5_4k5mr"]
+[ext_resource type="Texture2D" uid="uid://plvyx02rvm1l" path="res://assets/character_art/mage/Mage_attack_f3.png" id="4_g0rg7"]
+[ext_resource type="Texture2D" uid="uid://cf8weowpmed" path="res://assets/character_art/mage/Mage_attack_f1.png" id="4_kj6bn"]
+[ext_resource type="Texture2D" uid="uid://834u0ejvh4nc" path="res://assets/character_art/mage/Mage_attack_f2.png" id="5_jg2tr"]
 [ext_resource type="Script" uid="uid://lv7bihs01ua5" path="res://src/Level/healthbar.gd" id="7_a5lvk"]
-<<<<<<< Updated upstream
 [ext_resource type="Texture2D" uid="uid://dbbdi0bgi7vac" path="res://assets/character_art/mage/Mage_idle_f2.png" id="7_jg2tr"]
-=======
-[ext_resource type="Texture2D" uid="uid://jmiy51ye1yiv" path="res://assets/character_art/Slime/Slime_Sprite.png" id="8_wehan"]
-[ext_resource type="Texture2D" uid="uid://dw3l24usm53ep" path="res://assets/character_art/Slime/Slime_Idle_f1.png" id="9_fjflg"]
->>>>>>> Stashed changes
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s4pr6"]
 resource_local_to_scene = true
@@ -27,8 +17,6 @@ shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_llme5"]
 
 [sub_resource type="Animation" id="Animation_kj6bn"]
 length = 0.001
@@ -42,19 +30,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [SubResource("CompressedTexture2D_llme5")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -24)]
+"values": [ExtResource("7_jg2tr")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a5lvk"]
@@ -72,22 +48,10 @@ tracks/0/path = NodePath("Sprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.24, 0.5),
+"times": PackedFloat32Array(0, 0.233333, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ExtResource("3_wehan"), ExtResource("4_fjflg"), ExtResource("5_4k5mr")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -76)]
+"values": [ExtResource("4_kj6bn"), ExtResource("5_jg2tr"), ExtResource("4_g0rg7")]
 }
 
 [sub_resource type="Animation" id="Animation_k3yh3"]
@@ -104,19 +68,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("3_jg2tr"), ExtResource("4_a5lvk")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -24)]
+"values": [ExtResource("1_bsu0c"), ExtResource("7_jg2tr")]
 }
 
 [sub_resource type="Animation" id="Animation_xskcs"]
@@ -130,22 +82,10 @@ tracks/0/path = NodePath("Sprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.23),
+"times": PackedFloat32Array(0, 0.233333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("3_jg2tr"), ExtResource("4_a5lvk")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -24)]
+"values": [ExtResource("1_bsu0c"), ExtResource("7_jg2tr")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jg2tr"]
@@ -153,27 +93,6 @@ _data = {
 &"attack": SubResource("Animation_hwpfo"),
 &"idle": SubResource("Animation_k3yh3"),
 &"selected": SubResource("Animation_xskcs")
-}
-
-[sub_resource type="Animation" id="Animation_a5lvk"]
-length = 0.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [ExtResource("8_wehan"), ExtResource("9_fjflg")]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_s4pr6"]
-_data = {
-&"idle": SubResource("Animation_a5lvk")
 }
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kj6bn"]
@@ -198,18 +117,13 @@ script = ExtResource("1_xjefa")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_s4pr6")
-position = Vector2(0, -24)
-texture = SubResource("CompressedTexture2D_llme5")
+position = Vector2(-24, -24)
+texture = ExtResource("7_jg2tr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_a5lvk"),
-<<<<<<< Updated upstream
 &"mageAnimations": SubResource("AnimationLibrary_jg2tr")
-=======
-&"mageAnimations": SubResource("AnimationLibrary_jg2tr"),
-&"slimeAnimations": SubResource("AnimationLibrary_s4pr6")
->>>>>>> Stashed changes
 }
 
 [node name="Healthbar" type="ProgressBar" parent="."]

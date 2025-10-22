@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c54ef10fblnoy"
-path="res://.godot/imported/Mage_Default_Attack_f3.png-534e753cc0f558cd0b0cef089fbeb2c5.ctex"
+uid="uid://cf8weowpmed"
+path="res://.godot/imported/Mage_attack_f1.png-64b04271d012cbb7d2582aeb6df6c7e9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/character_art/mage/Mage_Default_Attack_f3.png"
-dest_files=["res://.godot/imported/Mage_Default_Attack_f3.png-534e753cc0f558cd0b0cef089fbeb2c5.ctex"]
+source_file="res://assets/character_art/mage/Mage_attack_f1.png"
+dest_files=["res://.godot/imported/Mage_attack_f1.png-64b04271d012cbb7d2582aeb6df6c7e9.ctex"]
 
 [params]
 
