@@ -8,12 +8,12 @@ class_name Actor extends CharacterBody2D
 """
 
 
-""" Unit-Unique Reasources """
+# --- Unit-Unique Reasources ---
 @export var stats: CharacterStats	# All stats to particular unit
 @export var profile: UnitProfile	# All other unique aspects of a unit (name, skills, talent...)
 var anim_library_name := "default"	# Liberary name for unit-animations, is the .tres file attached to profile
 
-# CONSTANTS
+# --- CONSTANTS ---
 const FRIENDLY_COLOR: Color = Color("00a78f")
 const ENEMY_COLOR: Color = Color.CRIMSON
 enum UnitState { IDLE, SELECTED, MOVING, ATTACKING, DEAD }	# Possible unit-states
@@ -25,23 +25,25 @@ var state_to_anim = {	# For animation filepaths
 		UnitState.DEAD: "dead"
 	}
 
-# Refrences to objects in actor
+# --- Refrences to objects in actor ---
 var behavior: Node = null	# Decides behavior based on if unit is playable, enemy, npc...
 @onready var sprite_2d: Sprite2D = $Sprite	# Just the default sprite to all characters
 @onready var anim_player: AnimationPlayer = $AnimationPlayer	# Used to play animations
 @onready var healthbar: ProgressBar = $Healthbar	# The units healthbar, gets set up in _ready()
 
 
-# Refrences to objects in World
+# --- Refrences to objects in World ---
 @onready var tile_map: TileMap = $"../../../TileMap"
 
-# Variables for movement
+# --- Variables for movement ---
 var astar_grid: AStarGrid2D
 var tile_size: int = 48
 
-""" Unit info while in gameplay: """
+# --- Unit info while in gameplay ---
 var selected: bool = false	# True if unit is selected
 var current_state: UnitState = UnitState.IDLE	# Current state of unit
+var acted: bool = false	# True if the unit has acted this turn
+
 # Export lets you toggle this in the inspector
 @export var is_friendly: bool = false:
 	set(value):

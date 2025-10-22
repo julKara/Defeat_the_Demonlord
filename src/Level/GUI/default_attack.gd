@@ -1,8 +1,8 @@
 extends Button
 
 @onready var character_manager: Node2D = $"../../../../../TileMapLayer/CharacterManager"
-@onready var pass_turn: Button = $"../Pass_Turn"
 @onready var battle_handler: BattleHandler = $"../../../../../BattleHandler"
+@onready var turn_manager: Node2D = $"../../../../../TileMapLayer/TurnManager"
 
 func _pressed() -> void:
 	
@@ -32,4 +32,4 @@ func _pressed() -> void:
 			#print("Counter Attack!")
 			await battle_handler.perform_battle(target, attacker, dist)
 	
-	pass_turn._pressed()
+	turn_manager.end_player_unit_turn(character_manager.current_character)

@@ -8,6 +8,7 @@ extends Node
 # Refrences
 @onready var character_manager: Node2D = $"../TileMapLayer/CharacterManager"
 @onready var animation_timer: Timer = $AnimationTimer
+@onready var turn_manager: Node2D = $"../TileMapLayer/TurnManager"
 
 
 # Can be preloaded globally or add it as a child of World scene
@@ -37,7 +38,7 @@ func perform_battle(attacker: Actor, defender: Actor, distance: float) -> void:
 	# 3. If a unit with longer range (2 or more), they do less damage close up
 	#print("Range: ", atk_stats.attack_range)
 	if atk_stats.attack_range >= 2 && distance <= 48.0:
-		print("Range Penalty!")
+		print("\t\t\tRange Penalty!")
 		damage *= 0.6
 
 	# 4. Apply Damage to Defender
@@ -47,7 +48,7 @@ func perform_battle(attacker: Actor, defender: Actor, distance: float) -> void:
 	defender.healthbar._set_health(def_stats.curr_health)
 	
 	# 6. TESTING Debug Output
-	print("%s attacked %s for %d damage!" % [
+	print("\t\t%s attacked %s for %d damage!" % [
 		atk_prof.character_name, def_prof.character_name, damage
 	])
 	
@@ -90,16 +91,21 @@ func _calculate_damage(atk: CharacterStats, def: CharacterStats) -> float:
 	# Doubles damage if preforming a crit
 	if randf() < float(atk.crit_chance) / 100.0:
 		damage *= 1.4
-		print("Critical hit!")
+		print("\t\t\tCritical hit!")
 	
 	return damage
 
 # Handles what happens when a unit dies.
 func _handle_death(dead_actor: Actor) -> void:
-	print("%s is dead!" % dead_actor.profile.character_name)	# TESTING
+	print("\t\t%s is dead!" % dead_actor.profile.character_name)	# TESTING
 	
 	# Death behavoiur
 	dead_actor.set_state(dead_actor.UnitState.DEAD)	# Dead state - updates animation
+	
+	# Remove actor from lists
 	character_manager.character_list.erase(dead_actor)	# Remove character from list in manager
+	turn_manager.player_queue.erase(dead_actor)
+	turn_manager.enemy_queue.erase(dead_actor)
+	
 	dead_actor.queue_free()	# Remove actor from world
 	character_manager.num_characters -= 1

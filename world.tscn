@@ -1,15 +1,14 @@
-[gd_scene load_steps=23 format=4 uid="uid://fr5vqykbi54o"]
+[gd_scene load_steps=25 format=4 uid="uid://fr5vqykbi54o"]
 
 [ext_resource type="Texture2D" uid="uid://bqmtavn12rhj2" path="res://assets/test_map5.png" id="1_70uel"]
 [ext_resource type="PackedScene" uid="uid://dijjspgi8x8sv" path="res://src/Units/actor.tscn" id="1_f3sb7"]
 [ext_resource type="Texture2D" uid="uid://bdy0m0gr2tme3" path="res://assets/level_art/48x48_Tileset/pipo-map001.png" id="1_fj7yv"]
+[ext_resource type="Script" uid="uid://u3h64ol6mmk2" path="res://src/Level/turn_manager.gd" id="4_hiqwa"]
 [ext_resource type="Script" uid="uid://t1qdqjubkhud" path="res://src/Units/character_manager.gd" id="4_ioo17"]
-[ext_resource type="Resource" uid="uid://cksht0d3f8feb" path="res://characters/Mage/mageStats.tres" id="5_2u3nc"]
+[ext_resource type="Script" uid="uid://dfeqtmcp7uacl" path="res://src/Units/CharacterStats.gd" id="5_70uel"]
 [ext_resource type="Resource" uid="uid://mwedg6ttx2lp" path="res://characters/Mage/mageProfile.tres" id="6_ic0uy"]
-[ext_resource type="Resource" uid="uid://ioqq5nerr7f3" path="res://characters/Knight/knightStats.tres" id="7_hiqwa"]
 [ext_resource type="Script" uid="uid://lvdowlbqk6fe" path="res://src/Level/GUI/actions_menu.gd" id="7_pkg7o"]
 [ext_resource type="Resource" uid="uid://bu2f1ylnrxljm" path="res://characters/Knight/knightProfile.tres" id="8_k3n1d"]
-[ext_resource type="Resource" uid="uid://byndvh2eojkeh" path="res://characters/Mage/mageEnemyStats.tres" id="9_2u3nc"]
 [ext_resource type="Script" uid="uid://duw38t7v0nrgf" path="res://src/Level/GUI/default_attack.gd" id="10_2o6r5"]
 [ext_resource type="Resource" uid="uid://b5bmi1atp4dnb" path="res://characters/Mage/mageEnemyProfile.tres" id="10_udxuc"]
 [ext_resource type="Script" uid="uid://b6oemt0bk5jyw" path="res://src/Level/GUI/stand_button.gd" id="10_wse8f"]
@@ -156,6 +155,54 @@ texture_region_size = Vector2i(48, 48)
 tile_size = Vector2i(48, 48)
 sources/1 = SubResource("TileSetAtlasSource_tlwt5")
 
+[sub_resource type="Resource" id="Resource_hiqwa"]
+resource_local_to_scene = true
+script = ExtResource("5_70uel")
+curr_health = 100
+max_health = 100
+phys_attack = 20
+mag_attack = 80
+phys_defense = 30
+mag_defense = 40
+crit_chance = 15
+level = 1
+attack_range = 2
+mobility = 3
+speed = 3.0
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
+[sub_resource type="Resource" id="Resource_2u3nc"]
+resource_local_to_scene = true
+script = ExtResource("5_70uel")
+curr_health = 200
+max_health = 200
+phys_attack = 90
+mag_attack = 10
+phys_defense = 80
+mag_defense = 20
+crit_chance = 5
+level = 1
+attack_range = 1
+mobility = 4
+speed = 4.0
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
+[sub_resource type="Resource" id="Resource_udxuc"]
+resource_local_to_scene = true
+script = ExtResource("5_70uel")
+curr_health = 100
+max_health = 100
+phys_attack = 20
+mag_attack = 60
+phys_defense = 10
+mag_defense = 30
+crit_chance = 10
+level = 1
+attack_range = 2
+mobility = 3
+speed = 3.0
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
 [sub_resource type="GDScript" id="GDScript_wse8f"]
 script/source = "extends CanvasLayer
 
@@ -202,23 +249,26 @@ tile_set = SubResource("TileSet_f3sb7")
 [node name="CharacterManager" type="Node2D" parent="TileMapLayer"]
 script = ExtResource("4_ioo17")
 
+[node name="TurnManager" type="Node2D" parent="TileMapLayer"]
+script = ExtResource("4_hiqwa")
+
 [node name="Actors" type="Node2D" parent="TileMapLayer"]
 
 [node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("1_f3sb7")]
 position = Vector2(120, 120)
-stats = ExtResource("5_2u3nc")
+stats = SubResource("Resource_hiqwa")
 profile = ExtResource("6_ic0uy")
 is_friendly = true
 
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("1_f3sb7")]
 position = Vector2(360, 264)
-stats = ExtResource("7_hiqwa")
+stats = SubResource("Resource_2u3nc")
 profile = ExtResource("8_k3n1d")
 is_friendly = true
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("1_f3sb7")]
 position = Vector2(168, 312)
-stats = ExtResource("9_2u3nc")
+stats = SubResource("Resource_udxuc")
 profile = ExtResource("10_udxuc")
 
 [node name="GUI" type="CanvasLayer" parent="."]

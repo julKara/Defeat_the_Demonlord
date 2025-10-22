@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://d0e6ryo4veo7h" path="res://assets/character_art/knight/Knight_Idle_f2.png" id="2_l11oq"]
 [ext_resource type="Texture2D" uid="uid://7io8kxck340j" path="res://assets/character_art/knight/Knight_Idle_f3.png" id="3_btf3e"]
 
+[sub_resource type="Animation" id="Animation_wehan"]
+
 [sub_resource type="Animation" id="Animation_s4pr6"]
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,8 +20,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [ExtResource("1_mk6ca"), ExtResource("2_l11oq"), ExtResource("3_btf3e")]
 }
-
-[sub_resource type="Animation" id="Animation_wehan"]
 
 [sub_resource type="Animation" id="Animation_fjflg"]
 length = 0.7
