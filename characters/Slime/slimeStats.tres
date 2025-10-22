@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=2 format=3 uid="uid://dlql8634g8qhy"]
+
+[ext_resource type="Script" uid="uid://dfeqtmcp7uacl" path="res://src/Units/CharacterStats.gd" id="1_yy017"]
+
+[resource]
+script = ExtResource("1_yy017")
+curr_health = 50
+max_health = 50
+phys_attack = 200
+mag_attack = 20
+phys_defense = 30
+mag_defense = 20
+crit_chance = 10
+level = 1
+attack_range = 1
+mobility = 2
+speed = 3.0
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"

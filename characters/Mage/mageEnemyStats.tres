@@ -3,12 +3,11 @@
 [ext_resource type="Script" uid="uid://dfeqtmcp7uacl" path="res://src/Units/CharacterStats.gd" id="1_35axt"]
 
 [resource]
-resource_local_to_scene = true
 script = ExtResource("1_35axt")
 curr_health = 100
 max_health = 100
 phys_attack = 20
-mag_attack = 50
+mag_attack = 200
 phys_defense = 10
 mag_defense = 30
 crit_chance = 10

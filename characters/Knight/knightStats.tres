@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://dfeqtmcp7uacl" path="res://src/Units/CharacterStats.gd" id="1_5edjx"]
 
 [resource]
-resource_local_to_scene = true
 script = ExtResource("1_5edjx")
 curr_health = 200
 max_health = 200

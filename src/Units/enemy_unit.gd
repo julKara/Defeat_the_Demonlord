@@ -67,32 +67,33 @@ func find_closest_player() -> CharacterBody2D:
 	
 
 func move():
-	
+
 	var closest_player = find_closest_player()
 	
-	# Create a path from the enemy to the closest player
-	var id_path = (astar_grid.get_id_path(tile_map.local_to_map(get_parent().global_position),
-			tile_map.local_to_map(closest_player.global_position)))
-	
-	# Shrink path down to be in the mobility range
-	while id_path.size() > mobility + attack_range + 1: # attack_range+1 allows enemy to move full distance
-		id_path.pop_back() # Remove last element
+	if closest_player != null:
+		# Create a path from the enemy to the closest player
+		var id_path = (astar_grid.get_id_path(tile_map.local_to_map(get_parent().global_position),
+				tile_map.local_to_map(closest_player.global_position)))
 		
-	var target_position
-	
-	# Perform the movement
-	while id_path.size() > attack_range: # >attack_range stops enemies when in range
-		target_position = tile_map.map_to_local(id_path.front())
+		# Shrink path down to be in the mobility range
+		while id_path.size() > mobility + attack_range + 1: # attack_range+1 allows enemy to move full distance
+			id_path.pop_back() # Remove last element
+			
+		var target_position
 		
-		# Move towards target
-		get_parent().global_position = get_parent().global_position.move_toward(target_position, move_speed)
-		await get_tree().create_timer(0.01).timeout # Adds a delay which lets the move animation play
-		# Remove the tile from the path
-		if get_parent().global_position == target_position:
-			id_path.pop_front()
-	
-	await get_tree().create_timer(0.01).timeout
-	emit_signal("ai_movement_finished")	
+		# Perform the movement
+		while id_path.size() > attack_range: # >attack_range stops enemies when in range
+			target_position = tile_map.map_to_local(id_path.front())
+			
+			# Move towards target
+			get_parent().global_position = get_parent().global_position.move_toward(target_position, move_speed)
+			await get_tree().create_timer(0.01).timeout # Adds a delay which lets the move animation play
+			# Remove the tile from the path
+			if get_parent().global_position == target_position:
+				id_path.pop_front()
+		
+		await get_tree().create_timer(0.01).timeout
+		emit_signal("ai_movement_finished")	
 
 	
 func select_attack_target():

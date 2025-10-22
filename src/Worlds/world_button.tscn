@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://pood72nr4l6o"]
+
+[ext_resource type="Script" uid="uid://cons1jaulits6" path="res://src/Worlds/world_button.gd" id="1_syrc8"]
+
+[node name="WorldButton" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "World 1"
+script = ExtResource("1_syrc8")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

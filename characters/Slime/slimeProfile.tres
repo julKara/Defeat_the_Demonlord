@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="UnitProfile" load_steps=4 format=3 uid="uid://co8geppy7b1dn"]
+
+[ext_resource type="Script" uid="uid://5kg8ybina31b" path="res://src/Units/Unit_Profile.gd" id="1_fg771"]
+[ext_resource type="AnimationLibrary" uid="uid://cbet0ylfotgqd" path="res://characters/Slime/slimeAnimations.tres" id="1_q3y8s"]
+[ext_resource type="Texture2D" uid="uid://jmiy51ye1yiv" path="res://assets/character_art/Slime/Slime_Sprite.png" id="2_lo8ng"]
+
+[resource]
+script = ExtResource("1_fg771")
+character_name = "Ulla"
+battle_class_type = "Slime"
+sprite = ExtResource("2_lo8ng")
+animation = ExtResource("1_q3y8s")
+metadata/_custom_type_script = "uid://5kg8ybina31b"
