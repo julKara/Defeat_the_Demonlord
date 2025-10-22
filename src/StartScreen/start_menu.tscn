@@ -13,6 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
 offset_right = 608.0
 offset_bottom = 407.0
 color = Color(0.106595, 0.303704, 0.245012, 1)

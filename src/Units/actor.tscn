@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dijjspgi8x8sv"]
+[gd_scene load_steps=21 format=3 uid="uid://dijjspgi8x8sv"]
 
 [ext_resource type="Texture2D" uid="uid://d1i60lf1ycih2" path="res://assets/character_art/mage/Mage_48x48.png" id="1_bsu0c"]
 [ext_resource type="Script" uid="uid://7mgltwn5kw4v" path="res://src/Units/actor.gd" id="1_xjefa"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://834u0ejvh4nc" path="res://assets/character_art/mage/Mage_attack_f2.png" id="5_jg2tr"]
 [ext_resource type="Script" uid="uid://lv7bihs01ua5" path="res://src/Level/healthbar.gd" id="7_a5lvk"]
 [ext_resource type="Texture2D" uid="uid://dbbdi0bgi7vac" path="res://assets/character_art/mage/Mage_idle_f2.png" id="7_jg2tr"]
+[ext_resource type="AnimationLibrary" uid="uid://cbet0ylfotgqd" path="res://characters/Slime/slimeAnimations.tres" id="8_s4pr6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s4pr6"]
 resource_local_to_scene = true
@@ -123,7 +124,8 @@ texture = ExtResource("7_jg2tr")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_a5lvk"),
-&"mageAnimations": SubResource("AnimationLibrary_jg2tr")
+&"mageAnimations": SubResource("AnimationLibrary_jg2tr"),
+&"slimeAnimations": ExtResource("8_s4pr6")
 }
 
 [node name="Healthbar" type="ProgressBar" parent="."]

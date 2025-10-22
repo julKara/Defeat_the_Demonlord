@@ -147,10 +147,16 @@ func _apply_profile() -> void:
 
 	# Connect profiles `animation` to anim_player here which is the object AnimationPlayer
 	if anim_player and profile.animation:
-		# Use the resource's name (if it has one), or default
-		anim_library_name = profile.animation.resource_name if profile.animation.resource_name != "" else "default"
-		anim_player.add_animation_library(anim_library_name, profile.animation)
-		print("Added animation library:", anim_library_name)	# For TESTING
+		var lib_path := profile.animation.resource_path
+		# Use the filename (without .tres) as library name
+		anim_library_name = lib_path.get_file().get_basename() if lib_path != "" else "default"
+
+		# Only add if not already present
+		if not anim_player.has_animation_library(anim_library_name):
+			anim_player.add_animation_library(anim_library_name, profile.animation)
+			print("Added animation library:", anim_library_name)
+		#else:
+			#print("Library already exists:", anim_library_name)
 
 # Updates current_state and calls update-animation
 func set_state(new_state: UnitState) -> void:
