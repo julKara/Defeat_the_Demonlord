@@ -79,7 +79,6 @@ func _input(event):
 		# Above check ensures that
 		if all_characters_deselected:
 			character_manager.current_character = get_parent()
-			pass_turn.counter = character_manager.character_list.find(get_parent(),0) + 1
 			highlight_range()
 			actions_menu.show()	# Show actions-menu when selecting actor
 			actor_info.display_actor_info(character_manager.current_character) # Show actor info

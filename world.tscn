@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream:world.tscn
 [gd_scene load_steps=24 format=4 uid="uid://fr5vqykbi54o"]
 
 [ext_resource type="Texture2D" uid="uid://bqmtavn12rhj2" path="res://assets/test_map5.png" id="1_70uel"]
@@ -14,6 +15,32 @@
 [ext_resource type="PackedScene" uid="uid://cats61ytkbbvj" path="res://src/PathVisuals/draw_path.tscn" id="11_ic0uy"]
 [ext_resource type="Script" uid="uid://dso7okpirndht" path="res://src/Level/GUI/actor_info.gd" id="11_k3n1d"]
 [ext_resource type="Script" uid="uid://bjl544x2g0v72" path="res://src/Combat/battle_handler.gd" id="14_70uel"]
+=======
+[gd_scene load_steps=31 format=4 uid="uid://fr5vqykbi54o"]
+
+[ext_resource type="Texture2D" uid="uid://bqmtavn12rhj2" path="res://assets/test_map5.png" id="1_bq4wg"]
+[ext_resource type="Texture2D" uid="uid://bdy0m0gr2tme3" path="res://assets/level_art/48x48_Tileset/pipo-map001.png" id="2_6mxkn"]
+[ext_resource type="Script" uid="uid://t1qdqjubkhud" path="res://src/Units/character_manager.gd" id="3_iucr1"]
+[ext_resource type="Script" uid="uid://bhwed77sgaeg3" path="res://src/Level/turn_manager.gd" id="4_0yevp"]
+[ext_resource type="PackedScene" uid="uid://dijjspgi8x8sv" path="res://src/Units/actor.tscn" id="4_e1a87"]
+[ext_resource type="Resource" uid="uid://cksht0d3f8feb" path="res://characters/Mage/mageStats.tres" id="5_8y1rk"]
+[ext_resource type="Resource" uid="uid://mwedg6ttx2lp" path="res://characters/Mage/mageProfile.tres" id="6_hhk72"]
+[ext_resource type="Resource" uid="uid://bu2f1ylnrxljm" path="res://characters/Knight/knightProfile.tres" id="7_8y1rk"]
+[ext_resource type="Resource" uid="uid://ioqq5nerr7f3" path="res://characters/Knight/knightStats.tres" id="7_na0ed"]
+[ext_resource type="Script" uid="uid://lvdowlbqk6fe" path="res://src/Level/GUI/actions_menu.gd" id="9_0yevp"]
+[ext_resource type="Resource" uid="uid://dlql8634g8qhy" path="res://characters/Slime/slimeStats.tres" id="9_na0ed"]
+[ext_resource type="Resource" uid="uid://co8geppy7b1dn" path="res://characters/Slime/slimeProfile.tres" id="10_0yevp"]
+[ext_resource type="Script" uid="uid://duw38t7v0nrgf" path="res://src/Level/GUI/default_attack.gd" id="10_rveb5"]
+[ext_resource type="Script" uid="uid://b6oemt0bk5jyw" path="res://src/Level/GUI/stand_button.gd" id="11_esv70"]
+[ext_resource type="Script" uid="uid://dso7okpirndht" path="res://src/Level/GUI/actor_info.gd" id="12_ky5eb"]
+[ext_resource type="Script" uid="uid://dous6wk318f1t" path="res://src/Level/GUI/victory_screen.gd" id="13_e1a87"]
+[ext_resource type="PackedScene" uid="uid://cats61ytkbbvj" path="res://src/PathVisuals/draw_path.tscn" id="13_jamn3"]
+[ext_resource type="Script" uid="uid://bjl544x2g0v72" path="res://src/Combat/battle_handler.gd" id="14_c4lxs"]
+[ext_resource type="Script" uid="uid://sddm7u5ng6mx" path="res://src/Level/GUI/game_over_screen.gd" id="14_n0kbp"]
+[ext_resource type="Script" uid="uid://nm7v2oerrihf" path="res://src/Level/win_loss_condition.gd" id="15_6mxkn"]
+[ext_resource type="Script" uid="uid://sehkuo2xbwos" path="res://src/Worlds/world_tracker.gd" id="18_hhk72"]
+[ext_resource type="Resource" uid="uid://b7d426jw88wxl" path="res://src/Worlds/world_handler.tres" id="19_8y1rk"]
+>>>>>>> Stashed changes:src/Worlds/World_1/Levels/Level_1-1.tscn
 
 [sub_resource type="GDScript" id="GDScript_ic0uy"]
 script/source = "extends Node2D
@@ -247,6 +274,9 @@ tile_set = SubResource("TileSet_f3sb7")
 
 [node name="CharacterManager" type="Node2D" parent="TileMapLayer"]
 script = ExtResource("4_ioo17")
+
+[node name="TurnManager" type="Node2D" parent="TileMapLayer"]
+script = ExtResource("4_0yevp")
 
 [node name="Actors" type="Node2D" parent="TileMapLayer"]
 

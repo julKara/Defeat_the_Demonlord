@@ -1,13 +1,19 @@
 extends Button
 @onready var character_manager: Node2D = $"../../../../../TileMapLayer/CharacterManager"
+<<<<<<< Updated upstream
 @onready var tile_map: TileMap = $"../../../../../TileMap"
 @onready var draw_path: Node2D = $"../../../../../DrawPath"
 @onready var actor_info: PanelContainer = $"../../../ActorInfo"
 @onready var actions_menu: PanelContainer = $"../.."
+=======
+@onready var turn_manager: Node2D = $"../../../../../TileMapLayer/TurnManager"
+
+>>>>>>> Stashed changes
 
 var counter: int = 0
 
 func _pressed() -> void:
+<<<<<<< Updated upstream
 	# Find the behaviour node of the current character
 	var all_children = character_manager.current_character.get_children()
 	var behaviour_node
@@ -43,20 +49,9 @@ func _pressed() -> void:
 	draw_path.hide()
 	actions_menu.hide()
 	actor_info.hide_actor_info()
+=======
+>>>>>>> Stashed changes
 
-	# Update the current character to the next in the array
-	character_manager.set_current_character(character_manager.character_list[counter%character_manager.num_characters])
-	counter = counter + 1
 	
-	# Update behaviour node to the new character
-	all_children = character_manager.current_character.get_children()
-	for child in all_children:
-		if child is Node:
-			behaviour_node = child
-	
-	if character_manager.current_character.is_friendly == true:	
-		# Highlight and select the updated current character
-		behaviour_node.highlight_range()
-	else:		
-		# AI enemy plays its turn
-		behaviour_node.play_turn()
+	var current = character_manager.current_character
+	turn_manager.end_player_unit_turn(current)
