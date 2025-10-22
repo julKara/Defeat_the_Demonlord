@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dif34ntuabmcx" path="res://assets/character_art/mage/Mage_Default_Attack_f2.png" id="2_phc3d"]
 [ext_resource type="Texture2D" uid="uid://c54ef10fblnoy" path="res://assets/character_art/mage/Mage_Default_Attack_f3.png" id="3_w7ikt"]
 [ext_resource type="Texture2D" uid="uid://bnghiadolb7x8" path="res://assets/character_art/mage/Mage_Sprite.png" id="4_vxxqd"]
-[ext_resource type="Texture2D" uid="uid://d0dmqxyexre4v" path="res://assets/character_art/mage/Mage_Idle_f2.png" id="5_5yjkd"]
+[ext_resource type="Texture2D" uid="uid://f8yh0wrrsois" path="res://assets/character_art/mage/Mage_Idle_f2.png" id="5_5yjkd"]
 
 [sub_resource type="Animation" id="Animation_hwpfo"]
 resource_name = "attack"
