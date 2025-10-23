@@ -77,7 +77,7 @@ func _input(event):
 				
 		# This part is only meant to be run when no characters are selected
 		# Above check ensures that
-		if all_characters_deselected:
+		if all_characters_deselected && get_parent().acted == false:
 			select_current_playable_character()
 			
 		
@@ -114,18 +114,19 @@ func _input(event):
 			)
 		
 		
-		for character in character_manager.character_list:
-			if tile_map.local_to_map(get_parent().get_global_mouse_position()) == tile_map.local_to_map(character.global_position):
-				var all_children = character.get_children()
-				var behaviour_node
-		
-				for child in all_children:
-					if child is Node:
-						behaviour_node = child
-				
-				destination_occupied = true
-				behaviour_node.selected = false
-				select_current_playable_character()
+		if get_parent().acted == false:
+			for character in character_manager.character_list:
+				if tile_map.local_to_map(get_parent().get_global_mouse_position()) == tile_map.local_to_map(character.global_position):
+					var all_children = character.get_children()
+					var behaviour_node
+			
+					for child in all_children:
+						if child is Node:
+							behaviour_node = child
+					
+					destination_occupied = true
+					behaviour_node.selected = false
+					select_current_playable_character()
 		
 		# Only perform the movement if the path is valid and within range
 		if id_path.is_empty() == false and id_path.size() <= mobility + 1 and destination_occupied == false:
