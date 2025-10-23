@@ -15,12 +15,18 @@ func _ready() -> void:
 	# Default value for starting character
 	current_character = actors.get_child(0)
 	
-	# Array storing all characters
+
 	for actor: Actor in actors.get_children():
+		# Reset health at start of a new level
+		actor.stats.curr_health = actor.stats.max_health
+		
+		# Array storing all characters
 		character_list.append(actor)
+		# Array storing copies of all characters. Used for leveling up and saving
+		character_list_copy.append(actor.duplicate())
 	
 	# Create copy of character_list to keep track of all character that were in the level before the game started
-	character_list_copy = character_list.duplicate()
+	#character_list_copy = character_list.duplicate()
 
 	num_characters = character_list.size()
 	
@@ -50,6 +56,13 @@ func _load_save():
 				elif character.profile.battle_class_type == "Swordsman":
 					character.stats = _save.playable_swordsman
 			print("Loaded " + character.profile.character_name + " from save file")
+			
+		for character in character_list_copy:
+			if character.is_friendly == true:
+				if character.profile.battle_class_type == "Mage":
+					character.stats = _save.playable_mage
+				elif character.profile.battle_class_type == "Swordsman":
+					character.stats = _save.playable_swordsman
 	
 
 	
@@ -59,9 +72,9 @@ func _save_game():
 			print("here ------ " + str(character))
 			if character.is_friendly == true:
 				if character.profile.battle_class_type == "Mage":
-					_save.playable_mage = character.stats
+					_save.playable_mage = character.stats.duplicate()
 				elif character.profile.battle_class_type == "Swordsman":
-					_save.playable_swordsman = character.stats
+					_save.playable_swordsman = character.stats.duplicate()
 			print("Saved " + character.profile.character_name)
 	_save.write_save()
 	

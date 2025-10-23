@@ -109,7 +109,7 @@ func _handle_death(dead_actor: Actor) -> void:
 	turn_manager.player_queue.erase(dead_actor)
 	turn_manager.enemy_queue.erase(dead_actor)
 	
-	#dead_actor.queue_free()	# Remove actor from world
+	dead_actor.queue_free()	# Remove actor from world
 	character_manager.num_characters -= 1
 	
 	# Check if a win/loss condition has been met
