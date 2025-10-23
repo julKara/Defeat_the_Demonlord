@@ -5,7 +5,6 @@ class_name playable_unit extends Node
 @onready var range_tile_map: TileMap = $"../../../../RangeTileMap"
 @onready var draw_path: Node2D = $"../../../../DrawPath"
 @onready var character_manager: Node2D = $"../../../CharacterManager"
-@onready var pass_turn: Button = $"../../../../GUI/Margin/ActionsMenu/VBoxContainer/Pass_Turn"
 @onready var actions_menu: PanelContainer = $"../../../../GUI/Margin/ActionsMenu"
 @onready var actor_info: PanelContainer = $"../../../../GUI/Margin/ActorInfo"
 
@@ -79,11 +78,8 @@ func _input(event):
 		# This part is only meant to be run when no characters are selected
 		# Above check ensures that
 		if all_characters_deselected:
-			character_manager.current_character = get_parent()
-			pass_turn.counter = character_manager.character_list.find(get_parent(),0) + 1
+			# character_manager.current_character = get_parent()
 			select_current_playable_character()
-			actions_menu.show()	# Show actions-menu when selecting actor
-			actor_info.display_actor_info(character_manager.current_character) # Show actor info
 			
 		
 	# Click to deselect character and hide move range
@@ -130,8 +126,7 @@ func _input(event):
 				
 				destination_occupied = true
 				behaviour_node.selected = false
-				character_manager.current_character = get_parent()
-				#stand_button.counter = character_manager.character_list.find(self,0) + 1
+				# character_manager.current_character = get_parent()
 				select_current_playable_character()
 		
 		# Only perform the movement if the path is valid and within range
@@ -253,11 +248,17 @@ func highlight_range():
 # For selecting a playable unit
 func select_current_playable_character() -> void:
 	
+	character_manager.current_character = get_parent()
+	
 	# Update state
 	selected = true
 	get_parent().set_state(get_parent().UnitState.SELECTED)	# Update state to SELECTED
 	
-	# Highlight range
+	# Display info and actions menu
+	actions_menu.show()	# Show actions-menu when selecting actor
+	actor_info.display_actor_info(character_manager.current_character) # Show actor info
+	
+	# Display highlight range
 	highlight_range()
 
 # For deselecting a playable unit
