@@ -28,13 +28,11 @@ func _pressed() -> void:
 	# Do a counter-attack if target is still alive and withing range
 	if target.stats.curr_health > 0:
 		
-		print("\t\t\tCounter!")
-		
 		var target_range = target.stats.attack_range
 		
 		# Only counterattack if attacker is within target’s range
 		if target_range * attacker.tile_size >= dist:
-			#print("Counter Attack!")
+			print("\t\t\tCounter!")
 			await battle_handler.perform_battle(target, attacker, dist)
 	
 	turn_manager.end_player_unit_turn(character_manager.current_character)
