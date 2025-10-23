@@ -112,7 +112,7 @@ func play_turn():
 	attack_used = false
 	
 	# Move towards the closest player
-	await move()
+	move()
 	
 	await ai_movement_finished
 	
