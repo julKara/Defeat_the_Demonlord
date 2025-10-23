@@ -1,8 +1,12 @@
 extends Button
 
+@onready var world_handler: Node = $"../../WorldHandler"
+
+
 func _pressed():
 	
-	# TEMP
+	world_handler._create_save()
+	
 	var world_select: String = "res://src/Worlds/world_select.tscn"
 
 	if FileAccess.file_exists(world_select):
