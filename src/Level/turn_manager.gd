@@ -107,16 +107,23 @@ func _next_player_unit() -> void:
 		print("\nPlayer phase complete.")
 		end_phase()
 	else:
-		character_manager.set_current_character(next_unit)
+		
 		print("\tPlayer unit turn: ", next_unit.profile.character_name)
-		_pass_button()
+		
+		# Select next playable unit
+		var next_behaviour_node: Node = next_unit.get_behaviour()
+		next_behaviour_node.select_current_playable_character()
 
 func end_player_unit_turn(unit: Actor) -> void:
 	unit.acted = true
 	print("\t", unit.profile.character_name, " has ended their turn.")
-	_next_player_unit()
 	
-	# Hide GUI and drawpath
+	# Deselect current character
+	var next_behaviour_node: Node = unit.get_behaviour()
+	next_behaviour_node.deselect_current_playable_character()
+	
+	# Select next unit
+	_next_player_unit()
 
 
 # --- ENEMY TURN HANDLING ---
