@@ -3,6 +3,7 @@ extends Node
 
 """
 # Handles all combat interactions between two Actor instances.
+# Gets called in turn_manager by the AI and by the default_attack button.
 """
 
 # Refrences
@@ -10,12 +11,6 @@ extends Node
 @onready var animation_timer: Timer = $AnimationTimer
 @onready var turn_manager: Node2D = $"../TileMapLayer/TurnManager"
 @onready var win_loss_condition: Node2D = $"../WinLossCondition"
-
-
-
-# Can be preloaded globally or add it as a child of World scene
-# Like: `var battle_handler = BattleHandler.new()` or keep it as an autoload singleton.
-# Probably connect it to default_attack button
 
 func perform_battle(attacker: Actor, defender: Actor, distance: float) -> void:
 	

@@ -1,8 +1,13 @@
 extends Button
 
 @onready var character_manager: Node2D = $"../../../../../TileMapLayer/CharacterManager"
-@onready var battle_handler: BattleHandler = $"../../../../../BattleHandler"
+#@onready var battle_handler: BattleHandler = $"../../../../../BattleHandler"
 @onready var turn_manager: Node2D = $"../../../../../TileMapLayer/TurnManager"
+
+var battle_handler: Node = null
+
+func _ready() -> void:
+	battle_handler = BattleHandlerSingleton
 
 func _pressed() -> void:
 	
@@ -22,6 +27,9 @@ func _pressed() -> void:
 	
 	# Do a counter-attack if target is still alive and withing range
 	if target.stats.curr_health > 0:
+		
+		print("\t\t\tCounter!")
+		
 		var target_range = target.stats.attack_range
 		
 		# Only counterattack if attacker is within target’s range

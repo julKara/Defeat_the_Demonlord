@@ -44,8 +44,11 @@ func _initialize_turn_order() -> void:
 
 # Cleans up prev turn and sets up the current one (player starts when level starts)
 func start_phase(phase: Phase) -> void:
+	
+	# Delay between phases, TODO: Add transitions
+	await get_tree().create_timer(1.0).timeout
+	
 	current_phase = phase
-
 	match phase:
 		Phase.PLAYER:
 			print("--- Player Phase ---")
@@ -140,11 +143,15 @@ func _next_enemy_unit() -> void:
 		# Get behaviour to play_turn
 		var next_behaviour_node: Node = next_unit.get_behaviour()
 		if next_behaviour_node.has_method("play_turn"):
-			await next_behaviour_node.play_turn()  # if play_turn() is async
-			await get_tree().create_timer(0.8).timeout  # delay between enemy actions
+			await next_behaviour_node.play_turn()  # Wait for AI to truly finish
+			await get_tree().create_timer(0.6).timeout  # Delay between enemy units
 		
-		next_unit.acted = true
-		_next_enemy_unit()  # Auto-advance in queue, might add a delay
+		# Test if unit survivied the attack
+		if next_unit != null:
+			next_unit.acted = true
+			
+		# Auto-advance in queue, might add a delay
+		_next_enemy_unit()
 
 # --- UTIL ---
 func _reset_acted_flag(list: Array) -> void:
