@@ -26,10 +26,6 @@ func _ready():
 	_set_stat_variables()
 	astar_grid = character_manager.current_character.astar_grid
 
-# func _process(delta):
-	# Simple AI behavior
-	# print("Enemy thinking...")	# TESTING
-
 # Intialize all stat-variables through the CharacterStats resource
 func _set_stat_variables():
 	mobility = get_parent().stats.mobility
@@ -116,15 +112,12 @@ func play_turn():
 	attack_used = false
 	
 	# Move towards the closest player
-	move()
+	await move()
 	
 	await ai_movement_finished
+	
 	# Attack
 	attack()
 
 	# Skill
 	# TO BE IMPLEMENTED
-	
-	# If no attack or skill was used -> end turn
-	if attack_used == false and skill_used == false:
-		pass_turn._pressed()
