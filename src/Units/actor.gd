@@ -183,3 +183,6 @@ func _update_state_animation() -> void:
 	if anim_player.has_animation(full_name):
 		anim_player.play(full_name)
 		# print("full_name:", full_name)	# TESTING
+
+func get_behaviour() -> Node:
+	return behavior

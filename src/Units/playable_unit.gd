@@ -78,7 +78,6 @@ func _input(event):
 		# This part is only meant to be run when no characters are selected
 		# Above check ensures that
 		if all_characters_deselected:
-			# character_manager.current_character = get_parent()
 			select_current_playable_character()
 			
 		
@@ -126,7 +125,6 @@ func _input(event):
 				
 				destination_occupied = true
 				behaviour_node.selected = false
-				# character_manager.current_character = get_parent()
 				select_current_playable_character()
 		
 		# Only perform the movement if the path is valid and within range
