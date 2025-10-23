@@ -5,6 +5,8 @@ const SAVE_GAME_PATH := "user://save.tres"
 
 # Resources that get saved
 @export var level_progression: Resource
+@export var playable_mage: Resource
+@export var playable_swordsman: Resource
 
 
 func write_save():

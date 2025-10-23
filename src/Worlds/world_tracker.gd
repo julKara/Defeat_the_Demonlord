@@ -16,12 +16,13 @@ func _load_save():
 func _create_save():
 	_save = SaveGame.new()
 	_save.level_progression = world_tracker.new()
+	_save.playable_mage = preload("res://characters/Mage/mageStats.tres").duplicate()
+	_save.playable_swordsman = preload("res://characters/Knight/knightStats.tres").duplicate()
 	_save.write_save()
 	world_script = _save.level_progression
 	print("New save file created")
 	
 func _save_game():
-	print(_save)
 	_save.level_progression = world_script
 	_save.write_save()
 	print("Saved the game")
