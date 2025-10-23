@@ -24,8 +24,6 @@ func _ready() -> void:
 	num_characters = character_list.size()
 	
 
-
-
 func set_current_character(character) -> void:
 	current_character = character
 	actor_info.display_actor_info(current_character)

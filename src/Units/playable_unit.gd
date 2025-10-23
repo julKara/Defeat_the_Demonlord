@@ -263,14 +263,30 @@ func select_current_playable_character() -> void:
 
 # For deselecting a playable unit
 func deselect_current_playable_character() -> void:
+	
+	# Clear range display
 	range_tile_map.clear_layer(0)
 	range_tile_map.clear_layer(1)
-	selected = false
 	draw_path.hide()
+	
+	# Update position
 	get_parent().global_position = tile_map.map_to_local(start_position)
+	
+	# Hide unit-display
 	actions_menu.hide()	# Hide actions-menu when deselecting actor
 	actor_info.hide_actor_info()
-	attack_target = null # Remove target after deselecting
 	
+	# Remove highlight from attack target if there is one
+	if attack_target != null:
+		var all_children = attack_target.get_children()
+		var sprite
+		for child in all_children:
+			if child is Sprite2D:
+				sprite = child
+		sprite.material.set("shader_parameter/width", 0.0)
+		attack_target = null # Remove target after deselecting
+	
+	# Update state of unit
+	selected = false
 	get_parent().set_state(get_parent().UnitState.IDLE)	# Update state to IDLE
 	
