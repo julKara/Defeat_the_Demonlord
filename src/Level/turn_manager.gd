@@ -104,9 +104,7 @@ func _next_player_unit() -> void:
 		end_phase()
 	else:
 		
-		print("\tPlayer unit turn: ", next_unit.profile.character_name)
-		
-		# Select next playable unit
+		# Select next playable unit (print-statement in function)
 		var next_behaviour_node: Node = next_unit.get_behaviour()
 		next_behaviour_node.select_current_playable_character()
 

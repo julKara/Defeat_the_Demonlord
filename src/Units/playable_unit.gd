@@ -259,6 +259,9 @@ func select_current_playable_character() -> void:
 	
 	# Display highlight range
 	highlight_range()
+	
+	# Log new unit selected
+	print("\tPlayer unit turn: ", get_parent().profile.character_name)
 
 # For deselecting a playable unit
 func deselect_current_playable_character() -> void:

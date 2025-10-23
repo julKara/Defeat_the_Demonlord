@@ -98,6 +98,11 @@ func select_attack_target():
 
 func attack():
 	select_attack_target()
+	
+	character_manager.set_current_character(get_parent())
+	print("Current unit: ", character_manager.current_character.profile.character_name)
+	if attack_target != null:
+		print("Target selected: ", attack_target.profile.character_name)
 
 	var attack_path = (astar_grid.get_id_path(tile_map.local_to_map(get_parent().global_position),
 			tile_map.local_to_map(attack_target.global_position)))
@@ -121,3 +126,7 @@ func play_turn():
 
 	# Skill
 	# TO BE IMPLEMENTED
+	
+	# Log enemy passed their turn
+	if attack_used == false and skill_used == false:
+		print("\t", get_parent().profile.character_name, " has ended their turn.")

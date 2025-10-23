@@ -7,11 +7,8 @@ extends Button
 func _pressed() -> void:
 	
 	# Find behaviour node of the current character
-	var all_children = character_manager.current_character.get_children()
-	var behaviour_node	
-	for child in all_children:
-		if child is Node:
-			behaviour_node = child
+	var selected_unit = character_manager.current_character
+	var behaviour_node = selected_unit.get_behaviour()
 	
 	# Set up attacker and target, and define damage from physical attack stat
 	var attacker: Actor = character_manager.current_character
