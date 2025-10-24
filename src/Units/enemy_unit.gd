@@ -93,6 +93,10 @@ func move():
 	# Only move if there is a path to move along
 	if id_path.is_empty() == false:
 		
+		# Check if the enemy will get a range penalty
+		if id_path.size()-1 < attack_range:
+			print("PENALTY")
+		
 		# Check if the final destination of the enemy is occupied by a different enemy
 		var enemy_pos	
 		for character in character_manager.character_list:
