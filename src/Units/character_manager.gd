@@ -55,7 +55,7 @@ func _load_save():
 					character.stats = _save.playable_mage
 				elif character.profile.battle_class_type == "Swordsman":
 					character.stats = _save.playable_swordsman
-			print("Loaded " + character.profile.character_name + " from save file")
+				print("Loaded " + character.profile.character_name + " from save file")
 			
 		for character in character_list_copy:
 			if character.is_friendly == true:
@@ -67,20 +67,12 @@ func _load_save():
 
 	
 func _save_game():
-	print(_save)
 	for character in character_list_copy:
-			print("here ------ " + str(character))
 			if character.is_friendly == true:
 				if character.profile.battle_class_type == "Mage":
 					_save.playable_mage = character.stats.duplicate()
 				elif character.profile.battle_class_type == "Swordsman":
 					_save.playable_swordsman = character.stats.duplicate()
-			print("Saved " + character.profile.character_name)
+				print("Saved " + character.profile.character_name)
 	_save.write_save()
 	
-	
-func _check_save() -> bool:
-	if SaveGame.save_exists():
-		return true
-	else:
-		return false

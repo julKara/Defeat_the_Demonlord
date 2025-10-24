@@ -11,7 +11,6 @@ func _ready() -> void:
 	world_num = world_handler.world_script.current_world
 	
 func setup_level_button():
-	print(world_handler.world_script.current_world)
 	for button in level_container.get_children():
 		button.level_num = button.get_index() + 1 # Assign level number to the button
 		button.text = "Level " + str(button.level_num) # Update text on button (Level number)
