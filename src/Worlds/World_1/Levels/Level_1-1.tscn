@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://fr5vqykbi54o"]
+[gd_scene load_steps=31 format=4 uid="uid://fr5vqykbi54o"]
 
 [ext_resource type="Texture2D" uid="uid://bqmtavn12rhj2" path="res://assets/test_map5.png" id="1_bq4wg"]
 [ext_resource type="Texture2D" uid="uid://bdy0m0gr2tme3" path="res://assets/level_art/48x48_Tileset/pipo-map001.png" id="2_6mxkn"]
@@ -14,6 +14,7 @@
 [ext_resource type="Resource" uid="uid://co8geppy7b1dn" path="res://characters/Slime/slimeProfile.tres" id="10_0yevp"]
 [ext_resource type="Script" uid="uid://duw38t7v0nrgf" path="res://src/Level/GUI/default_attack.gd" id="10_rveb5"]
 [ext_resource type="Script" uid="uid://b6oemt0bk5jyw" path="res://src/Level/GUI/stand_button.gd" id="11_esv70"]
+[ext_resource type="Resource" uid="uid://wi8ftl36jwfe" path="res://characters/Slime/slimeProfile2.tres" id="12_0yevp"]
 [ext_resource type="Script" uid="uid://dso7okpirndht" path="res://src/Level/GUI/actor_info.gd" id="12_ky5eb"]
 [ext_resource type="Script" uid="uid://dous6wk318f1t" path="res://src/Level/GUI/victory_screen.gd" id="13_e1a87"]
 [ext_resource type="PackedScene" uid="uid://cats61ytkbbvj" path="res://src/PathVisuals/draw_path.tscn" id="13_jamn3"]
@@ -250,7 +251,7 @@ profile = ExtResource("10_0yevp")
 [node name="enemy_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
 position = Vector2(312, 168)
 stats = ExtResource("9_na0ed")
-profile = ExtResource("10_0yevp")
+profile = ExtResource("12_0yevp")
 
 [node name="GUI" type="CanvasLayer" parent="."]
 script = SubResource("GDScript_wse8f")
