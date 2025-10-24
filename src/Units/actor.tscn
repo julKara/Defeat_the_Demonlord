@@ -1,11 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://dijjspgi8x8sv"]
+[gd_scene load_steps=15 format=3 uid="uid://dijjspgi8x8sv"]
 
 [ext_resource type="Script" uid="uid://7mgltwn5kw4v" path="res://src/Units/actor.gd" id="1_xjefa"]
 [ext_resource type="Shader" uid="uid://54clig0upyxr" path="res://src/Units/highlight.gdshader" id="2_a5lvk"]
-[ext_resource type="Texture2D" uid="uid://bnghiadolb7x8" path="res://assets/character_art/mage/Mage_Sprite.png" id="3_jg2tr"]
-[ext_resource type="Texture2D" uid="uid://crgdfnt7qqlqa" path="res://assets/character_art/mage/Mage_Default_Attack_f1.png" id="3_wehan"]
-[ext_resource type="Texture2D" uid="uid://dif34ntuabmcx" path="res://assets/character_art/mage/Mage_Default_Attack_f2.png" id="4_fjflg"]
-[ext_resource type="Texture2D" uid="uid://c54ef10fblnoy" path="res://assets/character_art/mage/Mage_Default_Attack_f3.png" id="5_4k5mr"]
+[ext_resource type="AnimationLibrary" uid="uid://csufkd5ailv6u" path="res://characters/Knight/knightAnimations.tres" id="4_jg2tr"]
+[ext_resource type="AnimationLibrary" uid="uid://db35i1b3vs4xd" path="res://characters/Mage/mageAnimations.tres" id="5_a5lvk"]
 [ext_resource type="Script" uid="uid://lv7bihs01ua5" path="res://src/Level/healthbar.gd" id="7_a5lvk"]
 [ext_resource type="Texture2D" uid="uid://d0dmqxyexre4v" path="res://assets/character_art/mage/Mage_Idle_f2.png" id="7_jg2tr"]
 [ext_resource type="AnimationLibrary" uid="uid://cbet0ylfotgqd" path="res://characters/Slime/slimeAnimations.tres" id="8_s4pr6"]
@@ -51,99 +49,6 @@ _data = {
 &"RESET": SubResource("Animation_kj6bn")
 }
 
-[sub_resource type="Animation" id="Animation_hwpfo"]
-resource_name = "attack"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.23, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [ExtResource("3_wehan"), ExtResource("4_fjflg"), ExtResource("5_4k5mr")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -76)]
-}
-
-[sub_resource type="Animation" id="Animation_k3yh3"]
-resource_name = "idle"
-length = 0.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [ExtResource("3_jg2tr"), ExtResource("7_jg2tr")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -24)]
-}
-
-[sub_resource type="Animation" id="Animation_xskcs"]
-resource_name = "selected"
-length = 0.5
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.23),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [ExtResource("3_jg2tr"), ExtResource("7_jg2tr")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -24)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jg2tr"]
-_data = {
-&"attack": SubResource("Animation_hwpfo"),
-&"idle": SubResource("Animation_k3yh3"),
-&"selected": SubResource("Animation_xskcs")
-}
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kj6bn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jg2tr"]
@@ -172,7 +77,8 @@ texture = ExtResource("7_jg2tr")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_a5lvk"),
-&"mageAnimations": SubResource("AnimationLibrary_jg2tr"),
+&"knightAnimations": ExtResource("4_jg2tr"),
+&"mageAnimations": ExtResource("5_a5lvk"),
 &"slimeAnimations": ExtResource("8_s4pr6")
 }
 

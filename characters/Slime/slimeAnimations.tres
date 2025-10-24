@@ -1,4 +1,4 @@
-[gd_resource type="AnimationLibrary" load_steps=4 format=3 uid="uid://cbet0ylfotgqd"]
+[gd_resource type="AnimationLibrary" load_steps=6 format=3 uid="uid://cbet0ylfotgqd"]
 
 [ext_resource type="Texture2D" uid="uid://jmiy51ye1yiv" path="res://assets/character_art/Slime/Slime_Sprite.png" id="1_hos6g"]
 [ext_resource type="Texture2D" uid="uid://dw3l24usm53ep" path="res://assets/character_art/Slime/Slime_Idle_f1.png" id="2_j78h7"]
@@ -19,7 +19,13 @@ tracks/0/keys = {
 "values": [ExtResource("1_hos6g"), ExtResource("2_j78h7")]
 }
 
+[sub_resource type="Animation" id="Animation_hos6g"]
+
+[sub_resource type="Animation" id="Animation_j78h7"]
+
 [resource]
 _data = {
-&"idle": SubResource("Animation_a5lvk")
+&"attack": SubResource("Animation_hos6g"),
+&"idle": SubResource("Animation_a5lvk"),
+&"selected": SubResource("Animation_j78h7")
 }
