@@ -37,3 +37,5 @@ func change_to_scene(level_num:int):
 	if FileAccess.file_exists(next_level):
 		get_tree().change_scene_to_file(next_level)
 		world_handler.world_script.set_current_level(level_num)
+		world_handler._save_game()
+	

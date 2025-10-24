@@ -59,6 +59,8 @@ func _ready() -> void:
 	# Start idle-state animation
 	_update_state_animation()
 	
+	stats.init_stats()
+	
 	# Initialize healthbar at start of level to max-health
 	healthbar.init_health(stats.max_health)
 	
@@ -156,8 +158,8 @@ func _apply_profile() -> void:
 		if not anim_player.has_animation_library(anim_library_name):
 			anim_player.add_animation_library(anim_library_name, profile.animation)
 			print("Added animation library:", anim_library_name)
-		#else:
-			#print("Library already exists:", anim_library_name)
+		else:
+			print("Library already exists:", anim_library_name)
 
 # Updates current_state and calls update-animation
 func set_state(new_state: UnitState) -> void:

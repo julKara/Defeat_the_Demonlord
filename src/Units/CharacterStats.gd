@@ -20,6 +20,10 @@ const MODIFIABLE_STATS = [
 ]
 
 # Set-functions
+func init_stats():
+	curr_health = max_health
+
+# Set-functions
 func set_max_health(value):
 	max_health = max(0, value)
 
