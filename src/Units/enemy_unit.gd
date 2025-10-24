@@ -67,29 +67,46 @@ func find_closest_player() -> CharacterBody2D:
 	return closest_player
 	
 
-func move():
-
+# Calculate the shortest path from the enemy to the closest player
+func calculate_path() -> Array[Vector2i]:
 	var closest_player = find_closest_player()
+	var id_path
 	
 	if closest_player != null:
 		# Create a path from the enemy to the closest player
-		var id_path = (astar_grid.get_id_path(tile_map.local_to_map(get_parent().global_position),
+		id_path = (astar_grid.get_id_path(tile_map.local_to_map(get_parent().global_position),
 				tile_map.local_to_map(closest_player.global_position)))
-		
 		
 		# Shrink path down to be in the mobility range
 		while id_path.size() > mobility + attack_range + 1: # attack_range+1 allows enemy to move full distance
 			id_path.pop_back() # Remove last element
-			
+		
+		return id_path
+	else:
+		return [] # Prevents crash at game over
+
+
+func move():
+
+	var id_path = calculate_path()
+	
+	# Only move if there is a path to move along
+	if id_path.is_empty() == false:
+		
+		# Check if the final destination of the enemy is occupied by a different enemy
+		var enemy_pos	
 		for character in character_manager.character_list:
 			if character.is_friendly == false and character != get_parent():
-				print(id_path)
-				var index = id_path.size() - attack_range - 1
-				print(tile_map.local_to_map(character.global_position))
-				print(id_path[index])
+				# The index of the tile the enemy will stop at. They always stops as soon as they're in range.
+				var index = id_path.size() - attack_range - 1 
 				if id_path[index] == tile_map.local_to_map(character.global_position):
-					id_path.pop_back()
-				print(id_path)
+					enemy_pos = tile_map.local_to_map(character.global_position)
+					# If the tile is occupied -> set tile to solid. The tile will then not be includen in pathfinding
+					astar_grid.set_point_solid(enemy_pos, true)
+		
+		# If the final destination is occupied -> recalculate path without the occupied tile
+		if enemy_pos != null:
+			id_path = calculate_path()
 			
 		var target_position
 		
@@ -106,6 +123,11 @@ func move():
 				id_path.pop_front()
 		
 		await get_tree().create_timer(0.01).timeout
+		
+		# If a tile was set to be solid -> reset it back to "not solid" after the move is done
+		if enemy_pos != null:
+			astar_grid.set_point_solid(enemy_pos, false)
+			
 		emit_signal("ai_movement_finished")	
 
 	
