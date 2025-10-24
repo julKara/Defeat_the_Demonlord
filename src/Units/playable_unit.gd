@@ -272,7 +272,7 @@ func deselect_current_playable_character() -> void:
 	draw_path.hide()
 	
 	# Update position
-	get_parent().global_position = tile_map.map_to_local(start_position)
+	start_position = tile_map.local_to_map(get_parent().global_position)
 	
 	# Hide unit-display
 	actions_menu.hide()	# Hide actions-menu when deselecting actor
