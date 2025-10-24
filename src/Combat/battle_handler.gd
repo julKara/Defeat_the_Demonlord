@@ -3,19 +3,26 @@ extends Node
 
 """
 # Handles all combat interactions between two Actor instances.
+# Gets called by the default_attack button.
 """
 
-# Refrences
-@onready var character_manager: Node2D = $"../TileMapLayer/CharacterManager"
-@onready var animation_timer: Timer = $AnimationTimer
-@onready var turn_manager: Node2D = $"../TileMapLayer/TurnManager"
-@onready var win_loss_condition: Node2D = $"../WinLossCondition"
+# Other scripts/objects in each level scene
+var animation_timer: Timer
+var character_manager: Node2D
+var turn_manager: Node2D
+var win_loss_condition: Node2D
 
+func _ready() -> void:
+	# Create our own AnimationTimer if not already present
+	if not has_node("AnimationTimer"):
+		animation_timer = Timer.new()
+		animation_timer.one_shot = true
+		add_child(animation_timer)
+	else:
+		animation_timer = $AnimationTimer
 
-
-# Can be preloaded globally or add it as a child of World scene
-# Like: `var battle_handler = BattleHandler.new()` or keep it as an autoload singleton.
-# Probably connect it to default_attack button
+	# Try to locate level-specific managers each time a level loads
+	_find_level_nodes()
 
 func perform_battle(attacker: Actor, defender: Actor, distance: float) -> void:
 	
@@ -114,3 +121,16 @@ func _handle_death(dead_actor: Actor) -> void:
 	
 	# Check if a win/loss condition has been met
 	win_loss_condition.check_conditions()
+
+# --- UTIL ---
+func _find_level_nodes() -> void:
+	# Find active level root (first child under root that isn’t an autoload)
+	for node in get_tree().root.get_children():
+		if node.name.begins_with("Level_"):  # adjust to your naming
+			var tilemap_layer = node.get_node_or_null("TileMapLayer")
+			if tilemap_layer:
+				character_manager = tilemap_layer.get_node_or_null("CharacterManager")
+				turn_manager = tilemap_layer.get_node_or_null("TurnManager")
+				win_loss_condition = node.get_node_or_null("WinLossCondition")
+				return
+	push_warning("BattleHandlerGlobal: Could not find CharacterManager or TurnManager in current level!")

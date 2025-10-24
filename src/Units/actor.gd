@@ -8,12 +8,12 @@ class_name Actor extends CharacterBody2D
 """
 
 
-""" Unit-Unique Reasources """
+# --- Unit-Unique Reasources ---
 @export var stats: CharacterStats	# All stats to particular unit
 @export var profile: UnitProfile	# All other unique aspects of a unit (name, skills, talent...)
 var anim_library_name := "default"	# Liberary name for unit-animations, is the .tres file attached to profile
 
-# CONSTANTS
+# --- CONSTANTS ---
 const FRIENDLY_COLOR: Color = Color("00a78f")
 const ENEMY_COLOR: Color = Color.CRIMSON
 enum UnitState { IDLE, SELECTED, MOVING, ATTACKING, DEAD }	# Possible unit-states
@@ -25,21 +25,21 @@ var state_to_anim = {	# For animation filepaths
 		UnitState.DEAD: "dead"
 	}
 
-# Refrences to objects in actor
+# --- Refrences to objects in actor ---
 var behavior: Node = null	# Decides behavior based on if unit is playable, enemy, npc...
 @onready var sprite_2d: Sprite2D = $Sprite	# Just the default sprite to all characters
 @onready var anim_player: AnimationPlayer = $AnimationPlayer	# Used to play animations
 @onready var healthbar: ProgressBar = $Healthbar	# The units healthbar, gets set up in _ready()
 
 
-# Refrences to objects in World
+# --- Refrences to objects in level ---
 @onready var tile_map: TileMap = $"../../../TileMap"
 
-# Variables for movement
+# --- Variables for movement ---
 var astar_grid: AStarGrid2D
 var tile_size: int = 48
 
-""" Unit info while in gameplay: """
+# --- Unit info while in gameplay: ---
 var selected: bool = false	# True if unit is selected
 var acted: bool = false    # True if the unit has acted this turn
 var current_state: UnitState = UnitState.IDLE	# Current state of unit
@@ -58,6 +58,8 @@ func _ready() -> void:
 	
 	# Start idle-state animation
 	_update_state_animation()
+	
+	stats.init_stats()
 	
 	# Initialize healthbar at start of level to max-health
 	healthbar.init_health(stats.max_health)
@@ -156,8 +158,8 @@ func _apply_profile() -> void:
 		if not anim_player.has_animation_library(anim_library_name):
 			anim_player.add_animation_library(anim_library_name, profile.animation)
 			print("Added animation library:", anim_library_name)
-		#else:
-			#print("Library already exists:", anim_library_name)
+		else:
+			print("Library already exists:", anim_library_name)
 
 # Updates current_state and calls update-animation
 func set_state(new_state: UnitState) -> void:
@@ -183,3 +185,6 @@ func _update_state_animation() -> void:
 	if anim_player.has_animation(full_name):
 		anim_player.play(full_name)
 		# print("full_name:", full_name)	# TESTING
+
+func get_behaviour() -> Node:
+	return behavior

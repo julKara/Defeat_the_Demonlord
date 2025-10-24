@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://b1nc2tns8qbkx"]
+[gd_scene load_steps=30 format=4 uid="uid://b1nc2tns8qbkx"]
 
 [ext_resource type="Texture2D" uid="uid://bqmtavn12rhj2" path="res://assets/test_map5.png" id="1_135in"]
 [ext_resource type="Texture2D" uid="uid://bdy0m0gr2tme3" path="res://assets/level_art/48x48_Tileset/pipo-map001.png" id="2_wiikb"]
@@ -15,11 +15,10 @@
 [ext_resource type="Script" uid="uid://duw38t7v0nrgf" path="res://src/Level/GUI/default_attack.gd" id="10_58ix3"]
 [ext_resource type="Script" uid="uid://b6oemt0bk5jyw" path="res://src/Level/GUI/stand_button.gd" id="11_8tn61"]
 [ext_resource type="Script" uid="uid://dso7okpirndht" path="res://src/Level/GUI/actor_info.gd" id="12_bk12l"]
-[ext_resource type="Script" uid="uid://dous6wk318f1t" path="res://src/Level/GUI/victory_screen.gd" id="13_2ewbx"]
-[ext_resource type="Script" uid="uid://sddm7u5ng6mx" path="res://src/Level/GUI/game_over_screen.gd" id="14_jf4e7"]
+[ext_resource type="Script" path="res://src/Level/GUI/victory_screen.gd" id="13_2ewbx"]
+[ext_resource type="Script" path="res://src/Level/GUI/game_over_screen.gd" id="14_jf4e7"]
 [ext_resource type="PackedScene" uid="uid://cats61ytkbbvj" path="res://src/PathVisuals/draw_path.tscn" id="15_52s2t"]
-[ext_resource type="Script" uid="uid://bjl544x2g0v72" path="res://src/Combat/battle_handler.gd" id="16_yq00x"]
-[ext_resource type="Script" uid="uid://nm7v2oerrihf" path="res://src/Level/win_loss_condition.gd" id="17_pgurd"]
+[ext_resource type="Script" path="res://src/Level/win_loss_condition.gd" id="17_pgurd"]
 [ext_resource type="Script" uid="uid://sehkuo2xbwos" path="res://src/Worlds/world_tracker.gd" id="18_l8073"]
 [ext_resource type="Resource" uid="uid://b7d426jw88wxl" path="res://src/Worlds/world_handler.tres" id="19_qhh6i"]
 
@@ -31,10 +30,10 @@ script/source = "extends Node2D
 #@onready var gui: CanvasLayer = $GUI
 @onready var actor_info: PanelContainer = $GUI/Margin/ActorInfo
 
-#func _ready() -> void:
-	#
-	#actors.get_child(0).selected = true
-	#actor_info.set_highlighted_actor(actors.get_child(0))	# Call gui on selceted unit
+func _ready() -> void:
+
+	# Setup battlehandler before starting each level
+	BattleHandlerSingleton._find_level_nodes()
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hiqwa"]
@@ -350,12 +349,6 @@ size_flags_vertical = 8
 text = "Return"
 
 [node name="DrawPath" parent="." instance=ExtResource("15_52s2t")]
-
-[node name="BattleHandler" type="Node2D" parent="."]
-script = ExtResource("16_yq00x")
-
-[node name="AnimationTimer" type="Timer" parent="BattleHandler"]
-one_shot = true
 
 [node name="WinLossCondition" type="Node2D" parent="."]
 script = ExtResource("17_pgurd")

@@ -5,7 +5,6 @@ class_name playable_unit extends Node
 @onready var range_tile_map: TileMap = $"../../../../RangeTileMap"
 @onready var draw_path: Node2D = $"../../../../DrawPath"
 @onready var character_manager: Node2D = $"../../../CharacterManager"
-@onready var pass_turn: Button = $"../../../../GUI/Margin/ActionsMenu/VBoxContainer/Pass_Turn"
 @onready var actions_menu: PanelContainer = $"../../../../GUI/Margin/ActionsMenu"
 @onready var actor_info: PanelContainer = $"../../../../GUI/Margin/ActorInfo"
 
@@ -78,28 +77,14 @@ func _input(event):
 				
 		# This part is only meant to be run when no characters are selected
 		# Above check ensures that
-		if all_characters_deselected:
-			character_manager.current_character = get_parent()
-			pass_turn.counter = character_manager.character_list.find(get_parent(),0) + 1
-			highlight_range()
-			actions_menu.show()	# Show actions-menu when selecting actor
-			actor_info.display_actor_info(character_manager.current_character) # Show actor info
+		if all_characters_deselected && get_parent().acted == false:
+			select_current_playable_character()
 			
 		
 	# Click to deselect character and hide move range
 	elif (selected == true and
 	tile_map.local_to_map(get_parent().get_global_mouse_position()) == tile_map.local_to_map(get_parent().global_position)):
-		range_tile_map.clear_layer(0)
-		range_tile_map.clear_layer(1)
-		selected = false
-		draw_path.hide()
-		get_parent().global_position = tile_map.map_to_local(start_position)
-		actions_menu.hide()	# Hide actions-menu when deselecting actor
-		actor_info.hide_actor_info()
-		attack_target = null # Remove target after deselecting
-		
-		get_parent().set_state(get_parent().UnitState.IDLE)	# Update state to IDLE
-
+		deselect_current_playable_character()	# Deselect playable unit
 	
 	# If a playable character is selected, perform the movement	
 	elif (selected == true and
@@ -129,20 +114,19 @@ func _input(event):
 			)
 		
 		
-		for character in character_manager.character_list:
-			if tile_map.local_to_map(get_parent().get_global_mouse_position()) == tile_map.local_to_map(character.global_position):
-				var all_children = character.get_children()
-				var behaviour_node
-		
-				for child in all_children:
-					if child is Node:
-						behaviour_node = child
-				
-				destination_occupied = true
-				behaviour_node.selected = false
-				character_manager.current_character = get_parent()
-				#stand_button.counter = character_manager.character_list.find(self,0) + 1
-				highlight_range()
+		if get_parent().acted == false:
+			for character in character_manager.character_list:
+				if tile_map.local_to_map(get_parent().get_global_mouse_position()) == tile_map.local_to_map(character.global_position):
+					var all_children = character.get_children()
+					var behaviour_node
+			
+					for child in all_children:
+						if child is Node:
+							behaviour_node = child
+					
+					destination_occupied = true
+					behaviour_node.selected = false
+					select_current_playable_character()
 		
 		# Only perform the movement if the path is valid and within range
 		if id_path.is_empty() == false and id_path.size() <= mobility + 1 and destination_occupied == false:
@@ -195,6 +179,11 @@ func _input(event):
 				
 				if attack_path.size() <= (attack_range + 1):
 					attack_target = x
+					
+					# Can't attack friendly units
+					if attack_target.is_friendly:
+						attack_target = null
+						break
 					
 					# Highlight the new target
 					var all_children = attack_target.get_children()
@@ -259,6 +248,52 @@ func highlight_range():
 			# Draw tiles with a path to it that is within the attack range
 			if mobility_path.size() <= (mobility + attack_range + 1): # mobility+1 since path includes start position
 				range_tile_map.set_cell(0, Vector2i(x,y), 1, Vector2i(1,1), 0)
+
+# For selecting a playable unit
+func select_current_playable_character() -> void:
 	
+	character_manager.current_character = get_parent()
+	
+	# Update state
 	selected = true
 	get_parent().set_state(get_parent().UnitState.SELECTED)	# Update state to SELECTED
+	
+	# Display info and actions menu
+	actions_menu.show()	# Show actions-menu when selecting actor
+	actor_info.display_actor_info(character_manager.current_character) # Show actor info
+	
+	# Display highlight range
+	highlight_range()
+	
+	# Log new unit selected
+	print("\tPlayer unit turn: ", get_parent().profile.character_name)
+
+# For deselecting a playable unit
+func deselect_current_playable_character() -> void:
+	
+	# Clear range display
+	range_tile_map.clear_layer(0)
+	range_tile_map.clear_layer(1)
+	draw_path.hide()
+	
+	# Update position
+	start_position = tile_map.local_to_map(get_parent().global_position)
+	
+	# Hide unit-display
+	actions_menu.hide()	# Hide actions-menu when deselecting actor
+	actor_info.hide_actor_info()
+	
+	# Remove highlight from attack target if there is one
+	if attack_target != null:
+		var all_children = attack_target.get_children()
+		var sprite
+		for child in all_children:
+			if child is Sprite2D:
+				sprite = child
+		sprite.material.set("shader_parameter/width", 0.0)
+		attack_target = null # Remove target after deselecting
+	
+	# Update state of unit
+	selected = false
+	get_parent().set_state(get_parent().UnitState.IDLE)	# Update state to IDLE
+	

@@ -3,7 +3,9 @@ class_name enemy_unit extends Node
 @onready var character_manager: Node2D = $"../../../CharacterManager"
 @onready var tile_map: TileMap = $"../../../../TileMap"
 @onready var pass_turn: Button = $"../../../../GUI/Margin/ActionsMenu/VBoxContainer/Pass_Turn"
-@onready var default_attack: Button = $"../../../../GUI/Margin/ActionsMenu/VBoxContainer/Default_Attack"
+#@onready var battle_handler: BattleHandler = $BattleHandler
+
+var battle_handler: Node = null
 
 var astar_grid
 var attack_target: CharacterBody2D
@@ -22,13 +24,12 @@ signal ai_movement_finished
 
 # Maybe enemy AI will be stored here...
 func _ready():
+	
+	battle_handler = BattleHandlerSingleton
+	
 	print("Enemy unit ready — AI active.")	# TESTING
 	_set_stat_variables()
 	astar_grid = character_manager.current_character.astar_grid
-
-# func _process(delta):
-	# Simple AI behavior
-	# print("Enemy thinking...")	# TESTING
 
 # Intialize all stat-variables through the CharacterStats resource
 func _set_stat_variables():
@@ -101,30 +102,56 @@ func select_attack_target():
 
 
 func attack():
-	select_attack_target()
+	
+	print("\t\tTarget selected: ", attack_target.profile.character_name)
 
 	var attack_path = (astar_grid.get_id_path(tile_map.local_to_map(get_parent().global_position),
 			tile_map.local_to_map(attack_target.global_position)))
 			
-	if attack_path.size() <= attack_range + 1:
-		default_attack._pressed()
+	if attack_path.size() <= attack_range + 1 && attack_target != null:
+		
+		# Set up attacker and target, and define damage from physical attack stat
+		var attacker: Actor = get_parent()
+		var target: Actor = attack_target
+		
+		# Distance between attacker and target, influences damage
+		var dist: float = attacker.position.distance_to(target.position)
+		
+		# Perform battle and wait for it to finish
+		await battle_handler.perform_battle(attacker, target, dist)
+		
+		# Do a counter-attack if target is still alive and withing range
+		if target.stats.curr_health > 0:
+			
+			var target_range = target.stats.attack_range
+			
+			# Only counterattack if attacker is within target’s range
+			if target_range * attacker.tile_size >= dist:
+				print("\t\t\tCounter!")
+				await battle_handler.perform_battle(target, attacker, dist)
+				
 		attack_used = true
 	
 				
 func play_turn():
 	
 	attack_used = false
+	skill_used = false
 	
 	# Move towards the closest player
 	move()
-	
 	await ai_movement_finished
+	
+	# Set attack_target
+	await select_attack_target()
+	
 	# Attack
-	attack()
+	if attack_target != null:
+		await attack()
 
 	# Skill
 	# TO BE IMPLEMENTED
 	
-	# If no attack or skill was used -> end turn
+	# Log enemy passed their turn
 	if attack_used == false and skill_used == false:
-		pass_turn._pressed()
+		print("\t", get_parent().profile.character_name, " has ended their turn.")

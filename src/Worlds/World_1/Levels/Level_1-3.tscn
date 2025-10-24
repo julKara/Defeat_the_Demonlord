@@ -15,11 +15,11 @@
 [ext_resource type="Script" uid="uid://duw38t7v0nrgf" path="res://src/Level/GUI/default_attack.gd" id="10_rautg"]
 [ext_resource type="Script" uid="uid://b6oemt0bk5jyw" path="res://src/Level/GUI/stand_button.gd" id="11_athqt"]
 [ext_resource type="Script" uid="uid://dso7okpirndht" path="res://src/Level/GUI/actor_info.gd" id="12_6tp14"]
-[ext_resource type="Script" uid="uid://dous6wk318f1t" path="res://src/Level/GUI/victory_screen.gd" id="13_0xagr"]
-[ext_resource type="Script" uid="uid://sddm7u5ng6mx" path="res://src/Level/GUI/game_over_screen.gd" id="14_hcgia"]
+[ext_resource type="Script" path="res://src/Level/GUI/victory_screen.gd" id="13_0xagr"]
+[ext_resource type="Script" path="res://src/Level/GUI/game_over_screen.gd" id="14_hcgia"]
 [ext_resource type="PackedScene" uid="uid://cats61ytkbbvj" path="res://src/PathVisuals/draw_path.tscn" id="15_eaamk"]
 [ext_resource type="Script" uid="uid://bjl544x2g0v72" path="res://src/Combat/battle_handler.gd" id="16_0fbun"]
-[ext_resource type="Script" uid="uid://nm7v2oerrihf" path="res://src/Level/win_loss_condition.gd" id="17_p2rbu"]
+[ext_resource type="Script" path="res://src/Level/win_loss_condition.gd" id="17_p2rbu"]
 [ext_resource type="Script" uid="uid://sehkuo2xbwos" path="res://src/Worlds/world_tracker.gd" id="18_l22j0"]
 [ext_resource type="Resource" uid="uid://b7d426jw88wxl" path="res://src/Worlds/world_handler.tres" id="19_5f36r"]
 
@@ -31,10 +31,10 @@ script/source = "extends Node2D
 #@onready var gui: CanvasLayer = $GUI
 @onready var actor_info: PanelContainer = $GUI/Margin/ActorInfo
 
-#func _ready() -> void:
-	#
-	#actors.get_child(0).selected = true
-	#actor_info.set_highlighted_actor(actors.get_child(0))	# Call gui on selceted unit
+func _ready() -> void:
+
+	# Setup battlehandler before starting each level
+	BattleHandlerSingleton._find_level_nodes()
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hiqwa"]

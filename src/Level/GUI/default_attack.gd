@@ -1,17 +1,19 @@
 extends Button
 
 @onready var character_manager: Node2D = $"../../../../../TileMapLayer/CharacterManager"
-@onready var battle_handler: BattleHandler = $"../../../../../BattleHandler"
+#@onready var battle_handler: BattleHandler = $"../../../../../BattleHandler"
 @onready var turn_manager: Node2D = $"../../../../../TileMapLayer/TurnManager"
+
+var battle_handler: Node = null
+
+func _ready() -> void:
+	battle_handler = BattleHandlerSingleton
 
 func _pressed() -> void:
 	
 	# Find behaviour node of the current character
-	var all_children = character_manager.current_character.get_children()
-	var behaviour_node	
-	for child in all_children:
-		if child is Node:
-			behaviour_node = child
+	var selected_unit = character_manager.current_character
+	var behaviour_node = selected_unit.get_behaviour()
 	
 	# Set up attacker and target, and define damage from physical attack stat
 	var attacker: Actor = character_manager.current_character
@@ -25,11 +27,12 @@ func _pressed() -> void:
 	
 	# Do a counter-attack if target is still alive and withing range
 	if target.stats.curr_health > 0:
+		
 		var target_range = target.stats.attack_range
 		
 		# Only counterattack if attacker is within target’s range
 		if target_range * attacker.tile_size >= dist:
-			#print("Counter Attack!")
+			print("\t\t\tCounter!")
 			await battle_handler.perform_battle(target, attacker, dist)
 	
 	turn_manager.end_player_unit_turn(character_manager.current_character)

@@ -11,12 +11,6 @@ enum Phase { PLAYER, ENEMY }	# The two possible phases
 
 # --- Imports ---
 @onready var actors: Node2D = $"../Actors"
-@onready var character_manager: Node2D = $"../CharacterManager"
-# For "deselecting"
-@onready var tile_map: TileMap = $"../../TileMap"
-@onready var draw_path: Node2D = $"../../DrawPath"
-@onready var actor_info: PanelContainer = $"../../GUI/Margin/ActorInfo"
-@onready var actions_menu: PanelContainer = $"../../GUI/Margin/ActionsMenu"
 
 
 # --- Variables ---
@@ -50,8 +44,11 @@ func _initialize_turn_order() -> void:
 
 # Cleans up prev turn and sets up the current one (player starts when level starts)
 func start_phase(phase: Phase) -> void:
+	
+	# Delay between phases, TODO: Add transitions
+	await get_tree().create_timer(1.0).timeout
+	
 	current_phase = phase
-
 	match phase:
 		Phase.PLAYER:
 			print("--- Player Phase ---")
@@ -76,7 +73,7 @@ func end_phase() -> void:
 func end_turn() -> void:
 	
 	# Increase current turn
-	print("--- Turn %d ended." % current_turn)
+	# print("--- Turn %d ended." % current_turn)
 	current_turn += 1
 	print("\n--- Turn %d start!\n" % current_turn)
 	
@@ -104,19 +101,26 @@ func _next_player_unit() -> void:
 			
 	# If queue is empty, end phase, otherwise set current_character
 	if next_unit == null:
-		print("\nPlayer phase complete.")
+		print("Player phase complete.\n")
+		
+		# End current phase and start ENEMY Phase
 		end_phase()
 	else:
-		character_manager.set_current_character(next_unit)
-		print("\tPlayer unit turn: ", next_unit.profile.character_name)
-		_pass_button()
+		
+		# Select next playable unit (print-statement in function)
+		var next_behaviour_node: Node = next_unit.get_behaviour()
+		next_behaviour_node.select_current_playable_character()
 
 func end_player_unit_turn(unit: Actor) -> void:
 	unit.acted = true
 	print("\t", unit.profile.character_name, " has ended their turn.")
-	_next_player_unit()
 	
-	# Hide GUI and drawpath
+	# Deselect current character
+	var next_behaviour_node: Node = unit.get_behaviour()
+	next_behaviour_node.deselect_current_playable_character()
+	
+	# Select next unit
+	_next_player_unit()
 
 
 # --- ENEMY TURN HANDLING ---
@@ -129,70 +133,27 @@ func _next_enemy_unit() -> void:
 			next_unit = unit
 			break
 	
-	# If queue is empty, end phase, otherwise set current_character
+	# If queue is empty, end phase
 	if next_unit == null:
-		print("\nEnemy phase complete.")
+		print("Enemy phase complete.\n")
 		end_phase()
 	else:
 		print("\tEnemy unit turn: ", next_unit.profile.character_name)
 		
 		# Get behaviour to play_turn
-		var behaviour = next_unit.get_child(0)
-		if behaviour.has_method("play_turn"):
-			await behaviour.play_turn()  # if play_turn() is async
-			await get_tree().create_timer(0.8).timeout  # delay between enemy actions
+		var next_behaviour_node: Node = next_unit.get_behaviour()
+		if next_behaviour_node.has_method("play_turn"):
+			await next_behaviour_node.play_turn()  # Wait for AI to truly finish
+			await get_tree().create_timer(0.6).timeout  # Delay between enemy units
 		
-		next_unit.acted = true
-		_next_enemy_unit()  # Auto-advance in queue, might add a delay
+		# Test if unit survivied the attack
+		if next_unit != null:
+			next_unit.acted = true
+			
+		# Auto-advance in queue, might add a delay
+		_next_enemy_unit()
 
 # --- UTIL ---
 func _reset_acted_flag(list: Array) -> void:
 	for unit in list:
 		unit.acted = false
-
-func _pass_button() -> void:
-	# Find the behaviour node of the current character
-	var all_children = character_manager.current_character.get_children()
-	var behaviour_node
-		
-	for child in all_children:
-		if child is Node:
-			behaviour_node = child
-	
-	# Update the startposision of the current playable character to be where it ended its move
-	if character_manager.current_character.is_friendly == true:
-		behaviour_node.start_position = tile_map.local_to_map(character_manager.current_character.global_position)
-	
-	# Hide mobility and attack range
-	tile_map.clear_layer(1)
-	tile_map.clear_layer(2)
-	
-	# Deselect character
-	behaviour_node.selected = false
-	
-	# Remove highlight from attack target
-	if behaviour_node.attack_target != null:
-		all_children = behaviour_node.attack_target.get_children()
-		var sprite
-		for child in all_children:
-			if child is Sprite2D:
-				sprite = child
-		sprite.material.set("shader_parameter/width", 0.0)
-	
-	# Remove selected attack target
-	behaviour_node.attack_target = null
-	
-	# Hidde movement path, actions-menu and actor info
-	draw_path.hide()
-	actions_menu.hide()
-	actor_info.hide_actor_info()
-	
-	# Update behaviour node to the new character
-	all_children = character_manager.current_character.get_children()
-	for child in all_children:
-		if child is Node:
-			behaviour_node = child
-	
-	if character_manager.current_character.is_friendly == true:	
-		# Highlight and select the updated current character
-		behaviour_node.highlight_range()

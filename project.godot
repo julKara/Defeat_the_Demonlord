@@ -15,6 +15,10 @@ run/main_scene="uid://fr5vqykbi54o"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+BattleHandlerSingleton="*res://src/Combat/battle_handler.gd"
+
 [display]
 
 window/size/viewport_width=600
