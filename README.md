@@ -12,6 +12,7 @@
 
 ## Annoying features:
 * You have to click on a unit to deselect them intead of just not clicking on anything else. Same with target.
+* Character located below another character should appear on top of the other character. (change node order)
 
 ## Todo:
 * Implement turns -- Julia
@@ -20,7 +21,7 @@
 * <del>Being able to start and win/lose a level (win/loss condition)</del> -- Mirijam
 * Xp system -- Mirijam
 * <del>Level select</del> -- Mirijam
-* Save files -- Mirijam
+* <del>Save files</del> -- Mirijam
 * Character talent (Knight: pass turn -> guard for allies (become attack_target), Mage: Apply burn (damage over time)) -- Julia
 * <del>Counter attack -- Julia</del>
 * Art (Demon Lord, slime, goblin, skeleton) -- Both

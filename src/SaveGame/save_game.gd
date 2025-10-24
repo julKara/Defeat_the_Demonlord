@@ -16,4 +16,4 @@ static func save_exists() -> bool:
 	return ResourceLoader.exists(SAVE_GAME_PATH)
 
 static func load_save() -> Resource:
-	return ResourceLoader.load(SAVE_GAME_PATH, "", 1)
+	return ResourceLoader.load(SAVE_GAME_PATH, "")
