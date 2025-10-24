@@ -76,9 +76,20 @@ func move():
 		var id_path = (astar_grid.get_id_path(tile_map.local_to_map(get_parent().global_position),
 				tile_map.local_to_map(closest_player.global_position)))
 		
+		
 		# Shrink path down to be in the mobility range
 		while id_path.size() > mobility + attack_range + 1: # attack_range+1 allows enemy to move full distance
 			id_path.pop_back() # Remove last element
+			
+		for character in character_manager.character_list:
+			if character.is_friendly == false and character != get_parent():
+				print(id_path)
+				var index = id_path.size() - attack_range - 1
+				print(tile_map.local_to_map(character.global_position))
+				print(id_path[index])
+				if id_path[index] == tile_map.local_to_map(character.global_position):
+					id_path.pop_back()
+				print(id_path)
 			
 		var target_position
 		
@@ -89,6 +100,7 @@ func move():
 			# Move towards target
 			get_parent().global_position = get_parent().global_position.move_toward(target_position, move_speed)
 			await get_tree().create_timer(0.01).timeout # Adds a delay which lets the move animation play
+			
 			# Remove the tile from the path
 			if get_parent().global_position == target_position:
 				id_path.pop_front()
