@@ -180,6 +180,11 @@ func _input(event):
 				if attack_path.size() <= (attack_range + 1):
 					attack_target = x
 					
+					# Can't attack friendly units
+					if attack_target.is_friendly:
+						attack_target = null
+						break
+					
 					# Highlight the new target
 					var all_children = attack_target.get_children()
 					var sprite
