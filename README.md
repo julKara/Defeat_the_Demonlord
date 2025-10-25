@@ -6,9 +6,7 @@
 
 ## Issues (not really bugs, more structural issues):
 * Changing `healthbar` color is not memory-efficient at all since it dublicates per character.
-* Enemies can probably occupy the same space
 * Sprites should flip when moving/attacking to the left.
-* AI-controlled ranged units should move to a beneficial range to avoid range-penalty.
 * Characters can level up when replaying a level.
 
 ## Annoying features:
