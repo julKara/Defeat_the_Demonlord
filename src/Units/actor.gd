@@ -58,7 +58,7 @@ func _ready() -> void:
 	
 	# Start idle-state animation
 	_update_state_animation()
-	
+
 	stats.init_stats()
 	
 	# Initialize healthbar at start of level to max-health

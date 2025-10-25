@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dfeqtmcp7uacl" path="res://src/Units/CharacterStats.gd" id="1_nj5x8"]
 
 [resource]
+resource_name = "mageStats"
 script = ExtResource("1_nj5x8")
 curr_health = 100
 max_health = 100

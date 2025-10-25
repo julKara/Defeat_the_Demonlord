@@ -41,11 +41,6 @@ func win():
 	# Show victory screen
 	victory_screen.show()
 	
-	print(current_world)
-	print(worlds_unlocked)
-	print(current_level)
-	print(levels_unlocked)
-	
 	# If this was the latest level -> unlock the next one
 	if current_world == worlds_unlocked and current_level == levels_unlocked:
 		world_handler.world_script.unlock_next_level()
