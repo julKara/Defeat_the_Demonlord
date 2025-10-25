@@ -117,27 +117,31 @@ func _handle_enemy_click(enemy: Actor) -> void:
 		selected_unit = null
 		enemy.get_behaviour().select(true)
 
+# Protocol for handeling clicks on non-units
 func _handle_empty_tile_click(click_tile: Vector2i) -> void:
 	
 	# If no unit is selected, do nothing
 	if not selected_unit:
 		return
 		
-	# If selected is a enemy, do nothing
+	# If selected is a enemy, do nothing since they can't be controlled
 	if not selected_unit.is_friendly:
 		return
 
-	# If has acted, do nothing
+	# If has acted, do nothing since they can't be controlled
 	var behaviour = selected_unit.get_behaviour()
 	if not behaviour or selected_unit.acted:
 		return
 
 	var range_data = behaviour.get_range_tiles()
 	var move_tiles: Array[Vector2i] = range_data.move_tiles
+	
 	if click_tile in move_tiles:
 		await behaviour.move_to(click_tile)
 	else:
-		print("Invalid move tile.")
+		# TODO: deselect() when clicking on not unit, (actions-menu should not count)
+		_deselect_unit(selected_unit)
+		#print("Invalid move tile.")
 
 # --- Selection logic ---
 func _select_unit(actor: Actor) -> void:

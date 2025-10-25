@@ -2,10 +2,8 @@ class_name enemy_unit extends Node
 
 @onready var character_manager: Node2D = $"../../../CharacterManager"
 @onready var tile_map: TileMap = $"../../../../TileMap"
-@onready var pass_turn: Button = $"../../../../GUI/Margin/ActionsMenu/VBoxContainer/Pass_Turn"
 @onready var range_tile_map: TileMap = $"../../../../RangeTileMap"
 @onready var actor_info: PanelContainer = $"../../../../GUI/Margin/ActorInfo"
-
 
 var battle_handler: Node = null
 
