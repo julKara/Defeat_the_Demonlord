@@ -3,10 +3,7 @@ extends Node
 
 # --- Refrences ---
 var tile_map: TileMap
-var range_tile_map: TileMap
 var character_manager: Node2D
-var actions_menu: PanelContainer
-var actor_info: PanelContainer
 
 # --- Member variables ---
 var selected_unit: Actor = null
@@ -65,6 +62,7 @@ func _handle_playable_click(actor: Actor) -> void:
 	# Then select the clicked actor
 	_select_unit(actor)
 
+# Protocol for handeling click on a enemy
 func _handle_enemy_click(enemy: Actor) -> void:
 	
 	# If clicked on unit is on already-selected, deselect
@@ -119,7 +117,6 @@ func _handle_enemy_click(enemy: Actor) -> void:
 		selected_unit = null
 		enemy.get_behaviour().select(true)
 
-
 func _handle_empty_tile_click(click_tile: Vector2i) -> void:
 	
 	# If no unit is selected, do nothing
@@ -170,7 +167,7 @@ func _deselect_unit(actor: Actor) -> void:
 
 # --- UTIL ---
 
-# Get acotr on clicked tile (if there is one)
+# Get actor on clicked tile (if there is one)
 func _get_actor_at(click_tile: Vector2i) -> Actor:
 
 	# Check every possible actor and try to mach it to the clicked tile
@@ -254,27 +251,10 @@ func _find_level_nodes() -> void:
 		if node.name.begins_with("Level_"):  # adjust to your level naming
 			#print("Found level root: ", node.name)
 			tile_map = node.get_node_or_null("TileMap")
-			range_tile_map = node.get_node_or_null("RangeTileMap")	
 			# --- TILEMAPLAYER ELEMENTS ---
 			var tilemap_layer = node.get_node_or_null("TileMapLayer")
 			if tilemap_layer:
 				character_manager = tilemap_layer.get_node_or_null("CharacterManager")
 				#print("CharacterManager found: ", character_manager != null)
-			# --- GUI ELEMENTS ---
-			var gui = node.get_node_or_null("GUI")
-			if gui:
-				#print("Found GUI.")
-				var margin = gui.get_node_or_null("Margin")
-				if margin:
-					#print("Found Margin.")
-					actions_menu = margin.get_node_or_null("ActionsMenu")
-					actor_info = margin.get_node_or_null("ActorInfo")
-					#print("ActionsMenu found: ", actions_menu != null)
-					#print("ActorInfo found: ", actor_info != null)
-				else:
-					push_warning("ClickHandler: MarginContainer not found under GUI.")
-			else:
-				push_warning("ClickHandler: GUI not found under level root.")
-			# Exit once set everything up for this level
 			return
 	push_warning("ClickHandler: No level starting with 'Level_' found under root!")

@@ -197,6 +197,9 @@ func select(has_acted: bool) -> void:	# Has to have input for override to functi
 	selected = true
 	get_parent().set_state(get_parent().UnitState.SELECTED)
 	
+	# Set selected_unit in click_handler
+	ClickHandler.selected_unit = get_parent() 
+	
 	# Display info
 	actor_info.display_actor_info(get_parent())
 	
@@ -209,6 +212,9 @@ func deselect() -> void:
 	# Update state
 	selected = false
 	get_parent().set_state(get_parent().UnitState.IDLE)
+	
+	# Set selected_unit in click_handler
+	ClickHandler.selected_unit = null
 	
 	# Clear mobility- and range-map
 	range_tile_map.clear_layer(0)

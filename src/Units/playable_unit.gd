@@ -137,6 +137,9 @@ func select(has_acted: bool) -> void:
 	# Set current character in character manager
 	character_manager.current_character = get_parent()
 	
+	# Set selected_unit in click_handler
+	ClickHandler.selected_unit = get_parent() 
+	
 	# Check if unit has already acted (should not get-actions menu, or animation)
 	if not has_acted:
 		get_parent().set_state(get_parent().UnitState.SELECTED)
@@ -155,6 +158,9 @@ func deselect() -> void:
 	# Update state
 	selected = false
 	get_parent().set_state(get_parent().UnitState.IDLE)
+	
+	# Set selected_unit in click_handler
+	ClickHandler.selected_unit = null
 	
 	# Clear mobility- and range-map
 	range_tile_map.clear_layer(0)
