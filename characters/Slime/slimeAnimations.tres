@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://jmiy51ye1yiv" path="res://assets/character_art/Slime/Slime_Sprite.png" id="1_hos6g"]
 [ext_resource type="Texture2D" uid="uid://dw3l24usm53ep" path="res://assets/character_art/Slime/Slime_Idle_f1.png" id="2_j78h7"]
 
-[sub_resource type="Animation" id="Animation_wehan"]
+[sub_resource type="Animation" id="Animation_4k5mr"]
 
 [sub_resource type="Animation" id="Animation_fjflg"]
 length = 0.7
@@ -21,7 +21,7 @@ tracks/0/keys = {
 "values": [ExtResource("1_hos6g"), ExtResource("2_j78h7")]
 }
 
-[sub_resource type="Animation" id="Animation_4k5mr"]
+[sub_resource type="Animation" id="Animation_wehan"]
 
 [resource]
 _data = {

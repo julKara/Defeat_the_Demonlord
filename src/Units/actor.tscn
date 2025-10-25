@@ -50,7 +50,7 @@ _data = {
 &"RESET": SubResource("Animation_kj6bn")
 }
 
-[sub_resource type="Animation" id="Animation_wehan"]
+[sub_resource type="Animation" id="Animation_4k5mr"]
 
 [sub_resource type="Animation" id="Animation_fjflg"]
 length = 0.7
@@ -68,7 +68,7 @@ tracks/0/keys = {
 "values": [ExtResource("6_a5lvk"), ExtResource("7_s4pr6")]
 }
 
-[sub_resource type="Animation" id="Animation_4k5mr"]
+[sub_resource type="Animation" id="Animation_wehan"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ni625"]
 _data = {

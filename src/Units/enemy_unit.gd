@@ -3,12 +3,14 @@ class_name enemy_unit extends Node
 @onready var character_manager: Node2D = $"../../../CharacterManager"
 @onready var tile_map: TileMap = $"../../../../TileMap"
 @onready var pass_turn: Button = $"../../../../GUI/Margin/ActionsMenu/VBoxContainer/Pass_Turn"
-#@onready var battle_handler: BattleHandler = $BattleHandler
+@onready var range_tile_map: TileMap = $"../../../../RangeTileMap"
+@onready var actor_info: PanelContainer = $"../../../../GUI/Margin/ActorInfo"
+
 
 var battle_handler: Node = null
 
 var astar_grid
-var attack_target: CharacterBody2D
+var attack_target: Actor
 var selected:bool = false
 
 # Keeps track of what moves are performed
@@ -155,3 +157,55 @@ func play_turn():
 	# Log enemy passed their turn
 	if attack_used == false and skill_used == false:
 		print("\t", get_parent().profile.character_name, " has ended their turn.")
+
+func highlight_enemy_range() -> void:
+	range_tile_map.clear_layer(0)
+	range_tile_map.clear_layer(1)
+
+	var parent = get_parent()
+	if not parent.astar_grid:
+		return
+	
+	var astar = parent.astar_grid
+	var grid_size = astar.get_size()
+
+	# Convert the actor's position to grid coordinates
+	var start = range_tile_map.local_to_map(parent.global_position)
+
+	for x in range(grid_size.x):
+		for y in range(grid_size.y):
+			
+			# Get point
+			var point = Vector2i(x, y)
+			if astar.is_point_solid(point):
+				continue
+
+			# get_point_path expects grid coordinates
+			var path = astar.get_point_path(start, point)
+			if path.is_empty():
+				continue
+
+			# Add range
+			if path.size() <= (mobility + 1):
+				range_tile_map.set_cell(1, point, 1, Vector2i(0, 1), 0)
+			elif path.size() <= (mobility + attack_range + 1):
+				range_tile_map.set_cell(0, point, 1, Vector2i(1, 1), 0)
+
+func selectEnemy() -> void:
+	
+	# Update state
+	selected = true
+	get_parent().set_state(get_parent().UnitState.SELECTED)
+	
+	# Display info
+	actor_info.display_actor_info(get_parent())
+	
+	# Display mobility- and range-tilemap
+	highlight_enemy_range()
+	print("\tEnemy selected:", get_parent().profile.character_name)
+	
+func deselectEnemy() -> void:
+	
+	# Update state
+	selected = false
+	get_parent().set_state(get_parent().UnitState.IDLE)

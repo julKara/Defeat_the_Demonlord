@@ -109,15 +109,21 @@ func _next_player_unit() -> void:
 		
 		# Select next playable unit (print-statement in function)
 		var next_behaviour_node: Node = next_unit.get_behaviour()
-		next_behaviour_node.select_current_playable_character()
+		next_behaviour_node.select(false)
 
 func end_player_unit_turn(unit: Actor) -> void:
+	
 	unit.acted = true
 	print("\t", unit.profile.character_name, " has ended their turn.")
 	
 	# Deselect current character
 	var next_behaviour_node: Node = unit.get_behaviour()
-	next_behaviour_node.deselect_current_playable_character()
+	next_behaviour_node.deselect()
+	
+	if next_behaviour_node and next_behaviour_node.has_method("confirm_position"):
+			next_behaviour_node.confirm_position()
+	
+	next_behaviour_node.deselect()
 	
 	# Select next unit
 	_next_player_unit()
@@ -145,6 +151,9 @@ func _next_enemy_unit() -> void:
 		if next_behaviour_node.has_method("play_turn"):
 			await next_behaviour_node.play_turn()  # Wait for AI to truly finish
 			await get_tree().create_timer(0.6).timeout  # Delay between enemy units
+		
+		if next_behaviour_node and next_behaviour_node.has_method("confirm_position"):
+			next_behaviour_node.confirm_position()
 		
 		# Test if unit survivied the attack
 		if next_unit != null:
