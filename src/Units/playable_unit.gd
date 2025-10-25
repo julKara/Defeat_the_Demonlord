@@ -12,7 +12,7 @@ class_name playable_unit extends Node
 var start_position: Vector2i
 var current_id_path: Array[Vector2i] = []
 var is_moving: bool = false
-var move_speed: float = 3.0
+var move_speed: float = 2.5
 var mobility: int = 3
 var attack_range: int = 1
 var attack_target: Actor = null
@@ -31,7 +31,7 @@ func _ready() -> void:
 func _set_stat_variables() -> void:
 	var stats = get_parent().stats
 	mobility = stats.mobility
-	move_speed = stats.speed
+	#move_speed = stats.speed
 	attack_range = stats.attack_range
 
 # --- UTIL ---

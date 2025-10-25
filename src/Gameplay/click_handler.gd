@@ -67,9 +67,14 @@ func _handle_playable_click(actor: Actor) -> void:
 
 func _handle_enemy_click(enemy: Actor) -> void:
 	
-	# If click is on already-selected, deselect
+	# If clicked on unit is on already-selected, deselect
 	if selected_unit == enemy:
 		_deselect_unit(enemy)
+		return
+	
+	# If no unit is selected, select
+	if selected_unit == null:
+		_select_unit(enemy)
 		return
 	
 	# If another was selected while having a enemy already selected, deselect it first and select new
@@ -77,13 +82,10 @@ func _handle_enemy_click(enemy: Actor) -> void:
 		_deselect_unit(selected_unit)
 		_select_unit(enemy)
 		return
-	
-	# If no unit is selected, select
-	if selected_unit == null:
-		_select_unit(enemy)
-		return
 
-	# --- If a playable is selected, try to move to the unit
+	# --- If a playable is selected
+	
+	# Get behaviour and check is acted (should not be moving if already acted)
 	var playable_behaviour = selected_unit.get_behaviour()
 	if not playable_behaviour or selected_unit.acted:
 		return
@@ -91,64 +93,28 @@ func _handle_enemy_click(enemy: Actor) -> void:
 	# Get all mobility-tiles and all tiles within attack-range
 	var range_data = playable_behaviour.get_range_tiles()
 	var move_tiles: Array[Vector2i] = range_data.move_tiles
-	#var range_tiles: Array[Vector2i] = range_data.range_tiles
 
 	# Get some other useful info
 	var enemy_pos: Vector2i = tile_map.local_to_map(enemy.global_position)
 	var attack_range = selected_unit.stats.attack_range
+	var current_tile = playable_behaviour.current_tile
 
-	# Will store the best tile to attack from
-	var best_tile: Vector2i = INVALID_POS
-	
-	# --- Check every tile in move range to find one at desired attack distance
-	for tile in move_tiles:
-		# compute dx/dy
-		var dx = abs(tile.x - enemy_pos.x)
-		var dy = abs(tile.y - enemy_pos.y)
-		var is_diagonal = dx > 0 and dy > 0
+	# --- Case 1: If enemy is already within attack-range, do not move, only select target
+	if _is_enemy_in_attack_range(current_tile, enemy_pos, attack_range):
+		print("Enemy already within attack range — no movement needed.")
+		playable_behaviour.set_attack_target(enemy)
+		return
 
-		# effective distance: diagonals cost +1
-		var eff_dist = max(dx, dy)
-		if is_diagonal:
-			eff_dist += 1
+	# --- Case 2: Enemy is outside "current" attack-range, find a tile to move to within range
+	var best_tile: Vector2i = _find_best_attack_tile(move_tiles, enemy_pos, attack_range)
 
-		# exact-match rule: eff_dist must equal attack_range
-		if eff_dist == attack_range:
-			var occupied: Actor = _get_actor_at(tile)
-			if occupied == null:  # ✅ only move to free tiles
-				best_tile = tile
-				break
-			else:
-				print("Tile ", tile, " occupied by ", occupied.profile.character_name)
-
-	# --- If no tile is exactly at that distance, choose nearest in range instead
-	if best_tile == INVALID_POS:
-		var closest_eff = INF
-		for tile in move_tiles:
-			var dx = abs(tile.x - enemy_pos.x)
-			var dy = abs(tile.y - enemy_pos.y)
-			var is_diagonal = dx > 0 and dy > 0
-
-			var eff_dist = max(dx, dy)
-			if is_diagonal:
-				eff_dist += 1
-
-			var occupied: Actor = _get_actor_at(tile)  # ✅ check again here
-
-			# Choose the tile with minimal effective distance but still within attack_range
-			if eff_dist < closest_eff and eff_dist <= attack_range and occupied == null:
-				closest_eff = eff_dist
-				best_tile = tile
-			elif occupied != null:
-				print("Skipped occupied tile ", tile, " (", occupied.profile.character_name, ")")
-
-	# --- If there is a functioning tile, move to that one and set enemy to attack-target
+	# If there is a functioning tile, move to that one and set enemy to attack-target
 	if best_tile != INVALID_POS:
 		await playable_behaviour.move_to(best_tile)
 		playable_behaviour.set_attack_target(enemy)
-	# --- If the enemy was out of range, select it instead
+	# If the enemy was out of range, select it instead
 	else:
-		print("Enemy out of reachable tiles from origin.")
+		#print("Enemy out of reachable tiles")
 		_deselect_unit(selected_unit)
 		selected_unit = null
 		enemy.get_behaviour().select(true)
@@ -216,6 +182,72 @@ func _get_actor_at(click_tile: Vector2i) -> Actor:
 			return actor
 	return null
 
+# Checks if the enemy is within attack range (diagonal range counts as one less)
+func _is_enemy_in_attack_range(from_tile: Vector2i, enemy_tile: Vector2i, attack_range: int) -> bool:
+	
+	# Calculate range
+	var dx = abs(from_tile.x - enemy_tile.x)
+	var dy = abs(from_tile.y - enemy_tile.y)
+	var eff_dist = max(dx, dy)
+	
+	# Check if diagonal
+	var is_diagonal = dx > 0 and dy > 0
+	if is_diagonal:
+		eff_dist += 1
+
+	return eff_dist <= attack_range
+
+# Automatically finds the best tile to move to when attacking a target
+func _find_best_attack_tile(move_tiles: Array[Vector2i], enemy_pos: Vector2i, attack_range: int) -> Vector2i:
+	var best_tile: Vector2i = INVALID_POS
+
+	# --- Check every tile in move range to find one at optimal attack distance
+	for tile in move_tiles:
+		# Calculate distance
+		var dx = abs(tile.x - enemy_pos.x)
+		var dy = abs(tile.y - enemy_pos.y)
+		var eff_dist = max(dx, dy)
+		
+		# Check if diagonal attack, if so "shortens range" (otherwise to long)
+		var is_diagonal = dx > 0 and dy > 0
+		if is_diagonal:
+			eff_dist += 1
+
+		# eff_dist must equal attack_range
+		if eff_dist == attack_range:
+			var occupied: Actor = _get_actor_at(tile)
+			if occupied == null:  # Only move to non-occupied tiles
+				best_tile = tile
+				break
+			#else:
+				#print("Tile ", tile, " is already occupied by ", occupied.profile.character_name)
+
+	# --- If no tile is at optimal distance, choose nearest in range instead
+	if best_tile == INVALID_POS:
+		
+		var closest_eff = INF
+		for tile in move_tiles:
+			# Calculate distance
+			var dx = abs(tile.x - enemy_pos.x)
+			var dy = abs(tile.y - enemy_pos.y)
+			var eff_dist = max(dx, dy)
+			
+			# Check if diagonal attack, if so "shortens range" (otherwise to long)
+			var is_diagonal = dx > 0 and dy > 0
+			if is_diagonal:
+				eff_dist += 1
+
+			var occupied: Actor = _get_actor_at(tile)  # # Only move to non-occupied tiles
+
+			# Choose the tile with minimal effective distance but still within attack_range
+			if eff_dist < closest_eff and eff_dist <= attack_range and occupied == null:
+				closest_eff = eff_dist
+				best_tile = tile
+			#elif occupied != null:
+				#print("Skipped occupied tile!")
+	return best_tile
+
+# Setup click_handler
 func _find_level_nodes() -> void:
 	# Find active level root (first child under root that isn’t an autoload)
 	for node in get_tree().root.get_children():
