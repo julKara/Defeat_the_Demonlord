@@ -11,6 +11,8 @@ var astar_grid
 var attack_target: CharacterBody2D
 var selected:bool = false
 
+var solid_enemy_pos
+
 # Keeps track of what moves are performed
 var attack_used: bool = false
 var skill_used: bool = false
@@ -22,10 +24,11 @@ var attack_range
 
 signal ai_movement_finished
 
-# Maybe enemy AI will be stored here...
 func _ready():
 	
 	battle_handler = BattleHandlerSingleton
+	
+	solid_enemy_pos = null
 	
 	print("Enemy unit ready — AI active.")	# TESTING
 	_set_stat_variables()
@@ -86,6 +89,85 @@ func calculate_path() -> Array[Vector2i]:
 		return [] # Prevents crash at game over
 
 
+func avoid_penalty(id_path: Array[Vector2i]):
+	
+	var enemy_pos = id_path[0]
+	var target_pos = id_path[id_path.size() - 1]
+	var move_pos = enemy_pos
+	var relative_pos: String
+	var final_path: Array[Vector2i] = [enemy_pos]
+	
+	# Find the position of the enemy relative to the target
+	if target_pos.y - enemy_pos.y < 0 and target_pos.x == enemy_pos.x:
+		relative_pos = "Down"
+	elif target_pos.y - enemy_pos.y > 0 and target_pos.x == enemy_pos.x:
+		relative_pos = "Up"
+	elif target_pos.y == enemy_pos.y and target_pos.x - enemy_pos.x < 0:
+		relative_pos = "Right"
+	elif target_pos.y == enemy_pos.y and target_pos.x - enemy_pos.x > 0:
+		relative_pos = "Left"
+	
+	# Depending on the relative position, try to move away one tile
+	match relative_pos:
+		"Down":
+			# If possible -> move down
+			if (astar_grid.is_point_solid(Vector2i(enemy_pos.x, enemy_pos.y + 1)) == false
+			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x, enemy_pos.y + 1)]) == false):
+				move_pos.y += 1
+			# If not possible -> try moving left
+			elif (astar_grid.is_point_solid(Vector2i(enemy_pos.x - 1, enemy_pos.y)) == false
+			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x - 1, enemy_pos.y)]) == false):
+				move_pos.x -= 1
+			# If not possible -> try moving right
+			elif (astar_grid.is_point_solid(Vector2i(enemy_pos.x + 1, enemy_pos.y)) == false
+			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x + 1, enemy_pos.y)]) == false):
+				move_pos.x += 1
+		"Up":
+			# If possible -> move up
+			if (astar_grid.is_point_solid(Vector2i(enemy_pos.x, enemy_pos.y - 1)) == false
+			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x, enemy_pos.y - 1)]) == false):
+				move_pos.y -= 1
+			# If not possible -> try moving left
+			elif (astar_grid.is_point_solid(Vector2i(enemy_pos.x - 1, enemy_pos.y)) == false
+			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x - 1, enemy_pos.y)]) == false):
+				move_pos.x -= 1
+			# If not possible -> try moving right
+			elif (astar_grid.is_point_solid(Vector2i(enemy_pos.x + 1, enemy_pos.y)) == false
+			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x + 1, enemy_pos.y)]) == false):
+				move_pos.x += 1
+		"Right":
+			# If possible -> move right
+			if (astar_grid.is_point_solid(Vector2i(enemy_pos.x + 1, enemy_pos.y)) == false
+			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x + 1, enemy_pos.y)]) == false):
+				move_pos.x += 1
+			# If not possible -> try moving up
+			elif (astar_grid.is_point_solid(Vector2i(enemy_pos.x, enemy_pos.y - 1)) == false
+			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x, enemy_pos.y - 1)]) == false):
+				move_pos.y -= 1
+			# If not possible -> try moving down
+			elif (astar_grid.is_point_solid(Vector2i(enemy_pos.x, enemy_pos.y + 1)) == false
+			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x, enemy_pos.y + 1)]) == false):
+				move_pos.y += 1
+		"Left":
+			# If possible -> move left
+			if (astar_grid.is_point_solid(Vector2i(enemy_pos.x - 1, enemy_pos.y)) == false
+			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x - 1, enemy_pos.y)]) == false):
+				move_pos.x -= 1
+			# If not possible -> try moving up
+			elif (astar_grid.is_point_solid(Vector2i(enemy_pos.x, enemy_pos.y - 1)) == false
+			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x, enemy_pos.y - 1)]) == false):
+				move_pos.y -= 1
+			# If not possible -> try moving down
+			elif (astar_grid.is_point_solid(Vector2i(enemy_pos.x, enemy_pos.y + 1)) == false
+			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x, enemy_pos.y + 1)]) == false):
+				move_pos.y += 1
+		
+	if move_pos != enemy_pos:
+		final_path.append(move_pos)	
+	
+	perform_movement(final_path, 0)
+
+
 func move():
 
 	var id_path = calculate_path()
@@ -93,29 +175,46 @@ func move():
 	# Only move if there is a path to move along
 	if id_path.is_empty() == false:
 		
-		# Check if the enemy will get a range penalty
-		if id_path.size()-1 < attack_range:
-			print("PENALTY")
-		
-		# Check if the final destination of the enemy is occupied by a different enemy
-		var enemy_pos	
-		for character in character_manager.character_list:
-			if character.is_friendly == false and character != get_parent():
-				# The index of the tile the enemy will stop at. They always stops as soon as they're in range.
-				var index = id_path.size() - attack_range - 1 
-				if id_path[index] == tile_map.local_to_map(character.global_position):
-					enemy_pos = tile_map.local_to_map(character.global_position)
-					# If the tile is occupied -> set tile to solid. The tile will then not be includen in pathfinding
-					astar_grid.set_point_solid(enemy_pos, true)
-		
-		# If the final destination is occupied -> recalculate path without the occupied tile
-		if enemy_pos != null:
-			id_path = calculate_path()
+		# If the enemy will get a range penalty -> move away
+		if id_path.size()-1 < 2:
+			avoid_penalty(id_path)
+		# Otherwise perform movement like normal
+		else:	
+			var occupied = check_if_occupied(id_path)
 			
-		var target_position
+			# If the final destination is occupied -> recalculate path without the occupied tile
+			if occupied == true:
+				id_path = calculate_path()
+			
+			# Perform the movement
+			perform_movement(id_path, attack_range)
 		
-		# Perform the movement
-		while id_path.size() > attack_range: # >attack_range stops enemies when in range
+		# Large timer needed, otherwise the attack is based on the start position rather than the final position
+		await get_tree().create_timer(1.0).timeout
+		
+		# If a tile was set to be solid -> reset it back to "not solid" after the move is done
+		if solid_enemy_pos != null:
+			astar_grid.set_point_solid(solid_enemy_pos, false)
+		
+		emit_signal("ai_movement_finished")	
+
+# Check if the final destination of the enemy is occupied by a different enemy
+func check_if_occupied(id_path: Array[Vector2i]) -> bool:
+	for character in character_manager.character_list:
+		if character.is_friendly == false and character != get_parent():
+			# The index of the tile the enemy will stop at. They always stops as soon as they're in range.
+			var index = id_path.size() - attack_range - 1 
+			if id_path[index] == tile_map.local_to_map(character.global_position):
+				solid_enemy_pos = tile_map.local_to_map(character.global_position)
+				# If the tile is occupied -> set tile to solid. The tile will then not be includen in pathfinding
+				astar_grid.set_point_solid(solid_enemy_pos, true)
+				return true
+	return false
+
+
+func perform_movement(id_path: Array[Vector2i], target_dist: int):
+	var target_position
+	while id_path.size() > target_dist: 
 			target_position = tile_map.map_to_local(id_path.front())
 			
 			# Move towards target
@@ -125,14 +224,6 @@ func move():
 			# Remove the tile from the path
 			if get_parent().global_position == target_position:
 				id_path.pop_front()
-		
-		await get_tree().create_timer(0.01).timeout
-		
-		# If a tile was set to be solid -> reset it back to "not solid" after the move is done
-		if enemy_pos != null:
-			astar_grid.set_point_solid(enemy_pos, false)
-			
-		emit_signal("ai_movement_finished")	
 
 	
 func select_attack_target():
@@ -140,14 +231,13 @@ func select_attack_target():
 
 
 func attack():
-	
+
 	print("\t\tTarget selected: ", attack_target.profile.character_name)
 
 	var attack_path = (astar_grid.get_id_path(tile_map.local_to_map(get_parent().global_position),
 			tile_map.local_to_map(attack_target.global_position)))
-			
+
 	if attack_path.size() <= attack_range + 1 && attack_target != null:
-		
 		# Set up attacker and target, and define damage from physical attack stat
 		var attacker: Actor = get_parent()
 		var target: Actor = attack_target
