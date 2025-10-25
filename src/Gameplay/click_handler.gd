@@ -12,8 +12,7 @@ var actor_info: PanelContainer
 var selected_unit: Actor = null
 
 # --- CONSTANTS ---
-const INVALID_POS: Vector2i = Vector2i(-9999, -9999)
-const ADJACENT_TILES: Array[Vector2i] = [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]
+const INVALID_POS: Vector2i = Vector2i(-9999, -9999)	# Used to set "null" for vector
 
 # --- The meat and potatoes ---
 func _ready() -> void:
@@ -68,51 +67,110 @@ func _handle_playable_click(actor: Actor) -> void:
 
 func _handle_enemy_click(enemy: Actor) -> void:
 	
-	# TODO: Deselect, check if within range to select even if there is a selected unit
+	# If click is on already-selected, deselect
+	if selected_unit == enemy:
+		_deselect_unit(enemy)
+		return
 	
-	# If no playable unit is selected: show enemy info (inspect)
+	# If another was selected while having a enemy already selected, deselect it first and select new
+	if selected_unit and selected_unit != enemy && not selected_unit.is_friendly:
+		_deselect_unit(selected_unit)
+		_select_unit(enemy)
+		return
+	
+	# If no unit is selected, select
 	if selected_unit == null:
-		enemy.get_behaviour().selectEnemy()
+		_select_unit(enemy)
 		return
 
-	# If a friendly is selected, try to move to the unit
-	var behaviour = selected_unit.get_behaviour()
-	if not behaviour or selected_unit.acted:
+	# --- If a playable is selected, try to move to the unit
+	var playable_behaviour = selected_unit.get_behaviour()
+	if not playable_behaviour or selected_unit.acted:
 		return
+	
+	# Get all mobility-tiles and all tiles within attack-range
+	var range_data = playable_behaviour.get_range_tiles()
+	var move_tiles: Array[Vector2i] = range_data.move_tiles
+	#var range_tiles: Array[Vector2i] = range_data.range_tiles
 
-	var move_tiles: Array[Vector2i] = behaviour.get_move_tiles()
+	# Get some other useful info
 	var enemy_pos: Vector2i = tile_map.local_to_map(enemy.global_position)
+	var attack_range = selected_unit.stats.attack_range
 
-	# Find an adjacent tile within move range (prefer nearest)
+	# Will store the best tile to attack from
 	var best_tile: Vector2i = INVALID_POS
-	for offset in ADJACENT_TILES:
-		var check_tile = enemy_pos + offset
-		if check_tile in move_tiles:
-			best_tile = check_tile
-			break
+	
+	# --- Check every tile in move range to find one at desired attack distance
+	for tile in move_tiles:
+		# compute dx/dy
+		var dx = abs(tile.x - enemy_pos.x)
+		var dy = abs(tile.y - enemy_pos.y)
+		var is_diagonal = dx > 0 and dy > 0
 
+		# effective distance: diagonals cost +1
+		var eff_dist = max(dx, dy)
+		if is_diagonal:
+			eff_dist += 1
+
+		# exact-match rule: eff_dist must equal attack_range
+		if eff_dist == attack_range:
+			var occupied: Actor = _get_actor_at(tile)
+			if occupied == null:  # ✅ only move to free tiles
+				best_tile = tile
+				break
+			else:
+				print("Tile ", tile, " occupied by ", occupied.profile.character_name)
+
+	# --- If no tile is exactly at that distance, choose nearest in range instead
+	if best_tile == INVALID_POS:
+		var closest_eff = INF
+		for tile in move_tiles:
+			var dx = abs(tile.x - enemy_pos.x)
+			var dy = abs(tile.y - enemy_pos.y)
+			var is_diagonal = dx > 0 and dy > 0
+
+			var eff_dist = max(dx, dy)
+			if is_diagonal:
+				eff_dist += 1
+
+			var occupied: Actor = _get_actor_at(tile)  # ✅ check again here
+
+			# Choose the tile with minimal effective distance but still within attack_range
+			if eff_dist < closest_eff and eff_dist <= attack_range and occupied == null:
+				closest_eff = eff_dist
+				best_tile = tile
+			elif occupied != null:
+				print("Skipped occupied tile ", tile, " (", occupied.profile.character_name, ")")
+
+	# --- If there is a functioning tile, move to that one and set enemy to attack-target
 	if best_tile != INVALID_POS:
-		# Move there but do NOT auto-finalize acted — allow repositioning after move
-		await behaviour.move_to(best_tile)
-		# set the target (visual highlight) but do not auto-attack here; the UI/attack button can be used
-		behaviour.set_attack_target(enemy)
-		print("Moved to attack-adjacent tile for target: ", enemy.profile.character_name)
+		await playable_behaviour.move_to(best_tile)
+		playable_behaviour.set_attack_target(enemy)
+	# --- If the enemy was out of range, select it instead
 	else:
-		# If enemy is not reachable by movement but we want to just show info, do so
 		print("Enemy out of reachable tiles from origin.")
-		# also show enemy info as helpful feedback
-		if actor_info:
-			actor_info.display_actor_info(enemy)
+		_deselect_unit(selected_unit)
+		selected_unit = null
+		enemy.get_behaviour().select(true)
+
 
 func _handle_empty_tile_click(click_tile: Vector2i) -> void:
+	
+	# If no unit is selected, do nothing
 	if not selected_unit:
 		return
+		
+	# If selected is a enemy, do nothing
+	if not selected_unit.is_friendly:
+		return
 
+	# If has acted, do nothing
 	var behaviour = selected_unit.get_behaviour()
 	if not behaviour or selected_unit.acted:
 		return
 
-	var move_tiles: Array[Vector2i] = behaviour.get_move_tiles()
+	var range_data = behaviour.get_range_tiles()
+	var move_tiles: Array[Vector2i] = range_data.move_tiles
 	if click_tile in move_tiles:
 		await behaviour.move_to(click_tile)
 	else:

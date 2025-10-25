@@ -35,19 +35,38 @@ func _set_stat_variables() -> void:
 	attack_range = stats.attack_range
 
 # --- UTIL ---
-func get_move_tiles() -> Array[Vector2i]:
-	var tiles_in_range: Array[Vector2i] = []
-	for x in get_parent().astar_grid.get_size().x:
-		for y in get_parent().astar_grid.get_size().y:
-			if get_parent().astar_grid.is_point_solid(Vector2i(x, y)):
-				continue
-			var path = get_parent().astar_grid.get_id_path(start_position, Vector2i(x, y))
-			if path.size() <= mobility + 1:
-				tiles_in_range.append(Vector2i(x, y))
-	return tiles_in_range
 
-func get_behaviour() -> playable_unit:
-	return self
+# Returns two arrays containing tiles within mobility-range and mobility-attack-range 
+func get_range_tiles() -> Dictionary:
+	var move_tiles: Array[Vector2i] = []
+	var range_tiles: Array[Vector2i] = []
+
+	var parent = get_parent()
+	var astar = parent.astar_grid
+	if not astar:
+		return {"move_tiles": move_tiles, "range_tiles": range_tiles}
+
+	var grid_size = astar.get_size()
+
+	for x in range(grid_size.x):
+		for y in range(grid_size.y):
+			var point = Vector2i(x, y)
+			if astar.is_point_solid(point):
+				continue
+
+			var path = astar.get_point_path(origin_tile, point)
+			if path.is_empty():
+				continue
+
+			# Within mobility range only
+			if path.size() - 1 <= mobility:
+				move_tiles.append(point)
+
+			# Within attack + mobility range
+			if path.size() - 1 <= mobility + attack_range:
+				range_tiles.append(point)
+
+	return {"move_tiles": move_tiles, "range_tiles": range_tiles}
 
 
 # --- Movement ---
@@ -176,7 +195,11 @@ func highlight_range() -> void:
 				range_tile_map.set_cell(0, point, 1, Vector2i(1, 1), 0)
 
 # --- UTIL ---
-func set_attack_target(target: Actor) -> void: # Remove highlight from previous target if any
+func set_attack_target(target: Actor) -> void:
+	
+	# TODO: Make attack-button usable
+	
+	# Remove highlight from previous target if any
 	if attack_target != null:
 		var sprite = attack_target.get_node("Sprite")
 		sprite.material.set("shader_parameter/width", 0.0)

@@ -238,7 +238,7 @@ profile = ExtResource("6_hhk72")
 is_friendly = true
 
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
-position = Vector2(360, 264)
+position = Vector2(168, 168)
 stats = ExtResource("7_na0ed")
 profile = ExtResource("7_8y1rk")
 is_friendly = true

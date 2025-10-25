@@ -191,7 +191,7 @@ func highlight_enemy_range() -> void:
 			elif path.size() <= (mobility + attack_range + 1):
 				range_tile_map.set_cell(0, point, 1, Vector2i(1, 1), 0)
 
-func selectEnemy() -> void:
+func select(has_acted: bool) -> void:	# Has to have input for override to function
 	
 	# Update state
 	selected = true
@@ -204,8 +204,12 @@ func selectEnemy() -> void:
 	highlight_enemy_range()
 	print("\tEnemy selected:", get_parent().profile.character_name)
 	
-func deselectEnemy() -> void:
+func deselect() -> void:
 	
 	# Update state
 	selected = false
 	get_parent().set_state(get_parent().UnitState.IDLE)
+	
+	# Clear mobility- and range-map
+	range_tile_map.clear_layer(0)
+	range_tile_map.clear_layer(1)
