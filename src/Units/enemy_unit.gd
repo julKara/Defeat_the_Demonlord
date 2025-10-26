@@ -222,6 +222,9 @@ func check_if_occupied(id_path: Array[Vector2i]) -> bool:
 
 
 func perform_movement(id_path: Array[Vector2i], target_dist: int):
+	# Flip sprite based on move direction
+	calculate_direction(id_path)
+	
 	var target_position
 	while id_path.size() > target_dist: 
 			target_position = tile_map.map_to_local(id_path.front())
@@ -233,6 +236,17 @@ func perform_movement(id_path: Array[Vector2i], target_dist: int):
 			# Remove the tile from the path
 			if get_parent().global_position == target_position:
 				id_path.pop_front()
+
+
+func calculate_direction(path: Array[Vector2i]):
+	var start = path[0]
+	var end = path[path.size()-1]
+	var sprite = get_parent().get_sprite()
+	
+	if start.x - end.x > 0: # Left
+		sprite.flip_h = true
+	else: # Right
+		sprite.flip_h = false
 
 	
 func select_attack_target():

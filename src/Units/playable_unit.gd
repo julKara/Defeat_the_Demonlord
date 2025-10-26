@@ -205,6 +205,9 @@ func _physics_process(_delta):
 		# Selects the first tile in the path to the destination
 		target_position = tile_map.map_to_local(current_id_path.front())
 		is_moving = true
+		
+		# Flip sprite to face move direction
+		calculate_direction(current_id_path)
 	
 	# Move the player to the tile
 	get_parent().global_position = get_parent().global_position.move_toward(target_position, move_speed)
@@ -297,3 +300,14 @@ func deselect_current_playable_character() -> void:
 	selected = false
 	get_parent().set_state(get_parent().UnitState.IDLE)	# Update state to IDLE
 	
+
+func calculate_direction(path: Array[Vector2i]):
+	var start = path[0]
+	var end = path[path.size()-1]
+	var sprite = get_parent().get_sprite()
+	
+	if start.x - end.x > 0: # Left
+		sprite.flip_h = true
+	else: # Right
+		sprite.flip_h = false
+		

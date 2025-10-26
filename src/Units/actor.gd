@@ -188,3 +188,13 @@ func _update_state_animation() -> void:
 
 func get_behaviour() -> Node:
 	return behavior
+	
+func get_sprite() -> Sprite2D:
+	var all_children = get_children()
+	var sprite
+		
+	for child in all_children:
+		if child is Sprite2D:
+			sprite = child
+	
+	return sprite
