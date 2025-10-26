@@ -234,7 +234,7 @@ script = ExtResource("4_byyk1")
 [node name="Actors" type="Node2D" parent="TileMapLayer"]
 
 [node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_2aopv")]
-position = Vector2(120, 120)
+position = Vector2(312, 216)
 stats = ExtResource("5_g3wur")
 profile = ExtResource("6_544mx")
 is_friendly = true

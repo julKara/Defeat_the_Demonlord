@@ -12,6 +12,7 @@ var attack_target: CharacterBody2D
 var selected:bool = false
 
 var solid_enemy_pos
+var move_count
 
 # Keeps track of what moves are performed
 var attack_used: bool = false
@@ -33,6 +34,8 @@ func _ready():
 	print("Enemy unit ready — AI active.")	# TESTING
 	_set_stat_variables()
 	astar_grid = character_manager.current_character.astar_grid
+	
+	move_count = mobility
 
 # Intialize all stat-variables through the CharacterStats resource
 func _set_stat_variables():
@@ -66,7 +69,7 @@ func find_closest_player() -> CharacterBody2D:
 				closest_player = x
 				
 			counter += 1
-	
+
 	return closest_player
 	
 
@@ -164,8 +167,13 @@ func avoid_penalty(id_path: Array[Vector2i]):
 		
 	if move_pos != enemy_pos:
 		final_path.append(move_pos)	
-	
-	perform_movement(final_path, 0)
+		perform_movement(final_path, 0)
+		# If still in range penalty after moving away, try again until all mobility is used
+		move_count -= 1
+		await get_tree().create_timer(1.0).timeout
+		var check_adjacency = calculate_path()
+		if check_adjacency.size()-1 < 2 and move_count > 0:
+			avoid_penalty(check_adjacency)
 
 
 func move():
@@ -176,7 +184,8 @@ func move():
 	if id_path.is_empty() == false:
 		
 		# If the enemy will get a range penalty -> move away
-		if id_path.size()-1 < 2:
+		if id_path.size()-1 < 2 and attack_range >= 2:
+			move_count = mobility
 			avoid_penalty(id_path)
 		# Otherwise perform movement like normal
 		else:	
