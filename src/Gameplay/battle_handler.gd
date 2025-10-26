@@ -21,9 +21,13 @@ func _ready() -> void:
 	else:
 		animation_timer = $AnimationTimer
 
-	# Try to locate level-specific managers each time a level loads
-	_find_level_nodes()
+	get_tree().connect("node_added", Callable(self, "_on_node_added"))
 
+func _on_node_added(node):
+	if node.name.begins_with("Level_"):
+		_find_level_nodes()
+
+# --- Main function ---
 func perform_battle(attacker: Actor, defender: Actor, distance: float) -> void:
 	
 	# Check if actors are valid
@@ -65,6 +69,8 @@ func perform_battle(attacker: Actor, defender: Actor, distance: float) -> void:
 	if def_stats.curr_health <= 0:
 		_handle_death(defender)
 	
+
+# --- UTIL ---
 
 func _play_animation(attacker: Actor) -> void:
 	
@@ -124,6 +130,12 @@ func _handle_death(dead_actor: Actor) -> void:
 
 # --- UTIL ---
 func _find_level_nodes() -> void:
+	
+	# Reset from prev level
+	character_manager = null
+	turn_manager = null
+	win_loss_condition = null
+	
 	# Find active level root (first child under root that isn’t an autoload)
 	for node in get_tree().root.get_children():
 		if node.name.begins_with("Level_"):  # adjust to your naming

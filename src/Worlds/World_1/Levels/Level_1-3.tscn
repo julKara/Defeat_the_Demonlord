@@ -25,16 +25,6 @@
 
 [sub_resource type="GDScript" id="GDScript_ic0uy"]
 script/source = "extends Node2D
-
-# Refrences
-@onready var actors: Node2D = $TileMapLayer/Actors
-#@onready var gui: CanvasLayer = $GUI
-@onready var actor_info: PanelContainer = $GUI/Margin/ActorInfo
-
-func _ready() -> void:
-
-	# Setup battlehandler before starting each level
-	BattleHandlerSingleton._find_level_nodes()
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hiqwa"]

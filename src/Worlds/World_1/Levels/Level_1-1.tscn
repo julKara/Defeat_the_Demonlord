@@ -32,8 +32,9 @@ script/source = "extends Node2D
 
 func _ready() -> void:
 
-	# Setup battlehandler before starting each level
+	# Can be removed in full game, but is needed if you want to directly test the level
 	BattleHandlerSingleton._find_level_nodes()
+	ClickHandler._find_level_nodes()
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hiqwa"]
