@@ -9,6 +9,7 @@
 * Enemies can probably occupy the same space
 * Sprites should flip when moving/attacking to the left.
 * AI-controlled ranged units should move to a beneficial range to avoid range-penalty.
+* Should not pass through enemy units
 
 ## Annoying features:
 * Character located below another character should appear on top of the other character. (change node order)
