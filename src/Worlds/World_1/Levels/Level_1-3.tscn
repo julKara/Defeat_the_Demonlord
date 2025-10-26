@@ -1,24 +1,22 @@
-[gd_scene load_steps=30 format=4 uid="uid://bi82xf4b50v4w"]
+[gd_scene load_steps=31 format=4 uid="uid://bi82xf4b50v4w"]
 
 [ext_resource type="Texture2D" uid="uid://bqmtavn12rhj2" path="res://assets/test_map5.png" id="1_qnc6k"]
 [ext_resource type="Texture2D" uid="uid://bdy0m0gr2tme3" path="res://assets/level_art/48x48_Tileset/pipo-map001.png" id="2_3dms0"]
 [ext_resource type="Script" uid="uid://t1qdqjubkhud" path="res://src/Units/character_manager.gd" id="3_yr84h"]
 [ext_resource type="PackedScene" uid="uid://dijjspgi8x8sv" path="res://src/Units/actor.tscn" id="4_orqvb"]
 [ext_resource type="Script" uid="uid://cjlatyxuwhq1n" path="res://src/Level/turn_manager.gd" id="4_s6fmu"]
-[ext_resource type="Resource" uid="uid://cksht0d3f8feb" path="res://characters/Mage/mageStats.tres" id="5_yr84h"]
+[ext_resource type="Script" uid="uid://dfeqtmcp7uacl" path="res://src/Units/CharacterStats.gd" id="6_qnc6k"]
 [ext_resource type="Resource" uid="uid://mwedg6ttx2lp" path="res://characters/Mage/mageProfile.tres" id="6_tjatl"]
 [ext_resource type="Resource" uid="uid://bu2f1ylnrxljm" path="res://characters/Knight/knightProfile.tres" id="7_0ni46"]
-[ext_resource type="Resource" uid="uid://ioqq5nerr7f3" path="res://characters/Knight/knightStats.tres" id="7_orqvb"]
 [ext_resource type="Resource" uid="uid://b5bmi1atp4dnb" path="res://characters/Mage/mageEnemyProfile.tres" id="8_mebf6"]
 [ext_resource type="Script" uid="uid://lvdowlbqk6fe" path="res://src/Level/GUI/actions_menu.gd" id="9_2skyk"]
-[ext_resource type="Resource" uid="uid://byndvh2eojkeh" path="res://characters/Mage/mageEnemyStats.tres" id="9_s6fmu"]
 [ext_resource type="Script" uid="uid://duw38t7v0nrgf" path="res://src/Level/GUI/default_attack.gd" id="10_rautg"]
 [ext_resource type="Script" uid="uid://b6oemt0bk5jyw" path="res://src/Level/GUI/stand_button.gd" id="11_athqt"]
 [ext_resource type="Script" uid="uid://dso7okpirndht" path="res://src/Level/GUI/actor_info.gd" id="12_6tp14"]
 [ext_resource type="Script" uid="uid://dous6wk318f1t" path="res://src/Level/GUI/victory_screen.gd" id="13_0xagr"]
 [ext_resource type="Script" path="res://src/Level/GUI/game_over_screen.gd" id="14_hcgia"]
 [ext_resource type="PackedScene" uid="uid://cats61ytkbbvj" path="res://src/PathVisuals/draw_path.tscn" id="15_eaamk"]
-[ext_resource type="Script" path="res://src/Level/win_loss_condition.gd" id="17_p2rbu"]
+[ext_resource type="Script" uid="uid://nm7v2oerrihf" path="res://src/Level/win_loss_condition.gd" id="17_p2rbu"]
 [ext_resource type="Script" uid="uid://sehkuo2xbwos" path="res://src/Worlds/world_tracker.gd" id="18_l22j0"]
 [ext_resource type="Resource" uid="uid://b7d426jw88wxl" path="res://src/Worlds/world_handler.tres" id="19_5f36r"]
 
@@ -163,6 +161,71 @@ texture_region_size = Vector2i(48, 48)
 tile_size = Vector2i(48, 48)
 sources/1 = SubResource("TileSetAtlasSource_tlwt5")
 
+[sub_resource type="Resource" id="Resource_qnc6k"]
+resource_name = "mageStats"
+script = ExtResource("6_qnc6k")
+curr_health = 100
+max_health = 100
+phys_attack = 20
+mag_attack = 80
+phys_defense = 30
+mag_defense = 50
+crit_chance = 15
+level = 1
+attack_range = 2
+mobility = 3
+speed = 3.0
+health_gain = 10
+phys_atk_gain = 0
+phys_def_gain = 0
+mag_atk_gain = 20
+mag_def_gain = 10
+crit_gain = 0
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
+[sub_resource type="Resource" id="Resource_3dms0"]
+resource_name = "knightStats"
+script = ExtResource("6_qnc6k")
+curr_health = 200
+max_health = 200
+phys_attack = 90
+mag_attack = 10
+phys_defense = 80
+mag_defense = 20
+crit_chance = 5
+level = 1
+attack_range = 1
+mobility = 4
+speed = 4.0
+health_gain = 20
+phys_atk_gain = 10
+phys_def_gain = 20
+mag_atk_gain = 0
+mag_def_gain = 0
+crit_gain = 0
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
+[sub_resource type="Resource" id="Resource_yr84h"]
+script = ExtResource("6_qnc6k")
+curr_health = 100
+max_health = 100
+phys_attack = 20
+mag_attack = 200
+phys_defense = 10
+mag_defense = 30
+crit_chance = 10
+level = 1
+attack_range = 2
+mobility = 3
+speed = 3.0
+health_gain = 0
+phys_atk_gain = 0
+phys_def_gain = 0
+mag_atk_gain = 0
+mag_def_gain = 0
+crit_gain = 0
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
 [sub_resource type="GDScript" id="GDScript_wse8f"]
 script/source = "extends CanvasLayer
 
@@ -221,19 +284,19 @@ script = ExtResource("4_s6fmu")
 
 [node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_orqvb")]
 position = Vector2(120, 120)
-stats = ExtResource("5_yr84h")
+stats = SubResource("Resource_qnc6k")
 profile = ExtResource("6_tjatl")
 is_friendly = true
 
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_orqvb")]
 position = Vector2(360, 264)
-stats = ExtResource("7_orqvb")
+stats = SubResource("Resource_3dms0")
 profile = ExtResource("7_0ni46")
 is_friendly = true
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_orqvb")]
 position = Vector2(168, 312)
-stats = ExtResource("9_s6fmu")
+stats = SubResource("Resource_yr84h")
 profile = ExtResource("8_mebf6")
 
 [node name="GUI" type="CanvasLayer" parent="."]

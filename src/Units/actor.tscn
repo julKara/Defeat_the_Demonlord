@@ -1,13 +1,17 @@
-[gd_scene load_steps=20 format=3 uid="uid://dijjspgi8x8sv"]
+[gd_scene load_steps=24 format=3 uid="uid://dijjspgi8x8sv"]
 
 [ext_resource type="Script" uid="uid://7mgltwn5kw4v" path="res://src/Units/actor.gd" id="1_xjefa"]
 [ext_resource type="Shader" uid="uid://54clig0upyxr" path="res://src/Units/highlight.gdshader" id="2_a5lvk"]
 [ext_resource type="AnimationLibrary" uid="uid://csufkd5ailv6u" path="res://characters/Knight/knightAnimations.tres" id="4_jg2tr"]
 [ext_resource type="AnimationLibrary" uid="uid://db35i1b3vs4xd" path="res://characters/Mage/mageAnimations.tres" id="5_a5lvk"]
 [ext_resource type="Texture2D" uid="uid://jmiy51ye1yiv" path="res://assets/character_art/Slime/Slime_Sprite.png" id="6_a5lvk"]
+[ext_resource type="Texture2D" uid="uid://ckg1tiejdrssx" path="res://assets/character_art/Slime/Slime_Default_Attack_f1.png" id="7_4k5mr"]
 [ext_resource type="Script" uid="uid://lv7bihs01ua5" path="res://src/Level/healthbar.gd" id="7_a5lvk"]
 [ext_resource type="Texture2D" uid="uid://d0dmqxyexre4v" path="res://assets/character_art/mage/Mage_Idle_f2.png" id="7_jg2tr"]
 [ext_resource type="Texture2D" uid="uid://dw3l24usm53ep" path="res://assets/character_art/Slime/Slime_Idle_f1.png" id="7_s4pr6"]
+[ext_resource type="Texture2D" uid="uid://cnq5sivude4o5" path="res://assets/character_art/Slime/Slime_Default_Attack_f2.png" id="8_ni625"]
+[ext_resource type="Texture2D" uid="uid://iy0guybfk7x6" path="res://assets/character_art/Slime/Slime_Default_Attack_f3.png" id="9_gdso5"]
+[ext_resource type="Texture2D" uid="uid://cfxaybx45nead" path="res://assets/character_art/Slime/Slime_Default_Attack_f4.png" id="10_tbjoy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s4pr6"]
 resource_local_to_scene = true
@@ -51,6 +55,19 @@ _data = {
 }
 
 [sub_resource type="Animation" id="Animation_4k5mr"]
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.35, 0.45, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("6_a5lvk"), ExtResource("7_4k5mr"), ExtResource("8_ni625"), ExtResource("9_gdso5"), ExtResource("10_tbjoy")]
+}
 
 [sub_resource type="Animation" id="Animation_fjflg"]
 length = 0.7
