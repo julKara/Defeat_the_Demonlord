@@ -56,13 +56,17 @@ func _ready() -> void:
 	# Apply unit profile to current instance of actor
 	_apply_profile()
 	
-	# Start idle-state animation
-	_update_state_animation()
+	# Duplicate stats so this actor has its own instance
+	if stats:
+		stats = stats.duplicate(true)
 	
 	stats.init_stats()
 	
 	# Initialize healthbar at start of level to max-health
 	healthbar.init_health(stats.max_health)
+	
+	# Start idle-state animation
+	_update_state_animation()
 	
 	# Create an A* grid that will be used for pathfinding
 	astar_grid = AStarGrid2D.new()
