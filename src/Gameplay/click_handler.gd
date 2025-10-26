@@ -167,7 +167,7 @@ func _select_unit(actor: Actor) -> void:
 			behaviour.select(true)
 		else:
 			behaviour.select(false)
-		print("\tSelected: ", actor.profile.character_name)
+		#print("\tSelected: ", actor.profile.character_name)
 
 
 # Protocol for deselecting a unit
@@ -182,7 +182,7 @@ func _deselect_unit(actor: Actor) -> void:
 		if not actor.acted && actor.is_friendly:	# Only friendly units should be reset
 			behaviour.reset_position_if_not_acted()
 	selected_unit = null
-	print("\tDeselected: ", actor.profile.character_name)
+	#print("\tDeselected: ", actor.profile.character_name)
 
 # --- UTIL ---
 
