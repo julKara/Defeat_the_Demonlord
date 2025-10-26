@@ -26,7 +26,7 @@ func _draw():
 	# Convert tile coords to global points
 	var points: Array[Vector2] = []
 	for id_tile in path:
-		points.append(tile_map.map_to_local(id_tile) + Vector2(48,48) / 2)
+		points.append(tile_map.map_to_local(id_tile))
 
 	if points.size() > 1:
-		draw_polyline(points, Color(1, 0, 0), 3.0)
+		draw_polyline(points, Color.RED , 3.0)

@@ -70,11 +70,13 @@ func get_range_tiles() -> Dictionary:
 
 
 # --- Movement ---
-func move_to(tile: Vector2i) -> void:
-	# tile is a map tile (Vector2i)
+func move_to(tile: Vector2i) -> void:	# tile is a map tile (Vector2i)
+	
+	# Only move to new tile
 	if tile == origin_tile:
 		return
 	
+	# Get path
 	var id_path = get_parent().astar_grid.get_id_path(origin_tile, tile)  # compute path from origin_tile
 	if id_path.is_empty():
 		return
@@ -91,15 +93,16 @@ func move_to(tile: Vector2i) -> void:
 		await get_tree().process_frame
 		
 	is_moving = false
-	# don't set origin_tile here — only confirm_position() should do that
-	current_tile = tile
 	draw_path.hide()
+	# don't set origin_tile here, only confirm_position() does that after acting
+	current_tile = tile
 	
 	# When moved manually, clear attack target
 	if attack_target != null:
 		var sprite = attack_target.get_node("Sprite")
 		sprite.material.set("shader_parameter/width", 0.0)
 		attack_target = null
+
 
 # Reset back to origin_tile if moved but not acted
 func reset_position_if_not_acted() -> void:
@@ -121,8 +124,7 @@ func reset_position_if_not_acted() -> void:
 		draw_path.hide()
 		
 		# Reset start-pos and curr-til so highlight uses origin_tile
-		start_position = origin_tile
-		current_tile = origin_tile
+		confirm_position()
 		#print("%s reset to original position." % parent.profile.character_name)
 
 
@@ -219,7 +221,6 @@ func set_attack_target(target: Actor) -> void:
 
 
 func confirm_position() -> void:
-	# call this when the unit's action is finalized (e.g. TurnManager.notify_unit_acted)
 	origin_tile = tile_map.local_to_map(get_parent().global_position)
 	start_position = origin_tile
 	current_tile = origin_tile
