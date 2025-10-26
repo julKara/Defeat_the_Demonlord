@@ -6,8 +6,6 @@
 
 ## Issues (not really bugs, more structural issues):
 * Changing `healthbar` color is not memory-efficient at all since it dublicates per character.
-* Sprites should flip when moving/attacking to the left.
-
 
 ## Annoying features:
 * You have to click on a unit to deselect them intead of just not clicking on anything else. Same with target.

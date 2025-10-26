@@ -269,7 +269,7 @@ func attack():
 		var dist: float = attacker.position.distance_to(target.position)
 		
 		# Perform battle and wait for it to finish
-		await battle_handler.perform_battle(attacker, target, dist)
+		await battle_handler.perform_battle(attacker, target, dist, attack_path)
 		
 		# Do a counter-attack if target is still alive and withing range
 		if target.stats.curr_health > 0:

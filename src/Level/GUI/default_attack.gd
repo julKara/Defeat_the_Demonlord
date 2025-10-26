@@ -3,6 +3,8 @@ extends Button
 @onready var character_manager: Node2D = $"../../../../../TileMapLayer/CharacterManager"
 #@onready var battle_handler: BattleHandler = $"../../../../../BattleHandler"
 @onready var turn_manager: Node2D = $"../../../../../TileMapLayer/TurnManager"
+@onready var tile_map: TileMap = $"../../../../../TileMap"
+
 
 var battle_handler: Node = null
 
@@ -22,8 +24,12 @@ func _pressed() -> void:
 	# Distance between attacker and target, influences damage
 	var dist: float = attacker.position.distance_to(target.position)
 	
+	# Path between attacker and target, used for flipping sprites
+	var path = attacker.astar_grid.get_id_path(tile_map.local_to_map(attacker.global_position),
+	tile_map.local_to_map(target.global_position))
+	
 	# Perform battle and wait for it to finish
-	await battle_handler.perform_battle(attacker, target, dist)
+	await battle_handler.perform_battle(attacker, target, dist, path)
 	
 	# Do a counter-attack if target is still alive and withing range
 	if target.stats.curr_health > 0:
