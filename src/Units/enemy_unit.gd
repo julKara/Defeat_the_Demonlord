@@ -189,7 +189,7 @@ func highlight_enemy_range() -> void:
 			elif path.size() <= (mobility + attack_range + 1):
 				range_tile_map.set_cell(0, point, 1, Vector2i(1, 1), 0)
 
-func select(has_acted: bool) -> void:	# Has to have input for override to function
+func select(_has_acted: bool) -> void:	# Has to have input for override to function
 	
 	# Update state
 	selected = true
