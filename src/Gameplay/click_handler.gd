@@ -7,6 +7,7 @@ var character_manager: Node2D
 
 # --- Member variables ---
 var selected_unit: Actor = null
+var ui_nodes = []	# Stores all GUI-elements that does not count as an empty click
 
 # --- CONSTANTS ---
 const INVALID_POS: Vector2i = Vector2i(-9999, -9999)	# Used to set "null" for vector
@@ -133,6 +134,10 @@ func _handle_empty_tile_click(click_tile: Vector2i) -> void:
 	if not behaviour or selected_unit.acted:
 		return
 
+	# Ignore clicks on UI
+	if _is_mouse_over_gui():
+		return
+	
 	var range_data = behaviour.get_range_tiles()
 	var move_tiles: Array[Vector2i] = range_data.move_tiles
 	
@@ -248,6 +253,20 @@ func _find_best_attack_tile(move_tiles: Array[Vector2i], enemy_pos: Vector2i, at
 				#print("Skipped occupied tile!")
 	return best_tile
 
+func _is_mouse_over_gui() -> bool:
+	
+	# Get mouse-pos
+	var mouse_pos = get_viewport().get_mouse_position()
+
+	# Go through all ui-nodes and chick if they were clicked on
+	for ui in ui_nodes:
+		if ui.visible:
+			var rect = Rect2(ui.global_position, ui.size)
+			if rect.has_point(mouse_pos):
+				return true
+	return false
+
+
 # Setup click_handler
 func _find_level_nodes() -> void:
 	# Find active level root (first child under root that isn’t an autoload)
@@ -260,5 +279,13 @@ func _find_level_nodes() -> void:
 			if tilemap_layer:
 				character_manager = tilemap_layer.get_node_or_null("CharacterManager")
 				#print("CharacterManager found: ", character_manager != null)
+				
+			# --- Attach GUI ELEMENTS to ui_nodes---
+			var gui = node.get_node_or_null("GUI")
+			if gui:
+				var margin = gui.get_node_or_null("Margin")
+				if margin:
+					ui_nodes.append(margin.get_node_or_null("ActionsMenu"))
+					ui_nodes.append(margin.get_node_or_null("ActorInfo"))
 			return
 	push_warning("ClickHandler: No level starting with 'Level_' found under root!")

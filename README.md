@@ -11,11 +11,10 @@
 * AI-controlled ranged units should move to a beneficial range to avoid range-penalty.
 
 ## Annoying features:
-* You have to click on a unit to deselect them intead of just not clicking on anything else. Same with target.
 * Character located below another character should appear on top of the other character. (change node order)
 
 ## Todo:
-* Implement turns -- Julia
+* <del>Implement turns -- Julia</del>
 * Cooldowns -- Julia
 * Class advantage -- Julia
 * <del>Being able to start and win/lose a level (win/loss condition)</del> -- Mirijam
