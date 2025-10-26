@@ -62,12 +62,11 @@ func character_level_up():
 			character.stats.level += 1
 			print(character.profile.character_name + " reached level " + str(character.stats.level))
 			
-			# increase stats per level
-			if character.profile.battle_class_type == "Mage":
-				character.stats.mag_attack += 20
-				character.stats.mag_defense += 10
-				character.stats.max_health += 10
-			elif character.profile.battle_class_type == "Swordsman":
-				character.stats.phys_attack += 10
-				character.stats.phys_defense += 20
-				character.stats.max_health += 20
+			# Increase stats
+			character.stats.max_health += character.stats.health_gain
+			character.stats.phys_attack += character.stats.phys_atk_gain
+			character.stats.phys_defense += character.stats.phys_def_gain
+			character.stats.mag_attack += character.stats.mag_atk_gain
+			character.stats.mag_defense += character.stats.mag_def_gain
+			character.stats.crit_chance += character.stats.crit_gain
+			
