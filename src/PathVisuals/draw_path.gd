@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var character_manager: Node2D = $"../TileMapLayer/CharacterManager"
+@onready var tile_map: TileMap = $"../TileMap"
 
 # Update drawing
 func _process(_delta):
@@ -8,15 +9,24 @@ func _process(_delta):
 
 # Draw a line along the selected path of the character
 func _draw():
-	var all_children = character_manager.current_character.get_children()
-	var behaviour_node
-		
-	for x in all_children:
-		if x is Node:
-			behaviour_node = x
-	
-	if behaviour_node.current_point_path.is_empty():
+	# Make sure a unit is selected
+	var actor = character_manager.current_character
+	if not actor:
 		return
-	
-	if behaviour_node.current_point_path.size() > 1:
-		draw_polyline(behaviour_node.current_point_path, Color.RED)
+
+	var behaviour = actor.get_behaviour()
+	if not behaviour:
+		return
+
+	# Path array check
+	var path: Array = behaviour.current_id_path
+	if path.is_empty():
+		return
+
+	# Convert tile coords to global points
+	var points: Array[Vector2] = []
+	for id_tile in path:
+		points.append(tile_map.map_to_local(id_tile))
+
+	if points.size() > 1:
+		draw_polyline(points, Color.RED , 3.0)

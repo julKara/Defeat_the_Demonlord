@@ -56,13 +56,17 @@ func _ready() -> void:
 	# Apply unit profile to current instance of actor
 	_apply_profile()
 	
-	# Start idle-state animation
-	_update_state_animation()
+	# Duplicate stats so this actor has its own instance
+	if stats:
+		stats = stats.duplicate(true)
 	
 	stats.init_stats()
 	
 	# Initialize healthbar at start of level to max-health
 	healthbar.init_health(stats.max_health)
+	
+	# Start idle-state animation
+	_update_state_animation()
 	
 	# Create an A* grid that will be used for pathfinding
 	astar_grid = AStarGrid2D.new()
@@ -158,8 +162,8 @@ func _apply_profile() -> void:
 		if not anim_player.has_animation_library(anim_library_name):
 			anim_player.add_animation_library(anim_library_name, profile.animation)
 			print("Added animation library:", anim_library_name)
-		else:
-			print("Library already exists:", anim_library_name)
+		#else:
+			#print("Library already exists:", anim_library_name)
 
 # Updates current_state and calls update-animation
 func set_state(new_state: UnitState) -> void:
@@ -185,6 +189,16 @@ func _update_state_animation() -> void:
 	if anim_player.has_animation(full_name):
 		anim_player.play(full_name)
 		# print("full_name:", full_name)	# TESTING
+
+func get_sprite() -> Sprite2D:
+	var all_children = get_children()
+	var sprite
+		
+	for child in all_children:
+		if child is Sprite2D:
+			sprite = child
+	
+	return sprite
 
 func get_behaviour() -> Node:
 	return behavior

@@ -6,20 +6,22 @@
 
 ## Issues (not really bugs, more structural issues):
 * Changing `healthbar` color is not memory-efficient at all since it dublicates per character.
-* Enemies can probably occupy the same space
-* Sprites should flip when moving/attacking to the left.
-* AI-controlled ranged units should move to a beneficial range to avoid range-penalty.
+* Sprites should flip when counter-attacking
+* *AI-controlled ranged units should move to a beneficial range to avoid range-penalty.*
+* Should not pass through enemy units.
+* Drawpath should stay to show where character started.
 
 ## Annoying features:
-* You have to click on a unit to deselect them intead of just not clicking on anything else. Same with target.
 * Character located below another character should appear on top of the other character. (change node order)
+* Cannot deselect enemies by clicking on map.
+* Turn-mangager doesn't pause after victory/lost
 
 ## Todo:
-* Implement turns -- Julia
+* <del>Implement turns -- Julia</del>
 * Cooldowns -- Julia
 * Class advantage -- Julia
 * <del>Being able to start and win/lose a level (win/loss condition)</del> -- Mirijam
-* Xp system -- Mirijam
+* *Xp system -- Mirijam*
 * <del>Level select</del> -- Mirijam
 * <del>Save files</del> -- Mirijam
 * Character talent (Knight: pass turn -> guard for allies (become attack_target), Mage: Apply burn (damage over time)) -- Julia
