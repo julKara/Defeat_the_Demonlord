@@ -13,6 +13,8 @@ var worlds_unlocked
 var levels_unlocked
 
 func _ready() -> void:
+	world_handler._load_save()
+	
 	current_world = world_handler.world_script.current_world
 	current_level = world_handler.world_script.current_level
 	worlds_unlocked = world_handler.world_script.worlds_unlocked
@@ -43,13 +45,28 @@ func win():
 	if current_world == worlds_unlocked and current_level == levels_unlocked:
 		world_handler.world_script.unlock_next_level()
 		
-	# Characters level up
-	for character in character_manager.character_list_copy:
-		if character.is_friendly == true:
-			character.stats.level += 1
-			print(character.profile.character_name + " reached level " + str(character.stats.level))
+	character_level_up()
 	
 func lose():
 	print("game over :(")
 	get_tree().paused = true
 	game_over_screen.show()
+	
+func character_level_up():
+
+	for character in character_manager.character_list_copy:
+		# Only increase level of playeble units when a level is finished for the first time
+		if character.is_friendly == true and current_world == worlds_unlocked and current_level == levels_unlocked:
+			
+			# Increase level
+			character.stats.level += 1
+			print(character.profile.character_name + " reached level " + str(character.stats.level))
+			
+			# Increase stats
+			character.stats.max_health += character.stats.health_gain
+			character.stats.phys_attack += character.stats.phys_atk_gain
+			character.stats.phys_defense += character.stats.phys_def_gain
+			character.stats.mag_attack += character.stats.mag_atk_gain
+			character.stats.mag_defense += character.stats.mag_def_gain
+			character.stats.crit_chance += character.stats.crit_gain
+			

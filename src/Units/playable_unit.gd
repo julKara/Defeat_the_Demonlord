@@ -84,6 +84,7 @@ func move_to(tile: Vector2i) -> void:	# tile is a map tile (Vector2i)
 	current_id_path = id_path
 	is_moving = true
 	draw_path.show()
+	calculate_direction(id_path)
 	
 	while is_moving and current_id_path.size() > 0:
 		var next_pos = tile_map.map_to_local(current_id_path.front())
@@ -224,3 +225,13 @@ func confirm_position() -> void:
 	origin_tile = tile_map.local_to_map(get_parent().global_position)
 	start_position = origin_tile
 	current_tile = origin_tile
+
+func calculate_direction(path: Array[Vector2i]):
+	var start = path[0]
+	var end = path[path.size()-1]
+	var sprite = get_parent().get_sprite()
+	
+	if start.x - end.x > 0: # Left
+		sprite.flip_h = true
+	else: # Right
+		sprite.flip_h = false

@@ -190,5 +190,15 @@ func _update_state_animation() -> void:
 		anim_player.play(full_name)
 		# print("full_name:", full_name)	# TESTING
 
+func get_sprite() -> Sprite2D:
+	var all_children = get_children()
+	var sprite
+		
+	for child in all_children:
+		if child is Sprite2D:
+			sprite = child
+	
+	return sprite
+
 func get_behaviour() -> Node:
 	return behavior
