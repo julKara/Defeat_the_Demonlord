@@ -6,6 +6,7 @@ var tile_map: TileMap
 var character_manager: Node2D
 
 # --- Member variables ---
+var level_active := false # Tells if we are in a level
 var selected_unit: Actor = null
 var ui_nodes = []	# Stores all GUI-elements that does not count as an empty click
 
@@ -14,19 +15,27 @@ const INVALID_POS: Vector2i = Vector2i(-9999, -9999)	# Used to set "null" for ve
 
 # --- The meat and potatoes ---
 func _ready() -> void:
-	# Should not be able to click imideiatly 
-	await get_tree().create_timer(0.05).timeout
-	
-	# Intialize all refrence-variables seen on top of ducoment
-	_find_level_nodes()
+	get_tree().connect("node_added", Callable(self, "_on_node_added"))
+
+func _on_node_added(node):
+	if node.name.begins_with("Level_"):
+		_find_level_nodes()
 
 # Handles all input from the player, but only registers left-mouse-click
 func _input(event: InputEvent) -> void:
 	
+	# If not in an real level, skip
+	if not level_active:
+		return
+	
+	# If not in a valid level yet, skip
+	if not is_instance_valid(tile_map) or not is_instance_valid(character_manager):
+		return
+	
 	# Check correct button
 	if not event.is_action_pressed("left_mouse_button"):
 		return
-
+	
 	# Convert mouse position into the local space of the TileMap before mapping to a cell # Needs FIX when new level
 	var local_mouse := tile_map.to_local(event.position)
 	var click_pos: Vector2i = tile_map.local_to_map(local_mouse)
@@ -160,6 +169,7 @@ func _select_unit(actor: Actor) -> void:
 			behaviour.select(false)
 		print("\tSelected: ", actor.profile.character_name)
 
+
 # Protocol for deselecting a unit
 func _deselect_unit(actor: Actor) -> void:
 	if not actor:
@@ -188,6 +198,7 @@ func _get_actor_at(click_tile: Vector2i) -> Actor:
 			return actor
 	return null
 
+
 # Checks if the enemy is within attack range (diagonal range counts as one less)
 func _is_enemy_in_attack_range(from_tile: Vector2i, enemy_tile: Vector2i, attack_range: int) -> bool:
 	
@@ -202,6 +213,7 @@ func _is_enemy_in_attack_range(from_tile: Vector2i, enemy_tile: Vector2i, attack
 		eff_dist += 1
 
 	return eff_dist <= attack_range
+
 
 # Automatically finds the best tile to move to when attacking a target
 func _find_best_attack_tile(move_tiles: Array[Vector2i], enemy_pos: Vector2i, attack_range: int) -> Vector2i:
@@ -253,6 +265,8 @@ func _find_best_attack_tile(move_tiles: Array[Vector2i], enemy_pos: Vector2i, at
 				#print("Skipped occupied tile!")
 	return best_tile
 
+
+# Check if mouse is currently over gui when "clicking on empty tile"
 func _is_mouse_over_gui() -> bool:
 	
 	# Get mouse-pos
@@ -269,23 +283,41 @@ func _is_mouse_over_gui() -> bool:
 
 # Setup click_handler
 func _find_level_nodes() -> void:
-	# Find active level root (first child under root that isn’t an autoload)
+	
+	# Reset old references, when starting a new level
+	level_active = false
+	tile_map = null
+	character_manager = null
+	ui_nodes.clear()
+
+	# Wait until the level scene is ready
+	await get_tree().process_frame
+
 	for node in get_tree().root.get_children():
-		if node.name.begins_with("Level_"):  # adjust to your level naming
-			#print("Found level root: ", node.name)
+		if node.name.begins_with("Level_"):
+			
+			# Get tile_map
 			tile_map = node.get_node_or_null("TileMap")
-			# --- TILEMAPLAYER ELEMENTS ---
+
+			# Get character_manager
 			var tilemap_layer = node.get_node_or_null("TileMapLayer")
 			if tilemap_layer:
 				character_manager = tilemap_layer.get_node_or_null("CharacterManager")
-				#print("CharacterManager found: ", character_manager != null)
-				
-			# --- Attach GUI ELEMENTS to ui_nodes---
+
+			# Apphend gui-elements to ui_nodes
 			var gui = node.get_node_or_null("GUI")
 			if gui:
 				var margin = gui.get_node_or_null("Margin")
 				if margin:
-					ui_nodes.append(margin.get_node_or_null("ActionsMenu"))
-					ui_nodes.append(margin.get_node_or_null("ActorInfo"))
+					var actions_menu = margin.get_node_or_null("ActionsMenu")
+					var actor_info = margin.get_node_or_null("ActorInfo")
+					if actions_menu:
+						ui_nodes.append(actions_menu)
+					if actor_info:
+						ui_nodes.append(actor_info)
+
+			level_active = true
+			print("ClickHandler: Found level nodes for ", node.name)
 			return
+
 	push_warning("ClickHandler: No level starting with 'Level_' found under root!")

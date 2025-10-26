@@ -34,7 +34,6 @@ func _ready() -> void:
 
 	# Setup battlehandler before starting each level
 	BattleHandlerSingleton._find_level_nodes()
-	ClickHandler._find_level_nodes()
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hiqwa"]
