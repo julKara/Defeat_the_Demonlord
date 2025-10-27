@@ -11,7 +11,7 @@ var astar_grid
 var attack_target: Actor
 var selected:bool = false
 
-var solid_enemy_pos
+var solid_pos: Array[Vector2i]
 var move_count
 var tested_tiles: Array[Vector2i]
 
@@ -30,7 +30,7 @@ func _ready():
 	
 	battle_handler = BattleHandlerSingleton
 	
-	solid_enemy_pos = null
+	solid_pos.clear()
 	
 	print("Enemy unit ready — AI active.")	# TESTING
 	_set_stat_variables()
@@ -215,22 +215,23 @@ func move():
 			await perform_movement(id_path, attack_range)
 		
 		# If a tile was set to be solid -> reset it back to "not solid" after the move is done
-		if solid_enemy_pos != null:
-			astar_grid.set_point_solid(solid_enemy_pos, false)
+		if solid_pos.is_empty() == false:
+			for tile in solid_pos:
+				astar_grid.set_point_solid(tile, false)
 		
 		#emit_signal("ai_movement_finished")	
 		
 
-# Check if the final destination of the enemy is occupied by a different enemy
+# Check if the final destination of the enemy is occupied
 func check_if_occupied(id_path: Array[Vector2i]) -> bool:
 	for character in character_manager.character_list:
-		if character.is_friendly == false and character != get_parent():
+		if character != get_parent():
 			# The index of the tile the enemy will stop at. They always stops as soon as they're in range.
 			var index = id_path.size() - attack_range - 1 
 			if id_path[index] == tile_map.local_to_map(character.global_position):
-				solid_enemy_pos = tile_map.local_to_map(character.global_position)
+				solid_pos.append(tile_map.local_to_map(character.global_position)) 
 				# If the tile is occupied -> set tile to solid. The tile will then not be includen in pathfinding
-				astar_grid.set_point_solid(solid_enemy_pos, true)
+				astar_grid.set_point_solid(solid_pos.back(), true)
 				return true
 	return false
 
