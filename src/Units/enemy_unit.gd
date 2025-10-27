@@ -370,3 +370,6 @@ func deselect() -> void:
 	# Clear mobility- and range-map
 	range_tile_map.clear_layer(0)
 	range_tile_map.clear_layer(1)
+	
+	# Hide gui
+	actor_info.hide_actor_info()

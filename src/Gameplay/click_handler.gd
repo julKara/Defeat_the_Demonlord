@@ -136,17 +136,18 @@ func _handle_empty_tile_click(click_tile: Vector2i) -> void:
 	if not selected_unit:
 		return
 		
+	# Ignore clicks on UI
+	if _is_mouse_over_gui():
+		return
+	
 	# If selected is a enemy, do nothing since they can't be controlled
 	if not selected_unit.is_friendly:
+		_deselect_unit(selected_unit)
 		return
 
 	# If has acted, do nothing since they can't be controlled
 	var behaviour = selected_unit.get_behaviour()
 	if not behaviour or selected_unit.acted:
-		return
-
-	# Ignore clicks on UI
-	if _is_mouse_over_gui():
 		return
 	
 	var range_data = behaviour.get_range_tiles()
