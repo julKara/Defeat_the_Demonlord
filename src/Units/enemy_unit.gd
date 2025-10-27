@@ -257,10 +257,7 @@ func attack():
 
 	print("\t\tTarget selected: ", attack_target.profile.character_name)
 
-	var attack_path = (astar_grid.get_id_path(tile_map.local_to_map(get_parent().global_position),
-			tile_map.local_to_map(attack_target.global_position)))
-
-	if attack_path.size() <= attack_range + 1 && attack_target != null:
+	if attack_target != null:
 		# Set up attacker and target, and define damage from physical attack stat
 		var attacker: Actor = get_parent()
 		var target: Actor = attack_target
@@ -269,7 +266,7 @@ func attack():
 		var dist: float = attacker.position.distance_to(target.position)
 		
 		# Perform battle and wait for it to finish
-		await battle_handler.perform_battle(attacker, target, dist, attack_path)
+		await battle_handler.perform_battle(attacker, target, dist)
 		
 		# Do a counter-attack if target is still alive and withing range
 		if target.stats.curr_health > 0:
@@ -279,7 +276,7 @@ func attack():
 			# Only counterattack if attacker is within target’s range
 			if target_range * attacker.tile_size >= dist:
 				print("\t\t\tCounter!")
-				await battle_handler.perform_battle(target, attacker, dist, attack_path)
+				await battle_handler.perform_battle(target, attacker, dist)
 				
 		attack_used = true
 	

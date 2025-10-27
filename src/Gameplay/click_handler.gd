@@ -129,7 +129,7 @@ func _handle_enemy_click(enemy: Actor) -> void:
 		enemy.get_behaviour().select(true)
 
 
-# Protocol for handeling clicks on non-units
+# Protocol for handeling clicks on non-units (includes movement)
 func _handle_empty_tile_click(click_tile: Vector2i) -> void:
 	
 	# If no unit is selected, do nothing

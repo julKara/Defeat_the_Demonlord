@@ -12,8 +12,6 @@
 
 ## Annoying features:
 * Character located below another character should appear on top of the other character. (change node order)
-* Cannot deselect enemies by clicking on map.
-* Turn-mangager doesn't pause after victory/lost
 
 ## Todo:
 * <del>Implement turns -- Julia</del>
