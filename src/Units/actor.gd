@@ -37,6 +37,7 @@ var behavior: Node = null	# Decides behavior based on if unit is playable, enemy
 
 # --- Variables for movement ---
 var astar_grid: AStarGrid2D
+var base_astar_grid: AStarGrid2D	# Contains the base-astar-grid before adding enemies
 var tile_size: int = 48
 
 # --- Unit info while in gameplay: ---
@@ -96,6 +97,8 @@ func _ready() -> void:
 			
 			if tile_data == null or tile_data.get_custom_data("walkable") == false:
 				astar_grid.set_point_solid(tile_position)
+	
+	base_astar_grid = astar_grid
 	
 	# Set friendly/enemy
 	is_friendly = is_friendly
@@ -190,15 +193,12 @@ func _update_state_animation() -> void:
 		anim_player.play(full_name)
 		# print("full_name:", full_name)	# TESTING
 
+# Resets atar back to before adding enemies
+func reset_astar_grid() -> void:
+	astar_grid = base_astar_grid
+
 func get_sprite() -> Sprite2D:
-	var all_children = get_children()
-	var sprite
-		
-	for child in all_children:
-		if child is Sprite2D:
-			sprite = child
-	
-	return sprite
+	return sprite_2d
 
 func get_behaviour() -> Node:
 	return behavior

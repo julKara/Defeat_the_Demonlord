@@ -7,6 +7,8 @@ class_name playable_unit extends Node
 @onready var character_manager: Node2D = $"../../../CharacterManager"
 @onready var actions_menu: PanelContainer = $"../../../../GUI/Margin/ActionsMenu"
 @onready var actor_info: PanelContainer = $"../../../../GUI/Margin/ActorInfo"
+@onready var turn_manager: Node2D = $"../../../TurnManager"
+
 
 # --- Variables ---
 var start_position: Vector2i	# Where the unit starts
@@ -155,58 +157,102 @@ func deselect() -> void:
 
 # Display the range of a selected unit
 func highlight_range() -> void:
-	range_tile_map.clear_layer(0)
-	range_tile_map.clear_layer(1)
-	
-	# Go through all tiles
-	var grid_size = get_parent().astar_grid.get_size()
-	for x in grid_size.x:
-		for y in grid_size.y:
-			
-			var point = Vector2i(x, y)
-			if get_parent().astar_grid.is_point_solid(point):
-				continue
-			var path = get_parent().astar_grid.get_id_path(origin_tile, point)
-			
-			# Add on range
-			if path.size() <= (mobility + 1):
-				range_tile_map.set_cell(1, point, 1, Vector2i(0, 1), 0)
-			if path.size() <= (mobility + attack_range + 1):
-				range_tile_map.set_cell(0, point, 1, Vector2i(1, 1), 0)
+	range_tile_map.clear_layer(0) # purple
+	range_tile_map.clear_layer(1) # blue
+
+	var data := get_range_tiles()
+	var move_tiles: Array[Vector2i] = data.move_tiles
+	var attack_tiles: Array[Vector2i] = data.attack_tiles
+
+	# Show blue (mobility)
+	for t in move_tiles:
+		range_tile_map.set_cell(1, t, 1, Vector2i(0, 1), 0)
+
+	# Show purple (attack range)
+	for t in attack_tiles:
+		range_tile_map.set_cell(0, t, 1, Vector2i(1, 1), 0)
 
 # --- UTIL ---
 
+# Return an Array of Vector2i positions occupied by enemy actors
+func _get_enemy_positions() -> Array:
+	
+	var positions := []
+	for actor in character_manager.character_list:
+		
+		if not actor: continue
+		
+		# actor is a Node2D whose global position maps to a tile
+		var actor_tile := tile_map.local_to_map(actor.global_position)
+		
+		# only consider enemies (is_friendly == false)
+		if not actor.is_friendly:
+			positions.append(actor_tile)
+
+	return positions.duplicate()
+	
+# Mark enemy positions as solid or clear them (solid = false) on this unit's astar grid.
+func _set_enemy_positions_solid_on_astar(solid: bool) -> void:
+	
+	var enemy_positions := _get_enemy_positions()
+	for pos in enemy_positions:
+		if solid:
+			# make this grid position solid so pathfinding cannot pass through it
+			# (Note: using set_point_solid used elsewhere in your code)
+			get_parent().astar_grid.set_point_solid(pos)
+		elif get_parent().astar_grid.is_point_solid(pos):
+			# clear the solid flag so pathfinding ignores the actor
+			# use clear_point_solid if available; if your version has a different API name replace accordingly
+			get_parent().astar_grid.clear_point_solid(pos)
+
+
 # Returns two arrays containing tiles within mobility-range and mobility-attack-range 
 func get_range_tiles() -> Dictionary:
+	# Always start from a fresh copy of the base grid (terrain-only)
+	get_parent().reset_astar_grid()
+
+	var grid: AStarGrid2D = get_parent().astar_grid
 	var move_tiles: Array[Vector2i] = []
-	var range_tiles: Array[Vector2i] = []
+	var attack_tiles: Array[Vector2i] = []
 
-	var parent = get_parent()
-	var astar = parent.astar_grid
-	if not astar:
-		return {"move_tiles": move_tiles, "range_tiles": range_tiles}
+	# Mark enemy positions as solid so they block mobility.
+	for enemy in turn_manager.enemy_queue:
+		var t := tile_map.local_to_map(enemy.global_position)
+		grid.set_point_solid(t)
 
-	var grid_size = astar.get_size()
+	var grid_size := grid.get_size()
 
-	for x in range(grid_size.x):
-		for y in range(grid_size.y):
-			var point = Vector2i(x, y)
-			if astar.is_point_solid(point):
+	for x in grid_size.x:
+		for y in grid_size.y:
+			var p = Vector2i(x, y)
+			if grid.is_point_solid(p):
 				continue
+			var path := grid.get_id_path(origin_tile, p)
+			if path.size() > 0 and path.size() <= (mobility + 1):
+				move_tiles.append(p)
 
-			var path = astar.get_point_path(origin_tile, point)
-			if path.is_empty():
+	# ATTACK RANGE — reuse the *same* base grid (not marking enemies solid)
+	get_parent().reset_astar_grid()
+	grid = get_parent().astar_grid
+
+	for x in grid_size.x:
+		for y in grid_size.y:
+			var p = Vector2i(x, y)
+			var tile_data = tile_map.get_cell_tile_data(0, p)
+			if tile_data == null or tile_data.get_custom_data("walkable") == false:
 				continue
+			var path := grid.get_id_path(origin_tile, p)
+			if path.size() > 0 and path.size() <= (mobility + attack_range + 1):
+				attack_tiles.append(p)
 
-			# Within mobility range only
-			if path.size() - 1 <= mobility:
-				move_tiles.append(point)
+	# Ensure enemy positions are included in attack_tiles (so their tiles glow purple)
+	for enemy in turn_manager.enemy_queue:
+		var enemy_tile := tile_map.local_to_map(enemy.global_position)
+		if enemy_tile not in attack_tiles:
+			attack_tiles.append(enemy_tile)
 
-			# Within attack + mobility range
-			if path.size() - 1 <= mobility + attack_range:
-				range_tiles.append(point)
+	return {"move_tiles": move_tiles, "attack_tiles": attack_tiles}
 
-	return {"move_tiles": move_tiles, "range_tiles": range_tiles}
 
 
 func set_attack_target(target: Actor) -> void:
