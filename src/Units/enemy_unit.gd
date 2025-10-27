@@ -94,7 +94,7 @@ func calculate_path() -> Array[Vector2i]:
 
 
 func avoid_penalty(id_path: Array[Vector2i]):
-	
+	print("Attempting to avoid penalty")
 	var enemy_pos = id_path[0]
 	var target_pos = id_path[id_path.size() - 1]
 	var move_pos = enemy_pos
@@ -218,7 +218,8 @@ func move():
 		if solid_enemy_pos != null:
 			astar_grid.set_point_solid(solid_enemy_pos, false)
 		
-		emit_signal("ai_movement_finished")	
+		#emit_signal("ai_movement_finished")	
+		
 
 # Check if the final destination of the enemy is occupied by a different enemy
 func check_if_occupied(id_path: Array[Vector2i]) -> bool:
@@ -304,9 +305,9 @@ func play_turn():
 	skill_used = false
 	
 	# Move towards the closest player
-	move()
-	await ai_movement_finished
-	
+	await move()
+	#await ai_movement_finished
+
 	# Set attack_target
 	await select_attack_target()
 	
