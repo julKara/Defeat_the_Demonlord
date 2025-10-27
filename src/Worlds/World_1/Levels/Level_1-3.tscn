@@ -223,16 +223,16 @@ metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
 [sub_resource type="Resource" id="Resource_yr84h"]
 script = ExtResource("6_qnc6k")
-curr_health = 90
-max_health = 90
+curr_health = 110
+max_health = 110
 original_max_health = 100
 phys_attack = 20
 original_phys_attack = 20
-mag_attack = 80
+mag_attack = 120
 original_mag_attack = 100
 phys_defense = 10
 original_phys_defense = 10
-mag_defense = 20
+mag_defense = 40
 original_mag_defense = 30
 crit_chance = 10
 original_crit_chance = 10

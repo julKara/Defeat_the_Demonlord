@@ -13,6 +13,7 @@ var selected:bool = false
 
 var solid_enemy_pos
 var move_count
+var tested_tiles: Array[Vector2i]
 
 # Keeps track of what moves are performed
 var attack_used: bool = false
@@ -115,65 +116,79 @@ func avoid_penalty(id_path: Array[Vector2i]):
 		"Down":
 			# If possible -> move down
 			if (astar_grid.is_point_solid(Vector2i(enemy_pos.x, enemy_pos.y + 1)) == false
-			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x, enemy_pos.y + 1)]) == false):
+			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x, enemy_pos.y + 1)]) == false
+			and tested_tiles.has(Vector2i(enemy_pos.x, enemy_pos.y + 1)) == false):
 				move_pos.y += 1
 			# If not possible -> try moving left
 			elif (astar_grid.is_point_solid(Vector2i(enemy_pos.x - 1, enemy_pos.y)) == false
-			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x - 1, enemy_pos.y)]) == false):
+			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x - 1, enemy_pos.y)]) == false
+			and tested_tiles.has(Vector2i(enemy_pos.x - 1, enemy_pos.y)) == false):
 				move_pos.x -= 1
 			# If not possible -> try moving right
 			elif (astar_grid.is_point_solid(Vector2i(enemy_pos.x + 1, enemy_pos.y)) == false
-			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x + 1, enemy_pos.y)]) == false):
+			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x + 1, enemy_pos.y)]) == false
+			and tested_tiles.has(Vector2i(enemy_pos.x + 1, enemy_pos.y)) == false):
 				move_pos.x += 1
 		"Up":
 			# If possible -> move up
 			if (astar_grid.is_point_solid(Vector2i(enemy_pos.x, enemy_pos.y - 1)) == false
-			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x, enemy_pos.y - 1)]) == false):
+			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x, enemy_pos.y - 1)]) == false
+			and tested_tiles.has(Vector2i(enemy_pos.x, enemy_pos.y - 1)) == false):
 				move_pos.y -= 1
 			# If not possible -> try moving left
 			elif (astar_grid.is_point_solid(Vector2i(enemy_pos.x - 1, enemy_pos.y)) == false
-			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x - 1, enemy_pos.y)]) == false):
+			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x - 1, enemy_pos.y)]) == false
+			and tested_tiles.has(Vector2i(enemy_pos.x - 1, enemy_pos.y)) == false):
 				move_pos.x -= 1
 			# If not possible -> try moving right
 			elif (astar_grid.is_point_solid(Vector2i(enemy_pos.x + 1, enemy_pos.y)) == false
-			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x + 1, enemy_pos.y)]) == false):
+			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x + 1, enemy_pos.y)]) == false
+			and tested_tiles.has(Vector2i(enemy_pos.x + 1, enemy_pos.y)) == false):
 				move_pos.x += 1
 		"Right":
 			# If possible -> move right
 			if (astar_grid.is_point_solid(Vector2i(enemy_pos.x + 1, enemy_pos.y)) == false
-			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x + 1, enemy_pos.y)]) == false):
+			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x + 1, enemy_pos.y)]) == false
+			and tested_tiles.has(Vector2i(enemy_pos.x + 1, enemy_pos.y)) == false):
 				move_pos.x += 1
 			# If not possible -> try moving up
 			elif (astar_grid.is_point_solid(Vector2i(enemy_pos.x, enemy_pos.y - 1)) == false
-			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x, enemy_pos.y - 1)]) == false):
+			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x, enemy_pos.y - 1)]) == false
+			and tested_tiles.has(Vector2i(enemy_pos.x, enemy_pos.y - 1)) == false):
 				move_pos.y -= 1
 			# If not possible -> try moving down
 			elif (astar_grid.is_point_solid(Vector2i(enemy_pos.x, enemy_pos.y + 1)) == false
-			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x, enemy_pos.y + 1)]) == false):
+			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x, enemy_pos.y + 1)]) == false
+			and tested_tiles.has(Vector2i(enemy_pos.x, enemy_pos.y + 1)) == false):
 				move_pos.y += 1
 		"Left":
 			# If possible -> move left
 			if (astar_grid.is_point_solid(Vector2i(enemy_pos.x - 1, enemy_pos.y)) == false
-			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x - 1, enemy_pos.y)]) == false):
+			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x - 1, enemy_pos.y)]) == false
+			and tested_tiles.has(Vector2i(enemy_pos.x - 1, enemy_pos.y)) == false):
 				move_pos.x -= 1
 			# If not possible -> try moving up
 			elif (astar_grid.is_point_solid(Vector2i(enemy_pos.x, enemy_pos.y - 1)) == false
-			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x, enemy_pos.y - 1)]) == false):
+			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x, enemy_pos.y - 1)]) == false
+			and tested_tiles.has(Vector2i(enemy_pos.x, enemy_pos.y - 1)) == false):
 				move_pos.y -= 1
 			# If not possible -> try moving down
 			elif (astar_grid.is_point_solid(Vector2i(enemy_pos.x, enemy_pos.y + 1)) == false
-			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x, enemy_pos.y + 1)]) == false):
+			and check_if_occupied([enemy_pos, Vector2i(enemy_pos.x, enemy_pos.y + 1)]) == false
+			and tested_tiles.has(Vector2i(enemy_pos.x, enemy_pos.y + 1)) == false):
 				move_pos.y += 1
 		
 	if move_pos != enemy_pos:
 		final_path.append(move_pos)	
-		perform_movement(final_path, 0)
+		await perform_movement(final_path, 0)
+		# Looks better when it doesn't move too fast
+		await get_tree().create_timer(0.1).timeout
 		# If still in range penalty after moving away, try again until all mobility is used
 		move_count -= 1
-		await get_tree().create_timer(1.0).timeout
 		var check_adjacency = calculate_path()
 		if check_adjacency.size()-1 < 2 and move_count > 0:
-			avoid_penalty(check_adjacency)
+			tested_tiles.append(enemy_pos)
+			await avoid_penalty(check_adjacency)
 
 
 func move():
@@ -186,7 +201,8 @@ func move():
 		# If the enemy will get a range penalty -> move away
 		if id_path.size()-1 < 2 and attack_range >= 2:
 			move_count = mobility
-			avoid_penalty(id_path)
+			await avoid_penalty(id_path)
+			tested_tiles.clear()
 		# Otherwise perform movement like normal
 		else:	
 			var occupied = check_if_occupied(id_path)
@@ -196,10 +212,7 @@ func move():
 				id_path = calculate_path()
 			
 			# Perform the movement
-			perform_movement(id_path, attack_range)
-		
-		# Large timer needed, otherwise the attack is based on the start position rather than the final position
-		await get_tree().create_timer(1.0).timeout
+			await perform_movement(id_path, attack_range)
 		
 		# If a tile was set to be solid -> reset it back to "not solid" after the move is done
 		if solid_enemy_pos != null:
