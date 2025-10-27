@@ -39,6 +39,7 @@ func _pressed() -> void:
 		# Only counterattack if attacker is within target’s range
 		if target_range * attacker.tile_size >= dist:
 			print("\t\t\tCounter!")
+			path.reverse()
 			await battle_handler.perform_battle(target, attacker, dist, path)
 	
 	turn_manager.end_player_unit_turn(character_manager.current_character)

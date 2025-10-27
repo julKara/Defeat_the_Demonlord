@@ -279,6 +279,7 @@ func attack():
 			# Only counterattack if attacker is within target’s range
 			if target_range * attacker.tile_size >= dist:
 				print("\t\t\tCounter!")
+				attack_path.reverse()
 				await battle_handler.perform_battle(target, attacker, dist, attack_path)
 				
 		attack_used = true
