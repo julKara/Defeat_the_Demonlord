@@ -6,7 +6,6 @@
 
 ## Issues (not really bugs, more structural issues):
 * Changing `healthbar` color is not memory-efficient at all since it dublicates per character.
-* *AI-controlled ranged units should move to a beneficial range to avoid range-penalty.*
 * Should not pass through enemy units.
 * Drawpath should stay to show where character started.
 
