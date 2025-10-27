@@ -63,10 +63,10 @@ func character_level_up():
 			print(character.profile.character_name + " reached level " + str(character.stats.level))
 			
 			# Increase stats
-			character.stats.max_health += character.stats.health_gain
-			character.stats.phys_attack += character.stats.phys_atk_gain
-			character.stats.phys_defense += character.stats.phys_def_gain
-			character.stats.mag_attack += character.stats.mag_atk_gain
-			character.stats.mag_defense += character.stats.mag_def_gain
-			character.stats.crit_chance += character.stats.crit_gain
+			character.stats.max_health = character.stats.original_max_health + character.stats.health_gain * (character.stats.level-1)
+			character.stats.phys_attack = character.stats.original_phys_attack + character.stats.phys_atk_gain * (character.stats.level-1)
+			character.stats.mag_attack = character.stats.original_mag_attack + character.stats.mag_atk_gain * (character.stats.level-1)
+			character.stats.phys_defense = character.stats.original_phys_defense + character.stats.phys_def_gain * (character.stats.level-1)
+			character.stats.mag_defense = character.stats.original_mag_defense + character.stats.mag_def_gain * (character.stats.level-1)
+			character.stats.crit_chance = character.stats.original_crit_chance + character.stats.crit_gain * (character.stats.level-1)
 			

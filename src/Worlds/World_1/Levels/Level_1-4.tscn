@@ -161,19 +161,27 @@ texture_region_size = Vector2i(48, 48)
 tile_size = Vector2i(48, 48)
 sources/1 = SubResource("TileSetAtlasSource_tlwt5")
 
-[sub_resource type="Resource" id="Resource_w41le"]
+[sub_resource type="Resource" id="Resource_rk3b1"]
 resource_name = "mageStats"
 script = ExtResource("6_rk3b1")
 curr_health = 100
 max_health = 100
+original_max_health = 100
 phys_attack = 20
+original_phys_attack = 20
 mag_attack = 80
+original_mag_attack = 80
 phys_defense = 30
+original_phys_defense = 30
 mag_defense = 50
+original_mag_defense = 50
 crit_chance = 15
-level = 1
+original_crit_chance = 15
 attack_range = 2
+original_attack_range = 2
 mobility = 3
+original_mobility = 3
+level = 1
 speed = 3.0
 health_gain = 10
 phys_atk_gain = 0
@@ -183,19 +191,27 @@ mag_def_gain = 10
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_aud31"]
+[sub_resource type="Resource" id="Resource_w41le"]
 resource_name = "knightStats"
 script = ExtResource("6_rk3b1")
 curr_health = 200
 max_health = 200
+original_max_health = 200
 phys_attack = 90
+original_phys_attack = 90
 mag_attack = 10
+original_mag_attack = 10
 phys_defense = 80
+original_phys_defense = 80
 mag_defense = 20
+original_mag_defense = 20
 crit_chance = 5
-level = 1
+original_crit_chance = 5
 attack_range = 1
+original_attack_range = 1
 mobility = 4
+original_mobility = 4
+level = 1
 speed = 4.0
 health_gain = 20
 phys_atk_gain = 10
@@ -205,24 +221,32 @@ mag_def_gain = 0
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_ye6rd"]
+[sub_resource type="Resource" id="Resource_aud31"]
 script = ExtResource("6_rk3b1")
-curr_health = 100
-max_health = 100
+curr_health = 90
+max_health = 90
+original_max_health = 100
 phys_attack = 20
-mag_attack = 200
+original_phys_attack = 20
+mag_attack = 80
+original_mag_attack = 100
 phys_defense = 10
-mag_defense = 30
+original_phys_defense = 10
+mag_defense = 20
+original_mag_defense = 30
 crit_chance = 10
-level = 1
+original_crit_chance = 10
 attack_range = 2
+original_attack_range = 2
 mobility = 3
+original_mobility = 3
+level = 1
 speed = 3.0
-health_gain = 0
+health_gain = 10
 phys_atk_gain = 0
 phys_def_gain = 0
-mag_atk_gain = 0
-mag_def_gain = 0
+mag_atk_gain = 20
+mag_def_gain = 10
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
@@ -284,20 +308,23 @@ script = ExtResource("4_4lxm7")
 
 [node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_ye6rd")]
 position = Vector2(120, 120)
-stats = SubResource("Resource_w41le")
+stats = SubResource("Resource_rk3b1")
 profile = ExtResource("6_4b0xi")
+enemy_level = 0
 is_friendly = true
 
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_ye6rd")]
 position = Vector2(360, 264)
-stats = SubResource("Resource_aud31")
+stats = SubResource("Resource_w41le")
 profile = ExtResource("7_aqmlc")
+enemy_level = 0
 is_friendly = true
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_ye6rd")]
 position = Vector2(168, 312)
-stats = SubResource("Resource_ye6rd")
+stats = SubResource("Resource_aud31")
 profile = ExtResource("8_g2v2w")
+enemy_level = 3
 
 [node name="GUI" type="CanvasLayer" parent="."]
 script = SubResource("GDScript_wse8f")

@@ -20,7 +20,7 @@
 * Cooldowns -- Julia
 * Class advantage -- Julia
 * <del>Being able to start and win/lose a level (win/loss condition)</del> -- Mirijam
-* *Xp system -- Mirijam*
+* <del>*Xp system</del> -- Mirijam*
 * <del>Level select</del> -- Mirijam
 * <del>Save files</del> -- Mirijam
 * Character talent (Knight: pass turn -> guard for allies (become attack_target), Mage: Apply burn (damage over time)) -- Julia

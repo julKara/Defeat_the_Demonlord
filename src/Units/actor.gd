@@ -12,6 +12,7 @@ class_name Actor extends CharacterBody2D
 @export var stats: CharacterStats	# All stats to particular unit
 @export var profile: UnitProfile	# All other unique aspects of a unit (name, skills, talent...)
 var anim_library_name := "default"	# Liberary name for unit-animations, is the .tres file attached to profile
+@export var enemy_level: int
 
 # --- CONSTANTS ---
 const FRIENDLY_COLOR: Color = Color("00a78f")
@@ -60,7 +61,7 @@ func _ready() -> void:
 	if stats:
 		stats = stats.duplicate(true)
 	
-	stats.init_stats()
+	init_stats()
 	
 	# Initialize healthbar at start of level to max-health
 	healthbar.init_health(stats.max_health)
@@ -189,6 +190,21 @@ func _update_state_animation() -> void:
 	if anim_player.has_animation(full_name):
 		anim_player.play(full_name)
 		# print("full_name:", full_name)	# TESTING
+		
+
+# Initiate stats
+func init_stats():
+	# Scale stats based on level for enemy units
+	if is_friendly == false:
+		stats.max_health = stats.original_max_health + stats.health_gain * (enemy_level-1)
+		stats.phys_attack = stats.original_phys_attack + stats.phys_atk_gain * (enemy_level-1)
+		stats.mag_attack = stats.original_mag_attack + stats.mag_atk_gain * (enemy_level-1)
+		stats.phys_defense = stats.original_phys_defense + stats.phys_def_gain * (enemy_level-1)
+		stats.mag_defense = stats.original_mag_defense + stats.mag_def_gain * (enemy_level-1)
+		stats.crit_chance = stats.original_crit_chance + stats.crit_gain * (enemy_level-1)
+	
+	# Reset healt at start of battle
+	stats.curr_health = stats.max_health
 
 func get_sprite() -> Sprite2D:
 	var all_children = get_children()
