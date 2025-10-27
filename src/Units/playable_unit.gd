@@ -8,17 +8,21 @@ class_name playable_unit extends Node
 @onready var actions_menu: PanelContainer = $"../../../../GUI/Margin/ActionsMenu"
 @onready var actor_info: PanelContainer = $"../../../../GUI/Margin/ActorInfo"
 
-# --- Variables for movement ---
-var start_position: Vector2i
-var current_id_path: Array[Vector2i] = []
-var is_moving: bool = false
-var move_speed: float = 2.5
-var mobility: int = 3
-var attack_range: int = 1
-var attack_target: Actor = null
-var selected: bool = false
+# --- Variables ---
+var start_position: Vector2i	# Where the unit starts
 var origin_tile: Vector2i            # Tile where unit started its current turn
 var current_tile: Vector2i = Vector2i.ZERO	# Tile where unit is currently (after moving but not acting)
+var current_id_path: Array[Vector2i] = []	# Stores the movement-path of unit (updated as it moves)
+var display_path: Array = []	# Stores the displayed red line when moving
+
+var is_moving: bool = false
+var selected: bool = false
+
+var move_speed: float = 2.5
+var mobility: int = 3
+
+var attack_range: int = 1
+var attack_target: Actor = null	# Is the enemy unit this unit hass selected to attack
 
 
 func _ready() -> void:
@@ -34,53 +38,20 @@ func _set_stat_variables() -> void:
 	#move_speed = stats.speed
 	attack_range = stats.attack_range
 
-# --- UTIL ---
-
-# Returns two arrays containing tiles within mobility-range and mobility-attack-range 
-func get_range_tiles() -> Dictionary:
-	var move_tiles: Array[Vector2i] = []
-	var range_tiles: Array[Vector2i] = []
-
-	var parent = get_parent()
-	var astar = parent.astar_grid
-	if not astar:
-		return {"move_tiles": move_tiles, "range_tiles": range_tiles}
-
-	var grid_size = astar.get_size()
-
-	for x in range(grid_size.x):
-		for y in range(grid_size.y):
-			var point = Vector2i(x, y)
-			if astar.is_point_solid(point):
-				continue
-
-			var path = astar.get_point_path(origin_tile, point)
-			if path.is_empty():
-				continue
-
-			# Within mobility range only
-			if path.size() - 1 <= mobility:
-				move_tiles.append(point)
-
-			# Within attack + mobility range
-			if path.size() - 1 <= mobility + attack_range:
-				range_tiles.append(point)
-
-	return {"move_tiles": move_tiles, "range_tiles": range_tiles}
-
-
 # --- Movement ---
-func move_to(tile: Vector2i) -> void:	# tile is a map tile (Vector2i)
-	
+func move_to(tile: Vector2i) -> void:
 	# Only move to new tile
 	if tile == origin_tile:
 		return
-	
+
 	# Get path
-	var id_path = get_parent().astar_grid.get_id_path(origin_tile, tile)  # compute path from origin_tile
+	var id_path = get_parent().astar_grid.get_id_path(origin_tile, tile)
 	if id_path.is_empty():
 		return
-	
+
+	# Store a copy for drawing purposes (the entire original route)
+	display_path = id_path.duplicate()
+
 	current_id_path = id_path
 	is_moving = true
 	draw_path.show()
@@ -94,8 +65,7 @@ func move_to(tile: Vector2i) -> void:	# tile is a map tile (Vector2i)
 		await get_tree().process_frame
 		
 	is_moving = false
-	draw_path.hide()
-	# don't set origin_tile here, only confirm_position() does that after acting
+	# Don't hide draw_path yet; keep visible until action or next move
 	current_tile = tile
 	
 	# When moved manually, clear attack target
@@ -204,6 +174,40 @@ func highlight_range() -> void:
 				range_tile_map.set_cell(0, point, 1, Vector2i(1, 1), 0)
 
 # --- UTIL ---
+
+# Returns two arrays containing tiles within mobility-range and mobility-attack-range 
+func get_range_tiles() -> Dictionary:
+	var move_tiles: Array[Vector2i] = []
+	var range_tiles: Array[Vector2i] = []
+
+	var parent = get_parent()
+	var astar = parent.astar_grid
+	if not astar:
+		return {"move_tiles": move_tiles, "range_tiles": range_tiles}
+
+	var grid_size = astar.get_size()
+
+	for x in range(grid_size.x):
+		for y in range(grid_size.y):
+			var point = Vector2i(x, y)
+			if astar.is_point_solid(point):
+				continue
+
+			var path = astar.get_point_path(origin_tile, point)
+			if path.is_empty():
+				continue
+
+			# Within mobility range only
+			if path.size() - 1 <= mobility:
+				move_tiles.append(point)
+
+			# Within attack + mobility range
+			if path.size() - 1 <= mobility + attack_range:
+				range_tiles.append(point)
+
+	return {"move_tiles": move_tiles, "range_tiles": range_tiles}
+
+
 func set_attack_target(target: Actor) -> void:
 	
 	# TODO: Make attack-button usable
@@ -225,6 +229,7 @@ func confirm_position() -> void:
 	origin_tile = tile_map.local_to_map(get_parent().global_position)
 	start_position = origin_tile
 	current_tile = origin_tile
+
 
 func calculate_direction(path: Array[Vector2i]):
 	var start = path[0]
