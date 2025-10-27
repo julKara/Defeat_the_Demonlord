@@ -15,6 +15,10 @@ run/main_scene="uid://fr5vqykbi54o"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout=""
+
 [autoload]
 
 BattleHandlerSingleton="*res://src/Gameplay/battle_handler.gd"
