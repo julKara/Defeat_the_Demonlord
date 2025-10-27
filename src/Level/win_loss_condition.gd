@@ -36,6 +36,7 @@ func win():
 	print("victory :3")
 	
 	# Pause game so that no more moves can be made
+	turn_manager.game_is_paused = true
 	get_tree().paused = true
 	
 	# Show victory screen
@@ -49,6 +50,7 @@ func win():
 	
 func lose():
 	print("game over :(")
+	turn_manager.game_is_paused = true
 	get_tree().paused = true
 	game_over_screen.show()
 	

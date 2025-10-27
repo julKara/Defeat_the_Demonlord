@@ -72,6 +72,7 @@ func _handle_playable_click(actor: Actor) -> void:
 	# Then select the clicked actor
 	_select_unit(actor)
 
+
 # Protocol for handeling click on a enemy
 func _handle_enemy_click(enemy: Actor) -> void:
 	
@@ -126,6 +127,7 @@ func _handle_enemy_click(enemy: Actor) -> void:
 		_deselect_unit(selected_unit)
 		selected_unit = null
 		enemy.get_behaviour().select(true)
+
 
 # Protocol for handeling clicks on non-units
 func _handle_empty_tile_click(click_tile: Vector2i) -> void:

@@ -11,6 +11,8 @@ enum Phase { PLAYER, ENEMY }	# The two possible phases
 
 # --- Imports ---
 @onready var actors: Node2D = $"../Actors"
+@onready var win_loss_condition: Node2D = $"../../WinLossCondition"
+var game_is_paused: bool = false
 
 
 # --- Variables ---
@@ -44,6 +46,10 @@ func _initialize_turn_order() -> void:
 
 # Cleans up prev turn and sets up the current one (player starts when level starts)
 func start_phase(phase: Phase) -> void:
+	
+	# Stop phase if game is paused
+	if game_is_paused:
+		return
 	
 	# Delay between phases, TODO: Add transitions
 	await get_tree().create_timer(1.0).timeout
@@ -86,11 +92,16 @@ func end_turn() -> void:
 # Triggers defeat TAG: MIRIJAM LOSE-CONDITION
 func _trigger_defeat() -> void:
 	print("\nDefeat! Max turns reached!")
-	# TODO: call game over logic here.
+	game_is_paused = true
+	win_loss_condition.lose()
 
 
 # --- PLAYER TURN HANDLING ---
 func _next_player_unit() -> void:
+	
+	# Stop phase if game is paused
+	if game_is_paused:
+		return
 	
 	# Get next playable unit is queue
 	var next_unit: Actor = null
@@ -158,6 +169,10 @@ func _next_enemy_unit() -> void:
 		# Test if unit survivied the attack
 		if next_unit != null:
 			next_unit.acted = true
+			
+		# Stop phase if game is paused
+		if game_is_paused:
+			return
 			
 		# Auto-advance in queue, might add a delay
 		_next_enemy_unit()
