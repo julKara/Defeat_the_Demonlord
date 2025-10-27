@@ -257,7 +257,10 @@ func attack():
 
 	print("\t\tTarget selected: ", attack_target.profile.character_name)
 
-	if attack_target != null:
+	var attack_path = (astar_grid.get_id_path(tile_map.local_to_map(get_parent().global_position),
+			tile_map.local_to_map(attack_target.global_position)))
+
+	if attack_path.size() <= attack_range + 1 && attack_target != null:
 		# Set up attacker and target, and define damage from physical attack stat
 		var attacker: Actor = get_parent()
 		var target: Actor = attack_target

@@ -10,8 +10,10 @@ extends Node2D
 enum Phase { PLAYER, ENEMY }	# The two possible phases
 
 # --- Imports ---
-@onready var actors: Node2D = $"../Actors"
+@onready var character_manager: Node2D = $"../CharacterManager"
 @onready var win_loss_condition: Node2D = $"../../WinLossCondition"
+@onready var tile_map: TileMap = $"../../TileMap"
+
 var game_is_paused: bool = false
 
 
@@ -35,7 +37,7 @@ func _initialize_turn_order() -> void:
 	enemy_queue.clear()
 	
 	# Sort units into player/enemy queue
-	for actor in actors.get_children():
+	for actor in character_manager.character_list:
 		if actor.is_friendly:
 			player_queue.append(actor)
 		else:
@@ -50,6 +52,13 @@ func start_phase(phase: Phase) -> void:
 	# Stop phase if game is paused
 	if game_is_paused:
 		return
+		
+	# Reset all actor grids to the clean base version before the enemy phase	# FIX
+	for actor in character_manager.character_list:
+		if actor.has_method("reset_astar_grid"):
+			print("Reset!")
+			actor.reset_astar_grid()
+
 	
 	# Delay between phases, TODO: Add transitions
 	await get_tree().create_timer(1.0).timeout
@@ -82,6 +91,7 @@ func end_turn() -> void:
 	# print("--- Turn %d ended." % current_turn)
 	current_turn += 1
 	print("\n--- Turn %d start!\n" % current_turn)
+	
 	
 	# Check if level is over, otherwise move on to next player-phase
 	if current_turn > max_turns:
@@ -149,6 +159,7 @@ func _next_enemy_unit() -> void:
 		if not unit.acted:
 			next_unit = unit
 			break
+			
 	
 	# If queue is empty, end phase
 	if next_unit == null:
