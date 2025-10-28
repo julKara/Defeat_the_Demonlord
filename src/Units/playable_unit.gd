@@ -9,6 +9,7 @@ class_name playable_unit extends Node
 @onready var actor_info: PanelContainer = $"../../../../GUI/Margin/ActorInfo"
 @onready var turn_manager: Node2D = $"../../../TurnManager"
 @onready var default_attack: Button = $"../../../../GUI/Margin/ActionsMenu/VBoxContainer/Default_Attack"
+@onready var skill_menu: PanelContainer = $"../../../../GUI/Margin/SkillMenu"
 
 
 
@@ -162,6 +163,7 @@ func deselect() -> void:
 	draw_path.hide()
 	
 	# Hide GUI-elements
+	skill_menu.hide_skill_menu()	# Must be first
 	actions_menu.hide()
 	actor_info.hide_actor_info()
 	

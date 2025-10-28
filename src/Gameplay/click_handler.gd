@@ -314,10 +314,13 @@ func _find_level_nodes() -> void:
 				if margin:
 					var actions_menu = margin.get_node_or_null("ActionsMenu")
 					var actor_info = margin.get_node_or_null("ActorInfo")
+					var skill_menu = margin.get_node_or_null("SkillMenu")
 					if actions_menu:
 						ui_nodes.append(actions_menu)
 					if actor_info:
 						ui_nodes.append(actor_info)
+					if skill_menu:
+						ui_nodes.append(skill_menu)
 
 			#level_active = true
 			print("ClickHandler: Found level nodes for ", node.name)
