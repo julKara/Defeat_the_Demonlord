@@ -223,16 +223,16 @@ metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
 [sub_resource type="Resource" id="Resource_w6ebu"]
 script = ExtResource("6_wiikb")
-curr_health = 90
-max_health = 90
+curr_health = 100
+max_health = 100
 original_max_health = 100
 phys_attack = 20
 original_phys_attack = 20
-mag_attack = 80
+mag_attack = 100
 original_mag_attack = 100
 phys_defense = 10
 original_phys_defense = 10
-mag_defense = 20
+mag_defense = 30
 original_mag_defense = 30
 crit_chance = 10
 original_crit_chance = 10
@@ -252,16 +252,16 @@ metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
 [sub_resource type="Resource" id="Resource_ir1sj"]
 script = ExtResource("6_wiikb")
-curr_health = 90
-max_health = 90
+curr_health = 100
+max_health = 100
 original_max_health = 100
 phys_attack = 20
 original_phys_attack = 20
-mag_attack = 80
+mag_attack = 100
 original_mag_attack = 100
 phys_defense = 10
 original_phys_defense = 10
-mag_defense = 20
+mag_defense = 30
 original_mag_defense = 30
 crit_chance = 10
 original_crit_chance = 10

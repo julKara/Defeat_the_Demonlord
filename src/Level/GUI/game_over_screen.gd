@@ -28,3 +28,4 @@ func _on_return_pressed() -> void:
 	# If the filepath is valid, change scene to the selected level
 	if FileAccess.file_exists(level_select):
 		get_tree().change_scene_to_file(level_select)
+		AudioManager.update_music_for_scene("Menu")

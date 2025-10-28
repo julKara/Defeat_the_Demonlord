@@ -23,6 +23,7 @@ buses/default_bus_layout=""
 
 BattleHandlerSingleton="*res://src/Gameplay/battle_handler.gd"
 ClickHandler="*res://src/Gameplay/click_handler.gd"
+AudioManager="*res://src/Audio/audio_manager.tscn"
 
 [display]
 

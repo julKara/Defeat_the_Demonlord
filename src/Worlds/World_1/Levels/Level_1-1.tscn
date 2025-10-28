@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://fr5vqykbi54o"]
+[gd_scene load_steps=32 format=4 uid="uid://fr5vqykbi54o"]
 
 [ext_resource type="Texture2D" uid="uid://bqmtavn12rhj2" path="res://assets/test_map5.png" id="1_bq4wg"]
 [ext_resource type="Texture2D" uid="uid://bdy0m0gr2tme3" path="res://assets/level_art/48x48_Tileset/pipo-map001.png" id="2_6mxkn"]
@@ -19,8 +19,6 @@
 [ext_resource type="Script" uid="uid://nm7v2oerrihf" path="res://src/Level/win_loss_condition.gd" id="15_6mxkn"]
 [ext_resource type="Script" uid="uid://sehkuo2xbwos" path="res://src/Worlds/world_tracker.gd" id="18_hhk72"]
 [ext_resource type="Resource" uid="uid://b7d426jw88wxl" path="res://src/Worlds/world_handler.tres" id="19_8y1rk"]
-[ext_resource type="Script" uid="uid://d1imvo430o74g" path="res://src/Audio/audio_manager.gd" id="20_8y1rk"]
-[ext_resource type="AudioStream" uid="uid://e7woog4arwtu" path="res://assets/Audio/Music/Battle/Battle_Music_1.ogg" id="21_na0ed"]
 
 [sub_resource type="GDScript" id="GDScript_ic0uy"]
 script/source = "extends Node2D
@@ -312,12 +310,6 @@ script/source = "extends CanvasLayer
 	#info_vbox.get_child(1).text = \"HP: \" + str(actor.stats.curr_health) + \"/\" + str(actor.stats.max_health)
 "
 
-[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_0yevp"]
-clip_count = 1
-clip_0/name = &"Battle"
-clip_0/stream = ExtResource("21_na0ed")
-clip_0/auto_advance = 0
-
 [node name="Level_1-1" type="Node2D"]
 script = SubResource("GDScript_ic0uy")
 
@@ -493,16 +485,6 @@ script = ExtResource("15_6mxkn")
 [node name="WorldHandler" type="Node" parent="."]
 script = ExtResource("18_hhk72")
 world_script = ExtResource("19_8y1rk")
-
-[node name="AudioManager" type="Node" parent="."]
-script = ExtResource("20_8y1rk")
-
-[node name="BackgroundMusicPlayer" type="AudioStreamPlayer" parent="AudioManager"]
-process_mode = 3
-stream = SubResource("AudioStreamInteractive_0yevp")
-volume_db = -10.0
-autoplay = true
-bus = &"music"
 
 [connection signal="pressed" from="GUI/Margin/VictoryScreen/Continue" to="GUI/Margin/VictoryScreen" method="_on_continue_pressed"]
 [connection signal="pressed" from="GUI/Margin/GameOverScreen/HBoxContainer/Retry" to="GUI/Margin/GameOverScreen" method="_on_retry_pressed"]

@@ -38,4 +38,5 @@ func change_to_scene(level_num:int):
 		get_tree().change_scene_to_file(next_level)
 		world_handler.world_script.set_current_level(level_num)
 		world_handler._save_game()
+		AudioManager.update_music_for_scene("Battle")
 	
