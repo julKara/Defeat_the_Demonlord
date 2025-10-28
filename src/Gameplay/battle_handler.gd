@@ -42,9 +42,10 @@ func perform_battle(attacker: Actor, defender: Actor, distance: float, path: Arr
 	var atk_prof: UnitProfile = attacker.profile
 	var def_prof: UnitProfile = defender.profile
 
-	# 1. Play attack animation and wait for it to finish
+	# 1. Play attack animation and sfx, and wait for it to finish
 	attacker.get_behaviour().calculate_direction(path) # Flip sprite based on attack direction
-	await _play_animation(attacker)
+	_play_attack_sfx(attacker) # Play attack sfx
+	await _play_animation(attacker) # Play attack animation
 	
 	# 2. Calculate damage based on stats
 	var damage: float = _calculate_damage(atk_stats, def_stats)
@@ -91,6 +92,12 @@ func _play_animation(attacker: Actor) -> void:
 
 	# 4. Return to idle state
 	attacker.set_state(attacker.UnitState.IDLE)
+
+func _play_attack_sfx(attacker: Actor) -> void:
+	# Set the audio clip to the attack sfx
+	attacker.audio_player["parameters/switch_to_clip"] = "Attack"
+	# Play sound
+	attacker.audio_player.play()
 
 # Calculates base damage between two CharacterStats
 func _calculate_damage(atk: CharacterStats, def: CharacterStats) -> float:

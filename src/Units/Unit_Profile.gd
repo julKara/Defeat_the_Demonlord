@@ -14,6 +14,7 @@ class_name UnitProfile extends Resource
 @export var battle_class_type : String = "Class"
 @export var sprite: Texture2D
 @export var animation: AnimationLibrary
+@export var audio: AudioStreamInteractive
 
 # TODO:
 # @export var skills: Array[Resource] = []    # Each skill can be its own Resource later

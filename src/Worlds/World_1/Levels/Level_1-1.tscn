@@ -172,7 +172,7 @@ texture_region_size = Vector2i(48, 48)
 tile_size = Vector2i(48, 48)
 sources/1 = SubResource("TileSetAtlasSource_tlwt5")
 
-[sub_resource type="Resource" id="Resource_na0ed"]
+[sub_resource type="Resource" id="Resource_hhk72"]
 resource_name = "mageStats"
 script = ExtResource("6_8y1rk")
 curr_health = 100
@@ -202,7 +202,7 @@ mag_def_gain = 10
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_0yevp"]
+[sub_resource type="Resource" id="Resource_8y1rk"]
 resource_name = "knightStats"
 script = ExtResource("6_8y1rk")
 curr_health = 200
@@ -232,7 +232,7 @@ mag_def_gain = 0
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_rveb5"]
+[sub_resource type="Resource" id="Resource_na0ed"]
 script = ExtResource("6_8y1rk")
 curr_health = 50
 max_health = 50
@@ -261,7 +261,7 @@ mag_def_gain = 5
 crit_gain = 1
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_esv70"]
+[sub_resource type="Resource" id="Resource_0yevp"]
 script = ExtResource("6_8y1rk")
 curr_health = 50
 max_health = 50
@@ -349,27 +349,25 @@ script = ExtResource("4_0yevp")
 
 [node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
 position = Vector2(120, 120)
-stats = SubResource("Resource_na0ed")
+stats = SubResource("Resource_hhk72")
 profile = ExtResource("6_hhk72")
-enemy_level = 0
 is_friendly = true
 
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
 position = Vector2(168, 168)
-stats = SubResource("Resource_0yevp")
+stats = SubResource("Resource_8y1rk")
 profile = ExtResource("7_8y1rk")
-enemy_level = 0
 is_friendly = true
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
 position = Vector2(168, 264)
-stats = SubResource("Resource_rveb5")
+stats = SubResource("Resource_na0ed")
 profile = ExtResource("10_0yevp")
 enemy_level = 1
 
 [node name="enemy_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
 position = Vector2(312, 168)
-stats = SubResource("Resource_esv70")
+stats = SubResource("Resource_0yevp")
 profile = ExtResource("10_0yevp")
 enemy_level = 1
 

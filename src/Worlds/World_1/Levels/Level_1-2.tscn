@@ -340,14 +340,12 @@ script = ExtResource("4_ngnys")
 position = Vector2(120, 120)
 stats = SubResource("Resource_135in")
 profile = ExtResource("6_5kkfe")
-enemy_level = 0
 is_friendly = true
 
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_ir1sj")]
 position = Vector2(360, 264)
 stats = SubResource("Resource_wiikb")
 profile = ExtResource("7_5r37h")
-enemy_level = 0
 is_friendly = true
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_ir1sj")]

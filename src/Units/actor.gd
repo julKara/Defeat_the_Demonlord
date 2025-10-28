@@ -31,7 +31,7 @@ var behavior: Node = null	# Decides behavior based on if unit is playable, enemy
 @onready var sprite_2d: Sprite2D = $Sprite	# Just the default sprite to all characters
 @onready var anim_player: AnimationPlayer = $AnimationPlayer	# Used to play animations
 @onready var healthbar: ProgressBar = $Healthbar	# The units healthbar, gets set up in _ready()
-
+@onready var audio_player: AudioStreamPlayer = $AudioPlayer
 
 # --- Refrences to objects in level ---
 @onready var tile_map: TileMap = $"../../../TileMap"
@@ -165,6 +165,10 @@ func _apply_profile() -> void:
 			print("Added animation library:", anim_library_name)
 		#else:
 			#print("Library already exists:", anim_library_name)
+	
+	# Connect the audio from the profile to the characters audio player		
+	if audio_player and profile.audio:
+		audio_player.stream = profile.audio
 
 # Updates current_state and calls update-animation
 func set_state(new_state: UnitState) -> void:
