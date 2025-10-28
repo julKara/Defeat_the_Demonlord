@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://defgyaxcewcwg"]
+[gd_scene load_steps=9 format=3 uid="uid://defgyaxcewcwg"]
 
 [ext_resource type="Script" uid="uid://d1imvo430o74g" path="res://src/Audio/audio_manager.gd" id="1_h88su"]
 [ext_resource type="AudioStream" uid="uid://e7woog4arwtu" path="res://assets/Audio/Music/Battle/Battle_Music_1.ogg" id="2_o66j1"]
 [ext_resource type="AudioStream" uid="uid://ceqde118a2e0g" path="res://assets/Audio/Music/Menu/Menu_Music_1.ogg" id="3_yslcm"]
 [ext_resource type="AudioStream" uid="uid://drivleu884biu" path="res://assets/Audio/SoundEffects/Click/Click 1.wav" id="4_o66j1"]
+[ext_resource type="AudioStream" uid="uid://dk11h4r8ssfw5" path="res://assets/Audio/SoundEffects/WinLoss/Victory 1.wav" id="5_f0ev6"]
+[ext_resource type="AudioStream" uid="uid://uh3imp8o21sm" path="res://assets/Audio/SoundEffects/WinLoss/Game Over 1.wav" id="6_iopov"]
 
 [sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_f0ev6"]
 clip_count = 2
@@ -29,10 +31,54 @@ Vector2i(1, 0): {
 }
 
 [sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_yslcm"]
-clip_count = 1
+clip_count = 3
 clip_0/name = &"Click"
 clip_0/stream = ExtResource("4_o66j1")
 clip_0/auto_advance = 0
+clip_1/name = &"Victory"
+clip_1/stream = ExtResource("5_f0ev6")
+clip_1/auto_advance = 0
+clip_2/name = &"Loss"
+clip_2/stream = ExtResource("6_iopov")
+clip_2/auto_advance = 0
+_transitions = {
+Vector2i(0, 1): {
+"fade_beats": 1.0,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 1
+},
+Vector2i(0, 2): {
+"fade_beats": 1.0,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 1
+},
+Vector2i(1, 0): {
+"fade_beats": 1.0,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 1
+},
+Vector2i(1, 2): {
+"fade_beats": 1.0,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 1
+},
+Vector2i(2, 0): {
+"fade_beats": 1.0,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 1
+},
+Vector2i(2, 1): {
+"fade_beats": 1.0,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 1
+}
+}
 
 [node name="AudioManager" type="Node" node_paths=PackedStringArray("music_player", "sfx_player")]
 script = ExtResource("1_h88su")

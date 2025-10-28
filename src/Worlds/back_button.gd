@@ -2,7 +2,7 @@ extends Button
 
 func _pressed() -> void:
 	# Play click sound
-	AudioManager.sfx_player.play()
+	AudioManager.play_sfx("Click")
 	
 	var back: String = "res://src/Worlds/world_select.tscn"
 

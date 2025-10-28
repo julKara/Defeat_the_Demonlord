@@ -11,7 +11,7 @@ func _ready() -> void:
 # Restart level
 func _on_retry_pressed() -> void:
 	# Play click sound
-	AudioManager.sfx_player.play()
+	AudioManager.play_sfx("Click")
 	
 	# Unpause game
 	get_tree().paused = false
@@ -23,7 +23,7 @@ func _on_retry_pressed() -> void:
 # Return to level select
 func _on_return_pressed() -> void:
 	# Play click sound
-	AudioManager.sfx_player.play()
+	AudioManager.play_sfx("Click")
 	
 	#Unpause game
 	get_tree().paused = false

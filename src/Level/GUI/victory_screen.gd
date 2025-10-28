@@ -14,7 +14,7 @@ func _ready() -> void:
 func _on_continue_pressed() -> void:
 	
 	# Play click sound
-	AudioManager.sfx_player.play()
+	AudioManager.play_sfx("Click")
 	
 	# Unpause game
 	get_tree().paused = false

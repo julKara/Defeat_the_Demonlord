@@ -6,7 +6,7 @@ extends Button
 func _pressed():
 	
 	# Play click sound
-	AudioManager.sfx_player.play()
+	AudioManager.play_sfx("Click")
 	
 	world_handler._create_save()
 	

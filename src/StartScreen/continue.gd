@@ -13,7 +13,7 @@ func _ready():
 func _pressed():
 	
 	# Play click sound
-	AudioManager.sfx_player.play()
+	AudioManager.play_sfx("Click")
 	
 	# If a save file exists -> load the save and move to world select
 	if world_handler._check_save() == true:

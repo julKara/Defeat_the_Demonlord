@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dk11h4r8ssfw5"
+path="res://.godot/imported/Victory 1.wav-574930713841e4911d835fd097eb363f.sample"
+
+[deps]
+
+source_file="res://assets/Audio/SoundEffects/WinLoss/Victory 1.wav"
+dest_files=["res://.godot/imported/Victory 1.wav-574930713841e4911d835fd097eb363f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

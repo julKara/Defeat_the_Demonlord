@@ -33,10 +33,3 @@
 * Trailer/preview - Mirijam
 
 * Code-explaination.
-
-## Missing sounds:
-* Victory music
-* Loss music
-* Button click
-* *Better Battle music*
-* *Better Menu music*

@@ -7,3 +7,8 @@ extends Node
 func update_music_for_scene(scene: String):
 	var scene_music = str(scene + "Music")
 	music_player["parameters/switch_to_clip"] = scene_music
+
+func play_sfx(scene: String):
+	sfx_player["parameters/switch_to_clip"] = scene
+	sfx_player.play()
+	

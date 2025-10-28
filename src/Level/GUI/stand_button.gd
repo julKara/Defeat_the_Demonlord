@@ -8,7 +8,7 @@ extends Button
 
 func _pressed() -> void:
 	# Play click sound
-	AudioManager.sfx_player.play()
+	AudioManager.play_sfx("Click")
 	
 	var current = character_manager.current_character
 	turn_manager.end_player_unit_turn(current)

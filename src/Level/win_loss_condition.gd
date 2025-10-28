@@ -41,6 +41,9 @@ func win():
 	# Show victory screen
 	victory_screen.show()
 	
+	# Play victory sound
+	AudioManager.play_sfx("Victory")
+	
 	# If this was the latest level -> unlock the next one
 	if current_world == worlds_unlocked and current_level == levels_unlocked:
 		world_handler.world_script.unlock_next_level()
@@ -50,7 +53,12 @@ func win():
 func lose():
 	print("game over :(")
 	get_tree().paused = true
+	
+	# Show game over screen
 	game_over_screen.show()
+	
+	# Play loss sound
+	AudioManager.play_sfx("Loss")
 	
 func character_level_up():
 

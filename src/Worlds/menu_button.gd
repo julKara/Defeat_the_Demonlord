@@ -2,7 +2,7 @@ extends Button
 
 func _pressed():
 	# Play click sound
-	AudioManager.sfx_player.play()
+	AudioManager.play_sfx("Click")
 	
 	var main_menu: String = "res://src/StartScreen/start_menu.tscn"
 

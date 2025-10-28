@@ -94,6 +94,8 @@ func _play_animation(attacker: Actor) -> void:
 	attacker.set_state(attacker.UnitState.IDLE)
 
 func _play_attack_sfx(attacker: Actor) -> void:
+	# Add a slight delay since it sounds better
+	await get_tree().create_timer(0.1).timeout
 	# Set the audio clip to the attack sfx
 	attacker.audio_player["parameters/switch_to_clip"] = "Attack"
 	# Play sound
