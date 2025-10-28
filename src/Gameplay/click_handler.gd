@@ -319,7 +319,7 @@ func _find_level_nodes() -> void:
 					if actor_info:
 						ui_nodes.append(actor_info)
 
-			level_active = true
+			#level_active = true
 			print("ClickHandler: Found level nodes for ", node.name)
 			return
 

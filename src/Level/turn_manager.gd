@@ -14,20 +14,22 @@ enum Phase { PLAYER, ENEMY }	# The two possible phases
 @onready var win_loss_condition: Node2D = $"../../WinLossCondition"
 @onready var tile_map: TileMap = $"../../TileMap"
 
-var game_is_paused: bool = false
-
 
 # --- Variables ---
 @export var max_turns: int = 10
+var game_is_paused: bool = false
+var skip_first_delay: bool = false
+
 var current_turn: int = 1
 var current_phase: Phase = Phase.PLAYER	# Player always start
 var player_queue: Array = []
 var enemy_queue: Array = []
 
+
 func _ready() -> void:
-	await get_tree().create_timer(0.01).timeout
+	await get_tree().create_timer(0.01).timeout	
 	_initialize_turn_order()
-	start_phase(Phase.PLAYER)
+	start_first_turn(Phase.PLAYER)
 
 # --- INITIAL SETUP ---
 func _initialize_turn_order() -> void:
@@ -46,6 +48,12 @@ func _initialize_turn_order() -> void:
 
 # --- PHASE CONTROL ---
 
+func start_first_turn(phase: Phase) -> void:
+	
+	await get_tree().create_timer(1.0).timeout	# Play start-animation
+	ClickHandler.level_active = true
+	start_phase(phase)
+
 # Cleans up prev turn and sets up the current one (player starts when level starts)
 func start_phase(phase: Phase) -> void:
 	
@@ -58,9 +66,10 @@ func start_phase(phase: Phase) -> void:
 		if actor.has_method("reset_astar_grid"):
 			actor.reset_astar_grid()
 
-	
-	# Delay between phases, TODO: Add transitions
-	await get_tree().create_timer(1.0).timeout
+	if skip_first_delay:
+		# Delay between phases, TODO: Add transitions
+		await get_tree().create_timer(1.0).timeout
+	skip_first_delay = true
 	
 	current_phase = phase
 	match phase:

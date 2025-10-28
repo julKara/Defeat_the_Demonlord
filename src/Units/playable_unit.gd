@@ -238,7 +238,6 @@ func get_range_tiles() -> Dictionary:
 
 	# Work from base grid (terrain-only) to check walkability
 	get_parent().reset_astar_grid()
-	var base_grid: AStarGrid2D = get_parent().astar_grid
 
 	# Add all enemies at their position to array, for check later
 	var actor_at_tile := {}
