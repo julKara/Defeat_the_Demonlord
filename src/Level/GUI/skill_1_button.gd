@@ -52,7 +52,7 @@ func _show_skill_info(skill: SkillResource) -> void:
 
 
 func _use_skill(actor, skill: SkillResource) -> void:
-	print("\t%s tries to use %s!" % [actor.name, skill.skill_name])
+	print("\t%s uses %s!" % [actor.name, skill.skill_name])
 	
 	# Determine target (you can later expand this)
 	var target = ClickHandler.selected_unit.get_behaviour().attack_target
