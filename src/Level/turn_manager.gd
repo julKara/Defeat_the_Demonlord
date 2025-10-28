@@ -53,10 +53,9 @@ func start_phase(phase: Phase) -> void:
 	if game_is_paused:
 		return
 		
-	# Reset all actor grids to the clean base version before the enemy phase	# FIX
+	# Reset all actor grids to the clean base version before the enemy phase
 	for actor in character_manager.character_list:
 		if actor.has_method("reset_astar_grid"):
-			print("Reset!")
 			actor.reset_astar_grid()
 
 	

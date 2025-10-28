@@ -98,7 +98,8 @@ func _ready() -> void:
 			if tile_data == null or tile_data.get_custom_data("walkable") == false:
 				astar_grid.set_point_solid(tile_position)
 	
-	base_astar_grid = astar_grid
+	# Make a clone of astar_grid so astar_grid can be "reset"
+	base_astar_grid = _clone_astar_grid(astar_grid)
 	
 	# Set friendly/enemy
 	is_friendly = is_friendly
@@ -193,12 +194,33 @@ func _update_state_animation() -> void:
 		anim_player.play(full_name)
 		# print("full_name:", full_name)	# TESTING
 
-# Resets atar back to before adding enemies
+# Resets astar back to before adding enemies
 func reset_astar_grid() -> void:
-	astar_grid = base_astar_grid
+	astar_grid = _clone_astar_grid(base_astar_grid)
 
+	
+# --- Get functions ---
 func get_sprite() -> Sprite2D:
 	return sprite_2d
 
 func get_behaviour() -> Node:
 	return behavior
+
+# --- UTIL ---
+
+# Clone astar_grid
+func _clone_astar_grid(src: AStarGrid2D) -> AStarGrid2D:
+	var new_grid := AStarGrid2D.new()
+	new_grid.region = src.region
+	new_grid.cell_size = src.cell_size
+	new_grid.diagonal_mode = src.diagonal_mode
+	new_grid.update()
+
+	# Copy solid state for each point
+	var size = src.get_size()
+	for x in size.x:
+		for y in size.y:
+			var pos = Vector2i(x, y)
+			if src.is_point_solid(pos):
+				new_grid.set_point_solid(pos, true)
+	return new_grid

@@ -227,7 +227,7 @@ func get_range_tiles() -> Dictionary:
 			if path.size() > 0 and path.size() <= (mobility + attack_range + 1):
 				attack_tiles.append(pos)
 
-	# --- Add enemies to the appropriate visual range ---
+	# --- Add enemies to the appropriate visual range (since their tile will be "blank" otherwise)---
 	for enemy in turn_manager.enemy_queue:
 		
 		var enemy_tile := tile_map.local_to_map(enemy.global_position)
