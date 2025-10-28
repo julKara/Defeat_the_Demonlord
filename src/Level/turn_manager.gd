@@ -18,7 +18,6 @@ enum Phase { PLAYER, ENEMY }	# The two possible phases
 # --- Variables ---
 @export var max_turns: int = 10
 var game_is_paused: bool = false
-var skip_first_delay: bool = false
 
 var current_turn: int = 1
 var current_phase: Phase = Phase.PLAYER	# Player always start
@@ -29,7 +28,7 @@ var enemy_queue: Array = []
 func _ready() -> void:
 	await get_tree().create_timer(0.01).timeout	
 	_initialize_turn_order()
-	start_first_turn(Phase.PLAYER)
+	start_phase(Phase.PLAYER)
 
 # --- INITIAL SETUP ---
 func _initialize_turn_order() -> void:
@@ -48,12 +47,6 @@ func _initialize_turn_order() -> void:
 
 # --- PHASE CONTROL ---
 
-func start_first_turn(phase: Phase) -> void:
-	
-	await get_tree().create_timer(1.0).timeout	# Play start-animation
-	ClickHandler.level_active = true
-	start_phase(phase)
-
 # Cleans up prev turn and sets up the current one (player starts when level starts)
 func start_phase(phase: Phase) -> void:
 	
@@ -66,15 +59,14 @@ func start_phase(phase: Phase) -> void:
 		if actor.has_method("reset_astar_grid"):
 			actor.reset_astar_grid()
 
-	if skip_first_delay:
-		# Delay between phases, TODO: Add transitions
-		await get_tree().create_timer(1.0).timeout
-	skip_first_delay = true
+	# Delay between phases, TODO: Add transitions
+	await get_tree().create_timer(1.0).timeout
 	
 	current_phase = phase
 	match phase:
 		Phase.PLAYER:
 			print("--- Player Phase ---")
+			ClickHandler.level_active = true
 			_reset_acted_flag(player_queue)	# Clear the bool acted
 			_next_player_unit()	# Select next playable unit in queue
 		Phase.ENEMY:
@@ -85,6 +77,7 @@ func start_phase(phase: Phase) -> void:
 # Sets and start either player or enemy depending on the prev
 func end_phase() -> void:
 	if current_phase == Phase.PLAYER:
+		ClickHandler.level_active = false
 		start_phase(Phase.ENEMY)
 	else:
 		end_turn()
