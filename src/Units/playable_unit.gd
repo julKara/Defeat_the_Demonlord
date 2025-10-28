@@ -8,6 +8,8 @@ class_name playable_unit extends Node
 @onready var actions_menu: PanelContainer = $"../../../../GUI/Margin/ActionsMenu"
 @onready var actor_info: PanelContainer = $"../../../../GUI/Margin/ActorInfo"
 @onready var turn_manager: Node2D = $"../../../TurnManager"
+@onready var default_attack: Button = $"../../../../GUI/Margin/ActionsMenu/VBoxContainer/Default_Attack"
+
 
 
 # --- Variables ---
@@ -42,16 +44,32 @@ func _set_stat_variables() -> void:
 
 # --- Movement ---
 func move_to(tile: Vector2i) -> void:
-	# Only move to new tile
+	
+	# Only move to a new tile
 	if tile == origin_tile:
 		return
 
-	# Get path
-	var id_path = get_parent().astar_grid.get_id_path(origin_tile, tile)
-	if id_path.is_empty():
+	# Only allow movement within mobility range
+	var range_data = get_range_tiles()
+	var move_tiles: Array[Vector2i] = range_data.move_tiles
+	if tile not in move_tiles:
+		print("Destination not within mobility range!")
 		return
 
-	# Store a copy for drawing purposes (the entire original route)
+	# Reset grid and mark enemies as solid
+	get_parent().reset_astar_grid()
+	var grid = get_parent().astar_grid
+	for enemy in turn_manager.enemy_queue:
+		var pos := tile_map.local_to_map(enemy.global_position)
+		grid.set_point_solid(pos, true)
+
+	# Get safe path
+	var id_path = grid.get_id_path(origin_tile, tile)
+	if id_path.is_empty():
+		print("No path found, blocked by solid tiles!")
+		return
+
+	# Store a copy for drawing
 	display_path = id_path.duplicate()
 
 	current_id_path = id_path
@@ -67,14 +85,14 @@ func move_to(tile: Vector2i) -> void:
 		await get_tree().process_frame
 		
 	is_moving = false
-	# Don't hide draw_path yet; keep visible until action or next move
 	current_tile = tile
 	
-	# When moved manually, clear attack target
+	# Clear target visuals after moving
 	if attack_target != null:
 		var sprite = attack_target.get_node("Sprite")
 		sprite.material.set("shader_parameter/width", 0.0)
 		attack_target = null
+		default_attack.disabled = true
 
 
 # Reset back to origin_tile if moved but not acted
@@ -152,6 +170,7 @@ func deselect() -> void:
 		var sprite = attack_target.get_node("Sprite")
 		sprite.material.set("shader_parameter/width", 0.0)
 		attack_target = null
+		default_attack.disabled = true
 		
 # --- Range Highlight ---
 
@@ -271,7 +290,8 @@ func _effective_distance(a: Vector2i, b: Vector2i) -> int:
 
 func set_attack_target(target: Actor) -> void:
 	
-	# TODO: Make attack-button usable
+	# Make attack-button usable
+	default_attack.disabled = false
 	
 	# Remove highlight from previous target if any
 	if attack_target != null:

@@ -1,15 +1,14 @@
 extends Button
 
 @onready var character_manager: Node2D = $"../../../../../TileMapLayer/CharacterManager"
-#@onready var battle_handler: BattleHandler = $"../../../../../BattleHandler"
 @onready var turn_manager: Node2D = $"../../../../../TileMapLayer/TurnManager"
 @onready var tile_map: TileMap = $"../../../../../TileMap"
-
-
 var battle_handler: Node = null
+
 
 func _ready() -> void:
 	battle_handler = BattleHandlerSingleton
+	disabled = true	# Buttons are disabled on start
 
 func _pressed() -> void:
 	

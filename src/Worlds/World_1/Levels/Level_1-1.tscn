@@ -290,7 +290,6 @@ layer_1/name = "Effects1"
 layer_2/name = "Effects2"
 
 [node name="Background" type="ColorRect" parent="."]
-visible = false
 custom_minimum_size = Vector2(600, 400)
 offset_right = 600.0
 offset_bottom = 400.0
@@ -331,12 +330,12 @@ profile = ExtResource("7_8y1rk")
 is_friendly = true
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
-position = Vector2(120, 168)
+position = Vector2(456, 312)
 stats = SubResource("Resource_na0ed")
 profile = ExtResource("10_0yevp")
 
 [node name="enemy_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
-position = Vector2(408, 168)
+position = Vector2(456, 120)
 stats = SubResource("Resource_0yevp")
 profile = ExtResource("10_0yevp")
 
@@ -364,6 +363,7 @@ script = ExtResource("10_rveb5")
 
 [node name="Use_Skill" type="Button" parent="GUI/Margin/ActionsMenu/VBoxContainer"]
 layout_mode = 2
+disabled = true
 text = "Skill"
 
 [node name="Pass_Turn" type="Button" parent="GUI/Margin/ActionsMenu/VBoxContainer"]
