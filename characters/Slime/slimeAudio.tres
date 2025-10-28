@@ -1,0 +1,9 @@
+[gd_resource type="AudioStreamInteractive" load_steps=2 format=3 uid="uid://ctkacgr4rwjrj"]
+
+[ext_resource type="AudioStream" uid="uid://c8r0d1afae8v3" path="res://assets/Audio/SoundEffects/Slime/Slime Attack 1.wav" id="1_m5mdx"]
+
+[resource]
+clip_count = 1
+clip_0/name = &"Attack"
+clip_0/stream = ExtResource("1_m5mdx")
+clip_0/auto_advance = 0

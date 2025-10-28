@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cnq5sivude4o5" path="res://assets/character_art/Slime/Slime_Default_Attack_f2.png" id="8_ni625"]
 [ext_resource type="Texture2D" uid="uid://iy0guybfk7x6" path="res://assets/character_art/Slime/Slime_Default_Attack_f3.png" id="9_gdso5"]
 [ext_resource type="Texture2D" uid="uid://cfxaybx45nead" path="res://assets/character_art/Slime/Slime_Default_Attack_f4.png" id="10_tbjoy"]
-[ext_resource type="AudioStream" uid="uid://blma88qxyui5g" path="res://characters/Knight/knightAudio.tres" id="13_ni625"]
+[ext_resource type="AudioStream" uid="uid://ctkacgr4rwjrj" path="res://characters/Slime/slimeAudio.tres" id="13_ni625"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s4pr6"]
 resource_local_to_scene = true
@@ -161,6 +161,7 @@ one_shot = true
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_ni625")
-volume_db = -5.0
+volume_db = -2.0
+bus = &"sfx"
 
 [connection signal="timeout" from="Healthbar/Timer" to="Healthbar" method="_on_timer_timeout"]

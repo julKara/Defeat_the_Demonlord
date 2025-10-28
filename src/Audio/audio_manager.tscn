@@ -36,3 +36,4 @@ process_mode = 3
 stream = SubResource("AudioStreamInteractive_f0ev6")
 volume_db = -10.0
 autoplay = true
+bus = &"music"

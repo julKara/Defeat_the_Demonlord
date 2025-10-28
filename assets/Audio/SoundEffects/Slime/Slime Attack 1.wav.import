@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c8r0d1afae8v3"
+path="res://.godot/imported/Slime Attack 1.wav-3ab83a6e40164e8177b79db3c5474750.sample"
+
+[deps]
+
+source_file="res://assets/Audio/SoundEffects/Slime/Slime Attack 1.wav"
+dest_files=["res://.godot/imported/Slime Attack 1.wav-3ab83a6e40164e8177b79db3c5474750.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
