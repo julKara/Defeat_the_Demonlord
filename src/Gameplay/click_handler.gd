@@ -110,7 +110,7 @@ func _handle_enemy_click(enemy: Actor) -> void:
 
 	# --- Case 1: If enemy is already within attack-range, do not move, only select target
 	if _is_enemy_in_attack_range(current_tile, enemy_pos, attack_range):
-		print("Enemy already within attack range — no movement needed.")
+		#print("Enemy already within attack range — no movement needed.")
 		playable_behaviour.set_attack_target(enemy)
 		return
 

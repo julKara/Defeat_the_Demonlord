@@ -178,83 +178,95 @@ func highlight_range() -> void:
 # Returns two arrays containing tiles within mobility-range and mobility-attack-range 
 func get_range_tiles() -> Dictionary:
 	
-	# Gets returned
+	# The two returns
 	var move_tiles: Array[Vector2i] = []
 	var attack_tiles: Array[Vector2i] = []
 
-	# --- move_tiles ---
-	
-	# Always start from base grid (terrain-only)
-	get_parent().reset_astar_grid()
+	# Test astar
+	var parent = get_parent()
+	var astar = parent.astar_grid
+	if not astar:
+		return {"move_tiles": move_tiles, "attack_tiles": attack_tiles}
+
+	# --- 1. Compute move_tiles using a grid where enemies are solid (can't move into them)
+	get_parent().reset_astar_grid()	# Reset just in case
 	var grid: AStarGrid2D = get_parent().astar_grid
 
 	# Mark enemy positions as solid so they block mobility
 	for enemy in turn_manager.enemy_queue:
-		var pos := tile_map.local_to_map(enemy.global_position)
-		grid.set_point_solid(pos, true)
+		var epos := tile_map.local_to_map(enemy.global_position)
+		grid.set_point_solid(epos, true)
 
 	var grid_size := grid.get_size()
 	
-	# Loop through grid to set path and add tiles to move_tiles
-	for x in grid_size.x:
-		for y in grid_size.y:
+	for x in range(grid_size.x):
+		for y in range(grid_size.y):
 			
 			var pos = Vector2i(x, y)
-			if grid.is_point_solid(pos):
+			if grid.is_point_solid(pos):	# Skip solid tiles
 				continue
-			
+				
+			# Add tiles within mobility-range to move_tiles
 			var path := grid.get_id_path(origin_tile, pos)
 			if path.size() > 0 and path.size() <= (mobility + 1):
 				move_tiles.append(pos)
 
-	# --- attack_tiles ---
-	
-	# Reuse base grid (not marking enemies solid)
+	# --- 2. Compute attack_tiles by expanding from each reachable tile and origin
+	# REMINDER: Effective distance where diagonals cost +1 (aka range less over diagonals)
+
+	# Copy move_tiles to not change anything
+	var move_to_tiles: Array[Vector2i] = move_tiles.duplicate()
+
+	# Work from base grid (terrain-only) to check walkability
 	get_parent().reset_astar_grid()
-	grid = get_parent().astar_grid
+	var base_grid: AStarGrid2D = get_parent().astar_grid
 
-	for x in grid_size.x:
-		for y in grid_size.y:
-			
-			var pos = Vector2i(x, y)
-			var tile_data = tile_map.get_cell_tile_data(0, pos)
-			
-			# Skip tiles that is not walkable (red), cannot attack those
-			if tile_data == null or tile_data.get_custom_data("walkable") == false:
-				continue
-			
-			var path := grid.get_id_path(origin_tile, pos)
-			if path.size() > 0 and path.size() <= (mobility + attack_range + 1):
-				attack_tiles.append(pos)
-
-	# --- Add enemies to the appropriate visual range (since their tile will be "blank" otherwise)---
+	# Add all enemies at their position to array, for check later
+	var actor_at_tile := {}
 	for enemy in turn_manager.enemy_queue:
-		
-		var enemy_tile := tile_map.local_to_map(enemy.global_position)
+		actor_at_tile[tile_map.local_to_map(enemy.global_position)] = enemy
 
-		# Skip enemies on non-walkable terrain (just safety)
-		#var tile_data = tile_map.get_cell_tile_data(0, enemy_tile)
-		#if tile_data == null or tile_data.get_custom_data("walkable") == false:
-			#continue
+	var attack_set := {}
+	for tile in move_to_tiles:
+		var min_x = max(0, tile.x - attack_range)
+		var max_x = min(grid_size.x - 1, tile.x + attack_range)
+		var min_y = max(0, tile.y - attack_range)
+		var max_y = min(grid_size.y - 1, tile.y + attack_range)
 
-		# Compute the effective distance (same logic as _is_enemy_in_attack_range)
-		var dx = abs(origin_tile.x - enemy_tile.x)
-		var dy = abs(origin_tile.y - enemy_tile.y)
-		var eff_dist = max(dx, dy)
-		if dx > 0 and dy > 0:
-			eff_dist += 1
+		for tx in range(min_x, max_x + 1):
+			for ty in range(min_y, max_y + 1):
+				var target = Vector2i(tx, ty)
 
-		if eff_dist <= mobility:
-			# Enemy tile is within movement range — show as blue (mobility)
-			if enemy_tile not in move_tiles:
-				move_tiles.append(enemy_tile)
-		elif eff_dist <= mobility + attack_range:
-			# Enemy tile is in attack range but not in mobility range — show as purple
-			if enemy_tile not in attack_tiles:
-				attack_tiles.append(enemy_tile)
+				# Skip empty non-walkable tiles, allow targeting occupied non-walkable tiles (enemies on non-walkable places like demonlord)
+				var tile_data = tile_map.get_cell_tile_data(0, target)
+				if (tile_data == null or tile_data.get_custom_data("walkable") == false) and not (target in actor_at_tile):
+					continue
+
+				# Calculate effective attack-distance
+				var eff = _effective_distance(tile, target)
+				if eff <= attack_range:
+					attack_set[target] = true
+
+	# Convert attack_set to list
+	for k in attack_set.keys():
+		attack_tiles.append(k)
+
+	# --- 3. Blue (move_tiles) should be prioritized — remove any attack tiles that are also movable	NOT NECESSARY ANYMORE (but maybe later...)
+	#for t in move_tiles:
+		#if t in attack_tiles:
+			#attack_tiles.erase(t)
 
 	return {"move_tiles": move_tiles, "attack_tiles": attack_tiles}
 
+
+# Effective distance where diagonals cost +1
+func _effective_distance(a: Vector2i, b: Vector2i) -> int:
+	var dx = abs(a.x - b.x)
+	var dy = abs(a.y - b.y)
+	var eff = max(dx, dy)
+	if dx > 0 and dy > 0:
+		eff += 1
+	return eff
 
 
 func set_attack_target(target: Actor) -> void:
