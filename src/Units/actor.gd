@@ -37,7 +37,7 @@ var behavior: Node = null	# Decides behavior based on if unit is playable, enemy
 
 # --- Variables for movement ---
 var astar_grid: AStarGrid2D
-var base_astar_grid: AStarGrid2D	# Contains the base-astar-grid before adding enemies
+var base_solid_points: Array[Vector2i] = []	# Contains all solid points from when the level was made
 var tile_size: int = 48
 
 # --- Unit info while in gameplay: ---
@@ -97,9 +97,7 @@ func _ready() -> void:
 			
 			if tile_data == null or tile_data.get_custom_data("walkable") == false:
 				astar_grid.set_point_solid(tile_position)
-	
-	# Make a clone of astar_grid so astar_grid can be "reset"
-	base_astar_grid = _clone_astar_grid(astar_grid)
+				base_solid_points.append(tile_position)	# Add "red" tiles
 	
 	# Set friendly/enemy
 	is_friendly = is_friendly
@@ -196,7 +194,14 @@ func _update_state_animation() -> void:
 
 # Resets astar back to before adding enemies
 func reset_astar_grid() -> void:
-	astar_grid = _clone_astar_grid(base_astar_grid)
+	
+	for x in astar_grid.get_size().x:
+		for y in astar_grid.get_size().y:
+			var pos = Vector2i(x, y)
+			astar_grid.set_point_solid(pos, false)
+			
+	for p in base_solid_points:
+		astar_grid.set_point_solid(p, true)
 
 	
 # --- Get functions ---
