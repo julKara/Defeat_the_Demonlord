@@ -6,9 +6,8 @@
 
 ## Issues (not really bugs, more structural issues):
 * Changing `healthbar` color is not memory-efficient at all since it dublicates per character.
-* Sprites should flip when counter-attacking
 * *AI-controlled ranged units should move to a beneficial range to avoid range-penalty.*
-* Should not pass through enemy units.
+* <del>Should not pass through enemy units.</del>, since they already can't beacuse of how their ai-work (will only go for closet anyway)
 
 ## Annoying features:
 * Character located below another character should appear on top of the other character. (change node order)
