@@ -7,5 +7,8 @@ extends Button
 @onready var turn_manager: Node2D = $"../../../../../TileMapLayer/TurnManager"
 
 func _pressed() -> void:
+	# Play click sound
+	AudioManager.sfx_player.play()
+	
 	var current = character_manager.current_character
 	turn_manager.end_player_unit_turn(current)

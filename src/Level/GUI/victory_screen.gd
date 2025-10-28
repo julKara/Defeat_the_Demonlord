@@ -13,6 +13,9 @@ func _ready() -> void:
 # Return to level select and unlock next level
 func _on_continue_pressed() -> void:
 	
+	# Play click sound
+	AudioManager.sfx_player.play()
+	
 	# Unpause game
 	get_tree().paused = false
 	

@@ -13,6 +13,9 @@ func _ready() -> void:
 
 func _pressed() -> void:
 	
+	# Play click sound
+	AudioManager.sfx_player.play()
+	
 	# Find behaviour node of the current character
 	var selected_unit = character_manager.current_character
 	var behaviour_node = selected_unit.get_behaviour()

@@ -1,6 +1,7 @@
 extends Node
 
 @export var music_player: AudioStreamPlayer
+@export var sfx_player: AudioStreamPlayer
 
 
 func update_music_for_scene(scene: String):

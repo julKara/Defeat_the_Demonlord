@@ -1,6 +1,9 @@
 extends Button
 
 func _pressed() -> void:
+	# Play click sound
+	AudioManager.sfx_player.play()
+	
 	var back: String = "res://src/Worlds/world_select.tscn"
 
 	# If the filepath is valid, change scene to world select

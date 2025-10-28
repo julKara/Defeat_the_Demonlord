@@ -5,6 +5,9 @@ extends Button
 
 func _pressed():
 	
+	# Play click sound
+	AudioManager.sfx_player.play()
+	
 	world_handler._create_save()
 	
 	var world_select: String = "res://src/Worlds/world_select.tscn"

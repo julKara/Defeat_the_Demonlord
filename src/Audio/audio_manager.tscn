@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://defgyaxcewcwg"]
+[gd_scene load_steps=7 format=3 uid="uid://defgyaxcewcwg"]
 
 [ext_resource type="Script" uid="uid://d1imvo430o74g" path="res://src/Audio/audio_manager.gd" id="1_h88su"]
 [ext_resource type="AudioStream" uid="uid://e7woog4arwtu" path="res://assets/Audio/Music/Battle/Battle_Music_1.ogg" id="2_o66j1"]
 [ext_resource type="AudioStream" uid="uid://ceqde118a2e0g" path="res://assets/Audio/Music/Menu/Menu_Music_1.ogg" id="3_yslcm"]
+[ext_resource type="AudioStream" uid="uid://drivleu884biu" path="res://assets/Audio/SoundEffects/Click/Click 1.wav" id="4_o66j1"]
 
 [sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_f0ev6"]
 clip_count = 2
@@ -27,9 +28,16 @@ Vector2i(1, 0): {
 }
 }
 
-[node name="AudioManager" type="Node" node_paths=PackedStringArray("music_player")]
+[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_yslcm"]
+clip_count = 1
+clip_0/name = &"Click"
+clip_0/stream = ExtResource("4_o66j1")
+clip_0/auto_advance = 0
+
+[node name="AudioManager" type="Node" node_paths=PackedStringArray("music_player", "sfx_player")]
 script = ExtResource("1_h88su")
 music_player = NodePath("BackgroundMusicPlayer")
+sfx_player = NodePath("SfxPlayer")
 
 [node name="BackgroundMusicPlayer" type="AudioStreamPlayer" parent="."]
 process_mode = 3
@@ -37,3 +45,8 @@ stream = SubResource("AudioStreamInteractive_f0ev6")
 volume_db = -10.0
 autoplay = true
 bus = &"music"
+
+[node name="SfxPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamInteractive_yslcm")
+volume_db = -4.0
+bus = &"sfx"

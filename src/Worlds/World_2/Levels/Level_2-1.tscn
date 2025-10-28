@@ -1,11 +1,10 @@
-[gd_scene load_steps=32 format=4 uid="uid://ddacdpv1f5knn"]
+[gd_scene load_steps=29 format=4 uid="uid://ddacdpv1f5knn"]
 
 [ext_resource type="Texture2D" uid="uid://bqmtavn12rhj2" path="res://assets/test_map5.png" id="1_vgxp4"]
 [ext_resource type="Texture2D" uid="uid://bdy0m0gr2tme3" path="res://assets/level_art/48x48_Tileset/pipo-map001.png" id="2_n0njb"]
 [ext_resource type="Script" uid="uid://t1qdqjubkhud" path="res://src/Units/character_manager.gd" id="3_21gwj"]
 [ext_resource type="PackedScene" uid="uid://dijjspgi8x8sv" path="res://src/Units/actor.tscn" id="4_2aopv"]
 [ext_resource type="Script" uid="uid://cjlatyxuwhq1n" path="res://src/Level/turn_manager.gd" id="4_byyk1"]
-[ext_resource type="Resource" uid="uid://mwedg6ttx2lp" path="res://characters/Mage/mageProfile.tres" id="6_544mx"]
 [ext_resource type="Script" uid="uid://dfeqtmcp7uacl" path="res://src/Units/CharacterStats.gd" id="6_ynq35"]
 [ext_resource type="Resource" uid="uid://bu2f1ylnrxljm" path="res://characters/Knight/knightProfile.tres" id="7_in3vx"]
 [ext_resource type="Resource" uid="uid://b5bmi1atp4dnb" path="res://characters/Mage/mageEnemyProfile.tres" id="8_0bmnd"]
@@ -161,37 +160,7 @@ texture_region_size = Vector2i(48, 48)
 tile_size = Vector2i(48, 48)
 sources/1 = SubResource("TileSetAtlasSource_tlwt5")
 
-[sub_resource type="Resource" id="Resource_ynq35"]
-resource_name = "mageStats"
-script = ExtResource("6_ynq35")
-curr_health = 100
-max_health = 100
-original_max_health = 100
-phys_attack = 20
-original_phys_attack = 20
-mag_attack = 80
-original_mag_attack = 80
-phys_defense = 30
-original_phys_defense = 30
-mag_defense = 50
-original_mag_defense = 50
-crit_chance = 15
-original_crit_chance = 15
-attack_range = 2
-original_attack_range = 2
-mobility = 3
-original_mobility = 3
-level = 1
-speed = 3.0
-health_gain = 10
-phys_atk_gain = 0
-phys_def_gain = 0
-mag_atk_gain = 20
-mag_def_gain = 10
-crit_gain = 0
-metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
-
-[sub_resource type="Resource" id="Resource_a17x8"]
+[sub_resource type="Resource" id="Resource_rp0ce"]
 resource_name = "knightStats"
 script = ExtResource("6_ynq35")
 curr_health = 200
@@ -221,37 +190,7 @@ mag_def_gain = 0
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_13550"]
-resource_name = "mageStats"
-script = ExtResource("6_ynq35")
-curr_health = 100
-max_health = 100
-original_max_health = 100
-phys_attack = 20
-original_phys_attack = 20
-mag_attack = 80
-original_mag_attack = 80
-phys_defense = 30
-original_phys_defense = 30
-mag_defense = 50
-original_mag_defense = 50
-crit_chance = 15
-original_crit_chance = 15
-attack_range = 2
-original_attack_range = 2
-mobility = 3
-original_mobility = 3
-level = 1
-speed = 3.0
-health_gain = 10
-phys_atk_gain = 0
-phys_def_gain = 0
-mag_atk_gain = 20
-mag_def_gain = 10
-crit_gain = 0
-metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
-
-[sub_resource type="Resource" id="Resource_byyk1"]
+[sub_resource type="Resource" id="Resource_ynq35"]
 script = ExtResource("6_ynq35")
 curr_health = 140
 max_health = 140
@@ -337,30 +276,15 @@ script = ExtResource("4_byyk1")
 
 [node name="Actors" type="Node2D" parent="TileMapLayer"]
 
-[node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_2aopv")]
-position = Vector2(360, 264)
-stats = SubResource("Resource_ynq35")
-profile = ExtResource("6_544mx")
-enemy_level = 0
-is_friendly = true
-
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_2aopv")]
 position = Vector2(312, 216)
-stats = SubResource("Resource_a17x8")
+stats = SubResource("Resource_rp0ce")
 profile = ExtResource("7_in3vx")
-enemy_level = 0
-is_friendly = true
-
-[node name="playable_unit3" parent="TileMapLayer/Actors" instance=ExtResource("4_2aopv")]
-position = Vector2(312, 312)
-stats = SubResource("Resource_13550")
-profile = ExtResource("6_544mx")
-enemy_level = 0
 is_friendly = true
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_2aopv")]
 position = Vector2(312, 264)
-stats = SubResource("Resource_byyk1")
+stats = SubResource("Resource_ynq35")
 profile = ExtResource("8_0bmnd")
 enemy_level = 5
 

@@ -16,4 +16,7 @@ func world_unlocked():
 	disabled = false
 
 func _on_pressed() -> void:
+	# Play click sound
+	AudioManager.sfx_player.play()
+	
 	world_selected.emit(world_num) # Signal used to specify which level was selected
