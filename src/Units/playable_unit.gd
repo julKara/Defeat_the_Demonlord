@@ -10,6 +10,8 @@ class_name playable_unit extends Node
 @onready var turn_manager: Node2D = $"../../../TurnManager"
 @onready var default_attack: Button = $"../../../../GUI/Margin/ActionsMenu/VBoxContainer/Default_Attack"
 @onready var skill_menu: PanelContainer = $"../../../../GUI/Margin/SkillMenu"
+@onready var skill_1: Button = $"../../../../GUI/Margin/SkillMenu/VBoxContainer/Skill1"
+
 
 
 
@@ -94,6 +96,7 @@ func move_to(tile: Vector2i) -> void:
 		sprite.material.set("shader_parameter/width", 0.0)
 		attack_target = null
 		default_attack.disabled = true
+		skill_1.disabled = true
 
 
 # Reset back to origin_tile if moved but not acted
@@ -173,6 +176,7 @@ func deselect() -> void:
 		sprite.material.set("shader_parameter/width", 0.0)
 		attack_target = null
 		default_attack.disabled = true
+		skill_1.disabled = true
 		
 # --- Range Highlight ---
 
@@ -293,6 +297,10 @@ func set_attack_target(target: Actor) -> void:
 	
 	# Make attack-button usable
 	default_attack.disabled = false
+	
+	# Make skill if requiring enemy attack-target enabled
+	if get_parent().skills[0].need_enemy_target && get_parent().skills[0].skill_type == "Active":
+		skill_1.disabled = false
 	
 	# Remove highlight from previous target if any
 	if attack_target != null:

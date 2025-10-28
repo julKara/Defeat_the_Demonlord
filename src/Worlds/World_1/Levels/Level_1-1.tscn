@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://fr5vqykbi54o"]
+[gd_scene load_steps=36 format=4 uid="uid://fr5vqykbi54o"]
 
 [ext_resource type="Texture2D" uid="uid://bqmtavn12rhj2" path="res://assets/test_map5.png" id="1_bq4wg"]
 [ext_resource type="Texture2D" uid="uid://bdy0m0gr2tme3" path="res://assets/level_art/48x48_Tileset/pipo-map001.png" id="2_6mxkn"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" path="res://src/Level/GUI/game_over_screen.gd" id="14_n0kbp"]
 [ext_resource type="Script" uid="uid://nm7v2oerrihf" path="res://src/Level/win_loss_condition.gd" id="15_6mxkn"]
 [ext_resource type="Script" uid="uid://chj04vcf4aml2" path="res://src/Level/GUI/back_skill_button.gd" id="16_0yevp"]
+[ext_resource type="Script" uid="uid://gnulp14d0qnj" path="res://src/Level/GUI/skill_1_button.gd" id="16_rveb5"]
 [ext_resource type="Script" uid="uid://sehkuo2xbwos" path="res://src/Worlds/world_tracker.gd" id="18_hhk72"]
 [ext_resource type="Resource" uid="uid://b7d426jw88wxl" path="res://src/Worlds/world_handler.tres" id="19_8y1rk"]
 
@@ -175,7 +176,7 @@ texture_region_size = Vector2i(48, 48)
 tile_size = Vector2i(48, 48)
 sources/1 = SubResource("TileSetAtlasSource_tlwt5")
 
-[sub_resource type="Resource" id="Resource_hhk72"]
+[sub_resource type="Resource" id="Resource_rveb5"]
 resource_name = "mageStats"
 script = ExtResource("6_8y1rk")
 curr_health = 100
@@ -197,7 +198,7 @@ mag_def_gain = 0
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_8y1rk"]
+[sub_resource type="Resource" id="Resource_esv70"]
 resource_name = "knightStats"
 script = ExtResource("6_8y1rk")
 curr_health = 200
@@ -219,7 +220,7 @@ mag_def_gain = 0
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_na0ed"]
+[sub_resource type="Resource" id="Resource_ky5eb"]
 script = ExtResource("6_8y1rk")
 curr_health = 50
 max_health = 50
@@ -240,7 +241,7 @@ mag_def_gain = 0
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_0yevp"]
+[sub_resource type="Resource" id="Resource_jamn3"]
 script = ExtResource("6_8y1rk")
 curr_health = 50
 max_health = 50
@@ -321,25 +322,25 @@ script = ExtResource("4_0yevp")
 y_sort_enabled = true
 
 [node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
-position = Vector2(120, 120)
-stats = SubResource("Resource_hhk72")
+position = Vector2(408, 312)
+stats = SubResource("Resource_rveb5")
 profile = ExtResource("6_hhk72")
 is_friendly = true
 
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
 position = Vector2(168, 168)
-stats = SubResource("Resource_8y1rk")
+stats = SubResource("Resource_esv70")
 profile = ExtResource("7_8y1rk")
 is_friendly = true
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
 position = Vector2(456, 312)
-stats = SubResource("Resource_na0ed")
+stats = SubResource("Resource_ky5eb")
 profile = ExtResource("10_0yevp")
 
 [node name="enemy_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
 position = Vector2(456, 120)
-stats = SubResource("Resource_0yevp")
+stats = SubResource("Resource_jamn3")
 profile = ExtResource("10_0yevp")
 
 [node name="GUI" type="CanvasLayer" parent="."]
@@ -381,12 +382,23 @@ size_flags_vertical = 8
 mouse_filter = 1
 script = ExtResource("14_8y1rk")
 
+[node name="SkillInfoPopup" type="PopupPanel" parent="GUI/Margin/SkillMenu"]
+visible = true
+
+[node name="SkillInfoLabel" type="RichTextLabel" parent="GUI/Margin/SkillMenu/SkillInfoPopup"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 96.0
+offset_bottom = 96.0
+text = "sdfghjkl"
+
 [node name="VBoxContainer" type="VBoxContainer" parent="GUI/Margin/SkillMenu"]
 layout_mode = 2
 
 [node name="Skill1" type="Button" parent="GUI/Margin/SkillMenu/VBoxContainer"]
 layout_mode = 2
 text = "Skill1"
+script = ExtResource("16_rveb5")
 
 [node name="Skill2" type="Button" parent="GUI/Margin/SkillMenu/VBoxContainer"]
 layout_mode = 2
@@ -413,6 +425,10 @@ layout_mode = 2
 text = "Name: John"
 
 [node name="HP" type="Label" parent="GUI/Margin/ActorInfo/VBoxContainer"]
+layout_mode = 2
+text = "HP: 00/00"
+
+[node name="PhysAttack" type="Label" parent="GUI/Margin/ActorInfo/VBoxContainer"]
 layout_mode = 2
 text = "HP: 00/00"
 

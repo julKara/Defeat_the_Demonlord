@@ -27,6 +27,7 @@ var state_to_anim = {	# For animation filepaths
 
 # --- Refrences to objects in actor ---
 var behavior: Node = null	# Decides behavior based on if unit is playable, enemy, npc...
+var skills: Array[SkillResource] = []
 @onready var sprite_2d: Sprite2D = $Sprite	# Just the default sprite to all characters
 @onready var anim_player: AnimationPlayer = $AnimationPlayer	# Used to play animations
 @onready var healthbar: ProgressBar = $Healthbar	# The units healthbar, gets set up in _ready()
@@ -150,22 +151,26 @@ func _apply_profile() -> void:
 	if profile == null:
 		return
 
-	# Apply sprite of unit if there is one
+	# Apply sprite
 	if sprite_2d and profile.sprite:
 		sprite_2d.texture = profile.sprite
 
-	# Connect profiles `animation` to anim_player here which is the object AnimationPlayer
+	# Apply animation library
 	if anim_player and profile.animation:
 		var lib_path := profile.animation.resource_path
-		# Use the filename (without .tres) as library name
 		anim_library_name = lib_path.get_file().get_basename() if lib_path != "" else "default"
-
-		# Only add if not already present
 		if not anim_player.has_animation_library(anim_library_name):
 			anim_player.add_animation_library(anim_library_name, profile.animation)
 			print("Added animation library:", anim_library_name)
-		#else:
-			#print("Library already exists:", anim_library_name)
+
+	# Load skills
+	if profile.skills.size() > 0:
+		skills = []
+		for skill in profile.skills:
+			if skill:
+				var inst = skill.duplicate(true)
+				skills.append(inst)
+		print("Loaded skills:", skills.map(func(s): return s.skill_name))
 
 # Updates current_state and calls update-animation
 func set_state(new_state: UnitState) -> void:
@@ -203,7 +208,16 @@ func reset_astar_grid() -> void:
 	for p in base_solid_points:
 		astar_grid.set_point_solid(p, true)
 
+# Using a skill
+func use_skill(skill: SkillResource, target: Actor) -> void:
 	
+	# Test skill
+	if skill == null:
+		return
+	print("%s uses %s on %s" % [profile.character_name, skill.skill_name, target.profile.character_name])
+	skill.apply_effect(self, target)
+
+
 # --- Get functions ---
 func get_sprite() -> Sprite2D:
 	return sprite_2d
