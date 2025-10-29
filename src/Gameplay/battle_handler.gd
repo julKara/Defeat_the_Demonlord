@@ -61,6 +61,7 @@ func perform_battle(attacker: Actor, defender: Actor, distance: float, path: Arr
 	
 	# 5. Update Health Bar
 	defender.healthbar._set_health(def_stats.curr_health)
+	_play_damage_sfx(attacker)
 	
 	# 6. TESTING Debug Output
 	print("\t\t%s attacked %s for %d damage!" % [
@@ -98,6 +99,12 @@ func _play_attack_sfx(attacker: Actor) -> void:
 	await get_tree().create_timer(0.1).timeout
 	# Set the audio clip to the attack sfx
 	attacker.audio_player["parameters/switch_to_clip"] = "Attack"
+	# Play sound
+	attacker.audio_player.play()
+	
+func _play_damage_sfx(attacker: Actor) -> void:
+	# Set the audio clip to the attack sfx
+	attacker.audio_player["parameters/switch_to_clip"] = "Damage"
 	# Play sound
 	attacker.audio_player.play()
 

@@ -1,9 +1,27 @@
-[gd_resource type="AudioStreamInteractive" load_steps=2 format=3 uid="uid://ctkacgr4rwjrj"]
+[gd_resource type="AudioStreamInteractive" load_steps=3 format=3 uid="uid://ctkacgr4rwjrj"]
 
 [ext_resource type="AudioStream" uid="uid://c8r0d1afae8v3" path="res://assets/Audio/SoundEffects/Slime/Slime Attack 1.wav" id="1_m5mdx"]
+[ext_resource type="AudioStream" uid="uid://1f3idsdsk5sm" path="res://assets/Audio/SoundEffects/Damage/Damage.wav" id="2_xysd8"]
 
 [resource]
-clip_count = 1
+clip_count = 2
 clip_0/name = &"Attack"
 clip_0/stream = ExtResource("1_m5mdx")
 clip_0/auto_advance = 0
+clip_1/name = &"Damage"
+clip_1/stream = ExtResource("2_xysd8")
+clip_1/auto_advance = 0
+_transitions = {
+Vector2i(0, 1): {
+"fade_beats": 1.0,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 1
+},
+Vector2i(1, 0): {
+"fade_beats": 1.0,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 1
+}
+}

@@ -223,16 +223,16 @@ metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
 [sub_resource type="Resource" id="Resource_wsyr5"]
 script = ExtResource("6_0xpq5")
-curr_health = 130
-max_health = 130
+curr_health = 190
+max_health = 190
 original_max_health = 100
 phys_attack = 20
 original_phys_attack = 20
-mag_attack = 160
+mag_attack = 280
 original_mag_attack = 100
 phys_defense = 10
 original_phys_defense = 10
-mag_defense = 60
+mag_defense = 120
 original_mag_defense = 30
 crit_chance = 10
 original_crit_chance = 10
@@ -322,7 +322,7 @@ is_friendly = true
 position = Vector2(168, 312)
 stats = SubResource("Resource_wsyr5")
 profile = ExtResource("8_je7ah")
-enemy_level = 4
+enemy_level = 10
 
 [node name="GUI" type="CanvasLayer" parent="."]
 script = SubResource("GDScript_wse8f")

@@ -1,9 +1,27 @@
-[gd_resource type="AudioStreamInteractive" load_steps=2 format=3 uid="uid://blma88qxyui5g"]
+[gd_resource type="AudioStreamInteractive" load_steps=3 format=3 uid="uid://blma88qxyui5g"]
 
 [ext_resource type="AudioStream" uid="uid://bdv2atehit0wi" path="res://assets/Audio/SoundEffects/Sword/Sword Attack 2.ogg" id="1_bp065"]
+[ext_resource type="AudioStream" uid="uid://1f3idsdsk5sm" path="res://assets/Audio/SoundEffects/Damage/Damage.wav" id="2_5k2mk"]
 
 [resource]
-clip_count = 1
+clip_count = 2
 clip_0/name = &"Attack"
 clip_0/stream = ExtResource("1_bp065")
 clip_0/auto_advance = 0
+clip_1/name = &"Damage"
+clip_1/stream = ExtResource("2_5k2mk")
+clip_1/auto_advance = 0
+_transitions = {
+Vector2i(0, 1): {
+"fade_beats": 1.0,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 1
+},
+Vector2i(1, 0): {
+"fade_beats": 1.0,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 1
+}
+}

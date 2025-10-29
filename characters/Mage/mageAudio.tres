@@ -1,12 +1,16 @@
-[gd_resource type="AudioStreamInteractive" load_steps=2 format=3 uid="uid://ywpate8lkytr"]
+[gd_resource type="AudioStreamInteractive" load_steps=3 format=3 uid="uid://ywpate8lkytr"]
 
 [ext_resource type="AudioStream" uid="uid://dur4c0t6anprt" path="res://assets/Audio/SoundEffects/Fireball/Fireball 2.ogg" id="1_rgh2u"]
+[ext_resource type="AudioStream" uid="uid://1f3idsdsk5sm" path="res://assets/Audio/SoundEffects/Damage/Damage.wav" id="2_uyd8o"]
 
 [resource]
-clip_count = 1
+clip_count = 2
 clip_0/name = &"Attack"
 clip_0/stream = ExtResource("1_rgh2u")
 clip_0/auto_advance = 0
+clip_1/name = &"Damage"
+clip_1/stream = ExtResource("2_uyd8o")
+clip_1/auto_advance = 0
 _transitions = {
 Vector2i(-1, 0): {
 "fade_beats": 1.0,
@@ -15,6 +19,12 @@ Vector2i(-1, 0): {
 "to_time": 1
 },
 Vector2i(0, -1): {
+"fade_beats": 1.0,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 1
+},
+Vector2i(1, 1): {
 "fade_beats": 1.0,
 "fade_mode": 0,
 "from_time": 0,
