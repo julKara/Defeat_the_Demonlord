@@ -24,7 +24,7 @@ var mobility
 var move_speed
 var attack_range
 
-signal ai_movement_finished
+#signal ai_movement_finished
 
 func _ready():
 	
@@ -371,6 +371,7 @@ func select(_has_acted: bool) -> void:	# Has to have input for override to funct
 	
 	# Display mobility- and range-tilemap
 	highlight_enemy_range()
+	
 	print("\tEnemy selected:", get_parent().profile.character_name)
 	
 func deselect() -> void:

@@ -12,6 +12,7 @@ class_name playable_unit extends Node
 @onready var skill_menu: PanelContainer = $"../../../../GUI/Margin/SkillMenu"
 @onready var skill_1: Button = $"../../../../GUI/Margin/SkillMenu/VBoxContainer/Skill1"
 @onready var skill_2: Button = $"../../../../GUI/Margin/SkillMenu/VBoxContainer/Skill2"
+@onready var camera_controller: Node = $"../../../../CameraController"
 
 
 # --- Variables ---
@@ -147,6 +148,11 @@ func select(has_acted: bool) -> void:
 	
 	# Display mobility- and range-tilemap
 	highlight_range()
+	
+	# Center camera on unit
+	if camera_controller:
+		camera_controller.focus_on_unit(get_parent(), true)
+	
 	print("\tPlayer unit turn:", get_parent().profile.character_name)
 
 # Protocol for deselecting a unit

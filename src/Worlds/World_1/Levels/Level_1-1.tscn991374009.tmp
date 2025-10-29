@@ -1,0 +1,551 @@
+[gd_scene load_steps=38 format=4 uid="uid://fr5vqykbi54o"]
+
+[ext_resource type="Texture2D" uid="uid://bqmtavn12rhj2" path="res://assets/test_map5.png" id="1_bq4wg"]
+[ext_resource type="Texture2D" uid="uid://bdy0m0gr2tme3" path="res://assets/level_art/48x48_Tileset/pipo-map001.png" id="2_6mxkn"]
+[ext_resource type="Script" uid="uid://t1qdqjubkhud" path="res://src/Units/character_manager.gd" id="3_iucr1"]
+[ext_resource type="Script" uid="uid://cjlatyxuwhq1n" path="res://src/Level/turn_manager.gd" id="4_0yevp"]
+[ext_resource type="PackedScene" uid="uid://dijjspgi8x8sv" path="res://src/Units/actor.tscn" id="4_e1a87"]
+[ext_resource type="Script" uid="uid://dfeqtmcp7uacl" path="res://src/Units/CharacterStats.gd" id="6_8y1rk"]
+[ext_resource type="Resource" uid="uid://mwedg6ttx2lp" path="res://characters/Mage/mageProfile.tres" id="6_hhk72"]
+[ext_resource type="Resource" uid="uid://bu2f1ylnrxljm" path="res://characters/Knight/knightProfile.tres" id="7_8y1rk"]
+[ext_resource type="Script" uid="uid://lvdowlbqk6fe" path="res://src/Level/GUI/actions_menu.gd" id="9_0yevp"]
+[ext_resource type="Resource" uid="uid://co8geppy7b1dn" path="res://characters/Slime/slimeProfile.tres" id="10_0yevp"]
+[ext_resource type="Script" uid="uid://duw38t7v0nrgf" path="res://src/Level/GUI/default_attack.gd" id="10_rveb5"]
+[ext_resource type="Script" uid="uid://b6oemt0bk5jyw" path="res://src/Level/GUI/stand_button.gd" id="11_esv70"]
+[ext_resource type="Script" uid="uid://c5xlaf1onfe67" path="res://src/Level/GUI/use_skill_button.gd" id="12_esv70"]
+[ext_resource type="Script" uid="uid://dso7okpirndht" path="res://src/Level/GUI/actor_info.gd" id="12_ky5eb"]
+[ext_resource type="Script" uid="uid://dous6wk318f1t" path="res://src/Level/GUI/victory_screen.gd" id="13_e1a87"]
+[ext_resource type="PackedScene" uid="uid://cats61ytkbbvj" path="res://src/PathVisuals/draw_path.tscn" id="13_jamn3"]
+[ext_resource type="Script" uid="uid://sddm7u5ng6mx" path="res://src/Level/GUI/game_over_screen.gd" id="14_n0kbp"]
+[ext_resource type="Script" uid="uid://nm7v2oerrihf" path="res://src/Level/win_loss_condition.gd" id="15_6mxkn"]
+[ext_resource type="Script" uid="uid://dbsll2ofxadj5" path="res://src/Level/GUI/skill_menu.gd" id="16_8y1rk"]
+[ext_resource type="Script" uid="uid://w7ua1w0mwld8" path="res://src/Level/GUI/skill_1_button.gd" id="17_na0ed"]
+[ext_resource type="Script" uid="uid://b3u6ea2h55gqj" path="res://src/Level/GUI/skill_2_button.gd" id="18_0yevp"]
+[ext_resource type="Script" uid="uid://sehkuo2xbwos" path="res://src/Worlds/world_tracker.gd" id="18_hhk72"]
+[ext_resource type="Resource" uid="uid://b7d426jw88wxl" path="res://src/Worlds/world_handler.tres" id="19_8y1rk"]
+[ext_resource type="Script" uid="uid://giyv8yaisw0a" path="res://src/Level/GUI/back_skill_button.gd" id="19_rveb5"]
+[ext_resource type="Script" uid="uid://dyx7v0w8tua76" path="res://src/Level/camera_controller.gd" id="22_ky5eb"]
+
+[sub_resource type="GDScript" id="GDScript_ic0uy"]
+script/source = "extends Node2D
+
+# Refrences
+@onready var actors: Node2D = $TileMapLayer/Actors
+#@onready var gui: CanvasLayer = $GUI
+@onready var actor_info: PanelContainer = $GUI/Margin/ActorInfo
+
+func _ready() -> void:
+
+	# Can be removed in full game, but is needed if you want to directly test the level
+	BattleHandlerSingleton._find_level_nodes()
+	ClickHandler._find_level_nodes()
+"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hiqwa"]
+texture = ExtResource("1_bq4wg")
+texture_region_size = Vector2i(48, 48)
+0:0/0 = 0
+0:0/0/custom_data_0 = true
+1:0/0 = 0
+0:1/0 = 0
+0:1/0/custom_data_0 = true
+1:1/0 = 0
+1:1/0/custom_data_0 = true
+
+[sub_resource type="TileSet" id="TileSet_ic0uy"]
+tile_size = Vector2i(48, 48)
+custom_data_layer_0/name = "walkable"
+custom_data_layer_0/type = 1
+sources/0 = SubResource("TileSetAtlasSource_hiqwa")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_70uel"]
+texture = ExtResource("1_bq4wg")
+texture_region_size = Vector2i(48, 48)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_hiqwa"]
+tile_size = Vector2i(48, 48)
+sources/1 = SubResource("TileSetAtlasSource_70uel")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tlwt5"]
+texture = ExtResource("2_6mxkn")
+texture_region_size = Vector2i(48, 48)
+0:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+6:6/0 = 0
+7:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+6:7/0 = 0
+0:8/0 = 0
+1:8/0 = 0
+2:8/0 = 0
+3:8/0 = 0
+4:8/0 = 0
+5:8/0 = 0
+6:8/0 = 0
+0:9/0 = 0
+1:9/0 = 0
+2:9/0 = 0
+3:9/0 = 0
+4:9/0 = 0
+5:9/0 = 0
+6:9/0 = 0
+0:10/0 = 0
+1:10/0 = 0
+2:10/0 = 0
+0:11/0 = 0
+1:11/0 = 0
+2:11/0 = 0
+3:11/0 = 0
+4:11/0 = 0
+5:11/0 = 0
+0:12/0 = 0
+1:12/0 = 0
+2:12/0 = 0
+3:12/0 = 0
+4:12/0 = 0
+5:12/0 = 0
+0:13/0 = 0
+1:13/0 = 0
+2:13/0 = 0
+3:13/0 = 0
+4:13/0 = 0
+5:13/0 = 0
+0:14/0 = 0
+1:14/0 = 0
+2:14/0 = 0
+0:15/0 = 0
+1:15/0 = 0
+2:15/0 = 0
+0:16/0 = 0
+1:16/0 = 0
+2:16/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_f3sb7"]
+tile_size = Vector2i(48, 48)
+sources/1 = SubResource("TileSetAtlasSource_tlwt5")
+
+[sub_resource type="Resource" id="Resource_esv70"]
+resource_name = "mageStats"
+script = ExtResource("6_8y1rk")
+curr_health = 100
+max_health = 100
+original_max_health = 100
+phys_attack = 20
+original_phys_attack = 20
+mag_attack = 80
+original_mag_attack = 80
+phys_defense = 30
+original_phys_defense = 30
+mag_defense = 50
+original_mag_defense = 50
+crit_chance = 15
+original_crit_chance = 15
+attack_range = 2
+original_attack_range = 2
+mobility = 3
+original_mobility = 3
+level = 1
+speed = 3.0
+health_gain = 10
+phys_atk_gain = 0
+phys_def_gain = 0
+mag_atk_gain = 20
+mag_def_gain = 10
+crit_gain = 0
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
+[sub_resource type="Resource" id="Resource_ky5eb"]
+resource_name = "knightStats"
+script = ExtResource("6_8y1rk")
+curr_health = 200
+max_health = 200
+original_max_health = 200
+phys_attack = 90
+original_phys_attack = 90
+mag_attack = 10
+original_mag_attack = 10
+phys_defense = 80
+original_phys_defense = 80
+mag_defense = 20
+original_mag_defense = 20
+crit_chance = 5
+original_crit_chance = 5
+attack_range = 1
+original_attack_range = 1
+mobility = 4
+original_mobility = 4
+level = 1
+speed = 4.0
+health_gain = 20
+phys_atk_gain = 10
+phys_def_gain = 20
+mag_atk_gain = 0
+mag_def_gain = 0
+crit_gain = 0
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
+[sub_resource type="Resource" id="Resource_jamn3"]
+script = ExtResource("6_8y1rk")
+curr_health = 50
+max_health = 50
+original_max_health = 50
+phys_attack = 30
+original_phys_attack = 30
+mag_attack = 10
+original_mag_attack = 10
+phys_defense = 30
+original_phys_defense = 30
+mag_defense = 20
+original_mag_defense = 20
+crit_chance = 5
+original_crit_chance = 5
+attack_range = 1
+original_attack_range = 1
+mobility = 2
+original_mobility = 2
+level = 1
+speed = 3.0
+health_gain = 10
+phys_atk_gain = 10
+phys_def_gain = 5
+mag_atk_gain = 0
+mag_def_gain = 5
+crit_gain = 1
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
+[sub_resource type="Resource" id="Resource_c4lxs"]
+script = ExtResource("6_8y1rk")
+curr_health = 50
+max_health = 50
+original_max_health = 50
+phys_attack = 30
+original_phys_attack = 30
+mag_attack = 10
+original_mag_attack = 10
+phys_defense = 30
+original_phys_defense = 30
+mag_defense = 20
+original_mag_defense = 20
+crit_chance = 5
+original_crit_chance = 5
+attack_range = 1
+original_attack_range = 1
+mobility = 2
+original_mobility = 2
+level = 1
+speed = 3.0
+health_gain = 10
+phys_atk_gain = 10
+phys_def_gain = 5
+mag_atk_gain = 0
+mag_def_gain = 5
+crit_gain = 1
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
+[sub_resource type="GDScript" id="GDScript_wse8f"]
+script/source = "extends CanvasLayer
+
+# Refrences
+#@onready var actor_info: PanelContainer = $Margin/ActorInfo
+#
+#func set_highlighted_actor(actor: Actor) -> void:
+	#
+	## Stop showing info is player clicks on other than actor (not implemented yet)
+	#if not actor:
+		#actor_info.hide()
+		#return
+		#
+	## Display some info (TODO: ADD MORE)
+	#var info_vbox: VBoxContainer = actor_info.get_child(0)	# First child
+	#actor_info.show()
+	#info_vbox.get_child(0).text = actor.stats.character_name + \" the \" + actor.stats.battle_class_type
+	#info_vbox.get_child(1).text = \"HP: \" + str(actor.stats.curr_health) + \"/\" + str(actor.stats.max_health)
+"
+
+[node name="Level_1-1" type="Node2D"]
+script = SubResource("GDScript_ic0uy")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_ic0uy")
+format = 2
+layer_0/name = "Ground"
+layer_0/tile_data = PackedInt32Array(0, 65536, 0, 65536, 65536, 0, 131072, 65536, 0, 196608, 65536, 0, 262144, 65536, 0, 327680, 65536, 0, 393216, 65536, 0, 458752, 65536, 0, 524288, 65536, 0, 1, 65536, 0, 65537, 65536, 0, 131073, 0, 0, 196609, 0, 0, 262145, 0, 0, 327681, 0, 0, 393217, 65536, 0, 458753, 65536, 0, 524289, 65536, 0, 2, 65536, 0, 65538, 0, 0, 131074, 0, 0, 196610, 0, 0, 262146, 0, 0, 327682, 0, 0, 393218, 0, 0, 458754, 65536, 0, 524290, 0, 0, 3, 65536, 0, 65539, 0, 0, 131075, 0, 0, 196611, 0, 0, 262147, 0, 0, 327683, 0, 0, 393219, 0, 0, 458755, 0, 0, 524291, 0, 0, 4, 65536, 0, 65540, 0, 0, 131076, 0, 0, 196612, 0, 0, 262148, 65536, 0, 327684, 65536, 0, 393220, 0, 0, 458756, 0, 0, 524292, 0, 0, 5, 65536, 0, 65541, 65536, 0, 131077, 0, 0, 196613, 0, 0, 262149, 65536, 0, 327685, 65536, 0, 393221, 0, 0, 458757, 0, 0, 524293, 0, 0, 6, 65536, 0, 65542, 65536, 0, 131078, 0, 0, 196614, 0, 0, 262150, 0, 0, 327686, 0, 0, 393222, 0, 0, 458758, 0, 0, 524294, 0, 0, 7, 65536, 0, 65543, 65536, 0, 131079, 65536, 0, 196615, 0, 0, 262151, 0, 0, 327687, 0, 0, 393223, 0, 0, 458759, 0, 0, 524295, 65536, 0, 8, 65536, 0, 65544, 65536, 0, 131080, 0, 0, 196616, 0, 0, 262152, 0, 0, 327688, 0, 0, 393224, 0, 0, 458760, 65536, 0, 524296, 65536, 0, 9, 65536, 0, 65545, 0, 0, 131081, 0, 0, 196617, 0, 0, 262153, 0, 0, 327689, 0, 0, 393225, 0, 0, 458761, 65536, 0, 524297, 65536, 0, 10, 65536, 0, 65546, 0, 0, 131082, 0, 0, 196618, 0, 0, 262154, 0, 0, 327690, 0, 0, 393226, 65536, 0, 458762, 65536, 0, 524298, 65536, 0, 11, 65536, 0, 65547, 0, 0, 131083, 0, 0, 196619, 0, 0, 262155, 0, 0, 327691, 0, 0, 393227, 65536, 0, 458763, 65536, 0, 524299, 65536, 0, 12, 0, 0, 65548, 0, 0, 131084, 0, 0, 196620, 0, 0, 262156, 0, 0, 327692, 65536, 0, 393228, 65536, 0, 458764, 65536, 0, 524300, 65536, 0)
+layer_1/name = "Effects1"
+layer_2/name = "Effects2"
+
+[node name="Background" type="ColorRect" parent="."]
+visible = false
+custom_minimum_size = Vector2(600, 400)
+offset_right = 600.0
+offset_bottom = 400.0
+color = Color(0.405487, 0.46665, 0.0850288, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="RangeTileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_hiqwa")
+format = 2
+layer_0/name = "Effects1"
+layer_1/name = "Effects2"
+
+[node name="DrawPath" parent="." instance=ExtResource("13_jamn3")]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAHAAAAAQACAAEAAAAHAAEAAQACAAEAAAAGAAEAAQAFAAUAAAAHAAIAAQACAAEAAAAIAAAAAQACAAEAAAAJAAAAAQACAAEAAAAKAAAAAQAAAAUAAAALAAAAAQABAAUAAAACAAAAAQABAAUAAAABAAAAAQAAAAUAAAAAAAAAAQABAAQAAAABAAEAAQACAAEAAAABAAYAAQAAAAEAAAAFAAUAAQABAAEAAAAIAAEAAQACAAEAAAALAAYAAQACAAEAAAAKAAYAAQAAAAEAAAAAAAEAAQABAAUAAAAAAAIAAQABAAQAAAAAAAUAAQABAAUAAAAAAAYAAQABAAQAAAABAAcAAQABAAEAAAACAAcAAQAAAAEAAAADAAAAAQACAAEAAAAEAAAAAQACAAEAAAAFAAAAAQAEAAQAAAAGAAAAAQAFAAQAAAAKAAcAAQACAAEAAAAJAAcAAQAAAAEAAAAIAAcAAQAAAAEAAAAKAAUAAQAAAAEAAAALAAIAAQAAAAEAAAAFAAEAAQAEAAUAAAAEAAUAAQABAAEAAAAHAAgAAQAAAAQAAAAIAAgAAQABAAQAAAAJAAgAAQAAAAQAAAAKAAgAAQABAAQAAAALAAgAAQAAAAQAAAAMAAcAAQAAAAQAAAAMAAYAAQAAAAUAAAAMAAgAAQACAAQAAAALAAcAAQAEAAEAAAAMAAUAAQAAAAQAAAAAAAcAAQABAAUAAAAAAAgAAQADAAQAAAABAAgAAQABAAUAAAAJAAQAAQAAAAEAAAAFAAQAAQAAAAEAAAAEAAQAAQACAAEAAAAAAAQAAQABAAQAAAAAAAMAAQABAAUAAAAKAAQAAQAGAAEAAAA=")
+tile_set = SubResource("TileSet_f3sb7")
+
+[node name="CharacterManager" type="Node2D" parent="TileMapLayer"]
+script = ExtResource("3_iucr1")
+
+[node name="TurnManager" type="Node2D" parent="TileMapLayer"]
+script = ExtResource("4_0yevp")
+
+[node name="Actors" type="Node2D" parent="TileMapLayer"]
+y_sort_enabled = true
+
+[node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
+position = Vector2(120, 120)
+stats = SubResource("Resource_esv70")
+profile = ExtResource("6_hhk72")
+is_friendly = true
+
+[node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
+position = Vector2(168, 168)
+stats = SubResource("Resource_ky5eb")
+profile = ExtResource("7_8y1rk")
+is_friendly = true
+
+[node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
+position = Vector2(168, 264)
+stats = SubResource("Resource_jamn3")
+profile = ExtResource("10_0yevp")
+enemy_level = 1
+
+[node name="enemy_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
+position = Vector2(312, 168)
+stats = SubResource("Resource_c4lxs")
+profile = ExtResource("10_0yevp")
+enemy_level = 1
+
+[node name="GUI" type="CanvasLayer" parent="."]
+script = SubResource("GDScript_wse8f")
+
+[node name="Margin" type="MarginContainer" parent="GUI"]
+offset_right = 600.0
+offset_bottom = 400.0
+
+[node name="ActionsMenu" type="PanelContainer" parent="GUI/Margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+mouse_filter = 1
+script = ExtResource("9_0yevp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/Margin/ActionsMenu"]
+layout_mode = 2
+
+[node name="Default_Attack" type="Button" parent="GUI/Margin/ActionsMenu/VBoxContainer"]
+layout_mode = 2
+text = "Attack"
+script = ExtResource("10_rveb5")
+
+[node name="Use_Skill" type="Button" parent="GUI/Margin/ActionsMenu/VBoxContainer"]
+layout_mode = 2
+text = "Skill"
+script = ExtResource("12_esv70")
+
+[node name="Pass_Turn" type="Button" parent="GUI/Margin/ActionsMenu/VBoxContainer"]
+layout_mode = 2
+text = "Pass"
+script = ExtResource("11_esv70")
+
+[node name="ActorInfo" type="PanelContainer" parent="GUI/Margin"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+mouse_filter = 1
+script = ExtResource("12_ky5eb")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/Margin/ActorInfo"]
+layout_mode = 2
+
+[node name="ActorName" type="Label" parent="GUI/Margin/ActorInfo/VBoxContainer"]
+layout_mode = 2
+text = "Name: John"
+
+[node name="HP" type="Label" parent="GUI/Margin/ActorInfo/VBoxContainer"]
+layout_mode = 2
+text = "HP: 00/00"
+
+[node name="PhysAttack" type="Label" parent="GUI/Margin/ActorInfo/VBoxContainer"]
+layout_mode = 2
+
+[node name="PhysDefence" type="Label" parent="GUI/Margin/ActorInfo/VBoxContainer"]
+layout_mode = 2
+
+[node name="VictoryScreen" type="PanelContainer" parent="GUI/Margin"]
+process_mode = 3
+visible = false
+custom_minimum_size = Vector2(400, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("13_e1a87")
+
+[node name="Label" type="Label" parent="GUI/Margin/VictoryScreen"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 40
+text = "Victory!"
+horizontal_alignment = 1
+
+[node name="Continue" type="Button" parent="GUI/Margin/VictoryScreen"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Continue"
+
+[node name="GameOverScreen" type="PanelContainer" parent="GUI/Margin"]
+process_mode = 3
+visible = false
+custom_minimum_size = Vector2(400, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("14_n0kbp")
+
+[node name="Label" type="Label" parent="GUI/Margin/GameOverScreen"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 40
+text = "Game Over!"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/Margin/GameOverScreen"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="Retry" type="Button" parent="GUI/Margin/GameOverScreen/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Retry"
+
+[node name="Return" type="Button" parent="GUI/Margin/GameOverScreen/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Return"
+
+[node name="SkillMenu" type="PanelContainer" parent="GUI/Margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+mouse_filter = 1
+script = ExtResource("16_8y1rk")
+
+[node name="SkillInfoPopup" type="PopupPanel" parent="GUI/Margin/SkillMenu"]
+visible = true
+
+[node name="SkillInfoLabel" type="RichTextLabel" parent="GUI/Margin/SkillMenu/SkillInfoPopup"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 96.0
+offset_bottom = 96.0
+text = "sjbhaikjkbiu
+"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/Margin/SkillMenu"]
+layout_mode = 2
+
+[node name="Skill1" type="Button" parent="GUI/Margin/SkillMenu/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Skill1"
+script = ExtResource("17_na0ed")
+
+[node name="Skill2" type="Button" parent="GUI/Margin/SkillMenu/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Skill2"
+script = ExtResource("18_0yevp")
+
+[node name="Back" type="Button" parent="GUI/Margin/SkillMenu/VBoxContainer"]
+layout_mode = 2
+text = "Back"
+script = ExtResource("19_rveb5")
+
+[node name="CameraController" type="Node" parent="."]
+script = ExtResource("22_ky5eb")
+zoom_step = null
+min_zoom = null
+max_zoom = null
+pan_speed = null
+camera_smoothness = null
+
+[node name="Camera2D" type="Camera2D" parent="CameraController"]
+
+[node name="WinLossCondition" type="Node2D" parent="."]
+script = ExtResource("15_6mxkn")
+
+[node name="WorldHandler" type="Node" parent="."]
+script = ExtResource("18_hhk72")
+world_script = ExtResource("19_8y1rk")
+
+[connection signal="pressed" from="GUI/Margin/VictoryScreen/Continue" to="GUI/Margin/VictoryScreen" method="_on_continue_pressed"]
+[connection signal="pressed" from="GUI/Margin/GameOverScreen/HBoxContainer/Retry" to="GUI/Margin/GameOverScreen" method="_on_retry_pressed"]
+[connection signal="pressed" from="GUI/Margin/GameOverScreen/HBoxContainer/Return" to="GUI/Margin/GameOverScreen" method="_on_return_pressed"]
