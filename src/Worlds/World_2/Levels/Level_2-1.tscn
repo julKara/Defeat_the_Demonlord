@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://ddacdpv1f5knn"]
+[gd_scene load_steps=34 format=4 uid="uid://ddacdpv1f5knn"]
 
 [ext_resource type="Texture2D" uid="uid://bqmtavn12rhj2" path="res://assets/test_map5.png" id="1_vgxp4"]
 [ext_resource type="Texture2D" uid="uid://bdy0m0gr2tme3" path="res://assets/level_art/48x48_Tileset/pipo-map001.png" id="2_n0njb"]
@@ -11,13 +11,18 @@
 [ext_resource type="Script" uid="uid://lvdowlbqk6fe" path="res://src/Level/GUI/actions_menu.gd" id="9_j4nfy"]
 [ext_resource type="Script" uid="uid://duw38t7v0nrgf" path="res://src/Level/GUI/default_attack.gd" id="10_pdlty"]
 [ext_resource type="Script" uid="uid://b6oemt0bk5jyw" path="res://src/Level/GUI/stand_button.gd" id="11_sx24n"]
+[ext_resource type="Script" uid="uid://c5xlaf1onfe67" path="res://src/Level/GUI/use_skill_button.gd" id="12_pk2nj"]
 [ext_resource type="Script" uid="uid://dso7okpirndht" path="res://src/Level/GUI/actor_info.gd" id="12_sbocg"]
 [ext_resource type="PackedScene" uid="uid://cats61ytkbbvj" path="res://src/PathVisuals/draw_path.tscn" id="13_hogbk"]
 [ext_resource type="Script" uid="uid://nm7v2oerrihf" path="res://src/Level/win_loss_condition.gd" id="15_6yfhb"]
 [ext_resource type="Script" uid="uid://dous6wk318f1t" path="res://src/Level/GUI/victory_screen.gd" id="15_13550"]
 [ext_resource type="Script" uid="uid://sddm7u5ng6mx" path="res://src/Level/GUI/game_over_screen.gd" id="16_byyk1"]
+[ext_resource type="Script" uid="uid://dbsll2ofxadj5" path="res://src/Level/GUI/skill_menu.gd" id="17_qojm6"]
+[ext_resource type="Script" uid="uid://w7ua1w0mwld8" path="res://src/Level/GUI/skill_1_button.gd" id="18_bco8a"]
 [ext_resource type="Script" uid="uid://sehkuo2xbwos" path="res://src/Worlds/world_tracker.gd" id="18_ynq35"]
 [ext_resource type="Resource" uid="uid://b7d426jw88wxl" path="res://src/Worlds/world_handler.tres" id="19_a17x8"]
+[ext_resource type="Script" uid="uid://b3u6ea2h55gqj" path="res://src/Level/GUI/skill_2_button.gd" id="19_le8uw"]
+[ext_resource type="Script" uid="uid://giyv8yaisw0a" path="res://src/Level/GUI/back_skill_button.gd" id="20_3my4o"]
 
 [sub_resource type="GDScript" id="GDScript_ic0uy"]
 script/source = "extends Node2D
@@ -160,7 +165,7 @@ texture_region_size = Vector2i(48, 48)
 tile_size = Vector2i(48, 48)
 sources/1 = SubResource("TileSetAtlasSource_tlwt5")
 
-[sub_resource type="Resource" id="Resource_rp0ce"]
+[sub_resource type="Resource" id="Resource_n3kg0"]
 resource_name = "knightStats"
 script = ExtResource("6_ynq35")
 curr_health = 200
@@ -190,7 +195,7 @@ mag_def_gain = 0
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_ynq35"]
+[sub_resource type="Resource" id="Resource_q6ceu"]
 script = ExtResource("6_ynq35")
 curr_health = 140
 max_health = 140
@@ -219,7 +224,7 @@ mag_def_gain = 10
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="GDScript" id="GDScript_wse8f"]
+[sub_resource type="GDScript" id="GDScript_mfmxk"]
 script/source = "extends CanvasLayer
 
 # Refrences
@@ -264,6 +269,8 @@ format = 2
 layer_0/name = "Effects1"
 layer_1/name = "Effects2"
 
+[node name="DrawPath" parent="." instance=ExtResource("13_hogbk")]
+
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAHAAAAAQACAAEAAAAHAAEAAQACAAEAAAAGAAEAAQAFAAUAAAAHAAIAAQACAAEAAAAIAAAAAQACAAEAAAAJAAAAAQACAAEAAAAKAAAAAQAAAAUAAAALAAAAAQABAAUAAAACAAAAAQABAAUAAAABAAAAAQAAAAUAAAAAAAAAAQABAAQAAAABAAEAAQACAAEAAAABAAYAAQAAAAEAAAAFAAUAAQABAAEAAAAIAAEAAQACAAEAAAALAAYAAQACAAEAAAAKAAYAAQAAAAEAAAAAAAEAAQABAAUAAAAAAAIAAQABAAQAAAAAAAUAAQABAAUAAAAAAAYAAQABAAQAAAABAAcAAQABAAEAAAACAAcAAQAAAAEAAAADAAAAAQACAAEAAAAEAAAAAQACAAEAAAAFAAAAAQAEAAQAAAAGAAAAAQAFAAQAAAAKAAcAAQACAAEAAAAJAAcAAQAAAAEAAAAIAAcAAQAAAAEAAAAKAAUAAQAAAAEAAAALAAIAAQAAAAEAAAAFAAEAAQAEAAUAAAAEAAUAAQABAAEAAAAHAAgAAQAAAAQAAAAIAAgAAQABAAQAAAAJAAgAAQAAAAQAAAAKAAgAAQABAAQAAAALAAgAAQAAAAQAAAAMAAcAAQAAAAQAAAAMAAYAAQAAAAUAAAAMAAgAAQACAAQAAAALAAcAAQAEAAEAAAAMAAUAAQAAAAQAAAAAAAcAAQABAAUAAAAAAAgAAQADAAQAAAABAAgAAQABAAUAAAAJAAQAAQAAAAEAAAAFAAQAAQAAAAEAAAAEAAQAAQACAAEAAAAAAAQAAQABAAQAAAAAAAMAAQABAAUAAAAKAAQAAQAGAAEAAAA=")
 tile_set = SubResource("TileSet_f3sb7")
@@ -275,21 +282,22 @@ script = ExtResource("3_21gwj")
 script = ExtResource("4_byyk1")
 
 [node name="Actors" type="Node2D" parent="TileMapLayer"]
+y_sort_enabled = true
 
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_2aopv")]
 position = Vector2(312, 216)
-stats = SubResource("Resource_rp0ce")
+stats = SubResource("Resource_n3kg0")
 profile = ExtResource("7_in3vx")
 is_friendly = true
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_2aopv")]
 position = Vector2(312, 264)
-stats = SubResource("Resource_ynq35")
+stats = SubResource("Resource_q6ceu")
 profile = ExtResource("8_0bmnd")
 enemy_level = 5
 
 [node name="GUI" type="CanvasLayer" parent="."]
-script = SubResource("GDScript_wse8f")
+script = SubResource("GDScript_mfmxk")
 
 [node name="Margin" type="MarginContainer" parent="GUI"]
 offset_right = 600.0
@@ -299,6 +307,7 @@ offset_bottom = 400.0
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
+mouse_filter = 1
 script = ExtResource("9_j4nfy")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GUI/Margin/ActionsMenu"]
@@ -312,6 +321,7 @@ script = ExtResource("10_pdlty")
 [node name="Use_Skill" type="Button" parent="GUI/Margin/ActionsMenu/VBoxContainer"]
 layout_mode = 2
 text = "Skill"
+script = ExtResource("12_pk2nj")
 
 [node name="Pass_Turn" type="Button" parent="GUI/Margin/ActionsMenu/VBoxContainer"]
 layout_mode = 2
@@ -322,6 +332,7 @@ script = ExtResource("11_sx24n")
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
+mouse_filter = 1
 script = ExtResource("12_sbocg")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GUI/Margin/ActorInfo"]
@@ -334,6 +345,12 @@ text = "Name: John"
 [node name="HP" type="Label" parent="GUI/Margin/ActorInfo/VBoxContainer"]
 layout_mode = 2
 text = "HP: 00/00"
+
+[node name="PhysAttack" type="Label" parent="GUI/Margin/ActorInfo/VBoxContainer"]
+layout_mode = 2
+
+[node name="PhysDefence" type="Label" parent="GUI/Margin/ActorInfo/VBoxContainer"]
+layout_mode = 2
 
 [node name="VictoryScreen" type="PanelContainer" parent="GUI/Margin"]
 process_mode = 3
@@ -390,7 +407,44 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "Return"
 
-[node name="DrawPath" parent="." instance=ExtResource("13_hogbk")]
+[node name="SkillMenu" type="PanelContainer" parent="GUI/Margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+mouse_filter = 1
+script = ExtResource("17_qojm6")
+
+[node name="SkillInfoPopup" type="PopupPanel" parent="GUI/Margin/SkillMenu"]
+auto_translate_mode = 1
+visible = true
+
+[node name="SkillInfoLabel" type="RichTextLabel" parent="GUI/Margin/SkillMenu/SkillInfoPopup"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 96.0
+offset_bottom = 96.0
+text = "sjbhaikjkbiu
+"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/Margin/SkillMenu"]
+layout_mode = 2
+
+[node name="Skill1" type="Button" parent="GUI/Margin/SkillMenu/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Skill1"
+script = ExtResource("18_bco8a")
+
+[node name="Skill2" type="Button" parent="GUI/Margin/SkillMenu/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Skill2"
+script = ExtResource("19_le8uw")
+
+[node name="Back" type="Button" parent="GUI/Margin/SkillMenu/VBoxContainer"]
+layout_mode = 2
+text = "Back"
+script = ExtResource("20_3my4o")
 
 [node name="WinLossCondition" type="Node2D" parent="."]
 script = ExtResource("15_6yfhb")

@@ -33,11 +33,17 @@ var behavior: Node = null	# Decides behavior based on if unit is playable, enemy
 @onready var healthbar: ProgressBar = $Healthbar	# The units healthbar, gets set up in _ready()
 @onready var audio_player: AudioStreamPlayer = $AudioPlayer
 
+# Skills
+var skills: Array[SkillResource] = []	# Stores the actual skills
+var active_effects: Array = []	# Stores active effects on the unit (skill, caster, remaining_duration, stat_addition, stat_multiplier)
+var passed_turn: bool = false	# Set to true when pressing pass-turn button to trigger certain passives
+
 # --- Refrences to objects in level ---
 @onready var tile_map: TileMap = $"../../../TileMap"
 
 # --- Variables for movement ---
 var astar_grid: AStarGrid2D
+var base_solid_points: Array[Vector2i] = []	# Contains all solid points from when the level was made
 var tile_size: int = 48
 
 # --- Unit info while in gameplay: ---
@@ -62,6 +68,7 @@ func _ready() -> void:
 		stats = stats.duplicate(true)
 	
 	init_stats()
+	stats.init_stats()
 	
 	# Initialize healthbar at start of level to max-health
 	healthbar.init_health(stats.max_health)
@@ -97,6 +104,7 @@ func _ready() -> void:
 			
 			if tile_data == null or tile_data.get_custom_data("walkable") == false:
 				astar_grid.set_point_solid(tile_position)
+				base_solid_points.append(tile_position)	# Add "red" tiles
 	
 	# Set friendly/enemy
 	is_friendly = is_friendly
@@ -169,6 +177,15 @@ func _apply_profile() -> void:
 	# Connect the audio from the profile to the characters audio player		
 	if audio_player and profile.audio:
 		audio_player.stream = profile.audio
+		
+	# Load skills
+	if profile.skills.size() > 0:
+		skills = []
+		for skill in profile.skills:
+			if skill:
+				var inst = skill.duplicate(true)
+				skills.append(inst)
+		print("Loaded skills:", skills.map(func(s): return s.skill_name))
 
 # Updates current_state and calls update-animation
 func set_state(new_state: UnitState) -> void:
@@ -206,19 +223,97 @@ func init_stats():
 		stats.phys_defense = stats.original_phys_defense + stats.phys_def_gain * (enemy_level-1)
 		stats.mag_defense = stats.original_mag_defense + stats.mag_def_gain * (enemy_level-1)
 		stats.crit_chance = stats.original_crit_chance + stats.crit_gain * (enemy_level-1)
+
+
+# Resets astar back to before adding enemies
+func reset_astar_grid() -> void:
 	
-	# Reset healt at start of battle
-	stats.curr_health = stats.max_health
+	for x in astar_grid.get_size().x:
+		for y in astar_grid.get_size().y:
+			var pos = Vector2i(x, y)
+			astar_grid.set_point_solid(pos, false)
+			
+	for p in base_solid_points:
+		astar_grid.set_point_solid(p, true)
+
+# --- Skill Handling ---
+
+# Use a skill
+func use_skill(skill: SkillResource, target: Actor) -> bool:
+	
+	if skill == null:
+		return false
+	
+	# Check cooldown
+	if skill.current_cooldown > 0:
+		print("Skill %s is on cooldown (%d turns left)." % [skill.skill_name, skill.current_cooldown])
+		return false
+
+	# Check target validit
+	match skill.target_type:
+		"Self":
+			target = self
+		"Ally":
+			# Allow only friendly targets
+			if not target or target.is_friendly != self.is_friendly:
+				print("Invalid ally target.")
+				return false
+		"Enemy":
+			if not target or target.is_friendly == self.is_friendly:
+				print("Invalid enemy target.")
+				return false
+		"Any":
+			pass
+
+	# Use the skill
+	skill.apply_effect(self, target)
+
+	# Tells that the skill was succesfully used (which ends units turn)
+	return true
+
+# Called by skill_resource.gd to record an effect with duration
+func register_active_effect(effect_record: Dictionary) -> void:
+	
+	# Append the effect applied by skill_resource.apply_effect
+	active_effects.append(effect_record)
+
+# Called each turn to decrement durations and/or remove effects
+func tick_effects() -> void:
+	
+	# Go backwards and remove expired effects
+	for i in range(active_effects.size() - 1, -1, -1):
+		
+		# Tick down duration
+		var effect = active_effects[i]
+		effect.remaining_duration -= 1
+		
+		# Remove effect if expired
+		if effect.remaining_duration <= 0:
+			
+			if effect.skill and effect.skill.has_method("remove_effect"):
+				effect.skill.remove_effect(self, effect)	# Remove effect on skills
+			active_effects.remove_at(i)	# Remove from list
+
+# Called each turn to decrement cooldowns of skills
+func tick_cooldowns() -> void:
+
+	if not ("skills" in self):
+		return
+		
+	for s in skills:
+		if s and s.current_cooldown > 0:
+			s.current_cooldown -= 1	# Decrement cooldown
+			
+			# Just in canse
+			if s.current_cooldown < 0:
+				s.current_cooldown = 0
+
+# --- Get functions ---
+func get_stats_resource() -> CharacterStats:
+	return stats
 
 func get_sprite() -> Sprite2D:
-	var all_children = get_children()
-	var sprite
-		
-	for child in all_children:
-		if child is Sprite2D:
-			sprite = child
-	
-	return sprite
+	return sprite_2d
 
 func get_behaviour() -> Node:
 	return behavior

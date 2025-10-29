@@ -19,7 +19,7 @@ func _draw():
 		return
 
 	# Path array check
-	var path: Array = behaviour.current_id_path
+	var path: Array = behaviour.display_path
 	if path.is_empty():
 		return
 
@@ -28,5 +28,6 @@ func _draw():
 	for id_tile in path:
 		points.append(tile_map.map_to_local(id_tile))
 
+	# Draw line
 	if points.size() > 1:
 		draw_polyline(points, Color.RED , 3.0)

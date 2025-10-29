@@ -10,18 +10,23 @@ extends Node2D
 enum Phase { PLAYER, ENEMY }	# The two possible phases
 
 # --- Imports ---
-@onready var actors: Node2D = $"../Actors"
+@onready var character_manager: Node2D = $"../CharacterManager"
+@onready var win_loss_condition: Node2D = $"../../WinLossCondition"
+@onready var tile_map: TileMap = $"../../TileMap"
 
 
 # --- Variables ---
 @export var max_turns: int = 10
+var game_is_paused: bool = false
+
 var current_turn: int = 1
 var current_phase: Phase = Phase.PLAYER	# Player always start
 var player_queue: Array = []
 var enemy_queue: Array = []
 
+
 func _ready() -> void:
-	await get_tree().create_timer(0.01).timeout
+	await get_tree().create_timer(0.01).timeout	
 	_initialize_turn_order()
 	start_phase(Phase.PLAYER)
 
@@ -33,7 +38,7 @@ func _initialize_turn_order() -> void:
 	enemy_queue.clear()
 	
 	# Sort units into player/enemy queue
-	for actor in actors.get_children():
+	for actor in character_manager.character_list:
 		if actor.is_friendly:
 			player_queue.append(actor)
 		else:
@@ -45,13 +50,24 @@ func _initialize_turn_order() -> void:
 # Cleans up prev turn and sets up the current one (player starts when level starts)
 func start_phase(phase: Phase) -> void:
 	
+	# Stop phase if game is paused
+	if game_is_paused:
+		return
+		
+	# Reset all actor grids to the clean base version before the enemy phase
+	for actor in character_manager.character_list:
+		if actor.has_method("reset_astar_grid"):
+			actor.reset_astar_grid()
+
 	# Delay between phases, TODO: Add transitions
 	await get_tree().create_timer(1.0).timeout
 	
 	current_phase = phase
 	match phase:
 		Phase.PLAYER:
+			print("\n--- Turn %d start!\n" % current_turn)
 			print("--- Player Phase ---")
+			ClickHandler.level_active = true
 			_reset_acted_flag(player_queue)	# Clear the bool acted
 			_next_player_unit()	# Select next playable unit in queue
 		Phase.ENEMY:
@@ -62,6 +78,7 @@ func start_phase(phase: Phase) -> void:
 # Sets and start either player or enemy depending on the prev
 func end_phase() -> void:
 	if current_phase == Phase.PLAYER:
+		ClickHandler.level_active = false
 		start_phase(Phase.ENEMY)
 	else:
 		end_turn()
@@ -73,24 +90,36 @@ func end_phase() -> void:
 func end_turn() -> void:
 	
 	# Increase current turn
-	# print("--- Turn %d ended." % current_turn)
 	current_turn += 1
-	print("\n--- Turn %d start!\n" % current_turn)
-	
+
+	# Update all actors effects and cooldowns
+	for actor in character_manager.character_list:
+		if actor:
+			if actor.has_method("tick_effects"):
+				actor.tick_effects()
+			if actor.has_method("tick_cooldowns"):
+				actor.tick_cooldowns()
+
 	# Check if level is over, otherwise move on to next player-phase
 	if current_turn > max_turns:
 		_trigger_defeat()
 	else:
 		start_phase(Phase.PLAYER)
 
+
 # Triggers defeat TAG: MIRIJAM LOSE-CONDITION
 func _trigger_defeat() -> void:
 	print("\nDefeat! Max turns reached!")
-	# TODO: call game over logic here.
+	game_is_paused = true
+	win_loss_condition.lose()
 
 
 # --- PLAYER TURN HANDLING ---
 func _next_player_unit() -> void:
+	
+	# Stop phase if game is paused
+	if game_is_paused:
+		return
 	
 	# Get next playable unit is queue
 	var next_unit: Actor = null
@@ -123,6 +152,9 @@ func end_player_unit_turn(unit: Actor) -> void:
 	if next_behaviour_node and next_behaviour_node.has_method("confirm_position"):
 			next_behaviour_node.confirm_position()
 	
+	# Check for passives triggered at end of turn
+	_trigger_end_turn_passives(unit)
+	
 	next_behaviour_node.deselect()
 	
 	# Select next unit
@@ -138,6 +170,7 @@ func _next_enemy_unit() -> void:
 		if not unit.acted:
 			next_unit = unit
 			break
+			
 	
 	# If queue is empty, end phase
 	if next_unit == null:
@@ -159,10 +192,29 @@ func _next_enemy_unit() -> void:
 		if next_unit != null:
 			next_unit.acted = true
 			
+		# Stop phase if game is paused
+		if game_is_paused:
+			return
+			
 		# Auto-advance in queue, might add a delay
 		_next_enemy_unit()
 
 # --- UTIL ---
+
+# Triggers passive skills that gets triggered at the end of a units turn
+func _trigger_end_turn_passives(actor: Actor) -> void:
+	
+	if not actor or not ("skills" in actor):
+		return
+	
+	for skill in actor.skills:
+		if skill.skill_type == "Passive" and skill.effect_script:
+			
+			# Call the script manually with target=self
+			var script_inst = skill.effect_script.new()
+			if script_inst.has_method("apply"):
+				script_inst.apply(actor, actor, skill)
+
 func _reset_acted_flag(list: Array) -> void:
 	for unit in list:
 		unit.acted = false

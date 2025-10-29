@@ -72,6 +72,7 @@ func _handle_playable_click(actor: Actor) -> void:
 	# Then select the clicked actor
 	_select_unit(actor)
 
+
 # Protocol for handeling click on a enemy
 func _handle_enemy_click(enemy: Actor) -> void:
 	
@@ -109,13 +110,12 @@ func _handle_enemy_click(enemy: Actor) -> void:
 
 	# --- Case 1: If enemy is already within attack-range, do not move, only select target
 	if _is_enemy_in_attack_range(current_tile, enemy_pos, attack_range):
-		print("Enemy already within attack range — no movement needed.")
+		#print("Enemy already within attack range — no movement needed.")
 		playable_behaviour.set_attack_target(enemy)
 		return
 
 	# --- Case 2: Enemy is outside "current" attack-range, find a tile to move to within range
 	var best_tile: Vector2i = _find_best_attack_tile(move_tiles, enemy_pos, attack_range)
-
 	# If there is a functioning tile, move to that one and set enemy to attack-target
 	if best_tile != INVALID_POS:
 		await playable_behaviour.move_to(best_tile)
@@ -127,24 +127,27 @@ func _handle_enemy_click(enemy: Actor) -> void:
 		selected_unit = null
 		enemy.get_behaviour().select(true)
 
-# Protocol for handeling clicks on non-units
+
+# Protocol for handeling clicks on non-units (includes movement)
 func _handle_empty_tile_click(click_tile: Vector2i) -> void:
 	
 	# If no unit is selected, do nothing
 	if not selected_unit:
 		return
 		
-	# If selected is a enemy, do nothing since they can't be controlled
-	if not selected_unit.is_friendly:
-		return
-
-	# If has acted, do nothing since they can't be controlled
-	var behaviour = selected_unit.get_behaviour()
-	if not behaviour or selected_unit.acted:
-		return
-
 	# Ignore clicks on UI
 	if _is_mouse_over_gui():
+		return
+	
+	# If selected is a enemy, deselect
+	if not selected_unit.is_friendly:
+		_deselect_unit(selected_unit)
+		return
+
+	# If has acted, deselect
+	var behaviour = selected_unit.get_behaviour()
+	if not behaviour or selected_unit.acted:
+		_deselect_unit(selected_unit)
 		return
 	
 	var range_data = behaviour.get_range_tiles()
@@ -311,12 +314,15 @@ func _find_level_nodes() -> void:
 				if margin:
 					var actions_menu = margin.get_node_or_null("ActionsMenu")
 					var actor_info = margin.get_node_or_null("ActorInfo")
+					var skill_menu = margin.get_node_or_null("SkillMenu")
 					if actions_menu:
 						ui_nodes.append(actions_menu)
 					if actor_info:
 						ui_nodes.append(actor_info)
+					if skill_menu:
+						ui_nodes.append(skill_menu)
 
-			level_active = true
+			#level_active = true
 			print("ClickHandler: Found level nodes for ", node.name)
 			return
 

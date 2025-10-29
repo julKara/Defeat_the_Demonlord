@@ -28,7 +28,7 @@ func _on_node_added(node):
 		_find_level_nodes()
 
 # --- Main function ---
-func perform_battle(attacker: Actor, defender: Actor, distance: float, path: Array[Vector2i]) -> void:
+func perform_battle(attacker: Actor, defender: Actor, distance: float) -> void:
 	
 	# Check if actors are valid
 	if attacker == null or defender == null:
@@ -43,7 +43,8 @@ func perform_battle(attacker: Actor, defender: Actor, distance: float, path: Arr
 	var def_prof: UnitProfile = defender.profile
 
 	# 1. Play attack animation and sfx, and wait for it to finish
-	attacker.get_behaviour().calculate_direction(path) # Flip sprite based on attack direction
+	var attacker_sprite = attacker.get_sprite()
+	attacker_sprite.flip_h = attacker.global_position.x > defender.global_position.x
 	_play_attack_sfx(attacker) # Play attack sfx
 	await _play_animation(attacker) # Play attack animation
 	
