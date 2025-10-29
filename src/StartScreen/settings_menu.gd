@@ -3,6 +3,7 @@ extends PanelContainer
 @onready var music_volume_slider: HScrollBar = $VBoxContainer/MusicContainer/MusicVolume
 @onready var sfx_volume_slider: HScrollBar = $VBoxContainer/SfxContainer/SfxVolume
 @onready var button_container: VBoxContainer = $"../ButtonContainer"
+@onready var button_background: Panel = $"../ButtonBackground"
 
 
 # Called when the node enters the scene tree for the first time.
@@ -46,4 +47,5 @@ func _on_close_pressed() -> void:
 	# Play click sound
 	AudioManager.play_sfx("Click")
 	hide()
+	button_background.show()
 	button_container.show()

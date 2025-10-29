@@ -35,6 +35,10 @@ window/size/window_height_override=1200
 window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
 
+[gui]
+
+theme/custom_font="uid://bb4n5ar7uvk27"
+
 [input]
 
 ui_left={
@@ -80,6 +84,7 @@ left_mouse_button={
 textures/canvas_textures/default_texture_filter=0
 textures/vram_compression/compress_with_gpu=false
 camera/depth_of_field/depth_of_field_bokeh_shape=0
+anti_aliasing/screen_space_roughness_limiter/enabled=false
 textures/decals/filter=0
 textures/light_projectors/filter=0
 2d/snap/snap_2d_transforms_to_pixel=true

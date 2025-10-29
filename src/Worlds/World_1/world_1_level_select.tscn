@@ -48,7 +48,7 @@ offset_top = 60.0
 offset_right = 46.5
 offset_bottom = 95.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 45
+theme_override_font_sizes/font_size = 50
 text = "World 1"
 
 [node name="ButtonBackground" type="Panel" parent="."]

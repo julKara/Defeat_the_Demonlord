@@ -48,7 +48,7 @@ offset_top = 60.0
 offset_right = 135.5
 offset_bottom = 123.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 45
+theme_override_font_sizes/font_size = 50
 text = "World Select"
 
 [node name="ButtonBackground" type="Panel" parent="."]
