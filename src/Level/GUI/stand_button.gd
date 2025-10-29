@@ -8,4 +8,5 @@ extends Button
 
 func _pressed() -> void:
 	var current = character_manager.current_character
+	current.passed_turn = true	# Set to true to trigger passives
 	turn_manager.end_player_unit_turn(current)

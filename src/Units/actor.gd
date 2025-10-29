@@ -34,7 +34,7 @@ var behavior: Node = null	# Decides behavior based on if unit is playable, enemy
 # Skills
 var skills: Array[SkillResource] = []	# Stores the actual skills
 var active_effects: Array = []	# Stores active effects on the unit (skill, caster, remaining_duration, stat_addition, stat_multiplier)
-
+var passed_turn: bool = false	# Set to true when pressing pass-turn button to trigger certain passives
 
 # --- Refrences to objects in level ---
 @onready var tile_map: TileMap = $"../../../TileMap"

@@ -145,6 +145,7 @@ func select(has_acted: bool) -> void:
 	# Display info
 	actor_info.display_actor_info(get_parent())
 	
+	get_parent().passed_turn = false	# Reset
 	if get_parent().skills.size() > 0:
 		skill_1.skill = get_parent().skills[0]
 		if skill_1.skill.target_type == "Self":

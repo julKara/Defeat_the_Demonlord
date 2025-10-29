@@ -152,6 +152,9 @@ func end_player_unit_turn(unit: Actor) -> void:
 	if next_behaviour_node and next_behaviour_node.has_method("confirm_position"):
 			next_behaviour_node.confirm_position()
 	
+	# Check for passives triggered at end of turn
+	_trigger_end_turn_passives(unit)
+	
 	next_behaviour_node.deselect()
 	
 	# Select next unit
@@ -197,6 +200,21 @@ func _next_enemy_unit() -> void:
 		_next_enemy_unit()
 
 # --- UTIL ---
+
+# Triggers passive skills that gets triggered at the end of a units turn
+func _trigger_end_turn_passives(actor: Actor) -> void:
+	
+	if not actor or not ("skills" in actor):
+		return
+	
+	for skill in actor.skills:
+		if skill.skill_type == "Passive" and skill.effect_script:
+			
+			# Call the script manually with target=self
+			var script_inst = skill.effect_script.new()
+			if script_inst.has_method("apply"):
+				script_inst.apply(actor, actor, skill)
+
 func _reset_acted_flag(list: Array) -> void:
 	for unit in list:
 		unit.acted = false

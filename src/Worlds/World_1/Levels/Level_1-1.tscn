@@ -429,6 +429,10 @@ text = "HP: 00/00"
 layout_mode = 2
 text = "HP: 00/00"
 
+[node name="PhysDefence" type="Label" parent="GUI/Margin/ActorInfo/VBoxContainer"]
+layout_mode = 2
+text = "HP: 00/00"
+
 [node name="VictoryScreen" type="PanelContainer" parent="GUI/Margin"]
 process_mode = 3
 visible = false
