@@ -12,4 +12,5 @@ battle_class_type = "Slime"
 sprite = ExtResource("2_lo8ng")
 animation = ExtResource("1_q3y8s")
 audio = ExtResource("2_0y1xr")
+skills = Array[Resource]([])
 metadata/_custom_type_script = "uid://5kg8ybina31b"

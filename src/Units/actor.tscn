@@ -162,6 +162,5 @@ one_shot = true
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_ni625")
 volume_db = -2.0
-bus = &"sfx"
 
 [connection signal="timeout" from="Healthbar/Timer" to="Healthbar" method="_on_timer_timeout"]

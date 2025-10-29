@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="SkillResource" load_steps=3 format=3 uid="uid://cjjcuhny0l2kj"]
 
-[ext_resource type="Script" uid="uid://bnlafpamei5gh" path="res://src/Units/skill_resource.gd" id="1_njd11"]
+[ext_resource type="Script" uid="uid://bw6iq6gxtp5vs" path="res://src/Units/skill_resource.gd" id="1_njd11"]
 [ext_resource type="Script" uid="uid://bpmtff3andkyb" path="res://assets/Skills/EndTurnDefenceBuff/prepare_defences.gd" id="1_rrj5k"]
 
 [resource]

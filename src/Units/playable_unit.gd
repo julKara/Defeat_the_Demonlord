@@ -40,9 +40,9 @@ func _ready() -> void:
 
 func _set_stat_variables() -> void:
 	var stats = get_parent().stats
-	mobility = stats.mobility
+	mobility = stats.curr_mobility
 	#move_speed = stats.speed
-	attack_range = stats.attack_range
+	attack_range = stats.curr_attack_range
 
 # --- Movement ---
 func move_to(tile: Vector2i) -> void:

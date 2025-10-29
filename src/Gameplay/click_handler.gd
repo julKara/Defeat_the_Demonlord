@@ -105,7 +105,7 @@ func _handle_enemy_click(enemy: Actor) -> void:
 
 	# Get some other useful info
 	var enemy_pos: Vector2i = tile_map.local_to_map(enemy.global_position)
-	var attack_range = selected_unit.stats.attack_range
+	var attack_range = selected_unit.stats.curr_attack_range
 	var current_tile = playable_behaviour.current_tile
 
 	# --- Case 1: If enemy is already within attack-range, do not move, only select target

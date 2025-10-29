@@ -40,9 +40,9 @@ func _ready():
 
 # Intialize all stat-variables through the CharacterStats resource
 func _set_stat_variables():
-	mobility = get_parent().stats.mobility
+	mobility = get_parent().stats.curr_mobility
 	move_speed = get_parent().stats.speed
-	attack_range = get_parent().stats.attack_range
+	attack_range = get_parent().stats.curr_attack_range
 
 func find_closest_player() -> CharacterBody2D:
 		
@@ -289,7 +289,7 @@ func attack():
 		# Do a counter-attack if target is still alive and withing range
 		if target.stats.curr_health > 0:
 			
-			var target_range = target.stats.attack_range
+			var target_range = target.stats.curr_attack_range
 			
 			# Only counterattack if attacker is within target’s range
 			if target_range * attacker.tile_size >= dist:
