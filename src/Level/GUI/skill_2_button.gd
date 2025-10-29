@@ -1,11 +1,11 @@
-# skill_1_button.gd
+# skill_2_button.gd
 extends Button
 
 @export var skill_index: int = 0    # make reusable for slot 0,1,2...
-@onready var skill_menu := get_parent()                          # assumed immediate parent is SkillMenu
 @onready var turn_manager: Node = $"../../../../../TileMapLayer/TurnManager"
 @onready var skill_info_popup: PopupPanel = $"../../SkillInfoPopup"
 @onready var skill_info_label: RichTextLabel = $"../../SkillInfoPopup/SkillInfoLabel"
+
 
 var skill: SkillResource = null
 
@@ -24,8 +24,12 @@ func _ready() -> void:
 
 
 func _pressed() -> void:
-	
 	click_count += 1
+	
+	# Tell SkillMenu to reset all other buttons
+	var skill_menu := get_parent().get_parent()  # Button is inside VBoxContainer under SkillMenu
+	if skill_menu.has_method("reset_other_buttons"):
+		skill_menu.reset_other_buttons(self)
 	
 	var actor := ClickHandler.selected_unit
 	
@@ -47,6 +51,7 @@ func _pressed() -> void:
 	elif skill.target_type == "Enemy" and actor.get_behaviour().attack_target == null:
 		disabled = true
 	_show_skill_info()
+
 
 func _show_skill_info() -> void:
 	

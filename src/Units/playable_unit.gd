@@ -11,7 +11,7 @@ class_name playable_unit extends Node
 @onready var default_attack: Button = $"../../../../GUI/Margin/ActionsMenu/VBoxContainer/Default_Attack"
 @onready var skill_menu: PanelContainer = $"../../../../GUI/Margin/SkillMenu"
 @onready var skill_1: Button = $"../../../../GUI/Margin/SkillMenu/VBoxContainer/Skill1"
-#@onready var skill_2: Button = $"../../../../GUI/Margin/SkillMenu/VBoxContainer/Skill2"
+@onready var skill_2: Button = $"../../../../GUI/Margin/SkillMenu/VBoxContainer/Skill2"
 
 
 # --- Variables ---
@@ -89,7 +89,7 @@ func move_to(tile: Vector2i) -> void:
 		attack_target = null
 		default_attack.disabled = true
 		skill_1.disabled = true
-		#skill_2.disabled = true
+		skill_2.disabled = true
 
 
 # Reset back to origin_tile if moved but not acted
@@ -142,8 +142,8 @@ func select(has_acted: bool) -> void:
 	if get_parent().skills.size() > 0:
 		skill_1.skill = get_parent().skills[0]
 		skill_1.disabled = false
-		#skill_2.skill = get_parent().skills[1]
-		#skill_2.disabled = false
+		skill_2.skill = get_parent().skills[1]
+		skill_2.disabled = false
 	
 	# Display mobility- and range-tilemap
 	highlight_range()
@@ -176,10 +176,10 @@ func deselect() -> void:
 	skill_1.disabled = true
 	skill_1.click_count = 0
 	
-	#skill_2.skill = null
-	#skill_2.text = "skill2"
-	#skill_2.disabled = true
-	#skill_2.click_count = 0
+	skill_2.skill = null
+	skill_2.text = "skill2"
+	skill_2.disabled = true
+	skill_2.click_count = 0
 	
 	# Remove target-highlight if the is one
 	if attack_target:
@@ -312,8 +312,8 @@ func set_attack_target(target: Actor) -> void:
 	if get_parent().skills.size() > 0:
 		if skill_1.skill.target_type == "Enemy":
 			skill_1.disabled = false
-		#if skill_2.skill.target_type == "Enemy":
-			#skill_2.disabled = false
+		if skill_2.skill.target_type == "Enemy":
+			skill_2.disabled = false
 	
 	# Remove highlight from previous target if any
 	if attack_target != null:
