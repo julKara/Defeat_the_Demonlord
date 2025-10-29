@@ -1,9 +1,10 @@
-[gd_scene load_steps=26 format=3 uid="uid://dijjspgi8x8sv"]
+[gd_scene load_steps=27 format=3 uid="uid://dijjspgi8x8sv"]
 
 [ext_resource type="Script" uid="uid://7mgltwn5kw4v" path="res://src/Units/actor.gd" id="1_xjefa"]
 [ext_resource type="Shader" uid="uid://54clig0upyxr" path="res://src/Units/highlight.gdshader" id="2_a5lvk"]
 [ext_resource type="AnimationLibrary" uid="uid://dokvnyivxhor6" path="res://characters/Goblin/goblinAnimations.tres" id="4_gdso5"]
 [ext_resource type="AnimationLibrary" uid="uid://csufkd5ailv6u" path="res://characters/Knight/knightAnimations.tres" id="4_jg2tr"]
+[ext_resource type="AnimationLibrary" uid="uid://b6saog4av0vko" path="res://characters/DemonLord/demonLordAnimations.res" id="4_tbjoy"]
 [ext_resource type="AnimationLibrary" uid="uid://db35i1b3vs4xd" path="res://characters/Mage/mageAnimations.tres" id="5_a5lvk"]
 [ext_resource type="Texture2D" uid="uid://jmiy51ye1yiv" path="res://assets/character_art/Slime/Slime_Sprite.png" id="6_a5lvk"]
 [ext_resource type="Texture2D" uid="uid://ckg1tiejdrssx" path="res://assets/character_art/Slime/Slime_Default_Attack_f1.png" id="7_4k5mr"]
@@ -126,6 +127,7 @@ texture = ExtResource("7_jg2tr")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_a5lvk"),
+&"demonLordAnimations": ExtResource("4_tbjoy"),
 &"goblinAnimations": ExtResource("4_gdso5"),
 &"knightAnimations": ExtResource("4_jg2tr"),
 &"mageAnimations": ExtResource("5_a5lvk"),
@@ -164,6 +166,5 @@ one_shot = true
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_ni625")
 volume_db = -2.0
-bus = &"sfx"
 
 [connection signal="timeout" from="Healthbar/Timer" to="Healthbar" method="_on_timer_timeout"]

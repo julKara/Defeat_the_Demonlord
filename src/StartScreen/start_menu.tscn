@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://bsi7hvfmcwssu" path="res://src/StartScreen/new_game.gd" id="1_ilsnu"]
 [ext_resource type="Script" uid="uid://0ad1m7m8j7ba" path="res://src/StartScreen/quit.gd" id="1_x5plg"]
 [ext_resource type="Script" uid="uid://mbi46648c8lx" path="res://src/StartScreen/continue.gd" id="1_yevbf"]
-[ext_resource type="Script" uid="uid://cicexurtybn0r" path="res://src/StartScreen/settings_button.gd" id="3_hrrfr"]
+[ext_resource type="Script" path="res://src/StartScreen/settings_button.gd" id="3_hrrfr"]
 [ext_resource type="Script" uid="uid://sehkuo2xbwos" path="res://src/Worlds/world_tracker.gd" id="4_1l0fv"]
 [ext_resource type="Resource" uid="uid://b7d426jw88wxl" path="res://src/Worlds/world_handler.tres" id="5_lva2g"]
-[ext_resource type="Script" uid="uid://bsypocv5nyt1l" path="res://src/StartScreen/settings_menu.gd" id="7_8l3u8"]
+[ext_resource type="Script" path="res://src/StartScreen/settings_menu.gd" id="7_8l3u8"]
 
 [node name="StartMenu" type="Control"]
 layout_mode = 3

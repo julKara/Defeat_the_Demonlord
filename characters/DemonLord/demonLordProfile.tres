@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="UnitProfile" load_steps=4 format=3 uid="uid://b0nthq3t1klg"]
+
+[ext_resource type="AnimationLibrary" uid="uid://b6saog4av0vko" path="res://characters/DemonLord/demonLordAnimations.res" id="1_jbcmj"]
+[ext_resource type="Script" uid="uid://5kg8ybina31b" path="res://src/Units/Unit_Profile.gd" id="1_jsrp8"]
+[ext_resource type="Texture2D" uid="uid://mvov0n8d4u8y" path="res://assets/character_art/demonlord/DemonLord_Sprite.png" id="2_mnjvy"]
+
+[resource]
+script = ExtResource("1_jsrp8")
+character_name = "Demon"
+battle_class_type = "Lord"
+sprite = ExtResource("2_mnjvy")
+animation = ExtResource("1_jbcmj")
+skills = Array[Resource]([])
+metadata/_custom_type_script = "uid://5kg8ybina31b"
