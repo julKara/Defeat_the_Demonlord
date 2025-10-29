@@ -166,7 +166,7 @@ texture_region_size = Vector2i(48, 48)
 tile_size = Vector2i(48, 48)
 sources/1 = SubResource("TileSetAtlasSource_tlwt5")
 
-[sub_resource type="Resource" id="Resource_athqt"]
+[sub_resource type="Resource" id="Resource_tjatl"]
 resource_name = "mageStats"
 script = ExtResource("6_qnc6k")
 curr_health = 100
@@ -196,7 +196,7 @@ mag_def_gain = 10
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_6tp14"]
+[sub_resource type="Resource" id="Resource_0ni46"]
 resource_name = "knightStats"
 script = ExtResource("6_qnc6k")
 curr_health = 200
@@ -226,7 +226,7 @@ mag_def_gain = 0
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_0xagr"]
+[sub_resource type="Resource" id="Resource_mebf6"]
 script = ExtResource("6_qnc6k")
 curr_health = 110
 max_health = 110
@@ -316,19 +316,19 @@ y_sort_enabled = true
 
 [node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_orqvb")]
 position = Vector2(120, 120)
-stats = SubResource("Resource_athqt")
+stats = SubResource("Resource_tjatl")
 profile = ExtResource("6_tjatl")
 is_friendly = true
 
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_orqvb")]
 position = Vector2(360, 264)
-stats = SubResource("Resource_6tp14")
+stats = SubResource("Resource_0ni46")
 profile = ExtResource("7_0ni46")
 is_friendly = true
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_orqvb")]
 position = Vector2(168, 312)
-stats = SubResource("Resource_0xagr")
+stats = SubResource("Resource_mebf6")
 profile = ExtResource("8_mebf6")
 enemy_level = 2
 

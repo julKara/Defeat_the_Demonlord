@@ -1,0 +1,45 @@
+[gd_resource type="AnimationLibrary" load_steps=6 format=3 uid="uid://dokvnyivxhor6"]
+
+[ext_resource type="Texture2D" uid="uid://nc6uwu57hop" path="res://assets/character_art/goblin/Goblin_Sprite.png" id="1_r5yoc"]
+[ext_resource type="Texture2D" uid="uid://docxpayk2468v" path="res://assets/character_art/goblin/Goblin_Idle_f1.png" id="2_pksls"]
+
+[sub_resource type="Animation" id="Animation_dhe84"]
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("1_r5yoc"), ExtResource("2_pksls")]
+}
+
+[sub_resource type="Animation" id="Animation_mw86b"]
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("1_r5yoc"), ExtResource("2_pksls")]
+}
+
+[sub_resource type="Animation" id="Animation_r5yoc"]
+
+[resource]
+_data = {
+&"attack": SubResource("Animation_r5yoc"),
+&"idle": SubResource("Animation_dhe84"),
+&"selected": SubResource("Animation_mw86b")
+}

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="UnitProfile" load_steps=5 format=3 uid="uid://crhx3b3htheuy"]
+
+[ext_resource type="Script" uid="uid://5kg8ybina31b" path="res://src/Units/Unit_Profile.gd" id="1_g0nim"]
+[ext_resource type="AnimationLibrary" uid="uid://dokvnyivxhor6" path="res://characters/Goblin/goblinAnimations.tres" id="1_n0xi7"]
+[ext_resource type="AudioStream" uid="uid://bprvhbjhnymbs" path="res://characters/Goblin/goblinAudio.tres" id="1_tklsk"]
+[ext_resource type="Texture2D" uid="uid://nc6uwu57hop" path="res://assets/character_art/goblin/Goblin_Sprite.png" id="3_n0xi7"]
+
+[resource]
+script = ExtResource("1_g0nim")
+character_name = "Stig"
+battle_class_type = "Assassin"
+sprite = ExtResource("3_n0xi7")
+animation = ExtResource("1_n0xi7")
+audio = ExtResource("1_tklsk")
+skills = Array[Resource]([])
+metadata/_custom_type_script = "uid://5kg8ybina31b"
