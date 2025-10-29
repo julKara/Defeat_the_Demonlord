@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://ddacdpv1f5knn"]
+[gd_scene load_steps=37 format=4 uid="uid://ddacdpv1f5knn"]
 
 [ext_resource type="Texture2D" uid="uid://bqmtavn12rhj2" path="res://assets/test_map5.png" id="1_vgxp4"]
 [ext_resource type="Texture2D" uid="uid://bdy0m0gr2tme3" path="res://assets/level_art/48x48_Tileset/pipo-map001.png" id="2_n0njb"]
@@ -23,8 +23,9 @@
 [ext_resource type="Resource" uid="uid://b7d426jw88wxl" path="res://src/Worlds/world_handler.tres" id="19_a17x8"]
 [ext_resource type="Script" uid="uid://b3u6ea2h55gqj" path="res://src/Level/GUI/skill_2_button.gd" id="19_le8uw"]
 [ext_resource type="Script" uid="uid://giyv8yaisw0a" path="res://src/Level/GUI/back_skill_button.gd" id="20_3my4o"]
-[ext_resource type="Script" uid="uid://bety4ic5vs3fy" path="res://src/Level/GUI/pause_button.gd" id="21_bco8a"]
-[ext_resource type="Script" uid="uid://2pk6lv5drag2" path="res://src/Level/GUI/pause_menu.gd" id="22_le8uw"]
+[ext_resource type="Script" path="res://src/Level/GUI/pause_button.gd" id="21_bco8a"]
+[ext_resource type="Script" path="res://src/Level/GUI/pause_menu.gd" id="22_le8uw"]
+[ext_resource type="Script" uid="uid://dyx7v0w8tua76" path="res://src/Level/camera_controller.gd" id="26_le8uw"]
 
 [sub_resource type="GDScript" id="GDScript_ic0uy"]
 script/source = "extends Node2D
@@ -167,7 +168,7 @@ texture_region_size = Vector2i(48, 48)
 tile_size = Vector2i(48, 48)
 sources/1 = SubResource("TileSetAtlasSource_tlwt5")
 
-[sub_resource type="Resource" id="Resource_bco8a"]
+[sub_resource type="Resource" id="Resource_3my4o"]
 resource_name = "knightStats"
 script = ExtResource("6_ynq35")
 curr_health = 200
@@ -197,7 +198,7 @@ mag_def_gain = 0
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_le8uw"]
+[sub_resource type="Resource" id="Resource_n3kg0"]
 script = ExtResource("6_ynq35")
 curr_health = 140
 max_health = 140
@@ -258,7 +259,6 @@ layer_1/name = "Effects1"
 layer_2/name = "Effects2"
 
 [node name="Background" type="ColorRect" parent="."]
-visible = false
 custom_minimum_size = Vector2(600, 400)
 offset_right = 600.0
 offset_bottom = 400.0
@@ -288,13 +288,13 @@ y_sort_enabled = true
 
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_2aopv")]
 position = Vector2(312, 216)
-stats = SubResource("Resource_bco8a")
+stats = SubResource("Resource_3my4o")
 profile = ExtResource("7_in3vx")
 is_friendly = true
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_2aopv")]
 position = Vector2(312, 264)
-stats = SubResource("Resource_le8uw")
+stats = SubResource("Resource_n3kg0")
 profile = ExtResource("8_0bmnd")
 enemy_level = 5
 
@@ -302,8 +302,11 @@ enemy_level = 5
 script = SubResource("GDScript_mfmxk")
 
 [node name="Margin" type="MarginContainer" parent="GUI"]
-offset_right = 600.0
-offset_bottom = 400.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ActionsMenu" type="PanelContainer" parent="GUI/Margin"]
 layout_mode = 2
@@ -515,6 +518,11 @@ script = ExtResource("15_6yfhb")
 [node name="WorldHandler" type="Node" parent="."]
 script = ExtResource("18_ynq35")
 world_script = ExtResource("19_a17x8")
+
+[node name="CameraController" type="Node2D" parent="."]
+script = ExtResource("26_le8uw")
+
+[node name="Camera" type="Camera2D" parent="CameraController"]
 
 [connection signal="pressed" from="GUI/Margin/VictoryScreen/Continue" to="GUI/Margin/VictoryScreen" method="_on_continue_pressed"]
 [connection signal="pressed" from="GUI/Margin/GameOverScreen/HBoxContainer/Retry" to="GUI/Margin/GameOverScreen" method="_on_retry_pressed"]

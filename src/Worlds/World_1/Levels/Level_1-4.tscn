@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://cvlihb3xstghc"]
+[gd_scene load_steps=39 format=4 uid="uid://cvlihb3xstghc"]
 
 [ext_resource type="Texture2D" uid="uid://bqmtavn12rhj2" path="res://assets/test_map5.png" id="1_rk3b1"]
 [ext_resource type="Texture2D" uid="uid://bdy0m0gr2tme3" path="res://assets/level_art/48x48_Tileset/pipo-map001.png" id="2_w41le"]
@@ -24,8 +24,9 @@
 [ext_resource type="Script" uid="uid://w7ua1w0mwld8" path="res://src/Level/GUI/skill_1_button.gd" id="19_g2v2w"]
 [ext_resource type="Script" uid="uid://b3u6ea2h55gqj" path="res://src/Level/GUI/skill_2_button.gd" id="20_q4c55"]
 [ext_resource type="Script" uid="uid://giyv8yaisw0a" path="res://src/Level/GUI/back_skill_button.gd" id="21_irhmm"]
-[ext_resource type="Script" uid="uid://bety4ic5vs3fy" path="res://src/Level/GUI/pause_button.gd" id="22_g2v2w"]
-[ext_resource type="Script" uid="uid://2pk6lv5drag2" path="res://src/Level/GUI/pause_menu.gd" id="23_q4c55"]
+[ext_resource type="Script" path="res://src/Level/GUI/pause_button.gd" id="22_g2v2w"]
+[ext_resource type="Script" path="res://src/Level/GUI/pause_menu.gd" id="23_q4c55"]
+[ext_resource type="Script" uid="uid://dyx7v0w8tua76" path="res://src/Level/camera_controller.gd" id="27_q4c55"]
 
 [sub_resource type="GDScript" id="GDScript_ic0uy"]
 script/source = "extends Node2D
@@ -168,7 +169,7 @@ texture_region_size = Vector2i(48, 48)
 tile_size = Vector2i(48, 48)
 sources/1 = SubResource("TileSetAtlasSource_tlwt5")
 
-[sub_resource type="Resource" id="Resource_g2v2w"]
+[sub_resource type="Resource" id="Resource_irhmm"]
 resource_name = "mageStats"
 script = ExtResource("6_rk3b1")
 curr_health = 100
@@ -198,7 +199,7 @@ mag_def_gain = 10
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_q4c55"]
+[sub_resource type="Resource" id="Resource_gjisq"]
 resource_name = "knightStats"
 script = ExtResource("6_rk3b1")
 curr_health = 200
@@ -228,7 +229,7 @@ mag_def_gain = 0
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_irhmm"]
+[sub_resource type="Resource" id="Resource_7hn85"]
 script = ExtResource("6_rk3b1")
 curr_health = 120
 max_health = 120
@@ -318,19 +319,19 @@ y_sort_enabled = true
 
 [node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_ye6rd")]
 position = Vector2(120, 120)
-stats = SubResource("Resource_g2v2w")
+stats = SubResource("Resource_irhmm")
 profile = ExtResource("6_4b0xi")
 is_friendly = true
 
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_ye6rd")]
 position = Vector2(360, 264)
-stats = SubResource("Resource_q4c55")
+stats = SubResource("Resource_gjisq")
 profile = ExtResource("7_aqmlc")
 is_friendly = true
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_ye6rd")]
 position = Vector2(168, 312)
-stats = SubResource("Resource_irhmm")
+stats = SubResource("Resource_7hn85")
 profile = ExtResource("8_g2v2w")
 enemy_level = 3
 
@@ -338,8 +339,11 @@ enemy_level = 3
 script = SubResource("GDScript_5fqfg")
 
 [node name="Margin" type="MarginContainer" parent="GUI"]
-offset_right = 600.0
-offset_bottom = 400.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ActionsMenu" type="PanelContainer" parent="GUI/Margin"]
 layout_mode = 2
@@ -551,6 +555,11 @@ script = ExtResource("17_8gfat")
 [node name="WorldHandler" type="Node" parent="."]
 script = ExtResource("18_ueqf1")
 world_script = ExtResource("19_1a4e0")
+
+[node name="CameraController" type="Node2D" parent="."]
+script = ExtResource("27_q4c55")
+
+[node name="Camera" type="Camera2D" parent="CameraController"]
 
 [connection signal="pressed" from="GUI/Margin/VictoryScreen/Continue" to="GUI/Margin/VictoryScreen" method="_on_continue_pressed"]
 [connection signal="pressed" from="GUI/Margin/GameOverScreen/HBoxContainer/Retry" to="GUI/Margin/GameOverScreen" method="_on_retry_pressed"]
