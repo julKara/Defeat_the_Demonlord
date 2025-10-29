@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://bi82xf4b50v4w"]
+[gd_scene load_steps=38 format=4 uid="uid://bi82xf4b50v4w"]
 
 [ext_resource type="Texture2D" uid="uid://bqmtavn12rhj2" path="res://assets/test_map5.png" id="1_qnc6k"]
 [ext_resource type="Texture2D" uid="uid://bdy0m0gr2tme3" path="res://assets/level_art/48x48_Tileset/pipo-map001.png" id="2_3dms0"]
@@ -24,6 +24,8 @@
 [ext_resource type="Script" uid="uid://w7ua1w0mwld8" path="res://src/Level/GUI/skill_1_button.gd" id="19_mebf6"]
 [ext_resource type="Script" uid="uid://b3u6ea2h55gqj" path="res://src/Level/GUI/skill_2_button.gd" id="20_2skyk"]
 [ext_resource type="Script" uid="uid://giyv8yaisw0a" path="res://src/Level/GUI/back_skill_button.gd" id="21_rautg"]
+[ext_resource type="Script" uid="uid://bety4ic5vs3fy" path="res://src/Level/GUI/pause_button.gd" id="22_mebf6"]
+[ext_resource type="Script" uid="uid://2pk6lv5drag2" path="res://src/Level/GUI/pause_menu.gd" id="23_2skyk"]
 
 [sub_resource type="GDScript" id="GDScript_ic0uy"]
 script/source = "extends Node2D
@@ -166,7 +168,7 @@ texture_region_size = Vector2i(48, 48)
 tile_size = Vector2i(48, 48)
 sources/1 = SubResource("TileSetAtlasSource_tlwt5")
 
-[sub_resource type="Resource" id="Resource_tjatl"]
+[sub_resource type="Resource" id="Resource_mebf6"]
 resource_name = "mageStats"
 script = ExtResource("6_qnc6k")
 curr_health = 100
@@ -196,7 +198,7 @@ mag_def_gain = 10
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_0ni46"]
+[sub_resource type="Resource" id="Resource_2skyk"]
 resource_name = "knightStats"
 script = ExtResource("6_qnc6k")
 curr_health = 200
@@ -226,7 +228,7 @@ mag_def_gain = 0
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_mebf6"]
+[sub_resource type="Resource" id="Resource_rautg"]
 script = ExtResource("6_qnc6k")
 curr_health = 110
 max_health = 110
@@ -316,19 +318,19 @@ y_sort_enabled = true
 
 [node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_orqvb")]
 position = Vector2(120, 120)
-stats = SubResource("Resource_tjatl")
+stats = SubResource("Resource_mebf6")
 profile = ExtResource("6_tjatl")
 is_friendly = true
 
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_orqvb")]
 position = Vector2(360, 264)
-stats = SubResource("Resource_0ni46")
+stats = SubResource("Resource_2skyk")
 profile = ExtResource("7_0ni46")
 is_friendly = true
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_orqvb")]
 position = Vector2(168, 312)
-stats = SubResource("Resource_mebf6")
+stats = SubResource("Resource_rautg")
 profile = ExtResource("8_mebf6")
 enemy_level = 2
 
@@ -482,6 +484,67 @@ layout_mode = 2
 text = "Back"
 script = ExtResource("21_rautg")
 
+[node name="PauseButton" type="Button" parent="GUI/Margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "Pause"
+script = ExtResource("22_mebf6")
+
+[node name="PauseMenu" type="PanelContainer" parent="GUI/Margin"]
+process_mode = 3
+visible = false
+custom_minimum_size = Vector2(400, 250)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("23_2skyk")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/Margin/PauseMenu"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+
+[node name="ReturnLevelSelect" type="Button" parent="GUI/Margin/PauseMenu/VBoxContainer"]
+layout_mode = 2
+text = "Return to level select"
+
+[node name="MusicContainer" type="VBoxContainer" parent="GUI/Margin/PauseMenu/VBoxContainer"]
+layout_mode = 2
+
+[node name="MusicText" type="Label" parent="GUI/Margin/PauseMenu/VBoxContainer/MusicContainer"]
+layout_mode = 2
+text = "Music Volume:"
+
+[node name="MusicVolume" type="HScrollBar" parent="GUI/Margin/PauseMenu/VBoxContainer/MusicContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+min_value = -60.0
+max_value = 20.0
+page = 1.0
+value = -5.0
+
+[node name="SfxContainer" type="VBoxContainer" parent="GUI/Margin/PauseMenu/VBoxContainer"]
+layout_mode = 2
+
+[node name="SfxText" type="Label" parent="GUI/Margin/PauseMenu/VBoxContainer/SfxContainer"]
+layout_mode = 2
+text = "Sound Effects Volume:"
+
+[node name="SfxVolume" type="HScrollBar" parent="GUI/Margin/PauseMenu/VBoxContainer/SfxContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+min_value = -60.0
+max_value = 20.0
+page = 1.0
+value = -5.0
+
+[node name="Close" type="Button" parent="GUI/Margin/PauseMenu/VBoxContainer"]
+layout_mode = 2
+text = "Close"
+
 [node name="WinLossCondition" type="Node2D" parent="."]
 script = ExtResource("17_p2rbu")
 
@@ -492,3 +555,5 @@ world_script = ExtResource("19_5f36r")
 [connection signal="pressed" from="GUI/Margin/VictoryScreen/Continue" to="GUI/Margin/VictoryScreen" method="_on_continue_pressed"]
 [connection signal="pressed" from="GUI/Margin/GameOverScreen/HBoxContainer/Retry" to="GUI/Margin/GameOverScreen" method="_on_retry_pressed"]
 [connection signal="pressed" from="GUI/Margin/GameOverScreen/HBoxContainer/Return" to="GUI/Margin/GameOverScreen" method="_on_return_pressed"]
+[connection signal="pressed" from="GUI/Margin/PauseMenu/VBoxContainer/ReturnLevelSelect" to="GUI/Margin/PauseMenu" method="_on_return_level_select_pressed"]
+[connection signal="pressed" from="GUI/Margin/PauseMenu/VBoxContainer/Close" to="GUI/Margin/PauseMenu" method="_on_close_pressed"]
