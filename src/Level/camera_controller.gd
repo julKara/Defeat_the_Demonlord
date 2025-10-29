@@ -35,9 +35,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		match event.button_index:
 			MOUSE_BUTTON_WHEEL_UP:
-				if event.pressed: _set_zoom_level(-1)
-			MOUSE_BUTTON_WHEEL_DOWN:
 				if event.pressed: _set_zoom_level(1)
+			MOUSE_BUTTON_WHEEL_DOWN:
+				if event.pressed: _set_zoom_level(-1)
 			MOUSE_BUTTON_LEFT:
 				dragging = event.pressed
 				last_mouse_pos = event.position

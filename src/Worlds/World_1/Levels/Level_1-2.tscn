@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=4 uid="uid://b1nc2tns8qbkx"]
+[gd_scene load_steps=42 format=4 uid="uid://b1nc2tns8qbkx"]
 
 [ext_resource type="Texture2D" uid="uid://bqmtavn12rhj2" path="res://assets/test_map5.png" id="1_135in"]
 [ext_resource type="Texture2D" uid="uid://bdy0m0gr2tme3" path="res://assets/level_art/48x48_Tileset/pipo-map001.png" id="2_wiikb"]
@@ -8,11 +8,11 @@
 [ext_resource type="Resource" uid="uid://mwedg6ttx2lp" path="res://characters/Mage/mageProfile.tres" id="6_5kkfe"]
 [ext_resource type="Script" uid="uid://dfeqtmcp7uacl" path="res://src/Units/CharacterStats.gd" id="6_wiikb"]
 [ext_resource type="Resource" uid="uid://bu2f1ylnrxljm" path="res://characters/Knight/knightProfile.tres" id="7_5r37h"]
-[ext_resource type="Resource" uid="uid://b5bmi1atp4dnb" path="res://characters/Mage/mageEnemyProfile.tres" id="8_3vf4n"]
 [ext_resource type="Script" uid="uid://lvdowlbqk6fe" path="res://src/Level/GUI/actions_menu.gd" id="9_rmym0"]
 [ext_resource type="Script" uid="uid://duw38t7v0nrgf" path="res://src/Level/GUI/default_attack.gd" id="10_58ix3"]
 [ext_resource type="Script" uid="uid://b6oemt0bk5jyw" path="res://src/Level/GUI/stand_button.gd" id="11_8tn61"]
 [ext_resource type="Resource" uid="uid://crhx3b3htheuy" path="res://characters/Goblin/goblinProfile.tres" id="11_rmym0"]
+[ext_resource type="Resource" uid="uid://co8geppy7b1dn" path="res://characters/Slime/slimeProfile.tres" id="12_2ewbx"]
 [ext_resource type="Script" uid="uid://dso7okpirndht" path="res://src/Level/GUI/actor_info.gd" id="12_bk12l"]
 [ext_resource type="Script" uid="uid://dous6wk318f1t" path="res://src/Level/GUI/victory_screen.gd" id="13_2ewbx"]
 [ext_resource type="Script" uid="uid://c5xlaf1onfe67" path="res://src/Level/GUI/use_skill_button.gd" id="13_5kkfe"]
@@ -25,8 +25,8 @@
 [ext_resource type="Resource" uid="uid://b7d426jw88wxl" path="res://src/Worlds/world_handler.tres" id="19_qhh6i"]
 [ext_resource type="Script" uid="uid://b3u6ea2h55gqj" path="res://src/Level/GUI/skill_2_button.gd" id="20_rmym0"]
 [ext_resource type="Script" uid="uid://giyv8yaisw0a" path="res://src/Level/GUI/back_skill_button.gd" id="21_58ix3"]
-[ext_resource type="Script" path="res://src/Level/GUI/pause_button.gd" id="23_rmym0"]
-[ext_resource type="Script" path="res://src/Level/GUI/pause_menu.gd" id="24_58ix3"]
+[ext_resource type="Script" uid="uid://bety4ic5vs3fy" path="res://src/Level/GUI/pause_button.gd" id="23_rmym0"]
+[ext_resource type="Script" uid="uid://2pk6lv5drag2" path="res://src/Level/GUI/pause_menu.gd" id="24_58ix3"]
 [ext_resource type="Script" uid="uid://dyx7v0w8tua76" path="res://src/Level/camera_controller.gd" id="28_58ix3"]
 
 [sub_resource type="GDScript" id="GDScript_ic0uy"]
@@ -170,7 +170,7 @@ texture_region_size = Vector2i(48, 48)
 tile_size = Vector2i(48, 48)
 sources/1 = SubResource("TileSetAtlasSource_tlwt5")
 
-[sub_resource type="Resource" id="Resource_8tn61"]
+[sub_resource type="Resource" id="Resource_58ix3"]
 resource_name = "mageStats"
 script = ExtResource("6_wiikb")
 curr_health = 100
@@ -200,20 +200,20 @@ mag_def_gain = 10
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_bk12l"]
+[sub_resource type="Resource" id="Resource_8tn61"]
 resource_name = "knightStats"
 script = ExtResource("6_wiikb")
-curr_health = 200
-max_health = 200
-original_max_health = 200
-phys_attack = 90
-original_phys_attack = 90
+curr_health = 100
+max_health = 100
+original_max_health = 100
+phys_attack = 60
+original_phys_attack = 60
 mag_attack = 10
 original_mag_attack = 10
-phys_defense = 80
-original_phys_defense = 80
-mag_defense = 20
-original_mag_defense = 20
+phys_defense = 20
+original_phys_defense = 20
+mag_defense = 5
+original_mag_defense = 5
 crit_chance = 5
 original_crit_chance = 5
 attack_range = 1
@@ -222,28 +222,28 @@ mobility = 4
 original_mobility = 4
 level = 1
 speed = 4.0
-health_gain = 20
-phys_atk_gain = 10
-phys_def_gain = 20
+health_gain = 10
+phys_atk_gain = 5
+phys_def_gain = 10
 mag_atk_gain = 0
 mag_def_gain = 0
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_2ewbx"]
+[sub_resource type="Resource" id="Resource_bk12l"]
 script = ExtResource("6_wiikb")
 curr_health = 50
-max_health = 50
+max_health = 60
 original_max_health = 50
-phys_attack = 50
+phys_attack = 60
 original_phys_attack = 50
 mag_attack = 10
 original_mag_attack = 10
-phys_defense = 20
+phys_defense = 25
 original_phys_defense = 20
-mag_defense = 20
+mag_defense = 25
 original_mag_defense = 20
-crit_chance = 20
+crit_chance = 25
 original_crit_chance = 20
 attack_range = 1
 original_attack_range = 1
@@ -259,33 +259,62 @@ mag_def_gain = 5
 crit_gain = 5
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_jf4e7"]
+[sub_resource type="Resource" id="Resource_2ewbx"]
 script = ExtResource("6_wiikb")
-curr_health = 100
-max_health = 100
-original_max_health = 100
-phys_attack = 20
-original_phys_attack = 20
-mag_attack = 100
-original_mag_attack = 100
-phys_defense = 10
-original_phys_defense = 10
-mag_defense = 30
-original_mag_defense = 30
-crit_chance = 10
-original_crit_chance = 10
-attack_range = 2
-original_attack_range = 2
-mobility = 3
-original_mobility = 3
+curr_health = 50
+max_health = 60
+original_max_health = 50
+phys_attack = 40
+original_phys_attack = 30
+mag_attack = 10
+original_mag_attack = 10
+phys_defense = 35
+original_phys_defense = 30
+mag_defense = 25
+original_mag_defense = 20
+crit_chance = 6
+original_crit_chance = 5
+attack_range = 1
+original_attack_range = 1
+mobility = 2
+original_mobility = 2
 level = 1
 speed = 3.0
 health_gain = 10
-phys_atk_gain = 0
-phys_def_gain = 0
-mag_atk_gain = 20
-mag_def_gain = 10
-crit_gain = 0
+phys_atk_gain = 10
+phys_def_gain = 5
+mag_atk_gain = 0
+mag_def_gain = 5
+crit_gain = 1
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
+[sub_resource type="Resource" id="Resource_jf4e7"]
+script = ExtResource("6_wiikb")
+curr_health = 50
+max_health = 60
+original_max_health = 50
+phys_attack = 40
+original_phys_attack = 30
+mag_attack = 10
+original_mag_attack = 10
+phys_defense = 35
+original_phys_defense = 30
+mag_defense = 25
+original_mag_defense = 20
+crit_chance = 6
+original_crit_chance = 5
+attack_range = 1
+original_attack_range = 1
+mobility = 2
+original_mobility = 2
+level = 1
+speed = 3.0
+health_gain = 10
+phys_atk_gain = 10
+phys_def_gain = 5
+mag_atk_gain = 0
+mag_def_gain = 5
+crit_gain = 1
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
 [sub_resource type="GDScript" id="GDScript_52s2t"]
@@ -320,6 +349,7 @@ layer_1/name = "Effects1"
 layer_2/name = "Effects2"
 
 [node name="Background" type="ColorRect" parent="."]
+visible = false
 custom_minimum_size = Vector2(600, 400)
 offset_right = 600.0
 offset_bottom = 400.0
@@ -349,27 +379,33 @@ y_sort_enabled = true
 
 [node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_ir1sj")]
 position = Vector2(120, 120)
-stats = SubResource("Resource_8tn61")
+stats = SubResource("Resource_58ix3")
 profile = ExtResource("6_5kkfe")
 is_friendly = true
 
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_ir1sj")]
-position = Vector2(360, 264)
-stats = SubResource("Resource_bk12l")
+position = Vector2(216, 120)
+stats = SubResource("Resource_8tn61")
 profile = ExtResource("7_5r37h")
 is_friendly = true
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_ir1sj")]
 position = Vector2(168, 312)
-stats = SubResource("Resource_2ewbx")
+stats = SubResource("Resource_bk12l")
 profile = ExtResource("11_rmym0")
-enemy_level = 1
+enemy_level = 2
 
 [node name="enemy_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_ir1sj")]
-position = Vector2(312, 120)
+position = Vector2(360, 312)
+stats = SubResource("Resource_2ewbx")
+profile = ExtResource("12_2ewbx")
+enemy_level = 2
+
+[node name="enemy_unit3" parent="TileMapLayer/Actors" instance=ExtResource("4_ir1sj")]
+position = Vector2(264, 360)
 stats = SubResource("Resource_jf4e7")
-profile = ExtResource("8_3vf4n")
-enemy_level = 1
+profile = ExtResource("12_2ewbx")
+enemy_level = 2
 
 [node name="GUI" type="CanvasLayer" parent="."]
 script = SubResource("GDScript_52s2t")
