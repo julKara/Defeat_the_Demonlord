@@ -10,11 +10,11 @@
 * <del>Should not pass through enemy units.</del>, since they already can't beacuse of how their ai-work (will only go for closet anyway)
 
 ## Annoying features:
-* Character located below another character should appear on top of the other character. (change node order)
 
 ## Todo:
 * <del>Implement turns -- Julia</del>
 * Cooldowns -- Julia
+    * Must fix that duration and cooldown does something
 * Class advantage -- Julia
 * <del>Being able to start and win/lose a level (win/loss condition)</del> -- Mirijam
 * *Xp system -- Mirijam*
