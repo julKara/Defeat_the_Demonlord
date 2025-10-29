@@ -3,6 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://nc6uwu57hop" path="res://assets/character_art/goblin/Goblin_Sprite.png" id="1_r5yoc"]
 [ext_resource type="Texture2D" uid="uid://docxpayk2468v" path="res://assets/character_art/goblin/Goblin_Idle_f1.png" id="2_pksls"]
 
+[sub_resource type="Animation" id="Animation_r5yoc"]
+
 [sub_resource type="Animation" id="Animation_dhe84"]
 length = 0.8
 loop_mode = 1
@@ -34,8 +36,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [ExtResource("1_r5yoc"), ExtResource("2_pksls")]
 }
-
-[sub_resource type="Animation" id="Animation_r5yoc"]
 
 [resource]
 _data = {
