@@ -1,6 +1,6 @@
 extends Button
 
-@onready var world_handler: Node = $"../../../WorldHandler"
+@onready var world_handler: Node = $"../../WorldHandler"
 
 
 
