@@ -27,10 +27,10 @@ AudioManager="*res://src/Audio/audio_manager.tscn"
 
 [display]
 
-window/size/viewport_width=600
+window/size/viewport_width=640
 window/size/viewport_height=400
 window/size/borderless=true
-window/size/window_width_override=1800
+window/size/window_width_override=1920
 window/size/window_height_override=1200
 window/stretch/mode="viewport"
 
@@ -77,3 +77,9 @@ left_mouse_button={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+textures/vram_compression/compress_with_gpu=false
+camera/depth_of_field/depth_of_field_bokeh_shape=0
+textures/decals/filter=0
+textures/light_projectors/filter=0
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true

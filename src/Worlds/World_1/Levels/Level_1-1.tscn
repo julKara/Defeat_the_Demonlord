@@ -344,6 +344,7 @@ layer_1/name = "Effects2"
 [node name="DrawPath" parent="." instance=ExtResource("13_jamn3")]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
+texture_repeat = 1
 tile_map_data = PackedByteArray("AAAHAAAAAQACAAEAAAAHAAEAAQACAAEAAAAGAAEAAQAFAAUAAAAHAAIAAQACAAEAAAAIAAAAAQACAAEAAAAJAAAAAQACAAEAAAAKAAAAAQAAAAUAAAALAAAAAQABAAUAAAACAAAAAQABAAUAAAABAAAAAQAAAAUAAAAAAAAAAQABAAQAAAABAAEAAQACAAEAAAABAAYAAQAAAAEAAAAFAAUAAQABAAEAAAAIAAEAAQACAAEAAAALAAYAAQACAAEAAAAKAAYAAQAAAAEAAAAAAAEAAQABAAUAAAAAAAIAAQABAAQAAAAAAAUAAQABAAUAAAAAAAYAAQABAAQAAAABAAcAAQABAAEAAAACAAcAAQAAAAEAAAADAAAAAQACAAEAAAAEAAAAAQACAAEAAAAFAAAAAQAEAAQAAAAGAAAAAQAFAAQAAAAKAAcAAQACAAEAAAAJAAcAAQAAAAEAAAAIAAcAAQAAAAEAAAAKAAUAAQAAAAEAAAALAAIAAQAAAAEAAAAFAAEAAQAEAAUAAAAEAAUAAQABAAEAAAAHAAgAAQAAAAQAAAAIAAgAAQABAAQAAAAJAAgAAQAAAAQAAAAKAAgAAQABAAQAAAALAAgAAQAAAAQAAAAMAAcAAQAAAAQAAAAMAAYAAQAAAAUAAAAMAAgAAQACAAQAAAALAAcAAQAEAAEAAAAMAAUAAQAAAAQAAAAAAAcAAQABAAUAAAAAAAgAAQADAAQAAAABAAgAAQABAAUAAAAJAAQAAQAAAAEAAAAFAAQAAQAAAAEAAAAEAAQAAQACAAEAAAAAAAQAAQABAAQAAAAAAAMAAQABAAUAAAAKAAQAAQAGAAEAAAA=")
 tile_set = SubResource("TileSet_f3sb7")
 
@@ -363,7 +364,7 @@ profile = ExtResource("6_hhk72")
 is_friendly = true
 
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
-position = Vector2(168, 168)
+position = Vector2(360, 312)
 stats = SubResource("Resource_jamn3")
 profile = ExtResource("7_8y1rk")
 is_friendly = true
@@ -375,7 +376,7 @@ profile = ExtResource("10_0yevp")
 enemy_level = 1
 
 [node name="enemy_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
-position = Vector2(312, 168)
+position = Vector2(552, 168)
 stats = SubResource("Resource_ev2u1")
 profile = ExtResource("10_0yevp")
 enemy_level = 1
@@ -529,11 +530,10 @@ layout_mode = 2
 text = "Back"
 script = ExtResource("19_rveb5")
 
-[node name="CameraController" type="Node" parent="."]
+[node name="CameraController" type="Node2D" parent="."]
 script = ExtResource("22_ky5eb")
 
-[node name="Camera2D" type="Camera2D" parent="CameraController"]
-position = Vector2(312, 216)
+[node name="Camera" type="Camera2D" parent="CameraController"]
 
 [node name="WinLossCondition" type="Node2D" parent="."]
 script = ExtResource("15_6mxkn")

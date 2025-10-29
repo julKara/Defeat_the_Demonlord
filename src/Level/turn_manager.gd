@@ -181,8 +181,8 @@ func _next_enemy_unit() -> void:
 		print("\tEnemy unit turn: ", next_unit.profile.character_name)
 		
 		# Center camera on unit
-		if camera_controller:
-			camera_controller.focus_on_unit(get_parent(), true)
+		camera_controller.focus_on_unit(next_unit)
+
 		
 		# Get behaviour to play_turn
 		var next_behaviour_node: Node = next_unit.get_behaviour()

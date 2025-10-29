@@ -37,8 +37,9 @@ func _input(event: InputEvent) -> void:
 		return
 	
 	# Convert mouse position into the local space of the TileMap before mapping to a cell # Needs FIX when new level
-	var local_mouse := tile_map.to_local(event.position)
-	var click_pos: Vector2i = tile_map.local_to_map(local_mouse)
+	#var local_mouse := tile_map.to_local(event.position)
+	var world_pos = get_viewport().get_camera_2d().get_global_mouse_position()
+	var click_pos: Vector2i = tile_map.local_to_map(tile_map.to_local(world_pos))
 
 	# Get the actor on the tile if there is one.
 	var clicked_actor: Actor = _get_actor_at(click_pos)
