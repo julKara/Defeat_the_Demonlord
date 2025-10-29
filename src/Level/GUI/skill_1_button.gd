@@ -19,20 +19,13 @@ func _ready() -> void:
 	if skill_info_popup:
 		skill_info_popup.hide()
 
-	
 	# Disable on start, gets enabled in select target of playable unit
 	disabled = true
 
 
 func _pressed() -> void:
-	var now := Time.get_ticks_msec() / 1000.0
-	
-	# Reset click count if too much time passed
-	if now - last_click_time > DOUBLE_CLICK_TIME:
-		click_count = 0
 	
 	click_count += 1
-	last_click_time = now
 	
 	var actor := ClickHandler.selected_unit
 	if actor == null:
@@ -44,12 +37,6 @@ func _pressed() -> void:
 	
 	skill = actor.skills[skill_index]
 	
-	# If popup already visible for this skill, treat press as "confirm/use"
-	if skill_info_popup.visible and skill_info_popup.visible:
-		_use_skill(actor, skill)
-		click_count = 0
-		return
-	
 	# Double-click (quick second press) => use immediately
 	if click_count >= 2:
 		_use_skill(actor, skill)
@@ -57,9 +44,11 @@ func _pressed() -> void:
 		return
 	
 	# Otherwise, show info (single click)
+	text = "Use Skill"
 	_show_skill_info(skill)
 
 func _show_skill_info(skill: Resource) -> void:
+	
 	if skill_info_label == null or skill_info_popup == null:
 		push_warning("SkillInfoPopup or SkillInfoLabel not found.")
 		return
@@ -79,10 +68,6 @@ func _show_skill_info(skill: Resource) -> void:
 	
 	# Show popup
 	skill_info_popup.popup()
-	
-	# Reset click counter to allow second click to confirm within timeframe
-	click_count = 1
-	last_click_time = Time.get_ticks_msec() / 1000.0
 
 func _use_skill(actor: Node, skill: Resource) -> void:
 	
