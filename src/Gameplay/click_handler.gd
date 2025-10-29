@@ -116,7 +116,6 @@ func _handle_enemy_click(enemy: Actor) -> void:
 
 	# --- Case 2: Enemy is outside "current" attack-range, find a tile to move to within range
 	var best_tile: Vector2i = _find_best_attack_tile(move_tiles, enemy_pos, attack_range)
-
 	# If there is a functioning tile, move to that one and set enemy to attack-target
 	if best_tile != INVALID_POS:
 		await playable_behaviour.move_to(best_tile)

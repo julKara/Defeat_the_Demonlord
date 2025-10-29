@@ -11,7 +11,7 @@ class_name playable_unit extends Node
 @onready var default_attack: Button = $"../../../../GUI/Margin/ActionsMenu/VBoxContainer/Default_Attack"
 @onready var skill_menu: PanelContainer = $"../../../../GUI/Margin/SkillMenu"
 @onready var skill_1: Button = $"../../../../GUI/Margin/SkillMenu/VBoxContainer/Skill1"
-#@onready var skill_2: Button = $GUI/Margin/SkillMenu/VBoxContainer/Skill2
+#@onready var skill_2: Button = $"../../../../GUI/Margin/SkillMenu/VBoxContainer/Skill2"
 
 
 # --- Variables ---
@@ -46,10 +46,6 @@ func _set_stat_variables() -> void:
 
 # --- Movement ---
 func move_to(tile: Vector2i) -> void:
-	
-	# Only move to a new tile
-	if tile == origin_tile:
-		return
 
 	# Only allow movement within mobility range
 	var range_data = get_range_tiles()
@@ -57,14 +53,12 @@ func move_to(tile: Vector2i) -> void:
 	if tile not in move_tiles:
 		print("Destination not within mobility range!")
 		return
-
 	# Reset grid and mark enemies as solid
 	get_parent().reset_astar_grid()
 	var grid = get_parent().astar_grid
 	for enemy in turn_manager.enemy_queue:
 		var pos := tile_map.local_to_map(enemy.global_position)
 		grid.set_point_solid(pos, true)
-
 	# Get safe path
 	var id_path = grid.get_id_path(origin_tile, tile)
 	if id_path.is_empty():
@@ -73,7 +67,6 @@ func move_to(tile: Vector2i) -> void:
 
 	# Store a copy for drawing
 	display_path = id_path.duplicate()
-
 	current_id_path = id_path
 	is_moving = true
 	draw_path.show()

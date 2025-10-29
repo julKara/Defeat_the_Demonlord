@@ -6,7 +6,6 @@ func apply(caster: Actor, _target: Actor, skill: SkillResource) -> void:
 	
 	# This passive triggers only if the caster did NOT act this turn
 	if not caster.passed_turn:
-		print("Didnt pass")
 		return
 
 	# --- 1️. Heal 30% of missing HP
