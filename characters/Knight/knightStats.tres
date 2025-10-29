@@ -15,7 +15,6 @@ crit_chance = 5
 level = 1
 attack_range = 1
 mobility = 4
-speed = 4.0
 health_gain = 20
 phys_atk_gain = 10
 phys_def_gain = 20

@@ -65,6 +65,7 @@ func start_phase(phase: Phase) -> void:
 	current_phase = phase
 	match phase:
 		Phase.PLAYER:
+			print("\n--- Turn %d start!\n" % current_turn)
 			print("--- Player Phase ---")
 			ClickHandler.level_active = true
 			_reset_acted_flag(player_queue)	# Clear the bool acted
@@ -89,16 +90,22 @@ func end_phase() -> void:
 func end_turn() -> void:
 	
 	# Increase current turn
-	# print("--- Turn %d ended." % current_turn)
 	current_turn += 1
-	print("\n--- Turn %d start!\n" % current_turn)
-	
-	
+
+	# Update all actors effects and cooldowns
+	for actor in character_manager.character_list:
+		if actor:
+			if actor.has_method("tick_effects"):
+				actor.tick_effects()
+			if actor.has_method("tick_cooldowns"):
+				actor.tick_cooldowns()
+
 	# Check if level is over, otherwise move on to next player-phase
 	if current_turn > max_turns:
 		_trigger_defeat()
 	else:
 		start_phase(Phase.PLAYER)
+
 
 # Triggers defeat TAG: MIRIJAM LOSE-CONDITION
 func _trigger_defeat() -> void:

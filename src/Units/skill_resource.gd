@@ -31,27 +31,93 @@ class_name SkillResource extends Resource
 # Custom script to handle unique skill logic
 @export var effect_script: Script
 
+var current_cooldown: int = 0    # remaining cooldown turns (>=0). 0 means usable.
+
 func apply_effect(caster: Actor, target: Actor) -> void:
 	
-	
+	# --- 1. Use scripts if there is one
 	# If a custom script is defined, use it
 	if effect_script:
 		var inst = effect_script.new()
 		if inst.has_method("apply"):
 			inst.apply(caster, target, self)
+		
+		# start cooldown
+		current_cooldown = cooldown
+		# If this skill has duration-handled behavior, add code to track it in target.active_effects
 		return
+	
+	# --- 2. Get abd set stats
 	
 	# Otherwise, apply built-in stat modifications
 	if target == null or target.stats == null:
-		push_warning("No valid target or stats to modify for skill: %s" % skill_name)
+		current_cooldown = cooldown
+		push_warning("No target or stats to modify for skill: %s" % skill_name)
 		return
 
-	for key in stat_addition.keys():
-		if key in CharacterStats.MODIFIABLE_STATS:
-			var current_value = target.stats.get(key)
-			target.stats.set(key, current_value + stat_addition[key])
+	var stats = target.get_stats_resource()
+	if stats == null:
+		push_warning("Target has no stats resource for skill: %s" % skill_name)
+		current_cooldown = cooldown
+		return
 
+	# Apply stat additions
+	for key in stat_addition.keys():
+		# validate modifiable stat and existence
+		if key in CharacterStats.MODIFIABLE_STATS:
+			var curr = stats.get(key)
+			stats.set(key, curr + stat_addition[key])
+
+	# Apply stat multipliers
 	for key in stat_multiplier.keys():
 		if key in CharacterStats.MODIFIABLE_STATS:
-			var current_value = target.stats.get(key)
-			target.stats.set(key, current_value * stat_multiplier[key])
+			var curr = stats.get(key)
+			stats.set(key, curr * stat_multiplier[key])
+
+	# --- 3. Record durations and cooldowns
+	
+	# If this skill has a duration, record a reversible effect so we can remove it later
+	if duration > 0:
+		
+		if not target.has_method("register_active_effect"):
+			push_warning("Target missing register_active_effect method")
+		else:
+			var effect_record := {
+				"skill": self,
+				"caster": caster,
+				"remaining_duration": duration,
+				# Save stat changes so they can be reverted exactly
+				"stat_addition": stat_addition.duplicate(true),
+				"stat_multiplier": stat_multiplier.duplicate(true)
+			}
+			target.register_active_effect(effect_record)
+			
+	# start cooldown
+	current_cooldown = cooldown
+
+# Reverses what apply_effect did (only stat changes, not scripts)
+func remove_effect(target: Node, effect_record: Dictionary) -> void:
+	
+	if target == null or not target.has_method("get_stats_resource"):
+		return
+	
+	var stats = target.get_stats_resource()
+	if stats == null:
+		return
+
+	# --- 1. Reverse additions by subtracting what was added
+	if "stat_addition" in effect_record:
+		for key in effect_record.stat_addition.keys():
+			if key in CharacterStats.MODIFIABLE_STATS:
+				var curr = stats.get(key)
+				stats.set(key, curr - effect_record.stat_addition[key])
+
+	# --- 2. Reverse multipliers by dividing by multiplier factor
+	if "stat_multiplier" in effect_record:
+		for key in effect_record.stat_multiplier.keys():
+			if key in CharacterStats.MODIFIABLE_STATS:
+				var factor = effect_record.stat_multiplier[key]
+				if factor == 0:	# Skip division by 0
+					continue
+				var curr = stats.get(key)
+				stats.set(key, curr / factor)

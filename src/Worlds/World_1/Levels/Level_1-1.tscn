@@ -324,7 +324,7 @@ profile = ExtResource("6_hhk72")
 is_friendly = true
 
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
-position = Vector2(168, 168)
+position = Vector2(456, 264)
 stats = SubResource("Resource_esv70")
 profile = ExtResource("7_8y1rk")
 is_friendly = true
@@ -335,7 +335,7 @@ stats = SubResource("Resource_ky5eb")
 profile = ExtResource("10_0yevp")
 
 [node name="enemy_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
-position = Vector2(264, 168)
+position = Vector2(72, 120)
 stats = SubResource("Resource_jamn3")
 profile = ExtResource("10_0yevp")
 

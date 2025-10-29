@@ -40,7 +40,10 @@ func _pressed() -> void:
 		return
 	
 	# Otherwise, show info (single click)
-	text = "Use Skill"
+	if skill.current_cooldown > 0:
+		disabled = true
+	else:
+		text = "Use Skill"
 	_show_skill_info()
 
 func _show_skill_info() -> void:

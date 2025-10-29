@@ -13,8 +13,8 @@
 
 ## Todo:
 * <del>Implement turns -- Julia</del>
-* Cooldowns -- Julia
-    * Must fix that duration and cooldown does something
+* <del>Skills -- Julia</del>
+* <del>Cooldowns -- Julia</del>
 * Class advantage -- Julia
 * <del>Being able to start and win/lose a level (win/loss condition)</del> -- Mirijam
 * *Xp system -- Mirijam*

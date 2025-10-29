@@ -16,6 +16,8 @@ func display_skill_menu() -> void:
 	# If skill doesn't require attack-target
 	if skill_1.skill != null:
 		skill_1.text = skill_1.skill.skill_name
+		if skill_1.skill.current_cooldown > 0:
+			skill_1.text = " (%d) " %  skill_1.skill.current_cooldown
 	#if skill_2.skill != null:
 		#skill_2.text = skill_2.skill.skill_name
 	

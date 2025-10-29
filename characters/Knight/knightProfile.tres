@@ -10,4 +10,5 @@ character_name = "Lennart"
 battle_class_type = "Swordsman"
 sprite = ExtResource("3_howji")
 animation = ExtResource("1_5d5y0")
+skills = Array[Resource]([])
 metadata/_custom_type_script = "uid://5kg8ybina31b"
