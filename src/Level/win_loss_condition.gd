@@ -45,6 +45,9 @@ func win():
 	# Play victory sound
 	AudioManager.play_sfx("Victory")
 	
+	# Play victory music
+	AudioManager.update_music_for_scene("Victory")
+	
 	# If this was the latest level -> unlock the next one
 	if current_world == worlds_unlocked and current_level == levels_unlocked:
 		world_handler.world_script.unlock_next_level()
@@ -61,6 +64,9 @@ func lose():
 	
 	# Play loss sound
 	AudioManager.play_sfx("Loss")
+	
+	# Play loss music
+	AudioManager.update_music_for_scene("Loss")
 	
 func character_level_up():
 

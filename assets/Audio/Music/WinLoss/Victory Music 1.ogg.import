@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://k1dcyi6x4vf8"
+path="res://.godot/imported/Victory Music 1.ogg-5512a92b162128577cca9a2da6edf303.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/Audio/Music/WinLoss/Victory Music 1.ogg"
+dest_files=["res://.godot/imported/Victory Music 1.ogg-5512a92b162128577cca9a2da6edf303.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

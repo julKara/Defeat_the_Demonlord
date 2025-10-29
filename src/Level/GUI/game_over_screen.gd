@@ -13,6 +13,9 @@ func _on_retry_pressed() -> void:
 	# Play click sound
 	AudioManager.play_sfx("Click")
 	
+	# Play battle music
+	AudioManager.update_music_for_scene("Battle")
+	
 	# Unpause game
 	get_tree().paused = false
 	

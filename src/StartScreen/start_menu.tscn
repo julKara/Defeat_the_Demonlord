@@ -70,6 +70,7 @@ script = ExtResource("1_x5plg")
 
 [node name="SettingsMenu" type="PanelContainer" parent="."]
 process_mode = 3
+visible = false
 custom_minimum_size = Vector2(400, 250)
 layout_mode = 1
 anchors_preset = 8
