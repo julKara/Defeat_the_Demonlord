@@ -15,6 +15,7 @@ func apply(caster: Actor, _target: Actor, skill: SkillResource) -> void:
 	
 	var heal_amount = int(stats.max_health * 0.3)
 	stats.recieve_healing(heal_amount)
+	caster.healthbar._set_health(caster.stats.curr_health)	# Update healthbar
 	print("%s recovers %d HP due to %s!" % [caster.profile.character_name, heal_amount, skill.skill_name])
 	
 	# --- 2️. Apply temporary +20% defense buff for 2 turns

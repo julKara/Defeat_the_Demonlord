@@ -141,11 +141,9 @@ func select(has_acted: bool) -> void:
 	get_parent().passed_turn = false	# Reset
 	if get_parent().skills.size() > 0:
 		skill_1.skill = get_parent().skills[0]
-		if skill_1.skill.target_type == "Self":
-			skill_1.disabled = false
+		skill_1.disabled = false
 		#skill_2.skill = get_parent().skills[1]
-		#if skill_2.skill.target_type == "Self":
-			#skill_2.disabled = false
+		#skill_2.disabled = false
 	
 	# Display mobility- and range-tilemap
 	highlight_range()

@@ -40,10 +40,12 @@ func _pressed() -> void:
 		return
 	
 	# Otherwise, show info (single click)
+	text = "Use Skill"
 	if skill.current_cooldown > 0 or skill.skill_type == "Passive":
 		disabled = true
-	else:
-		text = "Use Skill"
+		text = "Passive"
+	elif skill.target_type == "Enemy" and actor.get_behaviour().attack_target == null:
+		disabled = true
 	_show_skill_info()
 
 func _show_skill_info() -> void:
