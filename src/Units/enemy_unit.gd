@@ -20,7 +20,6 @@ var skill_used: bool = false
 
 # Stat-variables
 var mobility
-var move_speed
 var attack_range
 
 signal ai_movement_finished
@@ -40,7 +39,6 @@ func _ready():
 # Intialize all stat-variables through the CharacterStats resource
 func _set_stat_variables():
 	mobility = get_parent().stats.mobility
-	move_speed = get_parent().stats.speed
 	attack_range = get_parent().stats.attack_range
 
 func find_closest_player() -> CharacterBody2D:
@@ -230,7 +228,7 @@ func perform_movement(id_path: Array[Vector2i], target_dist: int):
 			target_position = tile_map.map_to_local(id_path.front())
 			
 			# Move towards target
-			get_parent().global_position = get_parent().global_position.move_toward(target_position, move_speed)
+			get_parent().global_position = get_parent().global_position.move_toward(target_position, 2.5)
 			await get_tree().create_timer(0.01).timeout # Adds a delay which lets the move animation play
 			
 			# Remove the tile from the path

@@ -15,7 +15,7 @@ func display_actor_info(actor: Actor) -> void:
 	# HP
 	info_vbox.get_child(1).text = "HP: " + str(actor.stats.curr_health) + "/" + str(actor.stats.max_health)
 	# Phys-Attack
-	info_vbox.get_child(2).text = "P_attack: " + str(actor.stats.phys_attack)
+	info_vbox.get_child(2).text = "P_attack: " + str(actor.stats.curr_phys_attack)
 	
 func hide_actor_info() -> void:
 	hide()

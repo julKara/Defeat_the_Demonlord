@@ -28,48 +28,44 @@ func _pressed() -> void:
 	click_count += 1
 	
 	var actor := ClickHandler.selected_unit
-	if actor == null:
-		print("No selected unit.")
-		return
-	if not ("skills" in actor) or actor.skills.size() <= skill_index:
+	
+	if skill == null:
 		print("No skill in that slot.")
 		return
 	
-	skill = actor.skills[skill_index]
-	
 	# Double-click (quick second press) => use immediately
 	if click_count >= 2:
-		_use_skill(actor, skill)
+		_trigger_use_skill(actor)
 		click_count = 0
 		return
 	
 	# Otherwise, show info (single click)
 	text = "Use Skill"
-	_show_skill_info(skill)
+	_show_skill_info()
 
-func _show_skill_info(skill: Resource) -> void:
+func _show_skill_info() -> void:
 	
 	if skill_info_label == null or skill_info_popup == null:
 		push_warning("SkillInfoPopup or SkillInfoLabel not found.")
 		return
 	
 	# Build text
-	var text := "[b]%s[/b]\n\n%s" % [skill.skill_name, skill.description]
+	var show_text := "[b]%s[/b]\n\n%s" % [skill.skill_name, skill.description]
 	if "skill_type" in skill:
-		text += "\n\n[b]Skill Type:[/b] %s" % skill.skill_type
+		show_text += "\n\n[b]Skill Type:[/b] %s" % skill.skill_type
 	if "duration" in skill and skill.duration > 0:
-		text += "\n\n[b]Duration:[/b] %d turn(s)" % skill.duration
+		show_text += "\n\n[b]Duration:[/b] %d turn(s)" % skill.duration
 	if "cooldown" in skill and skill.duration > 0:
-		text += "\n\n[b]Cooldown:[/b] %d turn(s)" % skill.cooldown
+		show_text += "\n\n[b]Cooldown:[/b] %d turn(s)" % skill.cooldown
 	
 	skill_info_label.bbcode_enabled = true
 	skill_info_label.clear()
-	skill_info_label.append_text(text)
+	skill_info_label.append_text(show_text)
 	
 	# Show popup
 	skill_info_popup.popup()
 
-func _use_skill(actor: Node, skill: Resource) -> void:
+func _trigger_use_skill(actor: Actor) -> void:
 	
 	# Determine target
 	var target = null
@@ -92,7 +88,7 @@ func _use_skill(actor: Node, skill: Resource) -> void:
 	# Call actor.use_skill (assumes this method exists)
 	if actor.has_method("use_skill"):
 		actor.use_skill(skill, target)
-		print("\t%s uses %s on %s" % [actor.profile.character_name, skill.skill_name, target.name])
+		print("\t%s uses %s on %s" % [actor.profile.character_name, skill.skill_name, target.profile.character_name])
 	else:
 		push_warning("Actor missing use_skill() method.")
 	

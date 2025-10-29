@@ -214,7 +214,6 @@ func use_skill(skill: SkillResource, target: Actor) -> void:
 	# Test skill
 	if skill == null:
 		return
-	print("%s uses %s on %s" % [profile.character_name, skill.skill_name, target.profile.character_name])
 	skill.apply_effect(self, target)
 
 

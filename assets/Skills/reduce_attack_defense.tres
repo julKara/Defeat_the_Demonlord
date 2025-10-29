@@ -7,18 +7,18 @@ script = ExtResource("1_nycdk")
 skill_name = "Confusion"
 description = "Reduces all of the targeted enemy's attack and defence."
 skill_type = "Active"
-need_enemy_target = true
+ends_turn = true
 target_type = "Enemy"
 duration = 2
 cooldown = 2
 stat_addition = {
-"attack_range": 0,
-"mobility": 0
+"curr_attack_range": 0,
+"curr_mobility": 0
 }
 stat_multiplier = {
-"mag_attack": 0.7,
-"mag_defense": 0.8,
-"phys_attack": 0.7,
-"phys_defense": 0.8
+"curr_mag_attack": 0.7,
+"curr_mag_defense": 0.8,
+"curr_phys_attack": 0.7,
+"curr_phys_defense": 0.8
 }
 metadata/_custom_type_script = "uid://bnlafpamei5gh"

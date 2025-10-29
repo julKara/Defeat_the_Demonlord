@@ -17,21 +17,23 @@ class_name SkillResource extends Resource
 # --- Generic buff/debuff stats
 # Written in how much you want reduced (-1 = stat goes down, 1 = stat goes upp)
 @export var stat_addition := {
-	"attack_range": 0,
-	"mobility": 0
+	"curr_attack_range": 0,
+	"curr_mobility": 0
 }
 # Written in percentage you want (0.7 = 70% debuff, 1.3 = 30% buff)
 @export var stat_multiplier := {
-	"phys_attack": 0.0,
-	"mag_attack": 0.0,
-	"phys_defense": 0.0,
-	"mag_defense": 0.0
+	"curr_phys_attack": 0.0,
+	"curr_mag_attack": 0.0,
+	"curr_phys_defense": 0.0,
+	"curr_mag_defense": 0.0
 }
 
 # Custom script to handle unique skill logic
 @export var effect_script: Script
 
 func apply_effect(caster: Actor, target: Actor) -> void:
+	
+	
 	# If a custom script is defined, use it
 	if effect_script:
 		var inst = effect_script.new()

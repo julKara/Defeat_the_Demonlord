@@ -11,9 +11,7 @@ class_name playable_unit extends Node
 @onready var default_attack: Button = $"../../../../GUI/Margin/ActionsMenu/VBoxContainer/Default_Attack"
 @onready var skill_menu: PanelContainer = $"../../../../GUI/Margin/SkillMenu"
 @onready var skill_1: Button = $"../../../../GUI/Margin/SkillMenu/VBoxContainer/Skill1"
-@onready var skill_2: Button = $GUI/Margin/SkillMenu/VBoxContainer/Skill2
-
-
+#@onready var skill_2: Button = $GUI/Margin/SkillMenu/VBoxContainer/Skill2
 
 
 # --- Variables ---
@@ -184,10 +182,12 @@ func deselect() -> void:
 	skill_1.skill = null
 	skill_1.text = "skill1"
 	skill_1.disabled = true
+	skill_1.click_count = 0
 	
 	#skill_2.skill = null
 	#skill_2.text = "skill2"
 	#skill_2.disabled = true
+	#skill_2.click_count = 0
 	
 	# Remove target-highlight if the is one
 	if attack_target:
