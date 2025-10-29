@@ -5,13 +5,14 @@ class_name SkillResource extends Resource
 @export var description: String = "lorem you know the drill"
 @export var icon: Texture2D
 @export_enum("Passive", "Active") var skill_type: String = "Active"
-@export var need_enemy_target: bool = false
+@export var ends_turn: bool = true
 
 # Who the skill can target
 @export_enum("Self", "Ally", "Enemy", "Any") var target_type: String = "Self"
 
 # Duration (for buffs/debuffs)
 @export var duration: int = 0  # 0 = instant/permanent
+@export var cooldown: int = 0  # 0 = instant/permanent
 
 # --- Generic buff/debuff stats
 # Written in how much you want reduced (-1 = stat goes down, 1 = stat goes upp)

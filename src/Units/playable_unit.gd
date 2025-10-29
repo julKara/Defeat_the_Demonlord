@@ -11,6 +11,7 @@ class_name playable_unit extends Node
 @onready var default_attack: Button = $"../../../../GUI/Margin/ActionsMenu/VBoxContainer/Default_Attack"
 @onready var skill_menu: PanelContainer = $"../../../../GUI/Margin/SkillMenu"
 @onready var skill_1: Button = $"../../../../GUI/Margin/SkillMenu/VBoxContainer/Skill1"
+@onready var skill_2: Button = $GUI/Margin/SkillMenu/VBoxContainer/Skill2
 
 
 
@@ -97,6 +98,7 @@ func move_to(tile: Vector2i) -> void:
 		attack_target = null
 		default_attack.disabled = true
 		skill_1.disabled = true
+		#skill_2.disabled = true
 
 
 # Reset back to origin_tile if moved but not acted
@@ -145,6 +147,14 @@ func select(has_acted: bool) -> void:
 	# Display info
 	actor_info.display_actor_info(get_parent())
 	
+	if get_parent().skills.size() > 0:
+		skill_1.skill = get_parent().skills[0]
+		if skill_1.skill.target_type == "Self":
+			skill_1.disabled = false
+		#skill_2.skill = get_parent().skills[1]
+		#if skill_2.skill.target_type == "Self":
+			#skill_2.disabled = false
+	
 	# Display mobility- and range-tilemap
 	highlight_range()
 	print("\tPlayer unit turn:", get_parent().profile.character_name)
@@ -170,13 +180,21 @@ func deselect() -> void:
 	actions_menu.hide()
 	actor_info.hide_actor_info()
 	
+	# Reset skill-buttons
+	skill_1.skill = null
+	skill_1.text = "skill1"
+	skill_1.disabled = true
+	
+	#skill_2.skill = null
+	#skill_2.text = "skill2"
+	#skill_2.disabled = true
+	
 	# Remove target-highlight if the is one
 	if attack_target:
 		var sprite = attack_target.get_node("Sprite")
 		sprite.material.set("shader_parameter/width", 0.0)
 		attack_target = null
 		default_attack.disabled = true
-		skill_1.disabled = true
 		
 # --- Range Highlight ---
 
@@ -299,8 +317,11 @@ func set_attack_target(target: Actor) -> void:
 	default_attack.disabled = false
 	
 	# Make skill if requiring enemy attack-target enabled
-	if get_parent().skills[0].need_enemy_target && get_parent().skills[0].skill_type == "Active":
-		skill_1.disabled = false
+	if get_parent().skills.size() > 0:
+		if skill_1.skill.target_type == "Enemy":
+			skill_1.disabled = false
+		#if skill_2.skill.target_type == "Enemy":
+			#skill_2.disabled = false
 	
 	# Remove highlight from previous target if any
 	if attack_target != null:
