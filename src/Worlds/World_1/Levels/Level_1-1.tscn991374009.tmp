@@ -178,7 +178,7 @@ texture_region_size = Vector2i(48, 48)
 tile_size = Vector2i(48, 48)
 sources/1 = SubResource("TileSetAtlasSource_tlwt5")
 
-[sub_resource type="Resource" id="Resource_ky5eb"]
+[sub_resource type="Resource" id="Resource_esv70"]
 resource_name = "mageStats"
 script = ExtResource("6_8y1rk")
 curr_health = 100
@@ -208,7 +208,7 @@ mag_def_gain = 10
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_jamn3"]
+[sub_resource type="Resource" id="Resource_ky5eb"]
 resource_name = "knightStats"
 script = ExtResource("6_8y1rk")
 curr_health = 200
@@ -238,7 +238,7 @@ mag_def_gain = 0
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_c4lxs"]
+[sub_resource type="Resource" id="Resource_jamn3"]
 script = ExtResource("6_8y1rk")
 curr_health = 50
 max_health = 50
@@ -267,7 +267,7 @@ mag_def_gain = 5
 crit_gain = 1
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_ev2u1"]
+[sub_resource type="Resource" id="Resource_c4lxs"]
 script = ExtResource("6_8y1rk")
 curr_health = 50
 max_health = 50
@@ -358,25 +358,25 @@ y_sort_enabled = true
 
 [node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
 position = Vector2(120, 120)
-stats = SubResource("Resource_ky5eb")
+stats = SubResource("Resource_esv70")
 profile = ExtResource("6_hhk72")
 is_friendly = true
 
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
 position = Vector2(168, 168)
-stats = SubResource("Resource_jamn3")
+stats = SubResource("Resource_ky5eb")
 profile = ExtResource("7_8y1rk")
 is_friendly = true
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
 position = Vector2(168, 264)
-stats = SubResource("Resource_c4lxs")
+stats = SubResource("Resource_jamn3")
 profile = ExtResource("10_0yevp")
 enemy_level = 1
 
 [node name="enemy_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
 position = Vector2(312, 168)
-stats = SubResource("Resource_ev2u1")
+stats = SubResource("Resource_c4lxs")
 profile = ExtResource("10_0yevp")
 enemy_level = 1
 
@@ -531,9 +531,13 @@ script = ExtResource("19_rveb5")
 
 [node name="CameraController" type="Node" parent="."]
 script = ExtResource("22_ky5eb")
+zoom_step = null
+min_zoom = null
+max_zoom = null
+pan_speed = null
+camera_smoothness = null
 
 [node name="Camera2D" type="Camera2D" parent="CameraController"]
-position = Vector2(312, 216)
 
 [node name="WinLossCondition" type="Node2D" parent="."]
 script = ExtResource("15_6mxkn")
