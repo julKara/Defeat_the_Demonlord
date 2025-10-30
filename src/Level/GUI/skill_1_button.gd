@@ -91,6 +91,11 @@ func _trigger_use_skill(actor: Actor) -> void:
 		target = ClickHandler.selected_unit.get_behaviour().attack_target
 		if target == null:
 			return
+			
+	if skill.target_type == "Ally":
+		target = ClickHandler.selected_unit.get_behaviour().friendly_target
+		if target == null:
+			return
 	
 	# If no target selected, keep popup open (or close and print)
 	if target == null:

@@ -1,4 +1,4 @@
-# skill_2_button.gd
+# skill_1_button.gd
 extends Button
 
 @export var skill_index: int = 0    # make reusable for slot 0,1,2...
@@ -91,7 +91,7 @@ func _trigger_use_skill(actor: Actor) -> void:
 		target = ClickHandler.selected_unit.get_behaviour().attack_target
 		if target == null:
 			return
-	
+			
 	if skill.target_type == "Ally":
 		target = ClickHandler.selected_unit.get_behaviour().friendly_target
 		if target == null:
@@ -99,7 +99,7 @@ func _trigger_use_skill(actor: Actor) -> void:
 	
 	# If no target selected, keep popup open (or close and print)
 	if target == null:
-		print("No target selected for skill: ", skill.skill_name)
+		print("No target selected for skill:", skill.skill_name)
 		return
 	
 	# Call actor.use_skill (assumes this method exists)

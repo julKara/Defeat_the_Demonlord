@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://5kg8ybina31b" path="res://src/Units/Unit_Profile.gd" id="1_js022"]
 [ext_resource type="AudioStream" uid="uid://blma88qxyui5g" path="res://characters/Knight/knightAudio.tres" id="2_lcvec"]
 [ext_resource type="Texture2D" uid="uid://yurcgjacxewa" path="res://assets/character_art/knight/Knight_Sprite.png" id="3_howji"]
-[ext_resource type="Resource" uid="uid://cjjcuhny0l2kj" path="res://assets/Skills/EndTurnDefenceBuff/prepare_defences.tres" id="4_mlohj"]
+[ext_resource type="Resource" uid="uid://btkwwfl1o5xir" path="res://assets/Skills/HealAlly/heal_ally.tres" id="4_vpm1q"]
 [ext_resource type="Resource" uid="uid://dc7vt7vrhpxa2" path="res://assets/Skills/reduce_attack_defense.tres" id="5_vpm1q"]
 
 [resource]
@@ -14,5 +14,5 @@ battle_class_type = "Swordsman"
 sprite = ExtResource("3_howji")
 animation = ExtResource("1_5d5y0")
 audio = ExtResource("2_lcvec")
-skills = Array[Resource]([ExtResource("4_mlohj"), ExtResource("5_vpm1q")])
+skills = Array[Resource]([ExtResource("4_vpm1q"), ExtResource("5_vpm1q")])
 metadata/_custom_type_script = "uid://5kg8ybina31b"
