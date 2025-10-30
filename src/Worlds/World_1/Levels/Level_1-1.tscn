@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=4 uid="uid://fr5vqykbi54o"]
+[gd_scene load_steps=44 format=4 uid="uid://fr5vqykbi54o"]
 
 [ext_resource type="Texture2D" uid="uid://bqmtavn12rhj2" path="res://assets/test_map5.png" id="1_bq4wg"]
 [ext_resource type="Texture2D" uid="uid://bdy0m0gr2tme3" path="res://assets/level_art/48x48_Tileset/pipo-map001.png" id="2_6mxkn"]
@@ -27,6 +27,7 @@
 [ext_resource type="Script" uid="uid://bety4ic5vs3fy" path="res://src/Level/GUI/pause_button.gd" id="22_jamn3"]
 [ext_resource type="Script" uid="uid://dyx7v0w8tua76" path="res://src/Level/camera_controller.gd" id="22_ky5eb"]
 [ext_resource type="Script" uid="uid://2pk6lv5drag2" path="res://src/Level/GUI/pause_menu.gd" id="24_c4lxs"]
+[ext_resource type="PackedScene" uid="uid://d3enl3nxco4pd" path="res://src/Level/TurnTransition.tscn" id="25_ev2u1"]
 
 [sub_resource type="GDScript" id="GDScript_ic0uy"]
 script/source = "extends Node2D
@@ -392,7 +393,7 @@ texture_region_size = Vector2i(48, 48)
 tile_size = Vector2i(48, 48)
 sources/1 = SubResource("TileSetAtlasSource_70uel")
 
-[sub_resource type="Resource" id="Resource_c4lxs"]
+[sub_resource type="Resource" id="Resource_ev2u1"]
 resource_name = "knightStats"
 script = ExtResource("6_8y1rk")
 curr_health = 100
@@ -422,7 +423,7 @@ mag_def_gain = 0
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_ev2u1"]
+[sub_resource type="Resource" id="Resource_ehkro"]
 script = ExtResource("6_8y1rk")
 curr_health = 50
 max_health = 50
@@ -451,7 +452,7 @@ mag_def_gain = 5
 crit_gain = 1
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_ehkro"]
+[sub_resource type="Resource" id="Resource_1sq2e"]
 script = ExtResource("6_8y1rk")
 curr_health = 50
 max_health = 50
@@ -549,19 +550,19 @@ y_sort_enabled = true
 
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
 position = Vector2(120, 120)
-stats = SubResource("Resource_c4lxs")
+stats = SubResource("Resource_ev2u1")
 profile = ExtResource("7_8y1rk")
 is_friendly = true
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
 position = Vector2(168, 312)
-stats = SubResource("Resource_ev2u1")
+stats = SubResource("Resource_ehkro")
 profile = ExtResource("10_0yevp")
 enemy_level = 1
 
 [node name="enemy_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
 position = Vector2(408, 264)
-stats = SubResource("Resource_ehkro")
+stats = SubResource("Resource_1sq2e")
 profile = ExtResource("10_0yevp")
 enemy_level = 1
 
@@ -589,11 +590,6 @@ script = ExtResource("9_0yevp")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GUI/Margin/ActionsMenu"]
 layout_mode = 2
-
-[node name="Default_Attack" type="Button" parent="GUI/Margin/ActionsMenu/VBoxContainer"]
-layout_mode = 2
-text = "Attack"
-script = ExtResource("10_rveb5")
 
 [node name="Use_Skill" type="Button" parent="GUI/Margin/ActionsMenu/VBoxContainer"]
 layout_mode = 2
@@ -628,6 +624,11 @@ layout_mode = 2
 
 [node name="PhysDefence" type="Label" parent="GUI/Margin/ActorInfo/VBoxContainer"]
 layout_mode = 2
+
+[node name="Default_Attack" type="Button" parent="GUI/Margin/ActorInfo"]
+layout_mode = 2
+text = "Attack"
+script = ExtResource("10_rveb5")
 
 [node name="VictoryScreen" type="PanelContainer" parent="GUI/Margin"]
 process_mode = 3
@@ -782,6 +783,8 @@ value = -5.0
 [node name="Close" type="Button" parent="GUI/Margin/PauseMenu/VBoxContainer"]
 layout_mode = 2
 text = "Close"
+
+[node name="TurnTransitionCanvas" parent="." instance=ExtResource("25_ev2u1")]
 
 [node name="WinLossCondition" type="Node2D" parent="."]
 script = ExtResource("15_6mxkn")

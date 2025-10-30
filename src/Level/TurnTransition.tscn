@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ldamku6hv6c6" path="res://src/Level/turn_transition.gd" id="1_c30u5"]
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[node name="TurnTransitionCanvas" type="CanvasLayer"]
 
 [node name="TurnTransition" type="Control" parent="."]
 layout_mode = 3

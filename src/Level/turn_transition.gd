@@ -20,7 +20,7 @@ func play_transition(text: String, color: Color = Color.WHITE, stay_time: float 
 	label.add_theme_color_override("font_outline_color", color)
 
 	# Let the UI update once so get_used_rect() returns accurate size
-	await get_tree().process_frame
+	#await get_tree().process_frame
 	
 	# Get the viewport size
 	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
@@ -46,5 +46,7 @@ func play_transition(text: String, color: Color = Color.WHITE, stay_time: float 
 	# Wait for tween to finish before hiding
 	await tween.finished
 
+	print("Wooo")
+	
 	label.visible = false
 	hide()

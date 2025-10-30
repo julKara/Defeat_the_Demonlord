@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=4 uid="uid://bi82xf4b50v4w"]
+[gd_scene load_steps=62 format=4 uid="uid://bi82xf4b50v4w"]
 
 [ext_resource type="Texture2D" uid="uid://bqmtavn12rhj2" path="res://assets/test_map5.png" id="1_qnc6k"]
 [ext_resource type="Texture2D" uid="uid://bdy0m0gr2tme3" path="res://assets/level_art/48x48_Tileset/pipo-map001.png" id="2_3dms0"]
@@ -31,9 +31,10 @@
 [ext_resource type="Script" uid="uid://w7ua1w0mwld8" path="res://src/Level/GUI/skill_1_button.gd" id="19_mebf6"]
 [ext_resource type="Script" uid="uid://b3u6ea2h55gqj" path="res://src/Level/GUI/skill_2_button.gd" id="20_2skyk"]
 [ext_resource type="Script" uid="uid://giyv8yaisw0a" path="res://src/Level/GUI/back_skill_button.gd" id="21_rautg"]
-[ext_resource type="Script" uid="uid://bety4ic5vs3fy" path="res://src/Level/GUI/pause_button.gd" id="22_mebf6"]
-[ext_resource type="Script" uid="uid://2pk6lv5drag2" path="res://src/Level/GUI/pause_menu.gd" id="23_2skyk"]
+[ext_resource type="Script" path="res://src/Level/GUI/pause_button.gd" id="22_mebf6"]
+[ext_resource type="Script" path="res://src/Level/GUI/pause_menu.gd" id="23_2skyk"]
 [ext_resource type="Script" uid="uid://dyx7v0w8tua76" path="res://src/Level/camera_controller.gd" id="27_2skyk"]
+[ext_resource type="PackedScene" uid="uid://d3enl3nxco4pd" path="res://src/Level/TurnTransition.tscn" id="31_p2rbu"]
 
 [sub_resource type="GDScript" id="GDScript_ic0uy"]
 script/source = "extends Node2D
@@ -808,7 +809,7 @@ texture_region_size = Vector2i(48, 48)
 tile_size = Vector2i(48, 48)
 sources/1 = SubResource("TileSetAtlasSource_tlwt5")
 
-[sub_resource type="Resource" id="Resource_0fbun"]
+[sub_resource type="Resource" id="Resource_l22j0"]
 resource_name = "knightStats"
 script = ExtResource("6_qnc6k")
 curr_health = 100
@@ -838,7 +839,7 @@ mag_def_gain = 0
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_p2rbu"]
+[sub_resource type="Resource" id="Resource_5f36r"]
 resource_name = "mageStats"
 script = ExtResource("6_qnc6k")
 curr_health = 90
@@ -868,65 +869,65 @@ mag_def_gain = 5
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_l22j0"]
-script = ExtResource("6_qnc6k")
-curr_health = 50
-max_health = 70
-original_max_health = 50
-phys_attack = 70
-original_phys_attack = 50
-mag_attack = 10
-original_mag_attack = 10
-phys_defense = 30
-original_phys_defense = 20
-mag_defense = 30
-original_mag_defense = 20
-crit_chance = 30
-original_crit_chance = 20
-attack_range = 1
-original_attack_range = 1
-mobility = 3
-original_mobility = 3
-level = 1
-speed = 3.0
-health_gain = 10
-phys_atk_gain = 10
-phys_def_gain = 5
-mag_atk_gain = 0
-mag_def_gain = 5
-crit_gain = 5
-metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
-
-[sub_resource type="Resource" id="Resource_5f36r"]
-script = ExtResource("6_qnc6k")
-curr_health = 50
-max_health = 70
-original_max_health = 50
-phys_attack = 70
-original_phys_attack = 50
-mag_attack = 10
-original_mag_attack = 10
-phys_defense = 30
-original_phys_defense = 20
-mag_defense = 30
-original_mag_defense = 20
-crit_chance = 30
-original_crit_chance = 20
-attack_range = 1
-original_attack_range = 1
-mobility = 3
-original_mobility = 3
-level = 1
-speed = 3.0
-health_gain = 10
-phys_atk_gain = 10
-phys_def_gain = 5
-mag_atk_gain = 0
-mag_def_gain = 5
-crit_gain = 5
-metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
-
 [sub_resource type="Resource" id="Resource_qjmhm"]
+script = ExtResource("6_qnc6k")
+curr_health = 50
+max_health = 70
+original_max_health = 50
+phys_attack = 70
+original_phys_attack = 50
+mag_attack = 10
+original_mag_attack = 10
+phys_defense = 30
+original_phys_defense = 20
+mag_defense = 30
+original_mag_defense = 20
+crit_chance = 30
+original_crit_chance = 20
+attack_range = 1
+original_attack_range = 1
+mobility = 3
+original_mobility = 3
+level = 1
+speed = 3.0
+health_gain = 10
+phys_atk_gain = 10
+phys_def_gain = 5
+mag_atk_gain = 0
+mag_def_gain = 5
+crit_gain = 5
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
+[sub_resource type="Resource" id="Resource_uyjn6"]
+script = ExtResource("6_qnc6k")
+curr_health = 50
+max_health = 70
+original_max_health = 50
+phys_attack = 70
+original_phys_attack = 50
+mag_attack = 10
+original_mag_attack = 10
+phys_defense = 30
+original_phys_defense = 20
+mag_defense = 30
+original_mag_defense = 20
+crit_chance = 30
+original_crit_chance = 20
+attack_range = 1
+original_attack_range = 1
+mobility = 3
+original_mobility = 3
+level = 1
+speed = 3.0
+health_gain = 10
+phys_atk_gain = 10
+phys_def_gain = 5
+mag_atk_gain = 0
+mag_def_gain = 5
+crit_gain = 5
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
+[sub_resource type="Resource" id="Resource_qdhws"]
 script = ExtResource("6_qnc6k")
 curr_health = 50
 max_health = 70
@@ -955,7 +956,7 @@ mag_def_gain = 5
 crit_gain = 1
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_uyjn6"]
+[sub_resource type="Resource" id="Resource_bndnf"]
 script = ExtResource("6_qnc6k")
 curr_health = 50
 max_health = 70
@@ -1053,37 +1054,37 @@ y_sort_enabled = true
 
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_orqvb")]
 position = Vector2(168, 216)
-stats = SubResource("Resource_0fbun")
+stats = SubResource("Resource_l22j0")
 profile = ExtResource("7_0ni46")
 is_friendly = true
 
 [node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_orqvb")]
 position = Vector2(216, 168)
-stats = SubResource("Resource_p2rbu")
+stats = SubResource("Resource_5f36r")
 profile = ExtResource("6_tjatl")
 is_friendly = true
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_orqvb")]
 position = Vector2(456, 360)
-stats = SubResource("Resource_l22j0")
+stats = SubResource("Resource_qjmhm")
 profile = ExtResource("11_6tp14")
 enemy_level = 3
 
 [node name="enemy_unit4" parent="TileMapLayer/Actors" instance=ExtResource("4_orqvb")]
 position = Vector2(552, 360)
-stats = SubResource("Resource_5f36r")
+stats = SubResource("Resource_uyjn6")
 profile = ExtResource("11_6tp14")
 enemy_level = 3
 
 [node name="enemy_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_orqvb")]
 position = Vector2(264, 360)
-stats = SubResource("Resource_qjmhm")
+stats = SubResource("Resource_qdhws")
 profile = ExtResource("11_rautg")
 enemy_level = 3
 
 [node name="enemy_unit3" parent="TileMapLayer/Actors" instance=ExtResource("4_orqvb")]
 position = Vector2(312, 408)
-stats = SubResource("Resource_uyjn6")
+stats = SubResource("Resource_bndnf")
 profile = ExtResource("11_rautg")
 enemy_level = 3
 
@@ -1300,6 +1301,8 @@ value = -5.0
 [node name="Close" type="Button" parent="GUI/Margin/PauseMenu/VBoxContainer"]
 layout_mode = 2
 text = "Close"
+
+[node name="TurnTransitionCanvas" parent="." instance=ExtResource("31_p2rbu")]
 
 [node name="WinLossCondition" type="Node2D" parent="."]
 script = ExtResource("17_p2rbu")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=4 uid="uid://cc3gxj81milfo"]
+[gd_scene load_steps=74 format=4 uid="uid://37uebo6x5it1"]
 
 [ext_resource type="Texture2D" uid="uid://bqmtavn12rhj2" path="res://assets/test_map5.png" id="1_78ovh"]
 [ext_resource type="Texture2D" uid="uid://cljq6ux0evrcp" path="res://assets/level_art/48x48_Tileset/[A]_type3/pipo-map001_at-kusa.png" id="2_le48r"]
@@ -22,7 +22,7 @@
 [ext_resource type="Resource" uid="uid://cbanv2lc58ujn" path="res://characters/Beholder/beholderProfile.tres" id="19_ya1iv"]
 [ext_resource type="Resource" uid="uid://dibcrc72hsl6q" path="res://characters/RedSlime/redSlimeProfile.tres" id="20_u2fm6"]
 [ext_resource type="Script" uid="uid://lvdowlbqk6fe" path="res://src/Level/GUI/actions_menu.gd" id="21_80cdk"]
-[ext_resource type="Resource" uid="uid://kcaxutpbj358" path="res://characters/Knight/knightEnemyProfile.tres" id="21_d4jd4"]
+[ext_resource type="Resource" path="res://characters/Knight/knightEnemyProfile.tres" id="21_d4jd4"]
 [ext_resource type="Resource" uid="uid://crhx3b3htheuy" path="res://characters/Goblin/goblinProfile.tres" id="21_le48r"]
 [ext_resource type="Script" uid="uid://duw38t7v0nrgf" path="res://src/Level/GUI/default_attack.gd" id="22_11v84"]
 [ext_resource type="Script" uid="uid://c5xlaf1onfe67" path="res://src/Level/GUI/use_skill_button.gd" id="23_3p3un"]
@@ -39,6 +39,7 @@
 [ext_resource type="Script" uid="uid://nm7v2oerrihf" path="res://src/Level/win_loss_condition.gd" id="34_0802b"]
 [ext_resource type="Script" uid="uid://sehkuo2xbwos" path="res://src/Worlds/world_tracker.gd" id="35_oyaua"]
 [ext_resource type="Resource" uid="uid://b7d426jw88wxl" path="res://src/Worlds/world_handler.tres" id="36_mpefo"]
+[ext_resource type="PackedScene" uid="uid://d3enl3nxco4pd" path="res://src/Level/TurnTransition.tscn" id="37_d4jd4"]
 [ext_resource type="Script" uid="uid://dyx7v0w8tua76" path="res://src/Level/camera_controller.gd" id="37_xkwxr"]
 
 [sub_resource type="GDScript" id="GDScript_ic0uy"]
@@ -1625,6 +1626,8 @@ value = -5.0
 [node name="Close" type="Button" parent="GUI/Margin/PauseMenu/VBoxContainer"]
 layout_mode = 2
 text = "Close"
+
+[node name="TurnTransitionCanvas" parent="." instance=ExtResource("37_d4jd4")]
 
 [node name="WinLossCondition" type="Node2D" parent="."]
 script = ExtResource("34_0802b")

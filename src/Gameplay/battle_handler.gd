@@ -11,6 +11,7 @@ var animation_timer: Timer
 var character_manager: Node2D
 var turn_manager: Node2D
 var win_loss_condition: Node2D
+var pause_button: Button
 
 func _ready() -> void:
 	# Create our own AnimationTimer if not already present
@@ -29,6 +30,9 @@ func _on_node_added(node):
 
 # --- Main function ---
 func perform_battle(attacker: Actor, defender: Actor, distance: float) -> void:
+	
+	# Disable pause-button
+	pause_button.disabled = true
 	
 	# Check if actors are valid
 	if attacker == null or defender == null:
@@ -73,6 +77,8 @@ func perform_battle(attacker: Actor, defender: Actor, distance: float) -> void:
 	if def_stats.curr_health <= 0:
 		_handle_death(defender)
 	
+	# Disable pause-button
+	pause_button.disabled = false
 
 # --- UTIL ---
 
@@ -170,5 +176,10 @@ func _find_level_nodes() -> void:
 				character_manager = tilemap_layer.get_node_or_null("CharacterManager")
 				turn_manager = tilemap_layer.get_node_or_null("TurnManager")
 				win_loss_condition = node.get_node_or_null("WinLossCondition")
-				return
+			var gui = node.get_node_or_null("GUI")
+			if gui:
+				var margin = gui.get_node_or_null("Margin")
+				if margin:
+					pause_button = margin.get_node_or_null("PauseButton")
+					return
 	push_warning("BattleHandlerGlobal: Could not find CharacterManager or TurnManager in current level!")

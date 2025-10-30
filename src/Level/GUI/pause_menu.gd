@@ -3,6 +3,8 @@ extends PanelContainer
 @onready var music_volume_slider: HScrollBar = $VBoxContainer/MusicContainer/MusicVolume
 @onready var sfx_volume_slider: HScrollBar = $VBoxContainer/SfxContainer/SfxVolume
 @onready var world_handler: Node = $"../../../WorldHandler"
+@onready var turn_manager: Node2D = $"../../../TileMapLayer/TurnManager"
+@onready var camera_controller: Node2D = $"../../../CameraController"
 
 var current_world
 
@@ -53,6 +55,13 @@ func _on_close_pressed() -> void:
 	
 	hide()
 	get_tree().paused = false
+	# Pause game so that no more moves can be made
+	turn_manager.game_is_paused = false
+	if turn_manager.current_phase == turn_manager.Phase.PLAYER:
+		turn_manager._next_player_unit()
+	elif turn_manager.current_phase == turn_manager.Phase.ENEMY:
+		turn_manager._next_enemy_unit()
+	camera_controller.active = true
 
 
 func _on_return_level_select_pressed() -> void:
