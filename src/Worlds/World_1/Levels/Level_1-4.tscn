@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=4 uid="uid://cvlihb3xstghc"]
+[gd_scene load_steps=42 format=4 uid="uid://cvlihb3xstghc"]
 
 [ext_resource type="Texture2D" uid="uid://bqmtavn12rhj2" path="res://assets/test_map5.png" id="1_rk3b1"]
 [ext_resource type="Texture2D" uid="uid://bdy0m0gr2tme3" path="res://assets/level_art/48x48_Tileset/pipo-map001.png" id="2_w41le"]
@@ -10,10 +10,11 @@
 [ext_resource type="Resource" uid="uid://bu2f1ylnrxljm" path="res://characters/Knight/knightProfile.tres" id="7_aqmlc"]
 [ext_resource type="Script" uid="uid://lvdowlbqk6fe" path="res://src/Level/GUI/actions_menu.gd" id="9_q4c55"]
 [ext_resource type="Script" uid="uid://duw38t7v0nrgf" path="res://src/Level/GUI/default_attack.gd" id="10_irhmm"]
-[ext_resource type="Resource" uid="uid://co8geppy7b1dn" path="res://characters/Slime/slimeProfile.tres" id="11_7hn85"]
 [ext_resource type="Script" uid="uid://b6oemt0bk5jyw" path="res://src/Level/GUI/stand_button.gd" id="11_gjisq"]
+[ext_resource type="Resource" uid="uid://crhx3b3htheuy" path="res://characters/Goblin/goblinProfile.tres" id="11_mmmlr"]
 [ext_resource type="Script" uid="uid://dso7okpirndht" path="res://src/Level/GUI/actor_info.gd" id="12_7hn85"]
 [ext_resource type="Script" uid="uid://c5xlaf1onfe67" path="res://src/Level/GUI/use_skill_button.gd" id="13_4b0xi"]
+[ext_resource type="Resource" uid="uid://dibcrc72hsl6q" path="res://characters/RedSlime/redSlimeProfile.tres" id="13_5fqfg"]
 [ext_resource type="Script" uid="uid://dous6wk318f1t" path="res://src/Level/GUI/victory_screen.gd" id="13_mmmlr"]
 [ext_resource type="Script" uid="uid://sddm7u5ng6mx" path="res://src/Level/GUI/game_over_screen.gd" id="14_5fqfg"]
 [ext_resource type="PackedScene" uid="uid://cats61ytkbbvj" path="res://src/PathVisuals/draw_path.tscn" id="15_oayya"]
@@ -169,7 +170,7 @@ texture_region_size = Vector2i(48, 48)
 tile_size = Vector2i(48, 48)
 sources/1 = SubResource("TileSetAtlasSource_tlwt5")
 
-[sub_resource type="Resource" id="Resource_q4c55"]
+[sub_resource type="Resource" id="Resource_irhmm"]
 resource_name = "mageStats"
 script = ExtResource("6_rk3b1")
 curr_health = 100
@@ -199,7 +200,7 @@ mag_def_gain = 10
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_irhmm"]
+[sub_resource type="Resource" id="Resource_gjisq"]
 resource_name = "knightStats"
 script = ExtResource("6_rk3b1")
 curr_health = 100
@@ -229,54 +230,25 @@ mag_def_gain = 0
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_gjisq"]
-script = ExtResource("6_rk3b1")
-curr_health = 50
-max_health = 70
-original_max_health = 50
-phys_attack = 60
-original_phys_attack = 40
-mag_attack = 10
-original_mag_attack = 10
-phys_defense = 40
-original_phys_defense = 30
-mag_defense = 30
-original_mag_defense = 20
-crit_chance = 7
-original_crit_chance = 5
-attack_range = 1
-original_attack_range = 1
-mobility = 2
-original_mobility = 2
-level = 1
-speed = 3.0
-health_gain = 10
-phys_atk_gain = 10
-phys_def_gain = 5
-mag_atk_gain = 0
-mag_def_gain = 5
-crit_gain = 1
-metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
-
 [sub_resource type="Resource" id="Resource_7hn85"]
 script = ExtResource("6_rk3b1")
 curr_health = 50
-max_health = 70
+max_health = 90
 original_max_health = 50
-phys_attack = 60
-original_phys_attack = 40
+phys_attack = 90
+original_phys_attack = 50
 mag_attack = 10
 original_mag_attack = 10
 phys_defense = 40
-original_phys_defense = 30
-mag_defense = 30
+original_phys_defense = 20
+mag_defense = 40
 original_mag_defense = 20
-crit_chance = 7
-original_crit_chance = 5
+crit_chance = 40
+original_crit_chance = 20
 attack_range = 1
 original_attack_range = 1
-mobility = 2
-original_mobility = 2
+mobility = 3
+original_mobility = 3
 level = 1
 speed = 3.0
 health_gain = 10
@@ -284,28 +256,57 @@ phys_atk_gain = 10
 phys_def_gain = 5
 mag_atk_gain = 0
 mag_def_gain = 5
-crit_gain = 1
+crit_gain = 5
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
 [sub_resource type="Resource" id="Resource_mmmlr"]
 script = ExtResource("6_rk3b1")
-curr_health = 50
-max_health = 70
-original_max_health = 50
-phys_attack = 60
-original_phys_attack = 40
+curr_health = 70
+max_health = 110
+original_max_health = 70
+phys_attack = 100
+original_phys_attack = 60
 mag_attack = 10
 original_mag_attack = 10
-phys_defense = 40
-original_phys_defense = 30
-mag_defense = 30
-original_mag_defense = 20
-crit_chance = 7
-original_crit_chance = 5
+phys_defense = 70
+original_phys_defense = 50
+mag_defense = 50
+original_mag_defense = 30
+crit_chance = 14
+original_crit_chance = 10
 attack_range = 1
 original_attack_range = 1
-mobility = 2
-original_mobility = 2
+mobility = 3
+original_mobility = 3
+level = 1
+speed = 3.0
+health_gain = 10
+phys_atk_gain = 10
+phys_def_gain = 5
+mag_atk_gain = 0
+mag_def_gain = 5
+crit_gain = 1
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
+[sub_resource type="Resource" id="Resource_5fqfg"]
+script = ExtResource("6_rk3b1")
+curr_health = 70
+max_health = 110
+original_max_health = 70
+phys_attack = 100
+original_phys_attack = 60
+mag_attack = 10
+original_mag_attack = 10
+phys_defense = 70
+original_phys_defense = 50
+mag_defense = 50
+original_mag_defense = 30
+crit_chance = 14
+original_crit_chance = 10
+attack_range = 1
+original_attack_range = 1
+mobility = 3
+original_mobility = 3
 level = 1
 speed = 3.0
 health_gain = 10
@@ -343,7 +344,7 @@ script = SubResource("GDScript_ic0uy")
 tile_set = SubResource("TileSet_ic0uy")
 format = 2
 layer_0/name = "Ground"
-layer_0/tile_data = PackedInt32Array(0, 65536, 0, 65536, 65536, 0, 131072, 65536, 0, 196608, 65536, 0, 262144, 65536, 0, 327680, 65536, 0, 393216, 65536, 0, 458752, 65536, 0, 524288, 65536, 0, 1, 65536, 0, 65537, 65536, 0, 131073, 0, 0, 196609, 0, 0, 262145, 0, 0, 327681, 65536, 0, 393217, 65536, 0, 458753, 65536, 0, 524289, 65536, 0, 2, 65536, 0, 65538, 0, 0, 131074, 0, 0, 196610, 0, 0, 262146, 65536, 0, 327682, 0, 0, 393218, 0, 0, 458754, 65536, 0, 524290, 0, 0, 3, 65536, 0, 65539, 0, 0, 131075, 0, 0, 196611, 0, 0, 262147, 0, 0, 327683, 65536, 0, 393219, 0, 0, 458755, 0, 0, 524291, 0, 0, 4, 65536, 0, 65540, 0, 0, 131076, 0, 0, 196612, 0, 0, 262148, 65536, 0, 327684, 65536, 0, 393220, 0, 0, 458756, 0, 0, 524292, 0, 0, 5, 65536, 0, 65541, 65536, 0, 131077, 0, 0, 196613, 0, 0, 262149, 65536, 0, 327685, 65536, 0, 393221, 0, 0, 458757, 0, 0, 524293, 0, 0, 6, 65536, 0, 65542, 65536, 0, 131078, 0, 0, 196614, 0, 0, 262150, 0, 0, 327686, 0, 0, 393222, 0, 0, 458758, 0, 0, 524294, 0, 0, 7, 65536, 0, 65543, 65536, 0, 131079, 65536, 0, 196615, 0, 0, 262151, 0, 0, 327687, 0, 0, 393223, 0, 0, 458759, 0, 0, 524295, 65536, 0, 8, 65536, 0, 65544, 65536, 0, 131080, 0, 0, 196616, 0, 0, 262152, 0, 0, 327688, 0, 0, 393224, 0, 0, 458760, 65536, 0, 524296, 65536, 0, 9, 65536, 0, 65545, 0, 0, 131081, 0, 0, 196617, 0, 0, 262153, 0, 0, 327689, 0, 0, 393225, 0, 0, 458761, 65536, 0, 524297, 65536, 0, 10, 65536, 0, 65546, 0, 0, 131082, 0, 0, 196618, 0, 0, 262154, 0, 0, 327690, 0, 0, 393226, 65536, 0, 458762, 65536, 0, 524298, 65536, 0, 11, 65536, 0, 65547, 0, 0, 131083, 0, 0, 196619, 0, 0, 262155, 0, 0, 327691, 0, 0, 393227, 65536, 0, 458763, 65536, 0, 524299, 65536, 0, 12, 0, 0, 65548, 0, 0, 131084, 0, 0, 196620, 0, 0, 262156, 0, 0, 327692, 65536, 0, 393228, 65536, 0, 458764, 65536, 0, 524300, 65536, 0)
+layer_0/tile_data = PackedInt32Array(0, 65536, 0, 65536, 65536, 0, 131072, 65536, 0, 196608, 65536, 0, 262144, 65536, 0, 327680, 65536, 0, 393216, 65536, 0, 458752, 65536, 0, 524288, 65536, 0, 1, 65536, 0, 65537, 65536, 0, 131073, 0, 0, 196609, 0, 0, 262145, 0, 0, 327681, 0, 0, 393217, 65536, 0, 458753, 65536, 0, 524289, 65536, 0, 2, 65536, 0, 65538, 0, 0, 131074, 0, 0, 196610, 0, 0, 262146, 0, 0, 327682, 0, 0, 393218, 0, 0, 458754, 65536, 0, 524290, 0, 0, 3, 65536, 0, 65539, 0, 0, 131075, 0, 0, 196611, 0, 0, 262147, 0, 0, 327683, 0, 0, 393219, 0, 0, 458755, 0, 0, 524291, 0, 0, 4, 65536, 0, 65540, 0, 0, 131076, 0, 0, 196612, 0, 0, 262148, 65536, 0, 327684, 65536, 0, 393220, 0, 0, 458756, 0, 0, 524292, 0, 0, 5, 65536, 0, 65541, 65536, 0, 131077, 0, 0, 196613, 0, 0, 262149, 65536, 0, 327685, 65536, 0, 393221, 0, 0, 458757, 0, 0, 524293, 0, 0, 6, 65536, 0, 65542, 65536, 0, 131078, 0, 0, 196614, 0, 0, 262150, 0, 0, 327686, 0, 0, 393222, 0, 0, 458758, 0, 0, 524294, 0, 0, 7, 65536, 0, 65543, 65536, 0, 131079, 65536, 0, 196615, 0, 0, 262151, 0, 0, 327687, 0, 0, 393223, 0, 0, 458759, 0, 0, 524295, 65536, 0, 8, 65536, 0, 65544, 65536, 0, 131080, 0, 0, 196616, 0, 0, 262152, 0, 0, 327688, 0, 0, 393224, 0, 0, 458760, 65536, 0, 524296, 65536, 0, 9, 65536, 0, 65545, 0, 0, 131081, 0, 0, 196617, 0, 0, 262153, 0, 0, 327689, 0, 0, 393225, 0, 0, 458761, 65536, 0, 524297, 65536, 0, 10, 65536, 0, 65546, 0, 0, 131082, 0, 0, 196618, 0, 0, 262154, 0, 0, 327690, 0, 0, 393226, 65536, 0, 458762, 65536, 0, 524298, 65536, 0, 11, 65536, 0, 65547, 0, 0, 131083, 0, 0, 196619, 0, 0, 262155, 0, 0, 327691, 0, 0, 393227, 65536, 0, 458763, 65536, 0, 524299, 65536, 0, 12, 0, 0, 65548, 0, 0, 131084, 0, 0, 196620, 0, 0, 262156, 0, 0, 327692, 65536, 0, 393228, 65536, 0, 458764, 65536, 0, 524300, 65536, 0)
 layer_1/name = "Effects1"
 layer_2/name = "Effects2"
 
@@ -377,34 +378,34 @@ script = ExtResource("4_4lxm7")
 y_sort_enabled = true
 
 [node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_ye6rd")]
-position = Vector2(216, 312)
-stats = SubResource("Resource_q4c55")
+position = Vector2(120, 120)
+stats = SubResource("Resource_irhmm")
 profile = ExtResource("6_4b0xi")
 is_friendly = true
 
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_ye6rd")]
-position = Vector2(408, 168)
-stats = SubResource("Resource_irhmm")
+position = Vector2(216, 120)
+stats = SubResource("Resource_gjisq")
 profile = ExtResource("7_aqmlc")
 is_friendly = true
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_ye6rd")]
-position = Vector2(120, 312)
-stats = SubResource("Resource_gjisq")
-profile = ExtResource("11_7hn85")
-enemy_level = 3
+position = Vector2(168, 312)
+stats = SubResource("Resource_7hn85")
+profile = ExtResource("11_mmmlr")
+enemy_level = 5
 
 [node name="enemy_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_ye6rd")]
-position = Vector2(120, 264)
-stats = SubResource("Resource_7hn85")
-profile = ExtResource("11_7hn85")
-enemy_level = 3
+position = Vector2(360, 264)
+stats = SubResource("Resource_mmmlr")
+profile = ExtResource("13_5fqfg")
+enemy_level = 5
 
 [node name="enemy_unit3" parent="TileMapLayer/Actors" instance=ExtResource("4_ye6rd")]
-position = Vector2(168, 312)
-stats = SubResource("Resource_mmmlr")
-profile = ExtResource("11_7hn85")
-enemy_level = 3
+position = Vector2(312, 360)
+stats = SubResource("Resource_5fqfg")
+profile = ExtResource("13_5fqfg")
+enemy_level = 5
 
 [node name="GUI" type="CanvasLayer" parent="."]
 script = SubResource("GDScript_5fqfg")

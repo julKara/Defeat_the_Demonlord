@@ -221,14 +221,11 @@ func move():
 
 # Check if the final destination of the enemy is occupied
 func check_if_occupied(id_path: Array[Vector2i]) -> bool:
-	print(id_path)
 	if id_path.is_empty() == false:
 		for character in character_manager.character_list:
 			if character != get_parent():
 				# The index of the tile the enemy will stop at. They always stops as soon as they're in range.
 				var index = id_path.size() - attack_range - 1 
-				print("Index tile: ",id_path[index])
-				print(character.profile.character_name, " on tile: ",tile_map.local_to_map(character.global_position))
 				if id_path[index] == tile_map.local_to_map(character.global_position):
 					solid_pos.append(tile_map.local_to_map(character.global_position)) 
 					# If the tile is occupied -> set tile to solid. The tile will then not be includen in pathfinding
