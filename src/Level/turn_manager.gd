@@ -14,7 +14,7 @@ enum Phase { PLAYER, ENEMY }	# The two possible phases
 @onready var win_loss_condition: Node2D = $"../../WinLossCondition"
 @onready var tile_map: TileMap = $"../../TileMap"
 @onready var camera_controller: Node = $"../../CameraController"
-
+@onready var turn_transition: Control = $"../../TurnTransitionCanvas/TurnTransition"
 
 # --- Variables ---
 @export var max_turns: int = 10
@@ -63,17 +63,27 @@ func start_phase(phase: Phase) -> void:
 			actor.reset_astar_grid()
 
 	# Delay between phases, TODO: Add transitions
-	await get_tree().create_timer(1.0).timeout
+	#await get_tree().create_timer(1.0).timeout
 	
 	current_phase = phase
 	match phase:
 		Phase.PLAYER:
+			
+			# Show the Turn number first
+			await turn_transition.play_transition("Turn %d / %d" % [current_turn, max_turns], Color(0.382, 0.296, 0.8), 0.863)
+			# Then show Player Turn banner
+			await turn_transition.play_transition("Player Turn", Color(0, 0.536, 0.737), 1.0)
+			
 			print("\n--- Turn %d start!\n" % current_turn)
 			print("--- Player Phase ---")
 			ClickHandler.level_active = true
 			_reset_acted_flag(player_queue)	# Clear the bool acted
 			_next_player_unit()	# Select next playable unit in queue
 		Phase.ENEMY:
+			
+			# Show Enemy Turn banner in darker color
+			await turn_transition.play_transition("Enemy Turn", Color(0.764, 0.133, 0.143), 1.2)
+			
 			print("--- Enemy Phase ---")
 			_reset_acted_flag(enemy_queue)	# Clear the bool acted
 			_next_enemy_unit()	# Select next playable unit in queue
