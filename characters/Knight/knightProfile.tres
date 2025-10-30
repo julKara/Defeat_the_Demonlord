@@ -10,7 +10,7 @@
 [resource]
 script = ExtResource("1_js022")
 character_name = "Lennart"
-battle_class_type = "Swordsman"
+battle_class_type = "Knight"
 sprite = ExtResource("3_howji")
 animation = ExtResource("1_5d5y0")
 audio = ExtResource("2_lcvec")
