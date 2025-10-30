@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://dijjspgi8x8sv"]
+[gd_scene load_steps=40 format=3 uid="uid://dijjspgi8x8sv"]
 
 [ext_resource type="Script" uid="uid://7mgltwn5kw4v" path="res://src/Units/actor.gd" id="1_xjefa"]
 [ext_resource type="Shader" uid="uid://54clig0upyxr" path="res://src/Units/highlight.gdshader" id="2_a5lvk"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://cnq5sivude4o5" path="res://assets/character_art/Slime/Slime_Default_Attack_f2.png" id="8_ni625"]
 [ext_resource type="Texture2D" uid="uid://iy0guybfk7x6" path="res://assets/character_art/Slime/Slime_Default_Attack_f3.png" id="9_gdso5"]
 [ext_resource type="Texture2D" uid="uid://cetju5ygret7e" path="res://assets/character_art/redSlime/Slime_Red_Default_Attack_f2.png" id="9_haarf"]
+[ext_resource type="AnimationLibrary" uid="uid://ck0moxulrlwi2" path="res://characters/Knight/knightEnemyAnimations.tres" id="9_ijenq"]
 [ext_resource type="Texture2D" uid="uid://bamsmmno7600h" path="res://assets/character_art/redSlime/Slime_Red_Default_Attack_f3.png" id="10_cb3ch"]
 [ext_resource type="Texture2D" uid="uid://cfxaybx45nead" path="res://assets/character_art/Slime/Slime_Default_Attack_f4.png" id="10_tbjoy"]
 [ext_resource type="Texture2D" uid="uid://ccwri7ry3bhar" path="res://assets/character_art/redSlime/Slime_Red_Default_Attack_f4.png" id="11_yuo2x"]
@@ -207,6 +208,7 @@ libraries = {
 &"goblinAnimations": ExtResource("4_gdso5"),
 &"healerAnimations": ExtResource("7_yuo2x"),
 &"knightAnimations": ExtResource("4_jg2tr"),
+&"knightEnemyAnimations": ExtResource("9_ijenq"),
 &"mageAnimations": ExtResource("5_a5lvk"),
 &"redSlimeAnimations": SubResource("AnimationLibrary_haarf"),
 &"slimeAnimations": SubResource("AnimationLibrary_ni625")
