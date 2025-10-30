@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dijjspgi8x8sv"]
+[gd_scene load_steps=38 format=3 uid="uid://dijjspgi8x8sv"]
 
 [ext_resource type="Script" uid="uid://7mgltwn5kw4v" path="res://src/Units/actor.gd" id="1_xjefa"]
 [ext_resource type="Shader" uid="uid://54clig0upyxr" path="res://src/Units/highlight.gdshader" id="2_a5lvk"]
@@ -201,8 +201,8 @@ texture = ExtResource("7_jg2tr")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_a5lvk"),
-&"demonLordAnimations": ExtResource("4_tbjoy"),
 &"beholderAnimations": ExtResource("4_haarf"),
+&"demonLordAnimations": ExtResource("4_tbjoy"),
 &"goblinAnimations": ExtResource("4_gdso5"),
 &"knightAnimations": ExtResource("4_jg2tr"),
 &"mageAnimations": ExtResource("5_a5lvk"),
