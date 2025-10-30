@@ -236,7 +236,7 @@ func check_if_occupied(id_path: Array[Vector2i]) -> bool:
 
 func perform_movement(id_path: Array[Vector2i], target_dist: int):
 	
-	if id_path.is_empty() == false:
+	if id_path.is_empty() == false && id_path.size() > 2:
 		# Flip sprite based on move direction
 		calculate_direction(id_path)
 		
