@@ -59,3 +59,23 @@ func reset_other_buttons(except_button: Button) -> void:
 			btn.text = "%s (%d)" % [btn.skill.skill_name, btn.skill.current_cooldown]
 		else:
 			btn.text = btn.skill.skill_name
+
+# Resets all buttons
+func reset_all_buttons() -> void:
+	
+	var skill_buttons = [skill_1, skill_2]
+
+	for btn in skill_buttons:
+
+		if btn.skill == null:
+			continue
+
+		# Reset state to "base"
+		btn.click_count = 0
+		btn.disabled = false
+
+		# Reset text (show cooldown if active)
+		if btn.skill.current_cooldown > 0:
+			btn.text = "%s (%d)" % [btn.skill.skill_name, btn.skill.current_cooldown]
+		else:
+			btn.text = btn.skill.skill_name

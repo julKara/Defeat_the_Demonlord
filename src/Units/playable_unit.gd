@@ -99,8 +99,7 @@ func move_to(tile: Vector2i) -> void:
 		friendly_target = null
 	
 	default_attack.disabled = true
-	skill_1.disabled = true
-	skill_2.disabled = true
+	skill_menu.reset_all_buttons()
 
 # Reset back to origin_tile if moved but not acted
 func reset_position_if_not_acted() -> void:
@@ -186,15 +185,7 @@ func deselect() -> void:
 	actor_info.hide_actor_info()
 	
 	# Reset skill-buttons
-	skill_1.skill = null
-	skill_1.text = "skill1"
-	skill_1.disabled = true
-	skill_1.click_count = 0
-	
-	skill_2.skill = null
-	skill_2.text = "skill2"
-	skill_2.disabled = true
-	skill_2.click_count = 0
+	skill_menu.reset_all_buttons()
 	
 	# Remove target-highlight if the is one
 	if attack_target:
