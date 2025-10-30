@@ -1,0 +1,62 @@
+[gd_resource type="AnimationLibrary" load_steps=9 format=3 uid="uid://dhkvvkgi8nbtj"]
+
+[ext_resource type="Texture2D" uid="uid://cxwxfasdxeih2" path="res://assets/character_art/healer/Healer_Sprite.png" id="1_by6ih"]
+[ext_resource type="Texture2D" uid="uid://cbu1fftcsor1n" path="res://assets/character_art/healer/Healer_Idle_f2.png" id="2_trqgv"]
+[ext_resource type="Texture2D" uid="uid://cshvgbe41xof0" path="res://assets/character_art/healer/Healer_Default_Attack_f2.png" id="3_d01m0"]
+[ext_resource type="Texture2D" uid="uid://db5dbclhei6ix" path="res://assets/character_art/healer/Healer_Default_Attack_f3.png" id="4_kg3pk"]
+[ext_resource type="Texture2D" uid="uid://brw10mokvsgsx" path="res://assets/character_art/healer/Healer_Default_Attack_f4.png" id="5_u6y4f"]
+
+[sub_resource type="Animation" id="Animation_cb3ch"]
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.366667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("1_by6ih"), ExtResource("2_trqgv")]
+}
+
+[sub_resource type="Animation" id="Animation_ijenq"]
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.566667, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_by6ih"), ExtResource("3_d01m0"), ExtResource("4_kg3pk"), ExtResource("5_u6y4f")]
+}
+
+[sub_resource type="Animation" id="Animation_jvd5u"]
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("1_by6ih"), ExtResource("2_trqgv")]
+}
+
+[resource]
+_data = {
+&"attack": SubResource("Animation_ijenq"),
+&"idle": SubResource("Animation_cb3ch"),
+&"selected": SubResource("Animation_jvd5u")
+}

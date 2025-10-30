@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dijjspgi8x8sv"]
+[gd_scene load_steps=39 format=3 uid="uid://dijjspgi8x8sv"]
 
 [ext_resource type="Script" uid="uid://7mgltwn5kw4v" path="res://src/Units/actor.gd" id="1_xjefa"]
 [ext_resource type="Shader" uid="uid://54clig0upyxr" path="res://src/Units/highlight.gdshader" id="2_a5lvk"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://d0dmqxyexre4v" path="res://assets/character_art/mage/Mage_Idle_f2.png" id="7_jg2tr"]
 [ext_resource type="Texture2D" uid="uid://dl5ka4ko4id0j" path="res://assets/character_art/redSlime/Slime_Red_Sprite.png" id="7_omvxy"]
 [ext_resource type="Texture2D" uid="uid://dw3l24usm53ep" path="res://assets/character_art/Slime/Slime_Idle_f1.png" id="7_s4pr6"]
+[ext_resource type="AnimationLibrary" uid="uid://dhkvvkgi8nbtj" path="res://characters/Healer/healerAnimations.tres" id="7_yuo2x"]
 [ext_resource type="Texture2D" uid="uid://ba2uvkiwp0853" path="res://assets/character_art/redSlime/Slime_Red_Default_Attack_f1.png" id="8_3drnx"]
 [ext_resource type="Texture2D" uid="uid://bcyx1jcb3c67c" path="res://assets/character_art/redSlime/Slime_Red_Idle_f1.png" id="8_jksgg"]
 [ext_resource type="Texture2D" uid="uid://cnq5sivude4o5" path="res://assets/character_art/Slime/Slime_Default_Attack_f2.png" id="8_ni625"]
@@ -62,13 +63,6 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a5lvk"]
 _data = {
 &"RESET": SubResource("Animation_kj6bn")
-}
-
-[sub_resource type="Animation" id="Animation_cb3ch"]
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_yuo2x"]
-_data = {
-&"idle": SubResource("Animation_cb3ch")
 }
 
 [sub_resource type="Animation" id="Animation_1ynkq"]
@@ -211,7 +205,7 @@ libraries = {
 &"beholderAnimations": ExtResource("4_haarf"),
 &"demonLordAnimations": ExtResource("4_tbjoy"),
 &"goblinAnimations": ExtResource("4_gdso5"),
-&"healerAnimations": SubResource("AnimationLibrary_yuo2x"),
+&"healerAnimations": ExtResource("7_yuo2x"),
 &"knightAnimations": ExtResource("4_jg2tr"),
 &"mageAnimations": ExtResource("5_a5lvk"),
 &"redSlimeAnimations": SubResource("AnimationLibrary_haarf"),

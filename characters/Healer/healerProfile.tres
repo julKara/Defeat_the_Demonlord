@@ -1,13 +1,16 @@
-[gd_resource type="Resource" script_class="UnitProfile" load_steps=4 format=3 uid="uid://b0ar83lqod7e4"]
+[gd_resource type="Resource" script_class="UnitProfile" load_steps=6 format=3 uid="uid://b0ar83lqod7e4"]
 
 [ext_resource type="Script" uid="uid://5kg8ybina31b" path="res://src/Units/Unit_Profile.gd" id="1_jysv8"]
+[ext_resource type="AnimationLibrary" uid="uid://dhkvvkgi8nbtj" path="res://characters/Healer/healerAnimations.tres" id="1_qrica"]
 [ext_resource type="Resource" uid="uid://btkwwfl1o5xir" path="res://assets/Skills/HealAlly/heal_ally.tres" id="3_ubsul"]
 [ext_resource type="Texture2D" uid="uid://cxwxfasdxeih2" path="res://assets/character_art/healer/Healer_Sprite.png" id="4_iqvq6"]
+[ext_resource type="Resource" uid="uid://cjjcuhny0l2kj" path="res://assets/Skills/EndTurnDefenceBuff/prepare_defences.tres" id="4_ubsul"]
 
 [resource]
 script = ExtResource("1_jysv8")
 character_name = "Sigrid"
 battle_class_type = "Healer"
 sprite = ExtResource("4_iqvq6")
-skills = Array[Resource]([ExtResource("3_ubsul"), ExtResource("3_ubsul")])
+animation = ExtResource("1_qrica")
+skills = Array[Resource]([ExtResource("3_ubsul"), ExtResource("4_ubsul")])
 metadata/_custom_type_script = "uid://5kg8ybina31b"
