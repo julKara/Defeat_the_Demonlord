@@ -7,6 +7,7 @@ const SAVE_GAME_PATH := "user://save.tres"
 @export var level_progression: Resource
 @export var mageStats: Resource
 @export var knightStats: Resource
+@export var healerStats: Resource
 
 
 func write_save():

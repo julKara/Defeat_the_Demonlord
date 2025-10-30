@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=2 format=3 uid="uid://bqwpn250yxp8h"]
+
+[ext_resource type="Script" uid="uid://dfeqtmcp7uacl" path="res://src/Units/CharacterStats.gd" id="1_caknm"]
+
+[resource]
+resource_name = "healerStats"
+script = ExtResource("1_caknm")
+curr_health = 1
+max_health = 1
+original_max_health = 1
+phys_attack = 1
+original_phys_attack = 1
+mag_attack = 100
+original_mag_attack = 1
+phys_defense = 1
+original_phys_defense = 1
+mag_defense = 1
+original_mag_defense = 1
+crit_chance = 1
+original_crit_chance = 1
+attack_range = 3
+original_attack_range = 3
+mobility = 2
+original_mobility = 1
+level = 1
+speed = 1.0
+health_gain = 1
+phys_atk_gain = 1
+phys_def_gain = 1
+mag_atk_gain = 1
+mag_def_gain = 1
+crit_gain = 1
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"

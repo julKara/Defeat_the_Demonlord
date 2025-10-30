@@ -18,6 +18,7 @@ func _create_save():
 	_save.level_progression = world_tracker.new()
 	_save.mageStats = preload("res://characters/Mage/mageStats.tres").duplicate()
 	_save.knightStats = preload("res://characters/Knight/knightStats.tres").duplicate()
+	_save.healerStats = preload("res://characters/Healer/healerStats.tres").duplicate()
 	_save.write_save()
 	world_script = _save.level_progression
 	print("New save file created")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dijjspgi8x8sv"]
+[gd_scene load_steps=40 format=3 uid="uid://dijjspgi8x8sv"]
 
 [ext_resource type="Script" uid="uid://7mgltwn5kw4v" path="res://src/Units/actor.gd" id="1_xjefa"]
 [ext_resource type="Shader" uid="uid://54clig0upyxr" path="res://src/Units/highlight.gdshader" id="2_a5lvk"]
@@ -62,6 +62,13 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a5lvk"]
 _data = {
 &"RESET": SubResource("Animation_kj6bn")
+}
+
+[sub_resource type="Animation" id="Animation_cb3ch"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yuo2x"]
+_data = {
+&"idle": SubResource("Animation_cb3ch")
 }
 
 [sub_resource type="Animation" id="Animation_1ynkq"]
@@ -204,6 +211,7 @@ libraries = {
 &"beholderAnimations": ExtResource("4_haarf"),
 &"demonLordAnimations": ExtResource("4_tbjoy"),
 &"goblinAnimations": ExtResource("4_gdso5"),
+&"healerAnimations": SubResource("AnimationLibrary_yuo2x"),
 &"knightAnimations": ExtResource("4_jg2tr"),
 &"mageAnimations": ExtResource("5_a5lvk"),
 &"redSlimeAnimations": SubResource("AnimationLibrary_haarf"),

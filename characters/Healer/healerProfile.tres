@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="UnitProfile" load_steps=4 format=3 uid="uid://b0ar83lqod7e4"]
+
+[ext_resource type="Script" uid="uid://5kg8ybina31b" path="res://src/Units/Unit_Profile.gd" id="1_jysv8"]
+[ext_resource type="Resource" uid="uid://btkwwfl1o5xir" path="res://assets/Skills/HealAlly/heal_ally.tres" id="3_ubsul"]
+[ext_resource type="Texture2D" uid="uid://cxwxfasdxeih2" path="res://assets/character_art/healer/Healer_Sprite.png" id="4_iqvq6"]
+
+[resource]
+script = ExtResource("1_jysv8")
+character_name = "Sigrid"
+battle_class_type = "Healer"
+sprite = ExtResource("4_iqvq6")
+skills = Array[Resource]([ExtResource("3_ubsul"), ExtResource("3_ubsul")])
+metadata/_custom_type_script = "uid://5kg8ybina31b"
