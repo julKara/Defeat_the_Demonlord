@@ -4,7 +4,7 @@
 [ext_resource type="AnimationLibrary" uid="uid://dhkvvkgi8nbtj" path="res://characters/Healer/healerAnimations.tres" id="1_qrica"]
 [ext_resource type="Resource" uid="uid://btkwwfl1o5xir" path="res://assets/Skills/HealAlly/heal_ally.tres" id="3_ubsul"]
 [ext_resource type="Texture2D" uid="uid://cxwxfasdxeih2" path="res://assets/character_art/healer/Healer_Sprite.png" id="4_iqvq6"]
-[ext_resource type="Resource" uid="uid://cjjcuhny0l2kj" path="res://assets/Skills/EndTurnDefenceBuff/prepare_defences.tres" id="4_ubsul"]
+[ext_resource type="Resource" uid="uid://byh3d4ht5foco" path="res://assets/Skills/BuffMobilityAndMagic/gather_energy.tres" id="4_ubsul"]
 
 [resource]
 script = ExtResource("1_jysv8")

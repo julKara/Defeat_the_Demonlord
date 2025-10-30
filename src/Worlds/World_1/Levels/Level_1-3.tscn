@@ -809,36 +809,6 @@ tile_size = Vector2i(48, 48)
 sources/1 = SubResource("TileSetAtlasSource_tlwt5")
 
 [sub_resource type="Resource" id="Resource_0fbun"]
-resource_name = "mageStats"
-script = ExtResource("6_qnc6k")
-curr_health = 90
-max_health = 90
-original_max_health = 90
-phys_attack = 10
-original_phys_attack = 10
-mag_attack = 80
-original_mag_attack = 80
-phys_defense = 20
-original_phys_defense = 20
-mag_defense = 50
-original_mag_defense = 50
-crit_chance = 10
-original_crit_chance = 10
-attack_range = 2
-original_attack_range = 2
-mobility = 3
-original_mobility = 3
-level = 3
-speed = 3.0
-health_gain = 5
-phys_atk_gain = 0
-phys_def_gain = 0
-mag_atk_gain = 10
-mag_def_gain = 5
-crit_gain = 0
-metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
-
-[sub_resource type="Resource" id="Resource_p2rbu"]
 resource_name = "knightStats"
 script = ExtResource("6_qnc6k")
 curr_health = 100
@@ -865,6 +835,36 @@ phys_atk_gain = 5
 phys_def_gain = 10
 mag_atk_gain = 0
 mag_def_gain = 0
+crit_gain = 0
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
+[sub_resource type="Resource" id="Resource_p2rbu"]
+resource_name = "mageStats"
+script = ExtResource("6_qnc6k")
+curr_health = 90
+max_health = 90
+original_max_health = 90
+phys_attack = 10
+original_phys_attack = 10
+mag_attack = 80
+original_mag_attack = 80
+phys_defense = 20
+original_phys_defense = 20
+mag_defense = 50
+original_mag_defense = 50
+crit_chance = 10
+original_crit_chance = 10
+attack_range = 2
+original_attack_range = 2
+mobility = 3
+original_mobility = 3
+level = 3
+speed = 3.0
+health_gain = 5
+phys_atk_gain = 0
+phys_def_gain = 0
+mag_atk_gain = 10
+mag_def_gain = 5
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
@@ -1051,16 +1051,16 @@ script = ExtResource("4_s6fmu")
 [node name="Actors" type="Node2D" parent="TileMapLayer"]
 y_sort_enabled = true
 
-[node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_orqvb")]
-position = Vector2(216, 168)
-stats = SubResource("Resource_0fbun")
-profile = ExtResource("6_tjatl")
-is_friendly = true
-
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_orqvb")]
 position = Vector2(168, 216)
-stats = SubResource("Resource_p2rbu")
+stats = SubResource("Resource_0fbun")
 profile = ExtResource("7_0ni46")
+is_friendly = true
+
+[node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_orqvb")]
+position = Vector2(216, 168)
+stats = SubResource("Resource_p2rbu")
+profile = ExtResource("6_tjatl")
 is_friendly = true
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_orqvb")]

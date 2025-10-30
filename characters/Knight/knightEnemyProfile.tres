@@ -1,12 +1,16 @@
-[gd_resource type="Resource" script_class="UnitProfile" load_steps=3 format=3 uid="uid://kcaxutpbj358"]
+[gd_resource type="Resource" script_class="UnitProfile" load_steps=5 format=3 uid="uid://kcaxutpbj358"]
 
+[ext_resource type="AnimationLibrary" path="res://characters/Knight/knightEnemyAnimations.tres" id="1_76kb0"]
 [ext_resource type="Script" uid="uid://5kg8ybina31b" path="res://src/Units/Unit_Profile.gd" id="1_e62rc"]
 [ext_resource type="AudioStream" uid="uid://blma88qxyui5g" path="res://characters/Knight/knightAudio.tres" id="1_hy2s4"]
+[ext_resource type="Texture2D" uid="uid://b4pdaijj4wjkj" path="res://assets/character_art/knightEnemy/Knight_Enemy_Sprite.png" id="4_5jl1g"]
 
 [resource]
 script = ExtResource("1_e62rc")
 character_name = "Rafael"
 battle_class_type = "Knight"
+sprite = ExtResource("4_5jl1g")
+animation = ExtResource("1_76kb0")
 audio = ExtResource("1_hy2s4")
 skills = Array[Resource]([])
 metadata/_custom_type_script = "uid://5kg8ybina31b"

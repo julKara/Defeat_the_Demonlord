@@ -1,4 +1,4 @@
-[gd_resource type="AnimationLibrary" load_steps=10 format=3 uid="uid://ck0moxulrlwi2"]
+[gd_resource type="AnimationLibrary" load_steps=10 format=3 uid="uid://dpo6d26rdncm3"]
 
 [ext_resource type="Texture2D" uid="uid://2f0jr4wtawj0" path="res://assets/character_art/knightEnemy/Knight_Enemy_Idle_f1.png" id="1_jnybl"]
 [ext_resource type="Texture2D" uid="uid://vw3dos1vgu00" path="res://assets/character_art/knightEnemy/Knight_Enemy_Idle_f2.png" id="2_dadb1"]

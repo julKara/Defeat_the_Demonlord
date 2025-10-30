@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="SkillResource" load_steps=3 format=3 uid="uid://byh3d4ht5foco"]
+
+[ext_resource type="Script" uid="uid://4rcexida7mu2" path="res://assets/Skills/BuffMobilityAndMagic/gather_energy.gd" id="1_88tm2"]
+[ext_resource type="Script" uid="uid://bw6iq6gxtp5vs" path="res://src/Units/skill_resource.gd" id="2_xgxoc"]
+
+[resource]
+script = ExtResource("2_xgxoc")
+skill_name = "Gather Energy"
+description = "By passing a turn without attacking or using a skill, recieve +2 to mobility and a 50% buff to magic stats."
+skill_type = "Passive"
+ends_turn = false
+target_type = "Self"
+duration = 2
+cooldown = 0
+stat_addition = {
+"curr_attack_range": 0,
+"curr_mobility": 0
+}
+stat_multiplier = {
+"curr_mag_attack": 0.0,
+"curr_mag_defense": 0.0,
+"curr_phys_attack": 0.0,
+"curr_phys_defense": 0.0
+}
+effect_script = ExtResource("1_88tm2")

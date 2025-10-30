@@ -4,17 +4,17 @@
 
 [resource]
 script = ExtResource("1_48lv3")
-curr_health = 100
-max_health = 100
-original_max_health = 100
-phys_attack = 50
-original_phys_attack = 50
+curr_health = 150
+max_health = 150
+original_max_health = 150
+phys_attack = 90
+original_phys_attack = 90
 mag_attack = 5
 original_mag_attack = 5
 phys_defense = 70
 original_phys_defense = 70
-mag_defense = 40
-original_mag_defense = 40
+mag_defense = 60
+original_mag_defense = 60
 crit_chance = 10
 original_crit_chance = 10
 attack_range = 1

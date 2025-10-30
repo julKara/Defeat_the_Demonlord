@@ -19,7 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://cnq5sivude4o5" path="res://assets/character_art/Slime/Slime_Default_Attack_f2.png" id="8_ni625"]
 [ext_resource type="Texture2D" uid="uid://iy0guybfk7x6" path="res://assets/character_art/Slime/Slime_Default_Attack_f3.png" id="9_gdso5"]
 [ext_resource type="Texture2D" uid="uid://cetju5ygret7e" path="res://assets/character_art/redSlime/Slime_Red_Default_Attack_f2.png" id="9_haarf"]
-[ext_resource type="AnimationLibrary" uid="uid://ck0moxulrlwi2" path="res://characters/Knight/knightEnemyAnimations.tres" id="9_ijenq"]
+[ext_resource type="AnimationLibrary" uid="uid://dpo6d26rdncm3" path="res://characters/Knight/knightEnemyAnimations.tres" id="9_ijenq"]
 [ext_resource type="Texture2D" uid="uid://bamsmmno7600h" path="res://assets/character_art/redSlime/Slime_Red_Default_Attack_f3.png" id="10_cb3ch"]
 [ext_resource type="Texture2D" uid="uid://cfxaybx45nead" path="res://assets/character_art/Slime/Slime_Default_Attack_f4.png" id="10_tbjoy"]
 [ext_resource type="AnimationLibrary" uid="uid://bfhibyg3m1e5o" path="res://characters/Mage/mageEnemyAnimations.tres" id="11_jvd5u"]

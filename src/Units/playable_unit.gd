@@ -32,6 +32,8 @@ var attack_range: int = 1
 var attack_target: Actor = null	# Is the enemy unit this unit hass selected to attack
 var friendly_target: Actor = null	# Is the friendly unit this unit has selected to healt/buff
 
+var stats
+
 
 func _ready() -> void:
 	print("Playable unit ready — player-controlled!")
@@ -41,7 +43,7 @@ func _ready() -> void:
 	start_position = origin_tile   # keep for compatibility with other code that need start_position
 
 func _set_stat_variables() -> void:
-	var stats = get_parent().stats
+	stats = get_parent().stats
 	mobility = stats.curr_mobility
 	#move_speed = stats.speed
 	attack_range = stats.curr_attack_range
@@ -255,7 +257,7 @@ func get_range_tiles() -> Dictionary:
 				
 			# Add tiles within mobility-range to move_tiles
 			var path := grid.get_id_path(origin_tile, pos)
-			if path.size() > 0 and path.size() <= (mobility + 1):
+			if path.size() > 0 and path.size() <= (stats.curr_mobility + 1):
 				move_tiles.append(pos)
 
 	# --- 2. Compute attack_tiles by expanding from each reachable tile and origin
