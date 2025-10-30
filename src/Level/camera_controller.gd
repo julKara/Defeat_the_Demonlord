@@ -23,7 +23,7 @@ func _process(delta: float) -> void:
 		return
 
 	var new_pos = global_position.lerp(target_position, clamp(delta * camera_smoothness, 0.0, 1.0))
-	# snap to nearest pixel *after zoom*
+	# Snap to nearest pixel after zoom
 	var snap_scale = camera.zoom.x
 	new_pos = (new_pos / snap_scale).round() * snap_scale
 	global_position = new_pos
@@ -34,9 +34,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if event is InputEventMouseButton:
 		match event.button_index:
-			MOUSE_BUTTON_WHEEL_UP:
-				if event.pressed: _set_zoom_level(-1)
 			MOUSE_BUTTON_WHEEL_DOWN:
+				if event.pressed: _set_zoom_level(-1)
+			MOUSE_BUTTON_WHEEL_UP:
 				if event.pressed: _set_zoom_level(1)
 			MOUSE_BUTTON_LEFT:
 				dragging = event.pressed
@@ -51,22 +51,22 @@ func _unhandled_input(event: InputEvent) -> void:
 
 # --- Zoom ---
 func _set_zoom_level(delta_idx: int) -> void:
-	# clamp new index
+	# Clamp new index
 	zoom_index = clamp(zoom_index + delta_idx, 0, zoom_levels.size() - 1)
 	var new_z : float = zoom_levels[zoom_index]
 
-	# screen point to focus on (mouse). Use viewport canvas transform to convert to world.
+	# Screen point to focus on (mouse), use viewport canvas transform to convert to world.
 	var mouse_screen : Vector2 = get_viewport().get_mouse_position()
 	var canvas_inv := get_viewport().get_canvas_transform().affine_inverse()
 	# world position under mouse before zoom
 	var mouse_world_before : Vector2 = canvas_inv * mouse_screen
 
-	# Temporarily set camera to new zoom to compute where the mouse would point AFTER zoom.
+	# Temp set camera to new zoom to compute where the mouse would point AFTER zoom.
 	var old_zoom_vec := camera.zoom
 	var old_zoom_f := old_zoom_vec.x
 	camera.zoom = Vector2.ONE * new_z
 	var mouse_world_after : Vector2 = canvas_inv * mouse_screen
-	# restore previous zoom so we can tween it smoothly
+	# Restore previous zoom so can tween it smoothly
 	camera.zoom = old_zoom_vec
 
 	# Adjust camera target so the zoom will feel centered on mouse position
@@ -79,7 +79,7 @@ func _set_zoom_level(delta_idx: int) -> void:
 	var tween := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.tween_property(camera, "zoom", Vector2.ONE * new_z, 0.18)
 
-	# Optional: when tween finishes, re-clamp (safety) to ensure viewport inside bounds
+	# When tween finishes, re-clamp to ensure view inside bounds
 	tween.connect("finished", Callable(self, "_clamp_camera_inside_map"))
 
 
