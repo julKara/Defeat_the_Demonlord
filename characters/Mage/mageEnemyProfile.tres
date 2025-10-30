@@ -1,15 +1,15 @@
 [gd_resource type="Resource" script_class="UnitProfile" load_steps=5 format=3 uid="uid://b5bmi1atp4dnb"]
 
-[ext_resource type="AnimationLibrary" uid="uid://bfhibyg3m1e5o" path="res://characters/Mage/mageEnemyAnimations.tres" id="1_0u0qi"]
+[ext_resource type="AnimationLibrary" uid="uid://d0rnnu6c0ym1k" path="res://characters/Mage/mageEnemyAnimations.tres" id="1_0u0qi"]
 [ext_resource type="Script" uid="uid://5kg8ybina31b" path="res://src/Units/Unit_Profile.gd" id="1_i27r2"]
 [ext_resource type="AudioStream" uid="uid://ywpate8lkytr" path="res://characters/Mage/mageAudio.tres" id="2_0u0qi"]
-[ext_resource type="Texture2D" uid="uid://bnghiadolb7x8" path="res://assets/character_art/mage/Mage_Sprite.png" id="2_8nwlt"]
+[ext_resource type="Texture2D" uid="uid://cqoufurentsbd" path="res://assets/character_art/mageEnemy/Mage_Enemy_Sprite.png" id="4_0u0qi"]
 
 [resource]
 script = ExtResource("1_i27r2")
 character_name = "Gustaf"
 battle_class_type = "Mage"
-sprite = ExtResource("2_8nwlt")
+sprite = ExtResource("4_0u0qi")
 animation = ExtResource("1_0u0qi")
 audio = ExtResource("2_0u0qi")
 skills = Array[Resource]([])
