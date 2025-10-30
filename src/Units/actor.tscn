@@ -1,8 +1,9 @@
-[gd_scene load_steps=36 format=3 uid="uid://dijjspgi8x8sv"]
+[gd_scene load_steps=37 format=3 uid="uid://dijjspgi8x8sv"]
 
 [ext_resource type="Script" uid="uid://7mgltwn5kw4v" path="res://src/Units/actor.gd" id="1_xjefa"]
 [ext_resource type="Shader" uid="uid://54clig0upyxr" path="res://src/Units/highlight.gdshader" id="2_a5lvk"]
 [ext_resource type="AnimationLibrary" uid="uid://dokvnyivxhor6" path="res://characters/Goblin/goblinAnimations.tres" id="4_gdso5"]
+[ext_resource type="AnimationLibrary" uid="uid://cgx7g4jdiiak5" path="res://characters/Beholder/beholderAnimations.tres" id="4_haarf"]
 [ext_resource type="AnimationLibrary" uid="uid://csufkd5ailv6u" path="res://characters/Knight/knightAnimations.tres" id="4_jg2tr"]
 [ext_resource type="AnimationLibrary" uid="uid://db35i1b3vs4xd" path="res://characters/Mage/mageAnimations.tres" id="5_a5lvk"]
 [ext_resource type="Texture2D" uid="uid://jmiy51ye1yiv" path="res://assets/character_art/Slime/Slime_Sprite.png" id="6_a5lvk"]
@@ -19,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://bamsmmno7600h" path="res://assets/character_art/redSlime/Slime_Red_Default_Attack_f3.png" id="10_cb3ch"]
 [ext_resource type="Texture2D" uid="uid://cfxaybx45nead" path="res://assets/character_art/Slime/Slime_Default_Attack_f4.png" id="10_tbjoy"]
 [ext_resource type="Texture2D" uid="uid://ccwri7ry3bhar" path="res://assets/character_art/redSlime/Slime_Red_Default_Attack_f4.png" id="11_yuo2x"]
-[ext_resource type="AudioStream" uid="uid://bprvhbjhnymbs" path="res://characters/Goblin/goblinAudio.tres" id="13_ni625"]
+[ext_resource type="AudioStream" uid="uid://cxlk418h85qrq" path="res://characters/Beholder/beholderAudio.tres" id="21_haarf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s4pr6"]
 resource_local_to_scene = true
@@ -199,6 +200,7 @@ texture = ExtResource("7_jg2tr")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_a5lvk"),
+&"beholderAnimations": ExtResource("4_haarf"),
 &"goblinAnimations": ExtResource("4_gdso5"),
 &"knightAnimations": ExtResource("4_jg2tr"),
 &"mageAnimations": ExtResource("5_a5lvk"),
@@ -236,7 +238,7 @@ wait_time = 0.35
 one_shot = true
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("13_ni625")
+stream = ExtResource("21_haarf")
 volume_db = -2.0
 bus = &"sfx"
 

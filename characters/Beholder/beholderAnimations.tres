@@ -1,0 +1,65 @@
+[gd_resource type="AnimationLibrary" load_steps=12 format=3 uid="uid://cgx7g4jdiiak5"]
+
+[ext_resource type="Texture2D" uid="uid://vvnrmw08xu4h" path="res://assets/character_art/beholder/Beholder_Sprite.png" id="1_2gobm"]
+[ext_resource type="Texture2D" uid="uid://bfi0ud0mwhvgm" path="res://assets/character_art/beholder/Beholder_Attack_f1.png" id="2_q8hl2"]
+[ext_resource type="Texture2D" uid="uid://y55b7nc12ffl" path="res://assets/character_art/beholder/Beholder_Attack_f2.png" id="3_ec0mi"]
+[ext_resource type="Texture2D" uid="uid://cdbfx657fuphw" path="res://assets/character_art/beholder/Beholder_Attack_f3.png" id="4_f2wln"]
+[ext_resource type="Texture2D" uid="uid://c5608gl4y68qo" path="res://assets/character_art/beholder/Beholder_Attack_f4.png" id="5_dn4hu"]
+[ext_resource type="Texture2D" uid="uid://dldlq1xm70ew6" path="res://assets/character_art/beholder/Beholder_Idle_f1.png" id="6_em7o7"]
+[ext_resource type="Texture2D" uid="uid://s7g7wubdri7x" path="res://assets/character_art/beholder/Beholder_Idle_f2.png" id="7_5wgsg"]
+[ext_resource type="Texture2D" uid="uid://cf118b2ybosu6" path="res://assets/character_art/beholder/Beholder_Idle_f3.png" id="8_pgp1e"]
+
+[sub_resource type="Animation" id="Animation_8j6e8"]
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_2gobm"), ExtResource("2_q8hl2"), ExtResource("3_ec0mi"), ExtResource("4_f2wln"), ExtResource("5_dn4hu")]
+}
+
+[sub_resource type="Animation" id="Animation_7472q"]
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_2gobm"), ExtResource("6_em7o7"), ExtResource("7_5wgsg"), ExtResource("8_pgp1e")]
+}
+
+[sub_resource type="Animation" id="Animation_l8bcx"]
+length = 1.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_2gobm"), ExtResource("6_em7o7"), ExtResource("7_5wgsg"), ExtResource("8_pgp1e")]
+}
+
+[resource]
+_data = {
+&"attack": SubResource("Animation_8j6e8"),
+&"idle": SubResource("Animation_7472q"),
+&"selected": SubResource("Animation_l8bcx")
+}

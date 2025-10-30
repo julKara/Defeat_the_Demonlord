@@ -1,0 +1,27 @@
+[gd_resource type="AudioStreamInteractive" load_steps=3 format=3 uid="uid://cxlk418h85qrq"]
+
+[ext_resource type="AudioStream" uid="uid://bmgbqyv87pjv" path="res://assets/Audio/SoundEffects/MagicSounds/Magic Beam.wav" id="1_rkx4q"]
+[ext_resource type="AudioStream" uid="uid://1f3idsdsk5sm" path="res://assets/Audio/SoundEffects/Damage/Damage.wav" id="2_1r2bw"]
+
+[resource]
+clip_count = 2
+clip_0/name = &"Attack"
+clip_0/stream = ExtResource("1_rkx4q")
+clip_0/auto_advance = 0
+clip_1/name = &"Damage"
+clip_1/stream = ExtResource("2_1r2bw")
+clip_1/auto_advance = 0
+_transitions = {
+Vector2i(0, 1): {
+"fade_beats": 1.0,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 1
+},
+Vector2i(1, 0): {
+"fade_beats": 1.0,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 1
+}
+}

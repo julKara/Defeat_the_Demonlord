@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="UnitProfile" load_steps=5 format=3 uid="uid://cbanv2lc58ujn"]
+
+[ext_resource type="Script" uid="uid://5kg8ybina31b" path="res://src/Units/Unit_Profile.gd" id="1_8o8ao"]
+[ext_resource type="AnimationLibrary" uid="uid://cgx7g4jdiiak5" path="res://characters/Beholder/beholderAnimations.tres" id="1_jmpci"]
+[ext_resource type="Texture2D" uid="uid://vvnrmw08xu4h" path="res://assets/character_art/beholder/Beholder_Sprite.png" id="2_3u6he"]
+[ext_resource type="AudioStream" uid="uid://cxlk418h85qrq" path="res://characters/Beholder/beholderAudio.tres" id="2_gss7i"]
+
+[resource]
+script = ExtResource("1_8o8ao")
+character_name = "Berit"
+battle_class_type = "Beholder"
+sprite = ExtResource("2_3u6he")
+animation = ExtResource("1_jmpci")
+audio = ExtResource("2_gss7i")
+skills = Array[Resource]([])
+metadata/_custom_type_script = "uid://5kg8ybina31b"
