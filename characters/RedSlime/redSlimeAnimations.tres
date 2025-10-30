@@ -1,0 +1,61 @@
+[gd_resource type="AnimationLibrary" load_steps=10 format=3 uid="uid://bv0wfhx3lyge3"]
+
+[ext_resource type="Texture2D" uid="uid://dl5ka4ko4id0j" path="res://assets/character_art/redSlime/Slime_Red_Sprite.png" id="1_s77fd"]
+[ext_resource type="Texture2D" uid="uid://ba2uvkiwp0853" path="res://assets/character_art/redSlime/Slime_Red_Default_Attack_f1.png" id="2_stvm5"]
+[ext_resource type="Texture2D" uid="uid://cetju5ygret7e" path="res://assets/character_art/redSlime/Slime_Red_Default_Attack_f2.png" id="3_moyhu"]
+[ext_resource type="Texture2D" uid="uid://bamsmmno7600h" path="res://assets/character_art/redSlime/Slime_Red_Default_Attack_f3.png" id="4_wcc8j"]
+[ext_resource type="Texture2D" uid="uid://ccwri7ry3bhar" path="res://assets/character_art/redSlime/Slime_Red_Default_Attack_f4.png" id="5_cvf48"]
+[ext_resource type="Texture2D" uid="uid://bcyx1jcb3c67c" path="res://assets/character_art/redSlime/Slime_Red_Idle_f1.png" id="6_qmu0r"]
+
+[sub_resource type="Animation" id="Animation_1ynkq"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.35, 0.45, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_s77fd"), ExtResource("2_stvm5"), ExtResource("3_moyhu"), ExtResource("4_wcc8j"), ExtResource("5_cvf48")]
+}
+
+[sub_resource type="Animation" id="Animation_q0v47"]
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.35),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("1_s77fd"), ExtResource("6_qmu0r")]
+}
+
+[sub_resource type="Animation" id="Animation_3drnx"]
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("1_s77fd"), ExtResource("6_qmu0r")]
+}
+
+[resource]
+_data = {
+&"attack": SubResource("Animation_1ynkq"),
+&"idle": SubResource("Animation_q0v47"),
+&"selected": SubResource("Animation_3drnx")
+}

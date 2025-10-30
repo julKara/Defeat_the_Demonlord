@@ -9,7 +9,6 @@
 [ext_resource type="Resource" uid="uid://mwedg6ttx2lp" path="res://characters/Mage/mageProfile.tres" id="6_7bvym"]
 [ext_resource type="Resource" uid="uid://bu2f1ylnrxljm" path="res://characters/Knight/knightProfile.tres" id="7_ltfsv"]
 [ext_resource type="Resource" uid="uid://b5bmi1atp4dnb" path="res://characters/Mage/mageEnemyProfile.tres" id="8_je7ah"]
-[ext_resource type="Resource" uid="uid://ioqq5nerr7f3" path="res://characters/Knight/knightStats.tres" id="9_575lp"]
 [ext_resource type="Script" uid="uid://lvdowlbqk6fe" path="res://src/Level/GUI/actions_menu.gd" id="9_f1mlg"]
 [ext_resource type="Script" uid="uid://duw38t7v0nrgf" path="res://src/Level/GUI/default_attack.gd" id="10_575lp"]
 [ext_resource type="Script" uid="uid://b6oemt0bk5jyw" path="res://src/Level/GUI/stand_button.gd" id="11_lbm28"]
@@ -170,7 +169,7 @@ texture_region_size = Vector2i(48, 48)
 tile_size = Vector2i(48, 48)
 sources/1 = SubResource("TileSetAtlasSource_tlwt5")
 
-[sub_resource type="Resource" id="Resource_575lp"]
+[sub_resource type="Resource" id="Resource_f1mlg"]
 resource_name = "mageStats"
 script = ExtResource("6_0xpq5")
 curr_health = 100
@@ -197,6 +196,36 @@ phys_atk_gain = 0
 phys_def_gain = 0
 mag_atk_gain = 20
 mag_def_gain = 10
+crit_gain = 0
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
+[sub_resource type="Resource" id="Resource_575lp"]
+resource_name = "knightStats"
+script = ExtResource("6_0xpq5")
+curr_health = 100
+max_health = 100
+original_max_health = 100
+phys_attack = 60
+original_phys_attack = 60
+mag_attack = 10
+original_mag_attack = 10
+phys_defense = 20
+original_phys_defense = 20
+mag_defense = 5
+original_mag_defense = 5
+crit_chance = 5
+original_crit_chance = 5
+attack_range = 1
+original_attack_range = 1
+mobility = 4
+original_mobility = 4
+level = 1
+speed = 4.0
+health_gain = 10
+phys_atk_gain = 5
+phys_def_gain = 10
+mag_atk_gain = 0
+mag_def_gain = 0
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
@@ -290,13 +319,13 @@ y_sort_enabled = true
 
 [node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_0xrj8")]
 position = Vector2(120, 120)
-stats = SubResource("Resource_575lp")
+stats = SubResource("Resource_f1mlg")
 profile = ExtResource("6_7bvym")
 is_friendly = true
 
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_0xrj8")]
 position = Vector2(360, 264)
-stats = ExtResource("9_575lp")
+stats = SubResource("Resource_575lp")
 profile = ExtResource("7_ltfsv")
 is_friendly = true
 

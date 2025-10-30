@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="CharacterStats" load_steps=2 format=3 uid="uid://dlql8634g8qhy"]
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=2 format=3 uid="uid://b7531iivk5ufi"]
 
-[ext_resource type="Script" uid="uid://dfeqtmcp7uacl" path="res://src/Units/CharacterStats.gd" id="1_yy017"]
+[ext_resource type="Script" uid="uid://dfeqtmcp7uacl" path="res://src/Units/CharacterStats.gd" id="1_75cb6"]
 
 [resource]
-script = ExtResource("1_yy017")
+script = ExtResource("1_75cb6")
 curr_health = 50
 max_health = 50
 original_max_health = 50
