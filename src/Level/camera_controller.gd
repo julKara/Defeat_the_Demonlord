@@ -63,7 +63,6 @@ func _set_zoom_level(delta_idx: int) -> void:
 
 	# Temp set camera to new zoom to compute where the mouse would point AFTER zoom.
 	var old_zoom_vec := camera.zoom
-	var old_zoom_f := old_zoom_vec.x
 	camera.zoom = Vector2.ONE * new_z
 	var mouse_world_after : Vector2 = canvas_inv * mouse_screen
 	# Restore previous zoom so can tween it smoothly

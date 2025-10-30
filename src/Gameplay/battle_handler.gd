@@ -84,8 +84,16 @@ func _play_animation(attacker: Actor) -> void:
 	# 2. Get lenght of animation in seconds
 	var anim_length: float = 1.0  # fallback default if test fails, usually an attack last 1s
 	var anim_player = attacker.anim_player
-	if anim_player and anim_player.has_animation("attack"):
-		anim_length = anim_player.get_animation("attack").length
+		
+	var anim_name = attacker.state_to_anim.get(attacker.current_state, null)
+	if anim_name == null:
+		return
+
+	# Dynamically put together filepath of animation (e.g default/idle)
+	var full_name = "%s/%s" % [attacker.anim_library_name, anim_name]
+	if anim_player.has_animation(full_name):
+		print("Got!")
+		anim_length = anim_player.get_animation(full_name).length
 
 	# 3. Start the timer to wait for animation completion
 	animation_timer.wait_time = anim_length
