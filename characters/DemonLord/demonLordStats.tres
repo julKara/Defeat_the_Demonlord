@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=2 format=3 uid="uid://bephnmy5s5urh"]
+
+[ext_resource type="Script" uid="uid://dfeqtmcp7uacl" path="res://src/Units/CharacterStats.gd" id="1_ye221"]
+
+[resource]
+script = ExtResource("1_ye221")
+curr_health = 0
+max_health = 1000
+original_max_health = 1000
+phys_attack = 1000
+original_phys_attack = 1000
+mag_attack = 1000
+original_mag_attack = 1000
+phys_defense = 1000
+original_phys_defense = 1000
+mag_defense = 1000
+original_mag_defense = 1000
+crit_chance = 1000
+original_crit_chance = 20
+attack_range = 5
+original_attack_range = 3
+mobility = 0
+original_mobility = 0
+level = 0
+speed = 0.0
+health_gain = 1
+phys_atk_gain = 1
+phys_def_gain = 1
+mag_atk_gain = 1
+mag_def_gain = 1
+crit_gain = 1
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"

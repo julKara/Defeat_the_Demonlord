@@ -17,12 +17,13 @@ var anim_library_name := "default"	# Liberary name for unit-animations, is the .
 # --- CONSTANTS ---
 const FRIENDLY_COLOR: Color = Color("00a78f")
 const ENEMY_COLOR: Color = Color.CRIMSON
-enum UnitState { IDLE, SELECTED, MOVING, ATTACKING, DEAD }	# Possible unit-states
+enum UnitState { IDLE, SELECTED, MOVING, ATTACKING, USESKILL, DEAD }	# Possible unit-states
 var state_to_anim = {	# For animation filepaths
 		UnitState.IDLE: "idle",
 		UnitState.SELECTED: "selected",
 		UnitState.MOVING: "move",
 		UnitState.ATTACKING: "attack",
+		UnitState.USESKILL: "useSkill",
 		UnitState.DEAD: "dead"
 	}
 

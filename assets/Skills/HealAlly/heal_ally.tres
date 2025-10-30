@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="SkillResource" load_steps=3 format=3 uid="uid://btkwwfl1o5xir"]
+
+[ext_resource type="Script" uid="uid://bw6iq6gxtp5vs" path="res://src/Units/skill_resource.gd" id="1_45kgw"]
+[ext_resource type="Script" uid="uid://cd5o5qtomkm0b" path="res://assets/Skills/HealAlly/heal_ally.gd" id="1_ec8y4"]
+
+[resource]
+script = ExtResource("1_45kgw")
+skill_name = "Heal Ally"
+description = "Heal ally with up to caster's 1x m_attack"
+skill_type = "Active"
+ends_turn = true
+target_type = "Ally"
+duration = 0
+cooldown = 2
+stat_addition = {
+"curr_attack_range": 0,
+"curr_mobility": 0
+}
+stat_multiplier = {
+"curr_mag_attack": 0.0,
+"curr_mag_defense": 0.0,
+"curr_phys_attack": 0.0,
+"curr_phys_defense": 0.0
+}
+effect_script = ExtResource("1_ec8y4")
+metadata/_custom_type_script = "uid://bw6iq6gxtp5vs"

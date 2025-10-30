@@ -12,4 +12,5 @@ battle_class_type = "Mage"
 sprite = ExtResource("2_8nwlt")
 animation = ExtResource("1_v4vic")
 audio = ExtResource("2_0u0qi")
+skills = Array[Resource]([])
 metadata/_custom_type_script = "uid://5kg8ybina31b"

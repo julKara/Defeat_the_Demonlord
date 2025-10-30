@@ -28,6 +28,8 @@ var enemy_queue: Array = []
 
 func _ready() -> void:
 	await get_tree().create_timer(0.01).timeout	
+	# Center camera on unit
+	camera_controller.focus_on_unit(character_manager.current_character)
 	_initialize_turn_order()
 	start_phase(Phase.PLAYER)
 

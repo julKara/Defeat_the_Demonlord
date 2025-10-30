@@ -40,4 +40,8 @@ func apply(caster: Actor, _target: Actor, skill: SkillResource) -> void:
 		"stat_addition": buff_addition,
 		"stat_multiplier": buff_multiplier
 	}
+	
+	# --- 3. Visual and AUDIO cue
+	caster.set_state(caster.UnitState.USESKILL)
+	
 	caster.register_active_effect(effect_record)

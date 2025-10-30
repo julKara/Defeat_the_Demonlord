@@ -50,6 +50,8 @@ func _pressed() -> void:
 		text = "Passive"
 	elif skill.target_type == "Enemy" and actor.get_behaviour().attack_target == null:
 		disabled = true
+	elif skill.target_type == "Ally" and actor.get_behaviour().friendly_target == null:
+		disabled = true
 	_show_skill_info()
 
 
@@ -90,9 +92,14 @@ func _trigger_use_skill(actor: Actor) -> void:
 		if target == null:
 			return
 	
+	if skill.target_type == "Ally":
+		target = ClickHandler.selected_unit.get_behaviour().friendly_target
+		if target == null:
+			return
+	
 	# If no target selected, keep popup open (or close and print)
 	if target == null:
-		print("No target selected for skill:", skill.skill_name)
+		print("No target selected for skill: ", skill.skill_name)
 		return
 	
 	# Call actor.use_skill (assumes this method exists)

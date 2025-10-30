@@ -61,17 +61,56 @@ func _input(event: InputEvent) -> void:
 # Protocol for handeling click on a player
 func _handle_playable_click(actor: Actor) -> void:
 	
-	# If click is on already-selected, deselect
+	# If clicked on unit is on already-selected, deselect
 	if selected_unit == actor:
 		_deselect_unit(actor)
 		return
-
-	# If another was selected while having a unit already selected, deselect it first
-	if selected_unit and selected_unit != actor:
+	
+	# If no unit is selected, select
+	if selected_unit == null:
+		_select_unit(actor)
+		return
+	
+	# If another was selected while having a enemy already selected, deselect it first and select new
+	if selected_unit and selected_unit != actor && not selected_unit.is_friendly:
 		_deselect_unit(selected_unit)
+		_select_unit(actor)
+		return
 
-	# Then select the clicked actor
-	_select_unit(actor)
+	# --- If a playable is selected
+	
+	# Get behaviour and check is acted (should not be moving if already acted)
+	var playable_behaviour = selected_unit.get_behaviour()
+	if not playable_behaviour or selected_unit.acted:
+		return
+	
+	# Get all mobility-tiles and all tiles within attack-range
+	var range_data = playable_behaviour.get_range_tiles()
+	var move_tiles: Array[Vector2i] = range_data.move_tiles
+
+	# Get some other useful info
+	var ally_pos: Vector2i = tile_map.local_to_map(actor.global_position)
+	var attack_range = selected_unit.stats.curr_attack_range
+	var current_tile = playable_behaviour.current_tile
+
+	# --- Case 1: If enemy is already within attack-range, do not move, only select target
+	if _is_enemy_in_attack_range(current_tile, ally_pos, attack_range):
+		#print("Enemy already within attack range — no movement needed.")
+		playable_behaviour.set_friendly_target(actor)
+		return
+
+	# --- Case 2: Enemy is outside "current" attack-range, find a tile to move to within range
+	var best_tile: Vector2i = _find_best_attack_tile(move_tiles, ally_pos, attack_range)
+	# If there is a functioning tile, move to that one and set enemy to attack-target
+	if best_tile != INVALID_POS:
+		await playable_behaviour.move_to(best_tile)
+		playable_behaviour.set_friendly_target(actor)
+	# If the enemy was out of range, select it instead
+	else:
+		#print("Enemy out of reachable tiles")
+		_deselect_unit(selected_unit)
+		selected_unit = null
+		actor.get_behaviour().select(true)
 
 
 # Protocol for handeling click on a enemy

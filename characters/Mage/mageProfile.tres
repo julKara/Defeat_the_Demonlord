@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://ywpate8lkytr" path="res://characters/Mage/mageAudio.tres" id="2_kyeyt"]
 [ext_resource type="Texture2D" uid="uid://bnghiadolb7x8" path="res://assets/character_art/mage/Mage_Sprite.png" id="3_3m1el"]
 [ext_resource type="Resource" uid="uid://dc7vt7vrhpxa2" path="res://assets/Skills/reduce_attack_defense.tres" id="4_thdio"]
-[ext_resource type="Resource" uid="uid://cjjcuhny0l2kj" path="res://assets/Skills/EndTurnDefenceBuff/prepare_defences.tres" id="5_bubfs"]
+[ext_resource type="Resource" uid="uid://btkwwfl1o5xir" path="res://assets/Skills/HealAlly/heal_ally.tres" id="5_bubfs"]
 
 [resource]
 script = ExtResource("1_1kl1b")

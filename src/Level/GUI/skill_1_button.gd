@@ -50,6 +50,8 @@ func _pressed() -> void:
 		text = "Passive"
 	elif skill.target_type == "Enemy" and actor.get_behaviour().attack_target == null:
 		disabled = true
+	elif skill.target_type == "Ally" and actor.get_behaviour().friendly_target == null:
+		disabled = true
 	_show_skill_info()
 
 
