@@ -205,10 +205,7 @@ func move():
 			tested_tiles.clear()
 		# Otherwise perform movement like normal
 		else:	
-			var occupied = check_if_occupied(id_path)
-			
-			# If the final destination is occupied -> recalculate path without the occupied tile
-			if occupied == true:
+			while check_if_occupied(id_path):
 				id_path = calculate_path()
 			
 			# Perform the movement
@@ -224,33 +221,36 @@ func move():
 
 # Check if the final destination of the enemy is occupied
 func check_if_occupied(id_path: Array[Vector2i]) -> bool:
-	for character in character_manager.character_list:
-		if character != get_parent():
-			# The index of the tile the enemy will stop at. They always stops as soon as they're in range.
-			var index = id_path.size() - attack_range - 1 
-			if id_path[index] == tile_map.local_to_map(character.global_position):
-				solid_pos.append(tile_map.local_to_map(character.global_position)) 
-				# If the tile is occupied -> set tile to solid. The tile will then not be includen in pathfinding
-				astar_grid.set_point_solid(solid_pos.back(), true)
-				return true
+	if id_path.is_empty() == false:
+		for character in character_manager.character_list:
+			if character != get_parent():
+				# The index of the tile the enemy will stop at. They always stops as soon as they're in range.
+				var index = id_path.size() - attack_range - 1 
+				if id_path[index] == tile_map.local_to_map(character.global_position):
+					solid_pos.append(tile_map.local_to_map(character.global_position)) 
+					# If the tile is occupied -> set tile to solid. The tile will then not be includen in pathfinding
+					astar_grid.set_point_solid(solid_pos.back(), true)
+					return true
 	return false
 
 
 func perform_movement(id_path: Array[Vector2i], target_dist: int):
-	# Flip sprite based on move direction
-	calculate_direction(id_path)
 	
-	var target_position
-	while id_path.size() > target_dist: 
-			target_position = tile_map.map_to_local(id_path.front())
-			
-			# Move towards target
-			get_parent().global_position = get_parent().global_position.move_toward(target_position, move_speed)
-			await get_tree().create_timer(0.01).timeout # Adds a delay which lets the move animation play
-			
-			# Remove the tile from the path
-			if get_parent().global_position == target_position:
-				id_path.pop_front()
+	if id_path.is_empty() == false:
+		# Flip sprite based on move direction
+		calculate_direction(id_path)
+		
+		var target_position
+		while id_path.size() > target_dist: 
+				target_position = tile_map.map_to_local(id_path.front())
+				
+				# Move towards target
+				get_parent().global_position = get_parent().global_position.move_toward(target_position, move_speed)
+				await get_tree().create_timer(0.01).timeout # Adds a delay which lets the move animation play
+				
+				# Remove the tile from the path
+				if get_parent().global_position == target_position:
+					id_path.pop_front()
 
 
 func calculate_direction(path: Array[Vector2i]):

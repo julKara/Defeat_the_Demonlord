@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="UnitProfile" load_steps=5 format=3 uid="uid://dibcrc72hsl6q"]
+
+[ext_resource type="AnimationLibrary" uid="uid://bv0wfhx3lyge3" path="res://characters/RedSlime/redSlimeAnimations.tres" id="1_dve6g"]
+[ext_resource type="AudioStream" uid="uid://dlurk28tejkyb" path="res://characters/RedSlime/redSlimeAudio.tres" id="2_8hb41"]
+[ext_resource type="Script" uid="uid://5kg8ybina31b" path="res://src/Units/Unit_Profile.gd" id="3_0ypta"]
+[ext_resource type="Texture2D" uid="uid://dl5ka4ko4id0j" path="res://assets/character_art/redSlime/Slime_Red_Sprite.png" id="4_dve6g"]
+
+[resource]
+script = ExtResource("3_0ypta")
+character_name = "Gunhild"
+battle_class_type = "Slime"
+sprite = ExtResource("4_dve6g")
+animation = ExtResource("1_dve6g")
+audio = ExtResource("2_8hb41")
+skills = Array[Resource]([])
+metadata/_custom_type_script = "uid://5kg8ybina31b"

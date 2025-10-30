@@ -126,11 +126,11 @@ sfx_player = NodePath("SfxPlayer")
 [node name="BackgroundMusicPlayer" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = SubResource("AudioStreamInteractive_f0ev6")
-volume_db = -10.0
+volume_db = -12.0
 autoplay = true
 bus = &"music"
 
 [node name="SfxPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamInteractive_yslcm")
-volume_db = -4.0
+volume_db = -7.0
 bus = &"sfx"

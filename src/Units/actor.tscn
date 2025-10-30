@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://7mgltwn5kw4v" path="res://src/Units/actor.gd" id="1_xjefa"]
 [ext_resource type="Shader" uid="uid://54clig0upyxr" path="res://src/Units/highlight.gdshader" id="2_a5lvk"]
 [ext_resource type="AnimationLibrary" uid="uid://dokvnyivxhor6" path="res://characters/Goblin/goblinAnimations.tres" id="4_gdso5"]
+[ext_resource type="AnimationLibrary" uid="uid://cgx7g4jdiiak5" path="res://characters/Beholder/beholderAnimations.tres" id="4_haarf"]
 [ext_resource type="AnimationLibrary" uid="uid://csufkd5ailv6u" path="res://characters/Knight/knightAnimations.tres" id="4_jg2tr"]
 [ext_resource type="AnimationLibrary" uid="uid://b6saog4av0vko" path="res://characters/DemonLord/demonLordAnimations.res" id="4_tbjoy"]
 [ext_resource type="AnimationLibrary" uid="uid://db35i1b3vs4xd" path="res://characters/Mage/mageAnimations.tres" id="5_a5lvk"]
@@ -10,11 +11,17 @@
 [ext_resource type="Texture2D" uid="uid://ckg1tiejdrssx" path="res://assets/character_art/Slime/Slime_Default_Attack_f1.png" id="7_4k5mr"]
 [ext_resource type="Script" uid="uid://lv7bihs01ua5" path="res://src/Level/healthbar.gd" id="7_a5lvk"]
 [ext_resource type="Texture2D" uid="uid://d0dmqxyexre4v" path="res://assets/character_art/mage/Mage_Idle_f2.png" id="7_jg2tr"]
+[ext_resource type="Texture2D" uid="uid://dl5ka4ko4id0j" path="res://assets/character_art/redSlime/Slime_Red_Sprite.png" id="7_omvxy"]
 [ext_resource type="Texture2D" uid="uid://dw3l24usm53ep" path="res://assets/character_art/Slime/Slime_Idle_f1.png" id="7_s4pr6"]
+[ext_resource type="Texture2D" uid="uid://ba2uvkiwp0853" path="res://assets/character_art/redSlime/Slime_Red_Default_Attack_f1.png" id="8_3drnx"]
+[ext_resource type="Texture2D" uid="uid://bcyx1jcb3c67c" path="res://assets/character_art/redSlime/Slime_Red_Idle_f1.png" id="8_jksgg"]
 [ext_resource type="Texture2D" uid="uid://cnq5sivude4o5" path="res://assets/character_art/Slime/Slime_Default_Attack_f2.png" id="8_ni625"]
 [ext_resource type="Texture2D" uid="uid://iy0guybfk7x6" path="res://assets/character_art/Slime/Slime_Default_Attack_f3.png" id="9_gdso5"]
+[ext_resource type="Texture2D" uid="uid://cetju5ygret7e" path="res://assets/character_art/redSlime/Slime_Red_Default_Attack_f2.png" id="9_haarf"]
+[ext_resource type="Texture2D" uid="uid://bamsmmno7600h" path="res://assets/character_art/redSlime/Slime_Red_Default_Attack_f3.png" id="10_cb3ch"]
 [ext_resource type="Texture2D" uid="uid://cfxaybx45nead" path="res://assets/character_art/Slime/Slime_Default_Attack_f4.png" id="10_tbjoy"]
-[ext_resource type="AudioStream" uid="uid://bprvhbjhnymbs" path="res://characters/Goblin/goblinAudio.tres" id="13_ni625"]
+[ext_resource type="Texture2D" uid="uid://ccwri7ry3bhar" path="res://assets/character_art/redSlime/Slime_Red_Default_Attack_f4.png" id="11_yuo2x"]
+[ext_resource type="AudioStream" uid="uid://cxlk418h85qrq" path="res://characters/Beholder/beholderAudio.tres" id="21_haarf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s4pr6"]
 resource_local_to_scene = true
@@ -57,6 +64,59 @@ _data = {
 &"RESET": SubResource("Animation_kj6bn")
 }
 
+[sub_resource type="Animation" id="Animation_1ynkq"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.35, 0.45, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("7_omvxy"), ExtResource("8_3drnx"), ExtResource("9_haarf"), ExtResource("10_cb3ch"), ExtResource("11_yuo2x")]
+}
+
+[sub_resource type="Animation" id="Animation_q0v47"]
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.35),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("7_omvxy"), ExtResource("8_jksgg")]
+}
+
+[sub_resource type="Animation" id="Animation_3drnx"]
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("7_omvxy"), ExtResource("8_jksgg")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_haarf"]
+_data = {
+&"attack": SubResource("Animation_1ynkq"),
+&"idle": SubResource("Animation_q0v47"),
+&"selected": SubResource("Animation_3drnx")
+}
+
 [sub_resource type="Animation" id="Animation_4k5mr"]
 loop_mode = 1
 tracks/0/type = "value"
@@ -89,6 +149,20 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_wehan"]
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("6_a5lvk"), ExtResource("7_s4pr6")]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ni625"]
 _data = {
@@ -128,9 +202,11 @@ texture = ExtResource("7_jg2tr")
 libraries = {
 &"": SubResource("AnimationLibrary_a5lvk"),
 &"demonLordAnimations": ExtResource("4_tbjoy"),
+&"beholderAnimations": ExtResource("4_haarf"),
 &"goblinAnimations": ExtResource("4_gdso5"),
 &"knightAnimations": ExtResource("4_jg2tr"),
 &"mageAnimations": ExtResource("5_a5lvk"),
+&"redSlimeAnimations": SubResource("AnimationLibrary_haarf"),
 &"slimeAnimations": SubResource("AnimationLibrary_ni625")
 }
 
@@ -164,7 +240,7 @@ wait_time = 0.35
 one_shot = true
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("13_ni625")
+stream = ExtResource("21_haarf")
 volume_db = -2.0
 
 [connection signal="timeout" from="Healthbar/Timer" to="Healthbar" method="_on_timer_timeout"]
