@@ -30,6 +30,7 @@ var mobility: int = 3
 
 var attack_range: int = 1
 var attack_target: Actor = null	# Is the enemy unit this unit hass selected to attack
+var friendly_target: Actor = null	# Is the friendly unit this unit has selected to healt/buff
 
 
 func _ready() -> void:
@@ -85,13 +86,21 @@ func move_to(tile: Vector2i) -> void:
 	
 	# Clear target visuals after moving
 	if attack_target != null:
-		var sprite = attack_target.get_node("Sprite")
+		
+		# Stop highligt attack target
+		var sprite = attack_target.get_sprite()
 		sprite.material.set("shader_parameter/width", 0.0)
 		attack_target = null
-		default_attack.disabled = true
-		skill_1.disabled = true
-		skill_2.disabled = true
-
+		
+	elif friendly_target != null:	
+		# Stop highligt ally target
+		var sprite_ally = friendly_target.get_sprite()
+		sprite_ally.material.set("shader_parameter/width", 0.0)
+		friendly_target = null
+	
+	default_attack.disabled = true
+	skill_1.disabled = true
+	skill_2.disabled = true
 
 # Reset back to origin_tile if moved but not acted
 func reset_position_if_not_acted() -> void:
@@ -189,9 +198,15 @@ func deselect() -> void:
 	
 	# Remove target-highlight if the is one
 	if attack_target:
-		var sprite = attack_target.get_node("Sprite")
+		var sprite = attack_target.get_sprite()
 		sprite.material.set("shader_parameter/width", 0.0)
 		attack_target = null
+		default_attack.disabled = true
+		
+	if friendly_target:
+		var friend_sprite = friendly_target.get_sprite()
+		friend_sprite.material.set("shader_parameter/width", 0.0)
+		friendly_target = null
 		default_attack.disabled = true
 		
 # --- Range Highlight ---
@@ -332,6 +347,31 @@ func set_attack_target(target: Actor) -> void:
 		var sprite = attack_target.get_node("Sprite")
 		sprite.material.set("shader_parameter/width", 1.0)
 		print("\tSelected attack target:", attack_target.profile.character_name)
+		
+		
+func set_friendly_target(target: Actor) -> void:
+	
+	# Make attack-button usable
+	default_attack.disabled = true
+	
+	# Make skill if requiring enemy attack-target enabled
+	if get_parent().skills.size() > 0:
+		if skill_1.skill.target_type == "Ally":
+			skill_1.disabled = false
+		if skill_2.skill.target_type == "Ally":
+			skill_2.disabled = false
+	
+	# Remove highlight from previous target if any
+	if friendly_target != null:
+		var sprite = friendly_target.get_node("Sprite")
+		sprite.material.set("shader_parameter/width", 0.0)
+	
+	# Set new target
+	friendly_target = target
+	if friendly_target != null:
+		var sprite = friendly_target.get_node("Sprite")
+		sprite.material.set("shader_parameter/width", 1.0)
+		print("\tSelected attack target:", friendly_target.profile.character_name)
 
 
 func confirm_position() -> void:
