@@ -109,8 +109,8 @@ func _handle_playable_click(actor: Actor) -> void:
 	else:
 		#print("Enemy out of reachable tiles")
 		_deselect_unit(selected_unit)
-		selected_unit = null
-		actor.get_behaviour().select(true)
+		_select_unit(actor)
+		return
 
 
 # Protocol for handeling click on a enemy

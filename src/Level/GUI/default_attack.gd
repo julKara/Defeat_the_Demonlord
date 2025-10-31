@@ -14,6 +14,8 @@ func _ready() -> void:
 
 func _pressed() -> void:
 	
+	disabled = true
+	
 	# Play click sound
 	AudioManager.play_sfx("Click")
 	

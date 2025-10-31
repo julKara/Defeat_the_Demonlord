@@ -4,6 +4,8 @@ class_name enemy_unit extends Node
 @onready var tile_map: TileMap = $"../../../../TileMap"
 @onready var range_tile_map: TileMap = $"../../../../RangeTileMap"
 @onready var select_display: PanelContainer = $"../../../../GUI/Margin/SelectDisplay"
+@onready var camera_controller: Node2D = $"../../../../CameraController"
+
 
 var battle_handler: Node = null
 
@@ -312,6 +314,9 @@ func play_turn():
 
 	# Set attack_target
 	await select_attack_target()
+	
+	# Move camera
+	camera_controller.focus_on_unit(get_parent())
 	
 	# Attack
 	if attack_target != null:

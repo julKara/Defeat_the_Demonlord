@@ -208,6 +208,7 @@ func _next_enemy_unit() -> void:
 		# Test if unit survivied the attack
 		if next_unit != null:
 			next_unit.acted = true
+			_trigger_end_turn_passives(next_unit)
 			
 		# Stop phase if game is paused
 		if game_is_paused:
@@ -218,19 +219,27 @@ func _next_enemy_unit() -> void:
 
 # --- UTIL ---
 
-# Triggers passive skills that gets triggered at the end of a units turn
+# Triggers passive skills and effects that gets triggered at the end of a units turn
 func _trigger_end_turn_passives(actor: Actor) -> void:
-	
-	if not actor or not ("skills" in actor):
+	if not actor:
 		return
 	
-	for skill in actor.skills:
-		if skill.skill_type == "Passive" and skill.effect_script:
-			
-			# Call the script manually with target=self
-			var script_inst = skill.effect_script.new()
-			if script_inst.has_method("apply"):
-				script_inst.apply(actor, actor, skill)
+	# --- 1. Passive skills (Buff Defence)
+	if "skills" in actor:
+		for skill in actor.skills:
+			if skill.skill_type == "Passive" and skill.effect_script:
+				var script_inst = skill.effect_script.new()
+				if script_inst.has_method("apply"):
+					script_inst.apply(actor, actor, skill)
+
+	# --- 2. Active ticking effects (Burn)
+	if "active_effects" in actor:
+		for effect in actor.active_effects:
+			if effect.has("skill") and effect.skill and effect.skill.effect_script:
+				var script_inst = effect.skill.effect_script.new()
+				if script_inst.has_method("tick_effect"):
+					script_inst.tick_effect(effect, actor)
+
 
 func _reset_acted_flag(list: Array) -> void:
 	for unit in list:

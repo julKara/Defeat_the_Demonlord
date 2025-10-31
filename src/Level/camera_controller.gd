@@ -104,7 +104,7 @@ func focus_on_unit(actor: Node2D, smooth := true) -> void:
 
 		# Tween to the clamped target
 		var tween := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
-		tween.tween_property(self, "target_position", end, 0.7).from(start)
+		tween.tween_property(self, "target_position", end, 0.6).from(start)
 
 
 # --- Map bounds clamp ---

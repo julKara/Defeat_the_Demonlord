@@ -35,7 +35,7 @@
 [ext_resource type="Script" uid="uid://sehkuo2xbwos" path="res://src/Worlds/world_tracker.gd" id="33_jyw0b"]
 [ext_resource type="Resource" uid="uid://b7d426jw88wxl" path="res://src/Worlds/world_handler.tres" id="34_5wngd"]
 [ext_resource type="Script" uid="uid://dyx7v0w8tua76" path="res://src/Level/camera_controller.gd" id="35_i6w3l"]
-[ext_resource type="Script" path="res://src/Gameplay/boss_handler.gd" id="36_wu41n"]
+[ext_resource type="Script" uid="uid://clylcm7g0eamp" path="res://src/Gameplay/boss_handler.gd" id="36_wu41n"]
 
 [sub_resource type="GDScript" id="GDScript_ic0uy"]
 script/source = "extends Node2D
