@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_8oog6")
-skill_name = "Set Fire"
+skill_name = "Burn"
 description = "Apply effect on target that makes them take 0.15x casters M-ATK after ending their turn. Effect ignores all defences."
 icon = ExtResource("2_iadb4")
 skill_type = "Active"
@@ -21,6 +21,7 @@ stat_addition = {
 stat_multiplier = {
 "curr_mag_attack": 0.0,
 "curr_mag_defense": 0.0,
+"curr_mobility": 0.0,
 "curr_phys_attack": 0.0,
 "curr_phys_defense": 0.0
 }
