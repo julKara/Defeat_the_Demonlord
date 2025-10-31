@@ -51,6 +51,7 @@ var tile_size: int = 48
 var selected: bool = false	# True if unit is selected
 var acted: bool = false    # True if the unit has acted this turn
 var current_state: UnitState = UnitState.IDLE	# Current state of unit
+
 # Export lets you toggle this in the inspector
 @export var is_friendly: bool = false:
 	set(value):
@@ -58,6 +59,7 @@ var current_state: UnitState = UnitState.IDLE	# Current state of unit
 		if is_node_ready():	# Must check if modulate should work
 			_reload_behavior()	# Set/Toggles behavior
 @export var is_demon_lord: bool = false
+@export var turn_to_start_act: int = 0	# Tells at which turn enemy unit may start acting
 
 # Sets up AstarGrid for pathfinding, walkable tiles and sets friendly/enemy color/name
 func _ready() -> void:	

@@ -5,8 +5,7 @@ class_name enemy_unit extends Node
 @onready var range_tile_map: TileMap = $"../../../../RangeTileMap"
 @onready var select_display: PanelContainer = $"../../../../GUI/Margin/SelectDisplay"
 @onready var camera_controller: Node2D = $"../../../../CameraController"
-
-
+@onready var turn_manager: Node2D = $"../../../TurnManager"
 var battle_handler: Node = null
 
 var astar_grid
@@ -304,6 +303,11 @@ func attack():
 	
 				
 func play_turn():
+	
+	# Cann not play turn until turn turn_to_start_act
+	if get_parent().turn_to_start_act > turn_manager.current_turn:
+		get_parent().acted = true
+		return
 	
 	_set_stat_variables()
 	

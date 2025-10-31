@@ -69,8 +69,10 @@ func _show_skill_info() -> void:
 	var show_text := "[b]%s[/b]\n\n%s" % [skill.skill_name, skill.description]
 	if "skill_type" in skill:
 		show_text += "\n\n[b]Skill Type:[/b] %s" % skill.skill_type
+	if "target_type" in skill:
+		show_text += "\n\n[b]Target Type:[/b] %s" % skill.target_type
 	if "duration" in skill and skill.duration > 0:
-		show_text += "\n\n[b]Duration:[/b] %d turn(s)" % skill.duration
+		show_text += "\n\n\n[b]Duration:[/b] %d turn(s)" % skill.duration
 	if "cooldown" in skill and skill.duration > 0:
 		show_text += "\n\n[b]Cooldown:[/b] %d turn(s)" % skill.cooldown
 	

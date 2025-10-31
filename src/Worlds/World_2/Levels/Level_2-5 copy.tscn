@@ -723,6 +723,7 @@ position = Vector2(312, 456)
 stats = SubResource("Resource_2fcyv")
 profile = ExtResource("10_negw4")
 is_friendly = true
+turn_to_start_act = null
 
 [node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
 position = Vector2(264, 504)
@@ -730,6 +731,7 @@ stats = SubResource("Resource_amktc")
 profile = ExtResource("11_4v0m7")
 enemy_level = 5
 is_friendly = true
+turn_to_start_act = null
 
 [node name="playable_unit3" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
 position = Vector2(264, 408)
@@ -737,60 +739,70 @@ stats = SubResource("Resource_u4ocy")
 profile = ExtResource("12_vxxiq")
 enemy_level = 5
 is_friendly = true
+turn_to_start_act = null
 
 [node name="enemy_unit2" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
 position = Vector2(552, 648)
 stats = SubResource("Resource_mdgp0")
 profile = ExtResource("13_kxehu")
 enemy_level = 3
+turn_to_start_act = 2
 
 [node name="enemy_unit3" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
 position = Vector2(72, 456)
 stats = SubResource("Resource_2bk3a")
 profile = ExtResource("15_s1w74")
 enemy_level = 1
+turn_to_start_act = null
 
 [node name="enemy_unit4" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
 position = Vector2(1608, 456)
 stats = SubResource("Resource_0q6j0")
 profile = ExtResource("13_kxehu")
 enemy_level = 2
+turn_to_start_act = 15
 
 [node name="enemy_unit5" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
 position = Vector2(1656, 552)
 stats = SubResource("Resource_tq1dx")
 profile = ExtResource("13_kxehu")
 enemy_level = 2
+turn_to_start_act = 15
 
 [node name="enemy_unit6" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
 position = Vector2(1656, 360)
 stats = SubResource("Resource_gtrv1")
 profile = ExtResource("13_kxehu")
 enemy_level = 2
+turn_to_start_act = 15
 
 [node name="enemy_unit7" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
 position = Vector2(1080, 216)
 stats = SubResource("Resource_woqaf")
 profile = ExtResource("15_s1w74")
 enemy_level = 1
+turn_to_start_act = 7
 
 [node name="enemy_unit9" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
 position = Vector2(1176, 216)
 stats = SubResource("Resource_negw4")
 profile = ExtResource("16_qb863")
 enemy_level = 2
+turn_to_start_act = 7
 
 [node name="enemy_unit10" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
 position = Vector2(504, 696)
 stats = SubResource("Resource_4v0m7")
 profile = ExtResource("17_oggf3")
 enemy_level = 5
+turn_to_start_act = 2
 
 [node name="enemy_unit11" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
 position = Vector2(600, 696)
 stats = SubResource("Resource_vxxiq")
 profile = ExtResource("17_oggf3")
 enemy_level = 5
+turn_to_start_act = 2
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
 position = Vector2(1752, 456)
@@ -798,6 +810,7 @@ stats = SubResource("Resource_kxehu")
 profile = ExtResource("14_mt6p0")
 enemy_level = 1
 is_demon_lord = true
+turn_to_start_act = null
 
 [node name="GUI" type="CanvasLayer" parent="."]
 script = SubResource("GDScript_mfmxk")
