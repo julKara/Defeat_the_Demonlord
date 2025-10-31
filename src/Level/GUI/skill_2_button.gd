@@ -39,6 +39,7 @@ func _pressed() -> void:
 	
 	# Double-click (quick second press) => use immediately
 	if click_count >= 2:
+		disabled = true
 		_trigger_use_skill(actor)
 		click_count = 0
 		return

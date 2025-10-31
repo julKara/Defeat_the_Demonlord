@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="SkillResource" load_steps=4 format=3 uid="uid://beaf7xrj1gi8j"]
+
+[ext_resource type="Script" uid="uid://bw6iq6gxtp5vs" path="res://src/Units/skill_resource.gd" id="1_8oog6"]
+[ext_resource type="Script" uid="uid://diu8a7yk102qm" path="res://assets/Skills/ApplyBurn/burn_effect.gd" id="1_jsv1o"]
+[ext_resource type="Texture2D" uid="uid://0x0etbxo85bq" path="res://assets/Icons/Skill_28.png" id="2_iadb4"]
+
+[resource]
+script = ExtResource("1_8oog6")
+skill_name = "Set Fire"
+description = "Apply effect on target that makes them take 0.15x casters M-ATK after ending their turn. Effect ignores all defences."
+icon = ExtResource("2_iadb4")
+skill_type = "Active"
+ends_turn = true
+target_type = "Enemy"
+duration = 3
+cooldown = 3
+stat_addition = {
+"curr_attack_range": 0,
+"curr_mobility": 0
+}
+stat_multiplier = {
+"curr_mag_attack": 0.0,
+"curr_mag_defense": 0.0,
+"curr_phys_attack": 0.0,
+"curr_phys_defense": 0.0
+}
+effect_script = ExtResource("1_jsv1o")
+metadata/_custom_type_script = "uid://bw6iq6gxtp5vs"

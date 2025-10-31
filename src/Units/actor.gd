@@ -288,18 +288,14 @@ func tick_effects() -> void:
 		# Tick down duration
 		var effect = active_effects[i]
 		effect.remaining_duration -= 1
+		#print(effect.skill.skill_name, " has ", effect.remaining_duration, " turns left")
 		
 		# Remove effect if expired
 		if effect.remaining_duration <= 0:
-			
 			if effect.skill and effect.skill.has_method("remove_effect"):
 				effect.skill.remove_effect(self, effect)	# Remove effect on skills
 			active_effects.remove_at(i)	# Remove from list
 			
-	# Refresh display if this actor is currently shown # MAYBE REMOVE
-	#var turn_stats = get_tree().get_first_node_in_group("TurnStatsDisplay")
-	#if turn_stats and turn_stats.current_actor == self:
-		#turn_stats.refresh_current()
 
 # Called each turn to decrement cooldowns of skills
 func tick_cooldowns() -> void:
@@ -315,10 +311,6 @@ func tick_cooldowns() -> void:
 			if s.current_cooldown < 0:
 				s.current_cooldown = 0
 	
-	# Refresh display if this actor is currently shown # MAYBE REMOVE
-	#var turn_stats = get_tree().get_first_node_in_group("TurnStatsDisplay")
-	#if turn_stats and turn_stats.current_actor == self:
-		#turn_stats.refresh_current()
 		
 	
 # --- Get functions ---

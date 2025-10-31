@@ -39,13 +39,17 @@ func _pressed() -> void:
 	
 	# Double-click (quick second press) => use immediately
 	if click_count >= 2:
+		disabled = true
 		_trigger_use_skill(actor)
 		click_count = 0
 		return
 	
 	# Otherwise, show info (single click)
 	text = "Use Skill"
-	if skill.current_cooldown > 0 or skill.skill_type == "Passive":
+	if skill.current_cooldown > 0:
+		disabled = true
+		text = "CD Left: " + str(skill.current_cooldown)
+	elif skill.skill_type == "Passive":
 		disabled = true
 		text = "Passive"
 	elif skill.target_type == "Enemy" and actor.get_behaviour().attack_target == null:
