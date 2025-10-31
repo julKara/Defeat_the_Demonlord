@@ -85,28 +85,37 @@ func _set_zoom_level(delta_idx: int) -> void:
 
 # --- Center / Focus ---
 func focus_on_unit(actor: Node2D, smooth := true) -> void:
-	if actor == null: return
+	if actor == null:
+		return
+
+	# Get intended end position
+	var end := actor.global_position
+
+	# Clamp that position
+	end = _get_clamped_position(end)
+
 	if not smooth:
-		target_position = actor.global_position
-		global_position = actor.global_position
+		target_position = end
+		global_position = end
 	else:
-		# start from current target instead of origin
+		
+		# Start from current position to prevent jump
 		var start := target_position
-		var end := actor.global_position
-		# run a tween for smooth centering
+
+		# Tween to the clamped target
 		var tween := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
-		tween.tween_property(self, "target_position", end, 0.6).from(start)
+		tween.tween_property(self, "target_position", end, 0.7).from(start)
+
 
 # --- Map bounds clamp ---
-func _clamp_camera_inside_map() -> void:
+func _get_clamped_position(pos: Vector2) -> Vector2:
 	if tile_map == null:
-		return
+		return pos
 
 	var map_rect := tile_map.get_used_rect()
 	var cell_size := tile_map.tile_set.tile_size
 	var world_rect := Rect2(map_rect.position * cell_size, map_rect.size * cell_size)
 
-	# viewport rect in world units
 	var vp_size := get_viewport().get_visible_rect().size * camera.zoom
 	var half_vp := vp_size * 0.5
 
@@ -115,7 +124,11 @@ func _clamp_camera_inside_map() -> void:
 	var min_y := world_rect.position.y + half_vp.y
 	var max_y := world_rect.end.y - half_vp.y
 
-	var clamped := target_position
-	clamped.x = clamp(clamped.x, min_x, max_x)
-	clamped.y = clamp(clamped.y, min_y, max_y)
-	target_position = clamped
+	var clamped := pos
+	clamped.x = clamp(pos.x, min_x, max_x)
+	clamped.y = clamp(pos.y, min_y, max_y)
+	return clamped
+
+
+func _clamp_camera_inside_map() -> void:
+	target_position = _get_clamped_position(target_position)

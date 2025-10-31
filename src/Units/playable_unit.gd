@@ -102,6 +102,7 @@ func move_to(tile: Vector2i) -> void:
 	
 	default_attack.disabled = true
 	skill_menu.reset_all_buttons()
+	camera_controller.focus_on_unit(get_parent())
 
 # Reset back to origin_tile if moved but not acted
 func reset_position_if_not_acted() -> void:

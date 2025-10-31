@@ -19,7 +19,6 @@
 [ext_resource type="Resource" uid="uid://crhx3b3htheuy" path="res://characters/Goblin/goblinProfile.tres" id="11_6tp14"]
 [ext_resource type="Script" uid="uid://b6oemt0bk5jyw" path="res://src/Level/GUI/stand_button.gd" id="11_athqt"]
 [ext_resource type="Resource" uid="uid://co8geppy7b1dn" path="res://characters/Slime/slimeProfile.tres" id="11_rautg"]
-[ext_resource type="Script" uid="uid://dso7okpirndht" path="res://src/Level/GUI/actor_info.gd" id="12_6tp14"]
 [ext_resource type="Script" uid="uid://dous6wk318f1t" path="res://src/Level/GUI/victory_screen.gd" id="13_0xagr"]
 [ext_resource type="Script" uid="uid://c5xlaf1onfe67" path="res://src/Level/GUI/use_skill_button.gd" id="13_tjatl"]
 [ext_resource type="Script" uid="uid://sddm7u5ng6mx" path="res://src/Level/GUI/game_over_screen.gd" id="14_hcgia"]
@@ -34,6 +33,7 @@
 [ext_resource type="Script" uid="uid://bety4ic5vs3fy" path="res://src/Level/GUI/pause_button.gd" id="22_mebf6"]
 [ext_resource type="Script" uid="uid://2pk6lv5drag2" path="res://src/Level/GUI/pause_menu.gd" id="23_2skyk"]
 [ext_resource type="Script" uid="uid://dyx7v0w8tua76" path="res://src/Level/camera_controller.gd" id="27_2skyk"]
+[ext_resource type="PackedScene" uid="uid://duc4fa4lsuh3c" path="res://src/Level/GUI/selected_unit_display.tscn" id="30_p2rbu"]
 [ext_resource type="PackedScene" uid="uid://d3enl3nxco4pd" path="res://src/Level/TurnTransition.tscn" id="31_p2rbu"]
 
 [sub_resource type="GDScript" id="GDScript_ic0uy"]
@@ -1057,42 +1057,36 @@ position = Vector2(120, 360)
 stats = SubResource("Resource_p2rbu")
 profile = ExtResource("7_0ni46")
 is_friendly = true
-is_demon_lord = null
 
 [node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_orqvb")]
 position = Vector2(408, 216)
 stats = SubResource("Resource_l22j0")
 profile = ExtResource("6_tjatl")
 is_friendly = true
-is_demon_lord = null
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_orqvb")]
 position = Vector2(456, 360)
 stats = SubResource("Resource_5f36r")
 profile = ExtResource("11_6tp14")
 enemy_level = 3
-is_demon_lord = null
 
 [node name="enemy_unit4" parent="TileMapLayer/Actors" instance=ExtResource("4_orqvb")]
 position = Vector2(552, 360)
 stats = SubResource("Resource_qjmhm")
 profile = ExtResource("11_6tp14")
 enemy_level = 3
-is_demon_lord = null
 
 [node name="enemy_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_orqvb")]
 position = Vector2(264, 360)
 stats = SubResource("Resource_uyjn6")
 profile = ExtResource("11_rautg")
 enemy_level = 3
-is_demon_lord = null
 
 [node name="enemy_unit3" parent="TileMapLayer/Actors" instance=ExtResource("4_orqvb")]
 position = Vector2(312, 408)
 stats = SubResource("Resource_qdhws")
 profile = ExtResource("11_rautg")
 enemy_level = 3
-is_demon_lord = null
 
 [node name="GUI" type="CanvasLayer" parent="."]
 script = SubResource("GDScript_hcgia")
@@ -1128,30 +1122,6 @@ script = ExtResource("13_tjatl")
 layout_mode = 2
 text = "Pass"
 script = ExtResource("11_athqt")
-
-[node name="ActorInfo" type="PanelContainer" parent="GUI/Margin"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-mouse_filter = 1
-script = ExtResource("12_6tp14")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI/Margin/ActorInfo"]
-layout_mode = 2
-
-[node name="ActorName" type="Label" parent="GUI/Margin/ActorInfo/VBoxContainer"]
-layout_mode = 2
-text = "Name: John"
-
-[node name="HP" type="Label" parent="GUI/Margin/ActorInfo/VBoxContainer"]
-layout_mode = 2
-text = "HP: 00/00"
-
-[node name="PhysAttack" type="Label" parent="GUI/Margin/ActorInfo/VBoxContainer"]
-layout_mode = 2
-
-[node name="PhysDefence" type="Label" parent="GUI/Margin/ActorInfo/VBoxContainer"]
-layout_mode = 2
 
 [node name="VictoryScreen" type="PanelContainer" parent="GUI/Margin"]
 process_mode = 3
@@ -1307,6 +1277,11 @@ value = -5.0
 [node name="Close" type="Button" parent="GUI/Margin/PauseMenu/VBoxContainer"]
 layout_mode = 2
 text = "Close"
+
+[node name="SelectDisplay" parent="GUI/Margin" instance=ExtResource("30_p2rbu")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
 
 [node name="TurnTransitionCanvas" parent="." instance=ExtResource("31_p2rbu")]
 

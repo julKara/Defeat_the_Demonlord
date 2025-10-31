@@ -17,8 +17,6 @@
 [ext_resource type="Script" uid="uid://b6oemt0bk5jyw" path="res://src/Level/GUI/stand_button.gd" id="13_kepf7"]
 [ext_resource type="Resource" uid="uid://b0ar83lqod7e4" path="res://characters/Healer/healerProfile.tres" id="13_n3xv8"]
 [ext_resource type="Resource" uid="uid://b0nthq3t1klg" path="res://characters/DemonLord/demonLordProfile.tres" id="13_rh6du"]
-[ext_resource type="Script" uid="uid://dso7okpirndht" path="res://src/Level/GUI/actor_info.gd" id="14_6ahfh"]
-[ext_resource type="Resource" uid="uid://bephnmy5s5urh" path="res://characters/DemonLord/demonLordStats.tres" id="14_wnk3o"]
 [ext_resource type="Script" uid="uid://dous6wk318f1t" path="res://src/Level/GUI/victory_screen.gd" id="15_6pnqh"]
 [ext_resource type="PackedScene" uid="uid://d3enl3nxco4pd" path="res://src/Level/TurnTransition.tscn" id="15_cqthp"]
 [ext_resource type="Script" uid="uid://sddm7u5ng6mx" path="res://src/Level/GUI/game_over_screen.gd" id="16_q5u82"]
@@ -31,8 +29,9 @@
 [ext_resource type="Script" uid="uid://nm7v2oerrihf" path="res://src/Level/win_loss_condition.gd" id="23_ff31n"]
 [ext_resource type="Script" uid="uid://sehkuo2xbwos" path="res://src/Worlds/world_tracker.gd" id="24_5cnm2"]
 [ext_resource type="Resource" uid="uid://b7d426jw88wxl" path="res://src/Worlds/world_handler.tres" id="25_fux7y"]
+[ext_resource type="PackedScene" uid="uid://duc4fa4lsuh3c" path="res://src/Level/GUI/selected_unit_display.tscn" id="26_cqthp"]
 [ext_resource type="Script" uid="uid://dyx7v0w8tua76" path="res://src/Level/camera_controller.gd" id="26_nmv3c"]
-[ext_resource type="Script" uid="uid://clylcm7g0eamp" path="res://src/Gameplay/boss_handler.gd" id="36_1rtpf"]
+[ext_resource type="Script" path="res://src/Gameplay/boss_handler.gd" id="36_1rtpf"]
 
 [sub_resource type="GDScript" id="GDScript_ic0uy"]
 script/source = "extends Node2D
@@ -40,7 +39,6 @@ script/source = "extends Node2D
 # Refrences
 @onready var actors: Node2D = $TileMapLayer/Actors
 #@onready var gui: CanvasLayer = $GUI
-@onready var actor_info: PanelContainer = $GUI/Margin/ActorInfo
 
 func _ready() -> void:
 
@@ -267,7 +265,7 @@ texture_region_size = Vector2i(48, 48)
 tile_size = Vector2i(48, 48)
 sources/1 = SubResource("TileSetAtlasSource_70uel")
 
-[sub_resource type="Resource" id="Resource_n3xv8"]
+[sub_resource type="Resource" id="Resource_cqthp"]
 resource_name = "knightStats"
 script = ExtResource("7_cqthp")
 curr_health = 200
@@ -297,7 +295,7 @@ mag_def_gain = 0
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_vm506"]
+[sub_resource type="Resource" id="Resource_n3xv8"]
 resource_name = "mageStats"
 script = ExtResource("7_cqthp")
 curr_health = 100
@@ -327,7 +325,7 @@ mag_def_gain = 10
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_piprm"]
+[sub_resource type="Resource" id="Resource_vm506"]
 resource_name = "healerStats"
 script = ExtResource("7_cqthp")
 curr_health = 1
@@ -355,6 +353,35 @@ phys_def_gain = 1
 mag_atk_gain = 1
 mag_def_gain = 1
 crit_gain = 1
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
+[sub_resource type="Resource" id="Resource_piprm"]
+script = ExtResource("7_cqthp")
+curr_health = 500
+max_health = 500
+original_max_health = 500
+phys_attack = 50
+original_phys_attack = 50
+mag_attack = 50
+original_mag_attack = 50
+phys_defense = 90
+original_phys_defense = 90
+mag_defense = 90
+original_mag_defense = 90
+crit_chance = 10
+original_crit_chance = 10
+attack_range = 5
+original_attack_range = 5
+mobility = 0
+original_mobility = 0
+level = 0
+speed = 0.0
+health_gain = 0
+phys_atk_gain = 0
+phys_def_gain = 0
+mag_atk_gain = 0
+mag_def_gain = 0
+crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
 [sub_resource type="GDScript" id="GDScript_mfmxk"]
@@ -428,30 +455,27 @@ y_sort_enabled = true
 
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("6_rh6du")]
 position = Vector2(1464, 456)
-stats = SubResource("Resource_n3xv8")
+stats = SubResource("Resource_cqthp")
 profile = ExtResource("8_n3xv8")
 is_friendly = true
-is_demon_lord = false
 
 [node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("6_rh6du")]
 position = Vector2(1416, 504)
-stats = SubResource("Resource_vm506")
+stats = SubResource("Resource_n3xv8")
 profile = ExtResource("9_vv3df")
 enemy_level = 5
 is_friendly = true
-is_demon_lord = false
 
 [node name="playable_unit3" parent="TileMapLayer/Actors" instance=ExtResource("6_rh6du")]
 position = Vector2(1416, 408)
-stats = SubResource("Resource_piprm")
+stats = SubResource("Resource_vm506")
 profile = ExtResource("13_n3xv8")
 enemy_level = 5
 is_friendly = true
-is_demon_lord = false
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("6_rh6du")]
 position = Vector2(1752, 456)
-stats = ExtResource("14_wnk3o")
+stats = SubResource("Resource_piprm")
 profile = ExtResource("13_rh6du")
 enemy_level = 1
 is_demon_lord = true
@@ -490,30 +514,6 @@ script = ExtResource("12_wnk3o")
 layout_mode = 2
 text = "Pass"
 script = ExtResource("13_kepf7")
-
-[node name="ActorInfo" type="PanelContainer" parent="GUI/Margin"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-mouse_filter = 1
-script = ExtResource("14_6ahfh")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI/Margin/ActorInfo"]
-layout_mode = 2
-
-[node name="ActorName" type="Label" parent="GUI/Margin/ActorInfo/VBoxContainer"]
-layout_mode = 2
-text = "Name: John"
-
-[node name="HP" type="Label" parent="GUI/Margin/ActorInfo/VBoxContainer"]
-layout_mode = 2
-text = "HP: 00/00"
-
-[node name="PhysAttack" type="Label" parent="GUI/Margin/ActorInfo/VBoxContainer"]
-layout_mode = 2
-
-[node name="PhysDefence" type="Label" parent="GUI/Margin/ActorInfo/VBoxContainer"]
-layout_mode = 2
 
 [node name="VictoryScreen" type="PanelContainer" parent="GUI/Margin"]
 process_mode = 3
@@ -668,6 +668,11 @@ value = -5.0
 [node name="Close" type="Button" parent="GUI/Margin/PauseMenu/VBoxContainer"]
 layout_mode = 2
 text = "Close"
+
+[node name="SelectDisplay" parent="GUI/Margin" instance=ExtResource("26_cqthp")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
 
 [node name="TurnTransitionCanvas" parent="." instance=ExtResource("15_cqthp")]
 

@@ -26,7 +26,6 @@
 [ext_resource type="Script" uid="uid://duw38t7v0nrgf" path="res://src/Level/GUI/default_attack.gd" id="22_l7n1t"]
 [ext_resource type="Script" uid="uid://c5xlaf1onfe67" path="res://src/Level/GUI/use_skill_button.gd" id="23_5vufa"]
 [ext_resource type="Script" uid="uid://b6oemt0bk5jyw" path="res://src/Level/GUI/stand_button.gd" id="24_3no4f"]
-[ext_resource type="Script" uid="uid://dso7okpirndht" path="res://src/Level/GUI/actor_info.gd" id="25_v1uc6"]
 [ext_resource type="Script" uid="uid://dous6wk318f1t" path="res://src/Level/GUI/victory_screen.gd" id="26_rw35y"]
 [ext_resource type="Script" uid="uid://sddm7u5ng6mx" path="res://src/Level/GUI/game_over_screen.gd" id="27_npdmk"]
 [ext_resource type="Script" uid="uid://dbsll2ofxadj5" path="res://src/Level/GUI/skill_menu.gd" id="28_n1bbw"]
@@ -36,6 +35,7 @@
 [ext_resource type="Script" uid="uid://bety4ic5vs3fy" path="res://src/Level/GUI/pause_button.gd" id="32_2tm0x"]
 [ext_resource type="Script" uid="uid://2pk6lv5drag2" path="res://src/Level/GUI/pause_menu.gd" id="33_pxboc"]
 [ext_resource type="Script" uid="uid://nm7v2oerrihf" path="res://src/Level/win_loss_condition.gd" id="34_hg06f"]
+[ext_resource type="PackedScene" uid="uid://duc4fa4lsuh3c" path="res://src/Level/GUI/selected_unit_display.tscn" id="35_0rsyb"]
 [ext_resource type="Script" uid="uid://sehkuo2xbwos" path="res://src/Worlds/world_tracker.gd" id="35_8uqfa"]
 [ext_resource type="PackedScene" uid="uid://d3enl3nxco4pd" path="res://src/Level/TurnTransition.tscn" id="36_0rsyb"]
 [ext_resource type="Resource" uid="uid://b7d426jw88wxl" path="res://src/Worlds/world_handler.tres" id="36_y4vk6"]
@@ -1304,56 +1304,48 @@ position = Vector2(408, 600)
 stats = SubResource("Resource_0rsyb")
 profile = ExtResource("18_emooc")
 is_friendly = true
-is_demon_lord = null
 
 [node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("15_2sevf")]
 position = Vector2(456, 648)
 stats = SubResource("Resource_848jj")
 profile = ExtResource("17_582yf")
 is_friendly = true
-is_demon_lord = null
 
 [node name="playable_unit3" parent="TileMapLayer/Actors" instance=ExtResource("15_2sevf")]
 position = Vector2(408, 648)
 stats = SubResource("Resource_67dxi")
 profile = ExtResource("19_62mnt")
 is_friendly = true
-is_demon_lord = null
 
 [node name="enemy_unit4" parent="TileMapLayer/Actors" instance=ExtResource("15_2sevf")]
 position = Vector2(744, 360)
 stats = SubResource("Resource_o284m")
 profile = ExtResource("20_nbr7s")
 enemy_level = 4
-is_demon_lord = null
 
 [node name="enemy_unit3" parent="TileMapLayer/Actors" instance=ExtResource("15_2sevf")]
 position = Vector2(408, 408)
 stats = SubResource("Resource_pk57h")
 profile = ExtResource("22_34d2c")
 enemy_level = 3
-is_demon_lord = null
 
 [node name="enemy_unit5" parent="TileMapLayer/Actors" instance=ExtResource("15_2sevf")]
 position = Vector2(216, 600)
 stats = SubResource("Resource_uqe0j")
 profile = ExtResource("20_nbr7s")
 enemy_level = 4
-is_demon_lord = null
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("15_2sevf")]
 position = Vector2(744, 216)
 stats = SubResource("Resource_1sr0d")
 profile = ExtResource("19_1u7qp")
 enemy_level = 1
-is_demon_lord = null
 
 [node name="enemy_unit2" parent="TileMapLayer/Actors" instance=ExtResource("15_2sevf")]
 position = Vector2(312, 216)
 stats = SubResource("Resource_j2126")
 profile = ExtResource("19_1u7qp")
 enemy_level = 1
-is_demon_lord = null
 
 [node name="GUI" type="CanvasLayer" parent="."]
 script = SubResource("GDScript_mfmxk")
@@ -1389,30 +1381,6 @@ script = ExtResource("23_5vufa")
 layout_mode = 2
 text = "Pass"
 script = ExtResource("24_3no4f")
-
-[node name="ActorInfo" type="PanelContainer" parent="GUI/Margin"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-mouse_filter = 1
-script = ExtResource("25_v1uc6")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI/Margin/ActorInfo"]
-layout_mode = 2
-
-[node name="ActorName" type="Label" parent="GUI/Margin/ActorInfo/VBoxContainer"]
-layout_mode = 2
-text = "Name: John"
-
-[node name="HP" type="Label" parent="GUI/Margin/ActorInfo/VBoxContainer"]
-layout_mode = 2
-text = "HP: 00/00"
-
-[node name="PhysAttack" type="Label" parent="GUI/Margin/ActorInfo/VBoxContainer"]
-layout_mode = 2
-
-[node name="PhysDefence" type="Label" parent="GUI/Margin/ActorInfo/VBoxContainer"]
-layout_mode = 2
 
 [node name="VictoryScreen" type="PanelContainer" parent="GUI/Margin"]
 process_mode = 3
@@ -1568,6 +1536,11 @@ value = -5.0
 [node name="Close" type="Button" parent="GUI/Margin/PauseMenu/VBoxContainer"]
 layout_mode = 2
 text = "Close"
+
+[node name="SelectDisplay" parent="GUI/Margin" instance=ExtResource("35_0rsyb")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
 
 [node name="TurnTransitionCanvas" parent="." instance=ExtResource("36_0rsyb")]
 

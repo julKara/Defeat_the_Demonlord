@@ -3,7 +3,6 @@ extends Node2D
 # Refrences world-objects
 @onready var actors: Node2D = $"../Actors"
 @onready var actions_menu: PanelContainer = $"../../GUI/Margin/ActionsMenu"
-@onready var actor_info: PanelContainer = $"../../GUI/Margin/ActorInfo"
 
 var character_list: Array
 var character_list_copy: Array
@@ -28,7 +27,6 @@ func _ready() -> void:
 
 func set_current_character(character) -> void:
 	current_character = character
-	actor_info.display_actor_info(current_character)
 	current_character.set_state(current_character.UnitState.SELECTED)	# Update state to selected
 	if character.is_friendly:
 				actions_menu.show()	# Show actions-menu when selecting playable actor

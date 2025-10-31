@@ -33,6 +33,7 @@ func perform_battle(attacker: Actor, defender: Actor, distance: float) -> void:
 	
 	# Disable pause-button
 	pause_button.disabled = true
+	ClickHandler.level_active = false
 	
 	# Check if actors are valid
 	if attacker == null or defender == null:
@@ -84,6 +85,7 @@ func perform_battle(attacker: Actor, defender: Actor, distance: float) -> void:
 	
 	# Disable pause-button
 	pause_button.disabled = false
+	ClickHandler.level_active = true
 
 # --- UTIL ---
 
