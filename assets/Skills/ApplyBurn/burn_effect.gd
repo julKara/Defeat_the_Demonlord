@@ -41,11 +41,11 @@ func tick_effect(effect: Dictionary, target: Actor) -> void:
 		var caster: Actor = effect["caster"]
 		var caster_stats = caster.get_stats_resource()
 		if caster_stats and "curr_mag_attack" in caster_stats:
-			dmg = int(caster_stats.curr_mag_attack * 0.15)
+			dmg = round(caster_stats.curr_mag_attack * 0.15)
 	else:
 		# If caster is dead or freed
 		if effect.has("caster_mag_attack_snapshot"):
-			dmg = int(effect["caster_mag_attack_snapshot"] * 0.1)
+			dmg = round(effect["caster_mag_attack_snapshot"] * 0.1)
 			
 	if dmg > 0:
 		# Apply the damage to the target

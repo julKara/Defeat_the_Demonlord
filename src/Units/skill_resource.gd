@@ -73,7 +73,7 @@ func apply_effect(caster: Actor, target: Actor) -> void:
 	for key in stat_multiplier.keys():
 		if key in CharacterStats.MODIFIABLE_STATS:
 			var curr = stats.get(key)
-			stats.set(key, curr * stat_multiplier[key])
+			stats.set(key, round(curr * stat_multiplier[key]))
 
 	# --- 3. Record durations and cooldowns
 	
@@ -129,4 +129,4 @@ func remove_effect(target: Node, effect_record: Dictionary) -> void:
 					continue
 
 				# Normal revert by dividing with factor
-				stats.set(key, curr_value / factor)
+				stats.set(key, round(curr_value / factor))

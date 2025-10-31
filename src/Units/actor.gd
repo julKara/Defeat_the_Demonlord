@@ -288,7 +288,7 @@ func tick_effects() -> void:
 		# Tick down duration
 		var effect = active_effects[i]
 		effect.remaining_duration -= 1
-		#print(effect.skill.skill_name, " has ", effect.remaining_duration, " turns left")
+		print(effect.skill.skill_name, " has ", effect.remaining_duration, " turns left")
 		
 		# Remove effect if expired
 		if effect.remaining_duration <= 0:
