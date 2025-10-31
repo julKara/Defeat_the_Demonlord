@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("1_45kgw")
 skill_name = "Heal Ally"
-description = "Heal ally with up to caster's 1x m_attack"
+description = "Heal ally with up to 0.8x caster's M-DEF."
 icon = ExtResource("2_xijco")
 skill_type = "Active"
 ends_turn = true

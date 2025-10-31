@@ -19,13 +19,13 @@ func display_skill_menu() -> void:
 		skill_1.disabled = false
 		skill_1.click_count = 0
 		if skill_1.skill.current_cooldown > 0:
-			skill_1.text = " (%d) " %  skill_1.skill.current_cooldown
+			skill_1.text = "%s (%d)" % [skill_1.skill.skill_name, skill_1.skill.current_cooldown]
 	if skill_2.skill != null:
 		skill_2.text = skill_2.skill.skill_name
 		skill_2.disabled = false
 		skill_2.click_count = 0
 		if skill_2.skill.current_cooldown > 0:
-			skill_2.text = " (%d) " %  skill_2.skill.current_cooldown
+			skill_2.text = "%s (%d)" % [skill_2.skill.skill_name, skill_2.skill.current_cooldown]
 	
 	show()
 

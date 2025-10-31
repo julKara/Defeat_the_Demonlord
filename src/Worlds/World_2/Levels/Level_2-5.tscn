@@ -454,20 +454,20 @@ max_turns = 25
 y_sort_enabled = true
 
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("6_rh6du")]
-position = Vector2(1176, 456)
+position = Vector2(264, 456)
 stats = SubResource("Resource_cqthp")
 profile = ExtResource("8_n3xv8")
 is_friendly = true
 
 [node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("6_rh6du")]
-position = Vector2(1128, 504)
+position = Vector2(216, 504)
 stats = SubResource("Resource_n3xv8")
 profile = ExtResource("9_vv3df")
 enemy_level = 5
 is_friendly = true
 
 [node name="playable_unit3" parent="TileMapLayer/Actors" instance=ExtResource("6_rh6du")]
-position = Vector2(1128, 408)
+position = Vector2(216, 408)
 stats = SubResource("Resource_vm506")
 profile = ExtResource("13_n3xv8")
 enemy_level = 5

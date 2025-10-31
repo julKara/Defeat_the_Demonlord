@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("2_xgxoc")
 skill_name = "Gather Energy"
-description = "By passing a turn without attacking or using a skill, recieve +2 to mobility and a 50% buff to magic stats."
+description = "By passing a turn without attacking or using a skill, recieve +2 to mobility and a 30% buff to magic stats."
 icon = ExtResource("2_jfasq")
 skill_type = "Passive"
 ends_turn = false

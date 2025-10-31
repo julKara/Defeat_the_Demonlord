@@ -12,7 +12,7 @@ func apply(caster: Actor, _target: Actor, skill: SkillResource) -> void:
 	if stats == null:
 		return
 	
-	# --- 1. Apply temporary +50% buff to magic stats and +2 mobility for 1 turn
+	# --- 1. Apply temporary +30% buff to magic stats and +2 mobility for 1 turn
 	# Local buff record to apply and register
 	var buff_addition := {
 		"curr_mobility": 2

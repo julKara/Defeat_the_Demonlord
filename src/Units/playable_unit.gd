@@ -331,9 +331,9 @@ func set_attack_target(target: Actor) -> void:
 	
 	# Make skill if requiring enemy attack-target enabled
 	if get_parent().skills.size() > 0:
-		if skill_1.skill.target_type == "Enemy":
+		if skill_1.skill.target_type == "Enemy" && skill_1.skill.current_cooldown <= 0:
 			skill_1.disabled = false
-		if skill_2.skill.target_type == "Enemy":
+		if skill_2.skill.target_type == "Enemy" && skill_2.skill.current_cooldown <= 0:
 			skill_2.disabled = false
 	
 	# Remove highlight from previous target if any
@@ -356,9 +356,9 @@ func set_friendly_target(target: Actor) -> void:
 	
 	# Make skill if requiring enemy attack-target enabled
 	if get_parent().skills.size() > 0:
-		if skill_1.skill.target_type == "Ally":
+		if skill_1.skill.target_type == "Ally" && skill_1.skill.current_cooldown <= 0:
 			skill_1.disabled = false
-		if skill_2.skill.target_type == "Ally":
+		if skill_2.skill.target_type == "Ally" && skill_2.skill.current_cooldown <= 0:
 			skill_2.disabled = false
 	
 	# Remove highlight from previous target if any
