@@ -1446,12 +1446,14 @@ script = ExtResource("28_n1bbw")
 
 [node name="SkillInfoPopup" type="PopupPanel" parent="GUI/Margin/SkillMenu"]
 auto_translate_mode = 1
+size = Vector2i(203, 100)
 visible = true
 
 [node name="SkillInfoLabel" type="RichTextLabel" parent="GUI/Margin/SkillMenu/SkillInfoPopup"]
+custom_minimum_size = Vector2(195, 90)
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 96.0
+offset_right = 199.0
 offset_bottom = 96.0
 text = "sjbhaikjkbiu
 "

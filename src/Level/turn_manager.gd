@@ -239,7 +239,28 @@ func _trigger_end_turn_passives(actor: Actor) -> void:
 				var script_inst = effect.skill.effect_script.new()
 				if script_inst.has_method("tick_effect"):
 					script_inst.tick_effect(effect, actor)
+					
+	if actor.stats.curr_health <= 0:
+		_handle_death(actor)
 
+
+# Handles what happens when a unit dies.
+func _handle_death(dead_actor: Actor) -> void:
+	print("\t\t%s is dead!" % dead_actor.profile.character_name)	# TESTING
+	
+	# Death behavoiur
+	dead_actor.set_state(dead_actor.UnitState.DEAD)	# Dead state - updates animation
+	
+	# Remove actor from lists
+	character_manager.character_list.erase(dead_actor)	# Remove character from list in manager
+	player_queue.erase(dead_actor)
+	enemy_queue.erase(dead_actor)
+	
+	dead_actor.queue_free()	# Remove actor from world
+	character_manager.num_characters -= 1
+	
+	# Check if a win/loss condition has been met
+	win_loss_condition.check_conditions()
 
 func _reset_acted_flag(list: Array) -> void:
 	for unit in list:

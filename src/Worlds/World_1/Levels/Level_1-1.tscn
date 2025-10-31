@@ -668,13 +668,15 @@ mouse_filter = 1
 script = ExtResource("16_8y1rk")
 
 [node name="SkillInfoPopup" type="PopupPanel" parent="GUI/Margin/SkillMenu"]
+size = Vector2i(198, 103)
 visible = true
 
 [node name="SkillInfoLabel" type="RichTextLabel" parent="GUI/Margin/SkillMenu/SkillInfoPopup"]
+custom_minimum_size = Vector2(190, 95)
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 96.0
-offset_bottom = 96.0
+offset_right = 194.0
+offset_bottom = 99.0
 text = "sjbhaikjkbiu
 "
 

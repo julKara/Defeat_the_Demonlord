@@ -2,6 +2,7 @@ extends Resource
 
 # A debuff that deals damage at the end of each turn lasting for the duration set in the SkillResource.
 
+
 func apply(caster: Actor, target: Actor, skill: SkillResource) -> void:
 	
 	if target == null or caster == null:
@@ -52,6 +53,7 @@ func tick_effect(effect: Dictionary, target: Actor) -> void:
 			target.stats.take_damage(dmg)
 			target.healthbar._set_health(target.get_stats_resource().curr_health)
 			_play_damage_sfx(target)
+			print("\n", target.profile.character_name, " took ", dmg, " in burn-damage")
 	else:
 		# Just print if no take_damage yet implemented
 		print("Something wrong with burn_effect!")

@@ -31,7 +31,7 @@
 [ext_resource type="Resource" uid="uid://b7d426jw88wxl" path="res://src/Worlds/world_handler.tres" id="25_fux7y"]
 [ext_resource type="PackedScene" uid="uid://duc4fa4lsuh3c" path="res://src/Level/GUI/selected_unit_display.tscn" id="26_cqthp"]
 [ext_resource type="Script" uid="uid://dyx7v0w8tua76" path="res://src/Level/camera_controller.gd" id="26_nmv3c"]
-[ext_resource type="Script" path="res://src/Gameplay/boss_handler.gd" id="36_1rtpf"]
+[ext_resource type="Script" uid="uid://clylcm7g0eamp" path="res://src/Gameplay/boss_handler.gd" id="36_1rtpf"]
 
 [sub_resource type="GDScript" id="GDScript_ic0uy"]
 script/source = "extends Node2D
@@ -579,12 +579,15 @@ script = ExtResource("17_qwlg0")
 
 [node name="SkillInfoPopup" type="PopupPanel" parent="GUI/Margin/SkillMenu"]
 auto_translate_mode = 1
+size = Vector2i(198, 103)
+visible = true
 
 [node name="SkillInfoLabel" type="RichTextLabel" parent="GUI/Margin/SkillMenu/SkillInfoPopup"]
+custom_minimum_size = Vector2(190, 95)
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 96.0
-offset_bottom = 96.0
+offset_right = 194.0
+offset_bottom = 99.0
 text = "sjbhaikjkbiu
 "
 
