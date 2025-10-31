@@ -46,7 +46,10 @@ func _pressed() -> void:
 	
 	# Otherwise, show info (single click)
 	text = "Use Skill"
-	if skill.current_cooldown > 0 or skill.skill_type == "Passive":
+	if skill.current_cooldown > 0:
+		disabled = true
+		text = "CD Left: " + str(skill.current_cooldown)
+	elif skill.skill_type == "Passive":
 		disabled = true
 		text = "Passive"
 	elif skill.target_type == "Enemy" and actor.get_behaviour().attack_target == null:
