@@ -25,3 +25,4 @@ stat_multiplier = {
 "curr_phys_defense": 0.0
 }
 effect_script = ExtResource("1_rrj5k")
+metadata/_custom_type_script = "uid://bnlafpamei5gh"

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://471n23xkuvla"]
 
 [ext_resource type="Script" uid="uid://c0dbybntiql1x" path="res://src/Worlds/level_select.gd" id="1_hxrf2"]
-[ext_resource type="Texture2D" uid="uid://br2xlu1vss8b1" path="res://assets/Backgrounds/forest-road-preview.png" id="2_aqxto"]
+[ext_resource type="Texture2D" uid="uid://cvxnu26d8xupm" path="res://assets/Backgrounds/HR_Dark_Gothic_Castle.png" id="2_aqxto"]
 [ext_resource type="PackedScene" uid="uid://m2ygs7vhnqnr" path="res://src/Worlds/level_button.tscn" id="2_svo87"]
 [ext_resource type="Script" uid="uid://ol07ourtj03u" path="res://src/Worlds/back_button.gd" id="3_cyqcq"]
 [ext_resource type="Script" uid="uid://sehkuo2xbwos" path="res://src/Worlds/world_tracker.gd" id="4_xoohk"]
@@ -26,17 +26,13 @@ script = ExtResource("1_hxrf2")
 [node name="BackgroundTexture" type="TextureRect" parent="."]
 modulate = Color(0.851769, 0.851769, 0.851769, 1)
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -303.0
-offset_top = -570.0
-offset_right = 307.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 texture = ExtResource("2_aqxto")
+expand_mode = 1
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
