@@ -27,4 +27,5 @@ func change_to_scene(world_num: int):
 	if FileAccess.file_exists(next_world):
 		get_tree().change_scene_to_file(next_world)
 		print("Changed to world " + str(world_num))
-		world_handler.world_script.set_current_world(world_num)
+		world_handler.world_script.current_world = world_num
+		world_handler._save_game()
