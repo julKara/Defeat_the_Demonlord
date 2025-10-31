@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://bpoij5dsca8rc"]
+[gd_scene load_steps=3 format=3 uid="uid://bpoij5dsca8rc"]
+
+[ext_resource type="Script" uid="uid://dj13sc5omcw0s" path="res://src/Worlds/credits_scene.gd" id="1_x5jq7"]
+[ext_resource type="Texture2D" uid="uid://cvxnu26d8xupm" path="res://assets/Backgrounds/HR_Dark_Gothic_Castle.png" id="2_q4wmv"]
 
 [node name="Credits" type="Control"]
 layout_mode = 3
@@ -7,56 +10,93 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_x5jq7")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0.678944, 0.678944, 0.678944, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.584512, 0.289007, 0.570961, 1)
+texture = ExtResource("2_q4wmv")
+expand_mode = 1
 
 [node name="DemonlordDefeated" type="Label" parent="."]
-visible = false
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -8.0
-offset_right = 20.0
-offset_bottom = 8.0
+offset_left = -339.0
+offset_top = -15.0
+offset_right = 339.0
+offset_bottom = 89.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.777059, 0.590746, 0, 1)
 theme_override_font_sizes/font_size = 45
-text = "Demonlord Defeated!"
+text = "Congratulations on 
+defeating the Demonlord!"
+horizontal_alignment = 1
 
-[node name="Label" type="Label" parent="."]
+[node name="TextContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -8.0
-offset_right = 20.0
-offset_bottom = 8.0
+offset_left = -159.0
+offset_top = 210.0
+offset_right = 159.0
+offset_bottom = 816.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "A game made by:
+theme_override_constants/separation = 40
 
-Julia Karlsson
+[node name="Text" type="Label" parent="TextContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "A game made by:"
+horizontal_alignment = 1
+
+[node name="Text2" type="Label" parent="TextContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Julia Karlsson
 and
-Mirijam Björn
+Mirijam Björn"
+horizontal_alignment = 1
 
-Shout out to:
-AppleDog
+[node name="Text3" type="Label" parent="TextContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "
+
+
+Shout out to:"
+horizontal_alignment = 1
+
+[node name="Text4" type="Label" parent="TextContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "AppleDog
 (Who made one of the tilesets used)
+
 and
+
 Justin Canse"
+horizontal_alignment = 1
+
+[node name="Text5" type="Label" parent="TextContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "
+
+
+Thanks for playing! :)"
 horizontal_alignment = 1

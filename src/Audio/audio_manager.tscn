@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://defgyaxcewcwg"]
+[gd_scene load_steps=13 format=3 uid="uid://defgyaxcewcwg"]
 
 [ext_resource type="Script" uid="uid://d1imvo430o74g" path="res://src/Audio/audio_manager.gd" id="1_h88su"]
 [ext_resource type="AudioStream" uid="uid://e7woog4arwtu" path="res://assets/Audio/Music/Battle/Battle_Music_1.ogg" id="2_o66j1"]
@@ -9,9 +9,10 @@
 [ext_resource type="AudioStream" uid="uid://bw10o7mwa0rxc" path="res://assets/Audio/Music/WinLoss/Game Over Music 1.wav" id="5_s2m6t"]
 [ext_resource type="AudioStream" uid="uid://uh3imp8o21sm" path="res://assets/Audio/SoundEffects/WinLoss/Game Over 1.wav" id="6_iopov"]
 [ext_resource type="AudioStream" uid="uid://j7uxwxrhdyp6" path="res://assets/Audio/Music/BossFight/BossMusic 1.ogg" id="6_s2m6t"]
+[ext_resource type="AudioStream" uid="uid://bpnwkojvnibma" path="res://assets/Audio/Music/Credits/Credits.ogg" id="7_4l5ky"]
 
 [sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_f0ev6"]
-clip_count = 5
+clip_count = 6
 clip_0/name = &"MenuMusic"
 clip_0/stream = ExtResource("3_yslcm")
 clip_0/auto_advance = 0
@@ -27,6 +28,9 @@ clip_3/auto_advance = 0
 clip_4/name = &"BossMusic"
 clip_4/stream = ExtResource("6_s2m6t")
 clip_4/auto_advance = 0
+clip_5/name = &"CreditsMusic"
+clip_5/stream = ExtResource("7_4l5ky")
+clip_5/auto_advance = 0
 _transitions = {
 Vector2i(0, 1): {
 "fade_beats": 1.0,
@@ -95,6 +99,18 @@ Vector2i(4, 2): {
 "to_time": 1
 },
 Vector2i(4, 3): {
+"fade_beats": 1.0,
+"fade_mode": 3,
+"from_time": 0,
+"to_time": 1
+},
+Vector2i(4, 5): {
+"fade_beats": 1.0,
+"fade_mode": 3,
+"from_time": 0,
+"to_time": 1
+},
+Vector2i(5, 0): {
 "fade_beats": 1.0,
 "fade_mode": 3,
 "from_time": 0,
