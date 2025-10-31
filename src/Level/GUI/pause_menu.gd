@@ -15,6 +15,7 @@ func _ready() -> void:
 	hide()
 	
 	# Set current world
+	world_handler._load_save()
 	current_world = world_handler.world_script.current_world
 	
 	# Find the audio busses

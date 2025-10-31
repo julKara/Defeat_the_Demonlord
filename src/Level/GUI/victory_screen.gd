@@ -7,7 +7,9 @@ extends PanelContainer
 var current_world
 
 func _ready() -> void:
+	world_handler._load_save()
 	current_world = world_handler.world_script.current_world
+	print("Current world: ", current_world)
 
 
 # Return to level select and unlock next level
