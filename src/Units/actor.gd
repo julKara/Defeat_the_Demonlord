@@ -57,6 +57,7 @@ var current_state: UnitState = UnitState.IDLE	# Current state of unit
 		is_friendly = value
 		if is_node_ready():	# Must check if modulate should work
 			_reload_behavior()	# Set/Toggles behavior
+@export var is_demon_lord: bool = false
 
 # Sets up AstarGrid for pathfinding, walkable tiles and sets friendly/enemy color/name
 func _ready() -> void:	

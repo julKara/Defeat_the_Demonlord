@@ -12,8 +12,8 @@ dest_files=["res://.godot/imported/BossMusic 1.ogg-bb00b3ce285cbd37ea7a1f43a6035
 
 [params]
 
-loop=false
-loop_offset=0
-bpm=0
+loop=true
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

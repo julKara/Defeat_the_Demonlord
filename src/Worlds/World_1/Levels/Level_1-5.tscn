@@ -1056,36 +1056,42 @@ position = Vector2(264, 168)
 stats = SubResource("Resource_2pfyh")
 profile = ExtResource("7_ltfsv")
 is_friendly = true
+is_demon_lord = null
 
 [node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_0xrj8")]
 position = Vector2(168, 216)
 stats = SubResource("Resource_8l6at")
 profile = ExtResource("6_7bvym")
 is_friendly = true
+is_demon_lord = null
 
 [node name="enemy_unit3" parent="TileMapLayer/Actors" instance=ExtResource("4_0xrj8")]
 position = Vector2(264, 456)
 stats = SubResource("Resource_mucl2")
 profile = ExtResource("10_f1mlg")
 enemy_level = 4
+is_demon_lord = null
 
 [node name="enemy_unit4" parent="TileMapLayer/Actors" instance=ExtResource("4_0xrj8")]
 position = Vector2(216, 408)
 stats = SubResource("Resource_kg7hq")
 profile = ExtResource("10_f1mlg")
 enemy_level = 4
+is_demon_lord = null
 
 [node name="enemy_unit5" parent="TileMapLayer/Actors" instance=ExtResource("4_0xrj8")]
 position = Vector2(648, 264)
 stats = SubResource("Resource_k71nq")
 profile = ExtResource("10_f1mlg")
 enemy_level = 4
+is_demon_lord = null
 
 [node name="enemy_unit6" parent="TileMapLayer/Actors" instance=ExtResource("4_0xrj8")]
 position = Vector2(648, 216)
 stats = SubResource("Resource_45y31")
 profile = ExtResource("10_f1mlg")
 enemy_level = 4
+is_demon_lord = null
 
 [node name="GUI" type="CanvasLayer" parent="."]
 script = SubResource("GDScript_pecvg")

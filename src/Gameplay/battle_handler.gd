@@ -52,14 +52,19 @@ func perform_battle(attacker: Actor, defender: Actor, distance: float) -> void:
 	_play_attack_sfx(attacker) # Play attack sfx
 	await _play_animation(attacker) # Play attack animation
 	
-	# 2. Calculate damage based on stats
-	var damage: float = _calculate_damage(atk_stats, def_stats)
+	var damage: float
 	
-	# 3. If a unit with longer range (2 or more), they do less damage close up
-	#print("Range: ", atk_stats.attack_range)
-	if atk_stats.attack_range >= 2 && distance <= 48.0:
-		print("\t\t\tRange Penalty!")
-		damage *= 0.6
+	if attacker.is_demon_lord:
+		damage = _calculate_demon_damage(atk_stats, def_stats)
+	else:
+		# 2. Calculate damage based on stats
+		damage = _calculate_damage(atk_stats, def_stats)
+		
+		# 3. If a unit with longer range (2 or more), they do less damage close up
+		#print("Range: ", atk_stats.attack_range)
+		if atk_stats.attack_range >= 2 && distance <= 48.0:
+			print("\t\t\tRange Penalty!")
+			damage *= 0.6
 
 	# 4. Apply Damage to Defender
 	def_stats.take_damage(int(damage))
@@ -134,6 +139,18 @@ func _calculate_damage(atk: CharacterStats, def: CharacterStats) -> float:
 	else:
 		#print("Using magic")
 		damage = max(1, atk.curr_mag_attack - def.curr_mag_defense)
+	
+	# Doubles damage if preforming a crit
+	if randf() < float(atk.curr_crit_chance) / 100.0:
+		damage *= 1.4
+		print("\t\t\tCritical hit!")
+	
+	return damage
+	
+func _calculate_demon_damage(atk: CharacterStats, def: CharacterStats) -> float:
+	var damage: float = 0.0
+	
+	damage = max(1, atk.curr_phys_attack - def.curr_phys_defense) + max(1, atk.curr_mag_attack - def.curr_mag_defense)
 	
 	# Doubles damage if preforming a crit
 	if randf() < float(atk.curr_crit_chance) / 100.0:

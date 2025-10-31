@@ -1,38 +1,41 @@
-[gd_scene load_steps=48 format=4 uid="uid://hkpgcieteteq"]
+[gd_scene load_steps=61 format=4 uid="uid://d3x05grqvxin2"]
 
-[ext_resource type="Texture2D" uid="uid://bqmtavn12rhj2" path="res://assets/test_map5.png" id="1_vv3df"]
-[ext_resource type="PackedScene" uid="uid://cats61ytkbbvj" path="res://src/PathVisuals/draw_path.tscn" id="2_iwxyq"]
-[ext_resource type="Texture2D" uid="uid://cnyhbigbys3p8" path="res://assets/level_art/48x48_Dungeon_Temple/A2_48x48.png" id="3_6rngw"]
-[ext_resource type="Script" uid="uid://t1qdqjubkhud" path="res://src/Units/character_manager.gd" id="4_2fkj7"]
-[ext_resource type="Texture2D" uid="uid://dvn0i1mc3ajf8" path="res://assets/level_art/48x48_Dungeon_Temple/A4_48x48.png" id="4_3nfj0"]
-[ext_resource type="Script" uid="uid://cjlatyxuwhq1n" path="res://src/Level/turn_manager.gd" id="5_3nfj0"]
-[ext_resource type="Texture2D" uid="uid://rlov5jfc4ku0" path="res://assets/level_art/48x48_Dungeon_Temple/B48x48.png" id="5_rh6du"]
-[ext_resource type="PackedScene" uid="uid://dijjspgi8x8sv" path="res://src/Units/actor.tscn" id="6_rh6du"]
-[ext_resource type="Script" uid="uid://dfeqtmcp7uacl" path="res://src/Units/CharacterStats.gd" id="7_cqthp"]
-[ext_resource type="Resource" uid="uid://bu2f1ylnrxljm" path="res://characters/Knight/knightProfile.tres" id="8_n3xv8"]
-[ext_resource type="Resource" uid="uid://mwedg6ttx2lp" path="res://characters/Mage/mageProfile.tres" id="9_vv3df"]
-[ext_resource type="Script" uid="uid://lvdowlbqk6fe" path="res://src/Level/GUI/actions_menu.gd" id="10_piprm"]
-[ext_resource type="Script" uid="uid://duw38t7v0nrgf" path="res://src/Level/GUI/default_attack.gd" id="11_1rtpf"]
-[ext_resource type="Script" uid="uid://c5xlaf1onfe67" path="res://src/Level/GUI/use_skill_button.gd" id="12_wnk3o"]
-[ext_resource type="Script" uid="uid://b6oemt0bk5jyw" path="res://src/Level/GUI/stand_button.gd" id="13_kepf7"]
-[ext_resource type="Resource" uid="uid://b0ar83lqod7e4" path="res://characters/Healer/healerProfile.tres" id="13_n3xv8"]
-[ext_resource type="Resource" uid="uid://b0nthq3t1klg" path="res://characters/DemonLord/demonLordProfile.tres" id="13_rh6du"]
-[ext_resource type="Script" uid="uid://dso7okpirndht" path="res://src/Level/GUI/actor_info.gd" id="14_6ahfh"]
-[ext_resource type="Resource" uid="uid://bephnmy5s5urh" path="res://characters/DemonLord/demonLordStats.tres" id="14_wnk3o"]
-[ext_resource type="Script" uid="uid://dous6wk318f1t" path="res://src/Level/GUI/victory_screen.gd" id="15_6pnqh"]
-[ext_resource type="PackedScene" uid="uid://d3enl3nxco4pd" path="res://src/Level/TurnTransition.tscn" id="15_cqthp"]
-[ext_resource type="Script" uid="uid://sddm7u5ng6mx" path="res://src/Level/GUI/game_over_screen.gd" id="16_q5u82"]
-[ext_resource type="Script" uid="uid://dbsll2ofxadj5" path="res://src/Level/GUI/skill_menu.gd" id="17_qwlg0"]
-[ext_resource type="Script" uid="uid://w7ua1w0mwld8" path="res://src/Level/GUI/skill_1_button.gd" id="18_fvyes"]
-[ext_resource type="Script" uid="uid://b3u6ea2h55gqj" path="res://src/Level/GUI/skill_2_button.gd" id="19_0c5bu"]
-[ext_resource type="Script" uid="uid://giyv8yaisw0a" path="res://src/Level/GUI/back_skill_button.gd" id="20_x61jx"]
-[ext_resource type="Script" uid="uid://bety4ic5vs3fy" path="res://src/Level/GUI/pause_button.gd" id="21_jjb7c"]
-[ext_resource type="Script" uid="uid://2pk6lv5drag2" path="res://src/Level/GUI/pause_menu.gd" id="22_1nnnw"]
-[ext_resource type="Script" uid="uid://nm7v2oerrihf" path="res://src/Level/win_loss_condition.gd" id="23_ff31n"]
-[ext_resource type="Script" uid="uid://sehkuo2xbwos" path="res://src/Worlds/world_tracker.gd" id="24_5cnm2"]
-[ext_resource type="Resource" uid="uid://b7d426jw88wxl" path="res://src/Worlds/world_handler.tres" id="25_fux7y"]
-[ext_resource type="Script" uid="uid://dyx7v0w8tua76" path="res://src/Level/camera_controller.gd" id="26_nmv3c"]
-[ext_resource type="Script" uid="uid://clylcm7g0eamp" path="res://src/Gameplay/boss_handler.gd" id="36_1rtpf"]
+[ext_resource type="Texture2D" uid="uid://bqmtavn12rhj2" path="res://assets/test_map5.png" id="1_2fcyv"]
+[ext_resource type="Texture2D" uid="uid://cnyhbigbys3p8" path="res://assets/level_art/48x48_Dungeon_Temple/A2_48x48.png" id="2_amktc"]
+[ext_resource type="Texture2D" uid="uid://dvn0i1mc3ajf8" path="res://assets/level_art/48x48_Dungeon_Temple/A4_48x48.png" id="3_u4ocy"]
+[ext_resource type="Texture2D" uid="uid://rlov5jfc4ku0" path="res://assets/level_art/48x48_Dungeon_Temple/B48x48.png" id="4_mdgp0"]
+[ext_resource type="PackedScene" uid="uid://cats61ytkbbvj" path="res://src/PathVisuals/draw_path.tscn" id="5_2bk3a"]
+[ext_resource type="Script" uid="uid://t1qdqjubkhud" path="res://src/Units/character_manager.gd" id="6_0q6j0"]
+[ext_resource type="Script" uid="uid://cjlatyxuwhq1n" path="res://src/Level/turn_manager.gd" id="7_tq1dx"]
+[ext_resource type="PackedScene" uid="uid://dijjspgi8x8sv" path="res://src/Units/actor.tscn" id="8_gtrv1"]
+[ext_resource type="Script" uid="uid://dfeqtmcp7uacl" path="res://src/Units/CharacterStats.gd" id="9_woqaf"]
+[ext_resource type="Resource" uid="uid://bu2f1ylnrxljm" path="res://characters/Knight/knightProfile.tres" id="10_negw4"]
+[ext_resource type="Resource" uid="uid://mwedg6ttx2lp" path="res://characters/Mage/mageProfile.tres" id="11_4v0m7"]
+[ext_resource type="Resource" uid="uid://b0ar83lqod7e4" path="res://characters/Healer/healerProfile.tres" id="12_vxxiq"]
+[ext_resource type="Resource" uid="uid://b5bmi1atp4dnb" path="res://characters/Mage/mageEnemyProfile.tres" id="13_kxehu"]
+[ext_resource type="Resource" uid="uid://b0nthq3t1klg" path="res://characters/DemonLord/demonLordProfile.tres" id="14_mt6p0"]
+[ext_resource type="Resource" uid="uid://cbanv2lc58ujn" path="res://characters/Beholder/beholderProfile.tres" id="15_s1w74"]
+[ext_resource type="Resource" uid="uid://kcaxutpbj358" path="res://characters/Knight/knightEnemyProfile.tres" id="16_qb863"]
+[ext_resource type="Resource" uid="uid://dibcrc72hsl6q" path="res://characters/RedSlime/redSlimeProfile.tres" id="17_oggf3"]
+[ext_resource type="Script" uid="uid://lvdowlbqk6fe" path="res://src/Level/GUI/actions_menu.gd" id="18_x3qpb"]
+[ext_resource type="Script" uid="uid://duw38t7v0nrgf" path="res://src/Level/GUI/default_attack.gd" id="19_g4x2h"]
+[ext_resource type="Script" uid="uid://c5xlaf1onfe67" path="res://src/Level/GUI/use_skill_button.gd" id="20_dj4xy"]
+[ext_resource type="Script" uid="uid://b6oemt0bk5jyw" path="res://src/Level/GUI/stand_button.gd" id="21_qon3o"]
+[ext_resource type="Script" uid="uid://dso7okpirndht" path="res://src/Level/GUI/actor_info.gd" id="22_0cjo7"]
+[ext_resource type="Script" uid="uid://dous6wk318f1t" path="res://src/Level/GUI/victory_screen.gd" id="23_k08xh"]
+[ext_resource type="Script" uid="uid://sddm7u5ng6mx" path="res://src/Level/GUI/game_over_screen.gd" id="24_n2wfk"]
+[ext_resource type="Script" uid="uid://dbsll2ofxadj5" path="res://src/Level/GUI/skill_menu.gd" id="25_hiqkj"]
+[ext_resource type="Script" uid="uid://w7ua1w0mwld8" path="res://src/Level/GUI/skill_1_button.gd" id="26_hdaaw"]
+[ext_resource type="Script" uid="uid://b3u6ea2h55gqj" path="res://src/Level/GUI/skill_2_button.gd" id="27_qv0nr"]
+[ext_resource type="Script" uid="uid://giyv8yaisw0a" path="res://src/Level/GUI/back_skill_button.gd" id="28_7cm00"]
+[ext_resource type="Script" uid="uid://bety4ic5vs3fy" path="res://src/Level/GUI/pause_button.gd" id="29_dqcch"]
+[ext_resource type="Script" uid="uid://2pk6lv5drag2" path="res://src/Level/GUI/pause_menu.gd" id="30_88f3s"]
+[ext_resource type="PackedScene" uid="uid://d3enl3nxco4pd" path="res://src/Level/TurnTransition.tscn" id="31_hhe5d"]
+[ext_resource type="Script" uid="uid://nm7v2oerrihf" path="res://src/Level/win_loss_condition.gd" id="32_sxea6"]
+[ext_resource type="Script" uid="uid://sehkuo2xbwos" path="res://src/Worlds/world_tracker.gd" id="33_jyw0b"]
+[ext_resource type="Resource" uid="uid://b7d426jw88wxl" path="res://src/Worlds/world_handler.tres" id="34_5wngd"]
+[ext_resource type="Script" uid="uid://dyx7v0w8tua76" path="res://src/Level/camera_controller.gd" id="35_i6w3l"]
+[ext_resource type="Script" uid="uid://clylcm7g0eamp" path="res://src/Gameplay/boss_handler.gd" id="36_wu41n"]
 
 [sub_resource type="GDScript" id="GDScript_ic0uy"]
 script/source = "extends Node2D
@@ -50,7 +53,7 @@ func _ready() -> void:
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hiqwa"]
-texture = ExtResource("1_vv3df")
+texture = ExtResource("1_2fcyv")
 texture_region_size = Vector2i(48, 48)
 0:0/0 = 0
 0:0/0/custom_data_0 = true
@@ -67,7 +70,7 @@ custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_hiqwa")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cqthp"]
-texture = ExtResource("3_6rngw")
+texture = ExtResource("2_amktc")
 texture_region_size = Vector2i(48, 48)
 0:0/0 = 0
 1:0/0 = 0
@@ -131,7 +134,7 @@ texture_region_size = Vector2i(48, 48)
 3:5/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n3xv8"]
-texture = ExtResource("4_3nfj0")
+texture = ExtResource("3_u4ocy")
 texture_region_size = Vector2i(48, 48)
 0:0/0 = 0
 1:0/0 = 0
@@ -160,7 +163,7 @@ sources/8 = SubResource("TileSetAtlasSource_n3xv8")
 sources/7 = SubResource("TileSetAtlasSource_cqthp")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6rngw"]
-texture = ExtResource("5_rh6du")
+texture = ExtResource("4_mdgp0")
 texture_region_size = Vector2i(48, 48)
 1:0/0 = 0
 2:0/0 = 0
@@ -256,7 +259,7 @@ tile_size = Vector2i(48, 48)
 sources/1 = SubResource("TileSetAtlasSource_6rngw")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_70uel"]
-texture = ExtResource("1_vv3df")
+texture = ExtResource("1_2fcyv")
 texture_region_size = Vector2i(48, 48)
 0:0/0 = 0
 1:0/0 = 0
@@ -267,9 +270,9 @@ texture_region_size = Vector2i(48, 48)
 tile_size = Vector2i(48, 48)
 sources/1 = SubResource("TileSetAtlasSource_70uel")
 
-[sub_resource type="Resource" id="Resource_n3xv8"]
+[sub_resource type="Resource" id="Resource_1rtpf"]
 resource_name = "knightStats"
-script = ExtResource("7_cqthp")
+script = ExtResource("9_woqaf")
 curr_health = 200
 max_health = 200
 original_max_health = 200
@@ -297,9 +300,9 @@ mag_def_gain = 0
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_vm506"]
+[sub_resource type="Resource" id="Resource_wnk3o"]
 resource_name = "mageStats"
-script = ExtResource("7_cqthp")
+script = ExtResource("9_woqaf")
 curr_health = 100
 max_health = 100
 original_max_health = 100
@@ -327,9 +330,9 @@ mag_def_gain = 10
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_piprm"]
+[sub_resource type="Resource" id="Resource_kepf7"]
 resource_name = "healerStats"
-script = ExtResource("7_cqthp")
+script = ExtResource("9_woqaf")
 curr_health = 1
 max_health = 1
 original_max_health = 1
@@ -354,6 +357,296 @@ phys_atk_gain = 1
 phys_def_gain = 1
 mag_atk_gain = 1
 mag_def_gain = 1
+crit_gain = 1
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
+[sub_resource type="Resource" id="Resource_6ahfh"]
+script = ExtResource("9_woqaf")
+curr_health = 100
+max_health = 120
+original_max_health = 100
+phys_attack = 20
+original_phys_attack = 20
+mag_attack = 140
+original_mag_attack = 100
+phys_defense = 10
+original_phys_defense = 10
+mag_defense = 50
+original_mag_defense = 30
+crit_chance = 10
+original_crit_chance = 10
+attack_range = 2
+original_attack_range = 2
+mobility = 3
+original_mobility = 3
+level = 1
+speed = 3.0
+health_gain = 10
+phys_atk_gain = 0
+phys_def_gain = 0
+mag_atk_gain = 20
+mag_def_gain = 10
+crit_gain = 0
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
+[sub_resource type="Resource" id="Resource_6pnqh"]
+script = ExtResource("9_woqaf")
+curr_health = 500
+max_health = 500
+original_max_health = 500
+phys_attack = 100
+original_phys_attack = 100
+mag_attack = 100
+original_mag_attack = 100
+phys_defense = 100
+original_phys_defense = 100
+mag_defense = 100
+original_mag_defense = 100
+crit_chance = 10
+original_crit_chance = 10
+attack_range = 5
+original_attack_range = 5
+mobility = 0
+original_mobility = 0
+level = 0
+speed = 0.0
+health_gain = 0
+phys_atk_gain = 0
+phys_def_gain = 0
+mag_atk_gain = 0
+mag_def_gain = 0
+crit_gain = 0
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
+[sub_resource type="Resource" id="Resource_q5u82"]
+script = ExtResource("9_woqaf")
+curr_health = 150
+max_health = 150
+original_max_health = 150
+phys_attack = 20
+original_phys_attack = 20
+mag_attack = 90
+original_mag_attack = 90
+phys_defense = 30
+original_phys_defense = 30
+mag_defense = 80
+original_mag_defense = 80
+crit_chance = 15
+original_crit_chance = 15
+attack_range = 2
+original_attack_range = 2
+mobility = 3
+original_mobility = 3
+level = 0
+speed = 3.0
+health_gain = 10
+phys_atk_gain = 0
+phys_def_gain = 5
+mag_atk_gain = 10
+mag_def_gain = 10
+crit_gain = 2
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
+[sub_resource type="Resource" id="Resource_qwlg0"]
+script = ExtResource("9_woqaf")
+curr_health = 100
+max_health = 130
+original_max_health = 100
+phys_attack = 20
+original_phys_attack = 20
+mag_attack = 160
+original_mag_attack = 100
+phys_defense = 10
+original_phys_defense = 10
+mag_defense = 60
+original_mag_defense = 30
+crit_chance = 10
+original_crit_chance = 10
+attack_range = 2
+original_attack_range = 2
+mobility = 3
+original_mobility = 3
+level = 1
+speed = 3.0
+health_gain = 10
+phys_atk_gain = 0
+phys_def_gain = 0
+mag_atk_gain = 20
+mag_def_gain = 10
+crit_gain = 0
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
+[sub_resource type="Resource" id="Resource_fvyes"]
+script = ExtResource("9_woqaf")
+curr_health = 100
+max_health = 130
+original_max_health = 100
+phys_attack = 20
+original_phys_attack = 20
+mag_attack = 160
+original_mag_attack = 100
+phys_defense = 10
+original_phys_defense = 10
+mag_defense = 60
+original_mag_defense = 30
+crit_chance = 10
+original_crit_chance = 10
+attack_range = 2
+original_attack_range = 2
+mobility = 3
+original_mobility = 3
+level = 1
+speed = 3.0
+health_gain = 10
+phys_atk_gain = 0
+phys_def_gain = 0
+mag_atk_gain = 20
+mag_def_gain = 10
+crit_gain = 0
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
+[sub_resource type="Resource" id="Resource_0c5bu"]
+script = ExtResource("9_woqaf")
+curr_health = 100
+max_health = 130
+original_max_health = 100
+phys_attack = 20
+original_phys_attack = 20
+mag_attack = 160
+original_mag_attack = 100
+phys_defense = 10
+original_phys_defense = 10
+mag_defense = 60
+original_mag_defense = 30
+crit_chance = 10
+original_crit_chance = 10
+attack_range = 2
+original_attack_range = 2
+mobility = 3
+original_mobility = 3
+level = 1
+speed = 3.0
+health_gain = 10
+phys_atk_gain = 0
+phys_def_gain = 0
+mag_atk_gain = 20
+mag_def_gain = 10
+crit_gain = 0
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
+[sub_resource type="Resource" id="Resource_x61jx"]
+script = ExtResource("9_woqaf")
+curr_health = 150
+max_health = 150
+original_max_health = 150
+phys_attack = 20
+original_phys_attack = 20
+mag_attack = 90
+original_mag_attack = 90
+phys_defense = 30
+original_phys_defense = 30
+mag_defense = 80
+original_mag_defense = 80
+crit_chance = 15
+original_crit_chance = 15
+attack_range = 2
+original_attack_range = 2
+mobility = 3
+original_mobility = 3
+level = 0
+speed = 3.0
+health_gain = 10
+phys_atk_gain = 0
+phys_def_gain = 5
+mag_atk_gain = 10
+mag_def_gain = 10
+crit_gain = 2
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
+[sub_resource type="Resource" id="Resource_jjb7c"]
+script = ExtResource("9_woqaf")
+curr_health = 150
+max_health = 160
+original_max_health = 150
+phys_attack = 100
+original_phys_attack = 90
+mag_attack = 5
+original_mag_attack = 5
+phys_defense = 80
+original_phys_defense = 70
+mag_defense = 65
+original_mag_defense = 60
+crit_chance = 12
+original_crit_chance = 10
+attack_range = 1
+original_attack_range = 1
+mobility = 3
+original_mobility = 3
+level = 0
+speed = 3.0
+health_gain = 10
+phys_atk_gain = 10
+phys_def_gain = 10
+mag_atk_gain = 0
+mag_def_gain = 5
+crit_gain = 2
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
+[sub_resource type="Resource" id="Resource_1nnnw"]
+script = ExtResource("9_woqaf")
+curr_health = 70
+max_health = 110
+original_max_health = 70
+phys_attack = 100
+original_phys_attack = 60
+mag_attack = 10
+original_mag_attack = 10
+phys_defense = 70
+original_phys_defense = 50
+mag_defense = 50
+original_mag_defense = 30
+crit_chance = 14
+original_crit_chance = 10
+attack_range = 1
+original_attack_range = 1
+mobility = 3
+original_mobility = 3
+level = 1
+speed = 3.0
+health_gain = 10
+phys_atk_gain = 10
+phys_def_gain = 5
+mag_atk_gain = 0
+mag_def_gain = 5
+crit_gain = 1
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
+[sub_resource type="Resource" id="Resource_ff31n"]
+script = ExtResource("9_woqaf")
+curr_health = 70
+max_health = 110
+original_max_health = 70
+phys_attack = 100
+original_phys_attack = 60
+mag_attack = 10
+original_mag_attack = 10
+phys_defense = 70
+original_phys_defense = 50
+mag_defense = 50
+original_mag_defense = 30
+crit_chance = 14
+original_crit_chance = 10
+attack_range = 1
+original_attack_range = 1
+mobility = 3
+original_mobility = 3
+level = 1
+speed = 3.0
+health_gain = 10
+phys_atk_gain = 10
+phys_def_gain = 5
+mag_atk_gain = 0
+mag_def_gain = 5
 crit_gain = 1
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
@@ -411,50 +704,113 @@ format = 2
 layer_0/name = "Effects1"
 layer_1/name = "Effects2"
 
-[node name="DrawPath" parent="." instance=ExtResource("2_iwxyq")]
+[node name="DrawPath" parent="." instance=ExtResource("5_2bk3a")]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_f3sb7")
 
 [node name="CharacterManager" type="Node2D" parent="TileMapLayer"]
-script = ExtResource("4_2fkj7")
+script = ExtResource("6_0q6j0")
 
 [node name="TurnManager" type="Node2D" parent="TileMapLayer"]
-script = ExtResource("5_3nfj0")
+script = ExtResource("7_tq1dx")
 max_turns = 25
 
 [node name="Actors" type="Node2D" parent="TileMapLayer"]
 y_sort_enabled = true
 
-[node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("6_rh6du")]
-position = Vector2(1464, 456)
-stats = SubResource("Resource_n3xv8")
-profile = ExtResource("8_n3xv8")
+[node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
+position = Vector2(312, 456)
+stats = SubResource("Resource_1rtpf")
+profile = ExtResource("10_negw4")
 is_friendly = true
 is_demon_lord = false
 
-[node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("6_rh6du")]
-position = Vector2(1416, 504)
-stats = SubResource("Resource_vm506")
-profile = ExtResource("9_vv3df")
+[node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
+position = Vector2(264, 504)
+stats = SubResource("Resource_wnk3o")
+profile = ExtResource("11_4v0m7")
 enemy_level = 5
 is_friendly = true
 is_demon_lord = false
 
-[node name="playable_unit3" parent="TileMapLayer/Actors" instance=ExtResource("6_rh6du")]
-position = Vector2(1416, 408)
-stats = SubResource("Resource_piprm")
-profile = ExtResource("13_n3xv8")
+[node name="playable_unit3" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
+position = Vector2(264, 408)
+stats = SubResource("Resource_kepf7")
+profile = ExtResource("12_vxxiq")
 enemy_level = 5
 is_friendly = true
 is_demon_lord = false
 
-[node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("6_rh6du")]
+[node name="enemy_unit2" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
+position = Vector2(552, 648)
+stats = SubResource("Resource_6ahfh")
+profile = ExtResource("13_kxehu")
+enemy_level = 3
+is_demon_lord = false
+
+[node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
 position = Vector2(1752, 456)
-stats = ExtResource("14_wnk3o")
-profile = ExtResource("13_rh6du")
+stats = SubResource("Resource_6pnqh")
+profile = ExtResource("14_mt6p0")
 enemy_level = 1
 is_demon_lord = true
+
+[node name="enemy_unit3" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
+position = Vector2(72, 456)
+stats = SubResource("Resource_q5u82")
+profile = ExtResource("15_s1w74")
+enemy_level = 1
+is_demon_lord = false
+
+[node name="enemy_unit4" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
+position = Vector2(1608, 456)
+stats = SubResource("Resource_qwlg0")
+profile = ExtResource("13_kxehu")
+enemy_level = 2
+is_demon_lord = false
+
+[node name="enemy_unit5" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
+position = Vector2(1656, 552)
+stats = SubResource("Resource_fvyes")
+profile = ExtResource("13_kxehu")
+enemy_level = 2
+is_demon_lord = false
+
+[node name="enemy_unit6" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
+position = Vector2(1656, 360)
+stats = SubResource("Resource_0c5bu")
+profile = ExtResource("13_kxehu")
+enemy_level = 2
+is_demon_lord = false
+
+[node name="enemy_unit7" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
+position = Vector2(1080, 216)
+stats = SubResource("Resource_x61jx")
+profile = ExtResource("15_s1w74")
+enemy_level = 1
+is_demon_lord = false
+
+[node name="enemy_unit9" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
+position = Vector2(1176, 216)
+stats = SubResource("Resource_jjb7c")
+profile = ExtResource("16_qb863")
+enemy_level = 2
+is_demon_lord = false
+
+[node name="enemy_unit10" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
+position = Vector2(504, 696)
+stats = SubResource("Resource_1nnnw")
+profile = ExtResource("17_oggf3")
+enemy_level = 5
+is_demon_lord = false
+
+[node name="enemy_unit11" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
+position = Vector2(600, 696)
+stats = SubResource("Resource_ff31n")
+profile = ExtResource("17_oggf3")
+enemy_level = 5
+is_demon_lord = false
 
 [node name="GUI" type="CanvasLayer" parent="."]
 script = SubResource("GDScript_mfmxk")
@@ -471,7 +827,7 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 mouse_filter = 1
-script = ExtResource("10_piprm")
+script = ExtResource("18_x3qpb")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GUI/Margin/ActionsMenu"]
 layout_mode = 2
@@ -479,24 +835,24 @@ layout_mode = 2
 [node name="Default_Attack" type="Button" parent="GUI/Margin/ActionsMenu/VBoxContainer"]
 layout_mode = 2
 text = "Attack"
-script = ExtResource("11_1rtpf")
+script = ExtResource("19_g4x2h")
 
 [node name="Use_Skill" type="Button" parent="GUI/Margin/ActionsMenu/VBoxContainer"]
 layout_mode = 2
 text = "Skill"
-script = ExtResource("12_wnk3o")
+script = ExtResource("20_dj4xy")
 
 [node name="Pass_Turn" type="Button" parent="GUI/Margin/ActionsMenu/VBoxContainer"]
 layout_mode = 2
 text = "Pass"
-script = ExtResource("13_kepf7")
+script = ExtResource("21_qon3o")
 
 [node name="ActorInfo" type="PanelContainer" parent="GUI/Margin"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 mouse_filter = 1
-script = ExtResource("14_6ahfh")
+script = ExtResource("22_0cjo7")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GUI/Margin/ActorInfo"]
 layout_mode = 2
@@ -522,7 +878,7 @@ custom_minimum_size = Vector2(400, 150)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("15_6pnqh")
+script = ExtResource("23_k08xh")
 
 [node name="Label" type="Label" parent="GUI/Margin/VictoryScreen"]
 layout_mode = 2
@@ -544,7 +900,7 @@ custom_minimum_size = Vector2(400, 150)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("16_q5u82")
+script = ExtResource("24_n2wfk")
 
 [node name="Label" type="Label" parent="GUI/Margin/GameOverScreen"]
 layout_mode = 2
@@ -575,7 +931,7 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 mouse_filter = 1
-script = ExtResource("17_qwlg0")
+script = ExtResource("25_hiqkj")
 
 [node name="SkillInfoPopup" type="PopupPanel" parent="GUI/Margin/SkillMenu"]
 auto_translate_mode = 1
@@ -595,25 +951,25 @@ layout_mode = 2
 layout_mode = 2
 disabled = true
 text = "Skill1"
-script = ExtResource("18_fvyes")
+script = ExtResource("26_hdaaw")
 
 [node name="Skill2" type="Button" parent="GUI/Margin/SkillMenu/VBoxContainer"]
 layout_mode = 2
 disabled = true
 text = "Skill2"
-script = ExtResource("19_0c5bu")
+script = ExtResource("27_qv0nr")
 
 [node name="Back" type="Button" parent="GUI/Margin/SkillMenu/VBoxContainer"]
 layout_mode = 2
 text = "Back"
-script = ExtResource("20_x61jx")
+script = ExtResource("28_7cm00")
 
 [node name="PauseButton" type="Button" parent="GUI/Margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "Pause"
-script = ExtResource("21_jjb7c")
+script = ExtResource("29_dqcch")
 
 [node name="PauseMenu" type="PanelContainer" parent="GUI/Margin"]
 process_mode = 3
@@ -622,7 +978,7 @@ custom_minimum_size = Vector2(400, 250)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("22_1nnnw")
+script = ExtResource("30_88f3s")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GUI/Margin/PauseMenu"]
 custom_minimum_size = Vector2(200, 0)
@@ -669,22 +1025,22 @@ value = -5.0
 layout_mode = 2
 text = "Close"
 
-[node name="TurnTransitionCanvas" parent="." instance=ExtResource("15_cqthp")]
+[node name="TurnTransitionCanvas" parent="." instance=ExtResource("31_hhe5d")]
 
 [node name="WinLossCondition" type="Node2D" parent="."]
-script = ExtResource("23_ff31n")
+script = ExtResource("32_sxea6")
 
 [node name="WorldHandler" type="Node" parent="."]
-script = ExtResource("24_5cnm2")
-world_script = ExtResource("25_fux7y")
+script = ExtResource("33_jyw0b")
+world_script = ExtResource("34_5wngd")
 
 [node name="CameraController" type="Node2D" parent="."]
-script = ExtResource("26_nmv3c")
+script = ExtResource("35_i6w3l")
 
 [node name="Camera" type="Camera2D" parent="CameraController"]
 
 [node name="BossHandler" type="Node" parent="."]
-script = ExtResource("36_1rtpf")
+script = ExtResource("36_wu41n")
 
 [connection signal="pressed" from="GUI/Margin/VictoryScreen/Continue" to="GUI/Margin/VictoryScreen" method="_on_continue_pressed"]
 [connection signal="pressed" from="GUI/Margin/GameOverScreen/HBoxContainer/Retry" to="GUI/Margin/GameOverScreen" method="_on_retry_pressed"]

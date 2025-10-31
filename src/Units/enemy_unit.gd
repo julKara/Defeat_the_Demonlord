@@ -227,11 +227,12 @@ func check_if_occupied(id_path: Array[Vector2i]) -> bool:
 			if character != get_parent():
 				# The index of the tile the enemy will stop at. They always stops as soon as they're in range.
 				var index = id_path.size() - attack_range - 1 
-				if id_path[index] == tile_map.local_to_map(character.global_position):
-					solid_pos.append(tile_map.local_to_map(character.global_position)) 
-					# If the tile is occupied -> set tile to solid. The tile will then not be includen in pathfinding
-					astar_grid.set_point_solid(solid_pos.back(), true)
-					return true
+				if index >= 0:
+					if id_path[index] == tile_map.local_to_map(character.global_position):
+						solid_pos.append(tile_map.local_to_map(character.global_position)) 
+						# If the tile is occupied -> set tile to solid. The tile will then not be includen in pathfinding
+						astar_grid.set_point_solid(solid_pos.back(), true)
+						return true
 	return false
 
 

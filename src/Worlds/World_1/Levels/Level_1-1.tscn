@@ -553,18 +553,21 @@ position = Vector2(120, 120)
 stats = SubResource("Resource_ev2u1")
 profile = ExtResource("7_8y1rk")
 is_friendly = true
+is_demon_lord = null
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
 position = Vector2(168, 312)
 stats = SubResource("Resource_ehkro")
 profile = ExtResource("10_0yevp")
 enemy_level = 1
+is_demon_lord = null
 
 [node name="enemy_unit2" parent="TileMapLayer/Actors" instance=ExtResource("4_e1a87")]
 position = Vector2(408, 264)
 stats = SubResource("Resource_1sq2e")
 profile = ExtResource("10_0yevp")
 enemy_level = 1
+is_demon_lord = null
 
 [node name="CameraController" type="Node2D" parent="."]
 script = ExtResource("22_ky5eb")

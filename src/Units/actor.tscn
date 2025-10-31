@@ -194,6 +194,7 @@ bg_color = Color(0.662452, 0.662452, 0.662452, 1)
 [node name="enemy_unit" type="CharacterBody2D"]
 y_sort_enabled = true
 script = ExtResource("1_xjefa")
+is_demon_lord = null
 
 [node name="Sprite" type="Sprite2D" parent="."]
 y_sort_enabled = true
