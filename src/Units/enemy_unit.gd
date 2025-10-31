@@ -305,6 +305,8 @@ func attack():
 				
 func play_turn():
 	
+	_set_stat_variables()
+	
 	attack_used = false
 	skill_used = false
 	
@@ -332,6 +334,9 @@ func play_turn():
 
 # --- Selection logic ---
 func highlight_enemy_range() -> void:
+	
+	_set_stat_variables()
+	
 	range_tile_map.clear_layer(0)
 	range_tile_map.clear_layer(1)
 

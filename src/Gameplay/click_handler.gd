@@ -76,6 +76,11 @@ func _handle_playable_click(actor: Actor) -> void:
 		_deselect_unit(selected_unit)
 		_select_unit(actor)
 		return
+		
+	if selected_unit.acted:
+		_deselect_unit(selected_unit)
+		_select_unit(actor)
+		return
 
 	# --- If a playable is selected
 	

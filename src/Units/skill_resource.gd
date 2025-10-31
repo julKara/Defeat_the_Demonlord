@@ -25,7 +25,8 @@ class_name SkillResource extends Resource
 	"curr_phys_attack": 0.0,
 	"curr_mag_attack": 0.0,
 	"curr_phys_defense": 0.0,
-	"curr_mag_defense": 0.0
+	"curr_mag_defense": 0.0,
+	"curr_mobility": 0.0
 }
 
 # Custom script to handle unique skill logic
@@ -117,7 +118,15 @@ func remove_effect(target: Node, effect_record: Dictionary) -> void:
 		for key in effect_record.stat_multiplier.keys():
 			if key in CharacterStats.MODIFIABLE_STATS:
 				var factor = effect_record.stat_multiplier[key]
-				if factor == 0:	# Skip division by 0
+				var curr_value = stats.get(key)
+
+				if factor == 0:
+					# Handle gracefully by restoring from the base stat
+					var base_key = key.replace("curr_", "")
+					print("Thing: ", base_key)
+					var base_value = stats.get(base_key)
+					stats.set(key, base_value)
 					continue
-				var curr = stats.get(key)
-				stats.set(key, curr / factor)
+
+				# Normal revert by dividing with factor
+				stats.set(key, curr_value / factor)

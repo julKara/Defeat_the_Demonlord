@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="SkillResource" load_steps=2 format=3 uid="uid://c2xq7fcox7l81"]
+
+[ext_resource type="Script" uid="uid://bw6iq6gxtp5vs" path="res://src/Units/skill_resource.gd" id="1_ycuwj"]
+
+[resource]
+script = ExtResource("1_ycuwj")
+skill_name = "Hold Person"
+description = "Reduce enemy targets mobility-range to 0 for a turn."
+skill_type = "Active"
+ends_turn = true
+target_type = "Enemy"
+duration = 1
+cooldown = 3
+stat_addition = {
+"curr_attack_range": 0,
+"curr_mobility": 0
+}
+stat_multiplier = {
+"curr_mag_attack": 1.0,
+"curr_mag_defense": 1.0,
+"curr_mobility": 0.0,
+"curr_phys_attack": 1.0,
+"curr_phys_defense": 1.0
+}
+metadata/_custom_type_script = "uid://bw6iq6gxtp5vs"
