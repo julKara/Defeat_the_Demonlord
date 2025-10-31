@@ -54,6 +54,8 @@ func win():
 	# If this was the latest level -> unlock the next one
 	if current_world == worlds_unlocked and current_level == levels_unlocked:
 		world_handler.world_script.unlock_next_level()
+		# Save level progression
+		world_handler._save_game()
 		
 	character_level_up()
 	

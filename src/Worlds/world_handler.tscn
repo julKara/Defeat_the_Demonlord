@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://vaccxc1odd4"]
+
+[ext_resource type="Script" uid="uid://sehkuo2xbwos" path="res://src/Worlds/world_tracker.gd" id="1_jinsx"]
+
+[node name="WorldHandler" type="Node"]
+script = ExtResource("1_jinsx")

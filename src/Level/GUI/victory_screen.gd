@@ -22,9 +22,6 @@ func _on_continue_pressed() -> void:
 	# Return to level select
 	var level_select: String = "res://src/Worlds/World_" + str(current_world) + "/world_" + str(current_world) + "_level_select.tscn" # Filepath to selected level
 	
-	# Save level progression
-	world_handler._save_game()
-	
 	# Save characters
 	character_manager._save_game()
 	

@@ -10,7 +10,7 @@ func _ready() -> void:
 func _load_save():
 	if SaveGame.save_exists():
 		_save = SaveGame.load_save() as SaveGame
-		world_script = _save.level_progression
+		world_script = _save.level_progression.duplicate()
 		print("Loaded game from save file")
 	
 func _create_save():
@@ -24,7 +24,7 @@ func _create_save():
 	print("New save file created")
 	
 func _save_game():
-	_save.level_progression = world_script
+	_save.level_progression = world_script.duplicate()
 	_save.write_save()
 	print("Saved the game")
 	
