@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="SkillResource" load_steps=3 format=3 uid="uid://cjjcuhny0l2kj"]
+[gd_resource type="Resource" script_class="SkillResource" load_steps=4 format=3 uid="uid://cjjcuhny0l2kj"]
 
 [ext_resource type="Script" uid="uid://bw6iq6gxtp5vs" path="res://src/Units/skill_resource.gd" id="1_njd11"]
 [ext_resource type="Script" uid="uid://bpmtff3andkyb" path="res://assets/Skills/EndTurnDefenceBuff/prepare_defences.gd" id="1_rrj5k"]
+[ext_resource type="Texture2D" uid="uid://cf4pncn6nhv65" path="res://assets/Icons/Skill_23.png" id="2_pqw3n"]
 
 [resource]
 script = ExtResource("1_njd11")
 skill_name = "Prepare Defences"
 description = "By passing a turn without attacking or using a skill, recieve a 30% heal and 20% defence(s) buff."
+icon = ExtResource("2_pqw3n")
 skill_type = "Passive"
 ends_turn = false
 target_type = "Self"
@@ -23,4 +25,3 @@ stat_multiplier = {
 "curr_phys_defense": 0.0
 }
 effect_script = ExtResource("1_rrj5k")
-metadata/_custom_type_script = "uid://bnlafpamei5gh"

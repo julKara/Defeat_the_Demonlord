@@ -45,8 +45,6 @@ func play_transition(text: String, color: Color = Color.WHITE, stay_time: float 
 
 	# Wait for tween to finish before hiding
 	await tween.finished
-
-	print("Wooo")
 	
 	label.visible = false
 	hide()

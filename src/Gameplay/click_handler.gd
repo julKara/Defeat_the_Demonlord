@@ -355,6 +355,7 @@ func _find_level_nodes() -> void:
 					var actions_menu = margin.get_node_or_null("ActionsMenu")
 					var actor_info = margin.get_node_or_null("ActorInfo")
 					var skill_menu = margin.get_node_or_null("SkillMenu")
+					
 					if actions_menu:
 						ui_nodes.append(actions_menu)
 					if actor_info:

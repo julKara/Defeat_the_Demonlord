@@ -3,7 +3,7 @@ class_name enemy_unit extends Node
 @onready var character_manager: Node2D = $"../../../CharacterManager"
 @onready var tile_map: TileMap = $"../../../../TileMap"
 @onready var range_tile_map: TileMap = $"../../../../RangeTileMap"
-@onready var actor_info: PanelContainer = $"../../../../GUI/Margin/ActorInfo"
+@onready var select_display: PanelContainer = $"../../../../GUI/Margin/SelectDisplay"
 
 var battle_handler: Node = null
 
@@ -367,7 +367,8 @@ func select(_has_acted: bool) -> void:	# Has to have input for override to funct
 	ClickHandler.selected_unit = get_parent() 
 	
 	# Display info
-	actor_info.display_actor_info(get_parent())
+	if select_display:
+		select_display.show_for_actor(get_parent())  # assuming actor = get_parent()
 	
 	# Display mobility- and range-tilemap
 	highlight_enemy_range()
@@ -387,5 +388,6 @@ func deselect() -> void:
 	range_tile_map.clear_layer(0)
 	range_tile_map.clear_layer(1)
 	
-	# Hide gui
-	actor_info.hide_actor_info()
+	# Hide or clear stats when deselected
+	if select_display:
+		select_display.visible = false
