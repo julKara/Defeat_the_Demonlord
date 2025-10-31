@@ -17,6 +17,7 @@ func _process(delta: float) -> void:
 		if phase == 1:
 			buff_demon_lord()
 
+# Increases stats every turn, including hp
 func buff_demon_lord():
 	demon_lord.stats.curr_health += 5
 	demon_lord.stats.max_health += 5
@@ -24,3 +25,9 @@ func buff_demon_lord():
 	demon_lord.stats.curr_mag_defense += 2
 	demon_lord.stats.curr_phys_attack += 2
 	demon_lord.stats.curr_phys_defense += 2
+	
+	# Update healthbar
+	var hp_bar : ProgressBar = demon_lord.healthbar
+	hp_bar.damagebar.max_value = demon_lord.stats.max_health
+	hp_bar.max_value = demon_lord.stats.max_health
+	hp_bar._set_health(demon_lord.stats.curr_health)

@@ -390,35 +390,6 @@ metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
 [sub_resource type="Resource" id="Resource_2bk3a"]
 script = ExtResource("9_woqaf")
-curr_health = 500
-max_health = 500
-original_max_health = 500
-phys_attack = 100
-original_phys_attack = 100
-mag_attack = 100
-original_mag_attack = 100
-phys_defense = 100
-original_phys_defense = 100
-mag_defense = 100
-original_mag_defense = 100
-crit_chance = 10
-original_crit_chance = 10
-attack_range = 5
-original_attack_range = 5
-mobility = 0
-original_mobility = 0
-level = 0
-speed = 0.0
-health_gain = 0
-phys_atk_gain = 0
-phys_def_gain = 0
-mag_atk_gain = 0
-mag_def_gain = 0
-crit_gain = 0
-metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
-
-[sub_resource type="Resource" id="Resource_0q6j0"]
-script = ExtResource("9_woqaf")
 curr_health = 150
 max_health = 150
 original_max_health = 150
@@ -444,6 +415,35 @@ phys_def_gain = 5
 mag_atk_gain = 10
 mag_def_gain = 10
 crit_gain = 2
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
+[sub_resource type="Resource" id="Resource_0q6j0"]
+script = ExtResource("9_woqaf")
+curr_health = 100
+max_health = 110
+original_max_health = 100
+phys_attack = 20
+original_phys_attack = 20
+mag_attack = 120
+original_mag_attack = 100
+phys_defense = 10
+original_phys_defense = 10
+mag_defense = 40
+original_mag_defense = 30
+crit_chance = 10
+original_crit_chance = 10
+attack_range = 2
+original_attack_range = 2
+mobility = 3
+original_mobility = 3
+level = 1
+speed = 3.0
+health_gain = 10
+phys_atk_gain = 0
+phys_def_gain = 0
+mag_atk_gain = 20
+mag_def_gain = 10
+crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
 [sub_resource type="Resource" id="Resource_tq1dx"]
@@ -506,35 +506,6 @@ metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
 [sub_resource type="Resource" id="Resource_woqaf"]
 script = ExtResource("9_woqaf")
-curr_health = 100
-max_health = 110
-original_max_health = 100
-phys_attack = 20
-original_phys_attack = 20
-mag_attack = 120
-original_mag_attack = 100
-phys_defense = 10
-original_phys_defense = 10
-mag_defense = 40
-original_mag_defense = 30
-crit_chance = 10
-original_crit_chance = 10
-attack_range = 2
-original_attack_range = 2
-mobility = 3
-original_mobility = 3
-level = 1
-speed = 3.0
-health_gain = 10
-phys_atk_gain = 0
-phys_def_gain = 0
-mag_atk_gain = 20
-mag_def_gain = 10
-crit_gain = 0
-metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
-
-[sub_resource type="Resource" id="Resource_negw4"]
-script = ExtResource("9_woqaf")
 curr_health = 150
 max_health = 150
 original_max_health = 150
@@ -562,7 +533,7 @@ mag_def_gain = 10
 crit_gain = 2
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_4v0m7"]
+[sub_resource type="Resource" id="Resource_negw4"]
 script = ExtResource("9_woqaf")
 curr_health = 150
 max_health = 160
@@ -589,6 +560,35 @@ phys_def_gain = 10
 mag_atk_gain = 0
 mag_def_gain = 5
 crit_gain = 2
+metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
+
+[sub_resource type="Resource" id="Resource_4v0m7"]
+script = ExtResource("9_woqaf")
+curr_health = 70
+max_health = 110
+original_max_health = 70
+phys_attack = 100
+original_phys_attack = 60
+mag_attack = 10
+original_mag_attack = 10
+phys_defense = 70
+original_phys_defense = 50
+mag_defense = 50
+original_mag_defense = 30
+crit_chance = 14
+original_crit_chance = 10
+attack_range = 1
+original_attack_range = 1
+mobility = 3
+original_mobility = 3
+level = 1
+speed = 3.0
+health_gain = 10
+phys_atk_gain = 10
+phys_def_gain = 5
+mag_atk_gain = 0
+mag_def_gain = 5
+crit_gain = 1
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
 [sub_resource type="Resource" id="Resource_vxxiq"]
@@ -622,31 +622,31 @@ metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
 [sub_resource type="Resource" id="Resource_kxehu"]
 script = ExtResource("9_woqaf")
-curr_health = 70
-max_health = 110
-original_max_health = 70
-phys_attack = 100
-original_phys_attack = 60
-mag_attack = 10
-original_mag_attack = 10
-phys_defense = 70
-original_phys_defense = 50
-mag_defense = 50
-original_mag_defense = 30
-crit_chance = 14
+curr_health = 500
+max_health = 500
+original_max_health = 500
+phys_attack = 50
+original_phys_attack = 50
+mag_attack = 50
+original_mag_attack = 50
+phys_defense = 90
+original_phys_defense = 90
+mag_defense = 90
+original_mag_defense = 90
+crit_chance = 10
 original_crit_chance = 10
-attack_range = 1
-original_attack_range = 1
-mobility = 3
-original_mobility = 3
-level = 1
-speed = 3.0
-health_gain = 10
-phys_atk_gain = 10
-phys_def_gain = 5
+attack_range = 5
+original_attack_range = 5
+mobility = 0
+original_mobility = 0
+level = 0
+speed = 0.0
+health_gain = 0
+phys_atk_gain = 0
+phys_def_gain = 0
 mag_atk_gain = 0
-mag_def_gain = 5
-crit_gain = 1
+mag_def_gain = 0
+crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
 [sub_resource type="GDScript" id="GDScript_mfmxk"]
@@ -744,60 +744,60 @@ stats = SubResource("Resource_mdgp0")
 profile = ExtResource("13_kxehu")
 enemy_level = 3
 
-[node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
-position = Vector2(1752, 456)
-stats = SubResource("Resource_2bk3a")
-profile = ExtResource("14_mt6p0")
-enemy_level = 1
-is_demon_lord = true
-
 [node name="enemy_unit3" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
 position = Vector2(72, 456)
-stats = SubResource("Resource_0q6j0")
+stats = SubResource("Resource_2bk3a")
 profile = ExtResource("15_s1w74")
 enemy_level = 1
 
 [node name="enemy_unit4" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
 position = Vector2(1608, 456)
-stats = SubResource("Resource_tq1dx")
+stats = SubResource("Resource_0q6j0")
 profile = ExtResource("13_kxehu")
 enemy_level = 2
 
 [node name="enemy_unit5" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
 position = Vector2(1656, 552)
-stats = SubResource("Resource_gtrv1")
+stats = SubResource("Resource_tq1dx")
 profile = ExtResource("13_kxehu")
 enemy_level = 2
 
 [node name="enemy_unit6" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
 position = Vector2(1656, 360)
-stats = SubResource("Resource_woqaf")
+stats = SubResource("Resource_gtrv1")
 profile = ExtResource("13_kxehu")
 enemy_level = 2
 
 [node name="enemy_unit7" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
 position = Vector2(1080, 216)
-stats = SubResource("Resource_negw4")
+stats = SubResource("Resource_woqaf")
 profile = ExtResource("15_s1w74")
 enemy_level = 1
 
 [node name="enemy_unit9" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
 position = Vector2(1176, 216)
-stats = SubResource("Resource_4v0m7")
+stats = SubResource("Resource_negw4")
 profile = ExtResource("16_qb863")
 enemy_level = 2
 
 [node name="enemy_unit10" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
 position = Vector2(504, 696)
-stats = SubResource("Resource_vxxiq")
+stats = SubResource("Resource_4v0m7")
 profile = ExtResource("17_oggf3")
 enemy_level = 5
 
 [node name="enemy_unit11" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
 position = Vector2(600, 696)
-stats = SubResource("Resource_kxehu")
+stats = SubResource("Resource_vxxiq")
 profile = ExtResource("17_oggf3")
 enemy_level = 5
+
+[node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
+position = Vector2(1752, 456)
+stats = SubResource("Resource_kxehu")
+profile = ExtResource("14_mt6p0")
+enemy_level = 1
+is_demon_lord = true
 
 [node name="GUI" type="CanvasLayer" parent="."]
 script = SubResource("GDScript_mfmxk")

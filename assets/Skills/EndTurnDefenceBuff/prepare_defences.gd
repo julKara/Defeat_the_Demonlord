@@ -30,7 +30,7 @@ func apply(caster: Actor, _target: Actor, skill: SkillResource) -> void:
 	for key in buff_multiplier.keys():
 		if key in CharacterStats.MODIFIABLE_STATS:
 			var curr = stats.get(key)
-			stats.set(key, curr * buff_multiplier[key])
+			stats.set(key, round(curr * buff_multiplier[key]))
 	
 	# Register the buffa so it gets reversed after duration
 	var effect_record := {
