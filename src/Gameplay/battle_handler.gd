@@ -103,7 +103,6 @@ func _play_animation(attacker: Actor) -> void:
 	# Dynamically put together filepath of animation (e.g default/idle)
 	var full_name = "%s/%s" % [attacker.anim_library_name, anim_name]
 	if anim_player.has_animation(full_name):
-		print("Got!")
 		anim_length = anim_player.get_animation(full_name).length
 
 	# 3. Start the timer to wait for animation completion

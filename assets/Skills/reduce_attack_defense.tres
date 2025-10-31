@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="SkillResource" load_steps=2 format=3 uid="uid://dc7vt7vrhpxa2"]
+[gd_resource type="Resource" script_class="SkillResource" load_steps=3 format=3 uid="uid://dc7vt7vrhpxa2"]
 
+[ext_resource type="Texture2D" uid="uid://c80kb085bo1eg" path="res://assets/Icons/Skill_45.png" id="1_35mf3"]
 [ext_resource type="Script" uid="uid://bw6iq6gxtp5vs" path="res://src/Units/skill_resource.gd" id="1_nycdk"]
 
 [resource]
 script = ExtResource("1_nycdk")
 skill_name = "Pocket Sand"
 description = "Reduces all of the targeted enemy's attack and defence."
+icon = ExtResource("1_35mf3")
 skill_type = "Active"
 ends_turn = true
 target_type = "Enemy"

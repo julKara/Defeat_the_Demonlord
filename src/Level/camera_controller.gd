@@ -5,8 +5,8 @@ extends Node2D
 
 @export var pan_speed := 1.0
 @export var camera_smoothness := 8.0
-@export var zoom_levels := [0.5, 0.75, 1.0] # pixel-perfect integer zooms
-var zoom_index := 2
+@export var zoom_levels := [0.5, 0.75, 1.0]
+var zoom_index := 1
 
 var target_position: Vector2
 var dragging := false
@@ -42,15 +42,16 @@ func _unhandled_input(event: InputEvent) -> void:
 				dragging = event.pressed
 				last_mouse_pos = event.position
 
+	# Move opposite the mouse drag, scaled by zoom
 	elif event is InputEventMouseMotion and dragging:
 		var delta_screen: Vector2 = event.position - last_mouse_pos
-		# Move opposite the mouse drag, scaled by zoom
 		target_position -= delta_screen * camera.zoom.x * pan_speed
 		last_mouse_pos = event.position
 		_clamp_camera_inside_map()
 
 # --- Zoom ---
 func _set_zoom_level(delta_idx: int) -> void:
+	
 	# Clamp new index
 	zoom_index = clamp(zoom_index + delta_idx, 0, zoom_levels.size() - 1)
 	var new_z : float = zoom_levels[zoom_index]

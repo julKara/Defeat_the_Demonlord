@@ -6,13 +6,13 @@ class_name playable_unit extends Node
 @onready var draw_path: Node2D = $"../../../../DrawPath"
 @onready var character_manager: Node2D = $"../../../CharacterManager"
 @onready var actions_menu: PanelContainer = $"../../../../GUI/Margin/ActionsMenu"
-@onready var actor_info: PanelContainer = $"../../../../GUI/Margin/ActorInfo"
 @onready var turn_manager: Node2D = $"../../../TurnManager"
 @onready var default_attack: Button = $"../../../../GUI/Margin/ActionsMenu/VBoxContainer/Default_Attack"
 @onready var skill_menu: PanelContainer = $"../../../../GUI/Margin/SkillMenu"
 @onready var skill_1: Button = $"../../../../GUI/Margin/SkillMenu/VBoxContainer/Skill1"
 @onready var skill_2: Button = $"../../../../GUI/Margin/SkillMenu/VBoxContainer/Skill2"
 @onready var camera_controller: Node = $"../../../../CameraController"
+@onready var select_display: PanelContainer = $"../../../../GUI/Margin/SelectDisplay"
 
 
 # --- Variables ---
@@ -146,9 +146,6 @@ func select(has_acted: bool) -> void:
 		get_parent().set_state(get_parent().UnitState.SELECTED)
 		actions_menu.show()
 	
-	# Display info
-	actor_info.display_actor_info(get_parent())
-	
 	get_parent().passed_turn = false	# Reset
 	if get_parent().skills.size() > 0:
 		skill_1.skill = get_parent().skills[0]
@@ -158,6 +155,11 @@ func select(has_acted: bool) -> void:
 	
 	# Display mobility- and range-tilemap
 	highlight_range()
+	
+	# Show stats display
+	
+	if select_display:
+		select_display.show_for_actor(get_parent())  # assuming actor = get_parent()
 	
 	# Center camera on unit
 	if camera_controller:
@@ -184,10 +186,14 @@ func deselect() -> void:
 	# Hide GUI-elements
 	skill_menu.hide_skill_menu()	# Must be first
 	actions_menu.hide()
-	actor_info.hide_actor_info()
 	
 	# Reset skill-buttons
 	skill_menu.reset_all_buttons()
+	
+	# Hide or clear stats when deselected
+	if select_display:
+		select_display.visible = false
+
 	
 	# Remove target-highlight if the is one
 	if attack_target:

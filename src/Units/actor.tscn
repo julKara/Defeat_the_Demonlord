@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dijjspgi8x8sv"]
+[gd_scene load_steps=48 format=3 uid="uid://dijjspgi8x8sv"]
 
 [ext_resource type="Script" uid="uid://7mgltwn5kw4v" path="res://src/Units/actor.gd" id="1_xjefa"]
 [ext_resource type="Shader" uid="uid://54clig0upyxr" path="res://src/Units/highlight.gdshader" id="2_a5lvk"]
@@ -22,8 +22,12 @@
 [ext_resource type="AnimationLibrary" uid="uid://dpo6d26rdncm3" path="res://characters/Knight/knightEnemyAnimations.tres" id="9_ijenq"]
 [ext_resource type="Texture2D" uid="uid://bamsmmno7600h" path="res://assets/character_art/redSlime/Slime_Red_Default_Attack_f3.png" id="10_cb3ch"]
 [ext_resource type="Texture2D" uid="uid://cfxaybx45nead" path="res://assets/character_art/Slime/Slime_Default_Attack_f4.png" id="10_tbjoy"]
-[ext_resource type="AnimationLibrary" uid="uid://bfhibyg3m1e5o" path="res://characters/Mage/mageEnemyAnimations.tres" id="11_jvd5u"]
+[ext_resource type="Texture2D" uid="uid://cfb28nqiblcx6" path="res://assets/character_art/mageEnemy/Mage_Enemy_Default_Attack__f1.png" id="11_2bl5i"]
+[ext_resource type="Texture2D" uid="uid://cqoufurentsbd" path="res://assets/character_art/mageEnemy/Mage_Enemy_Sprite.png" id="11_hpj27"]
 [ext_resource type="Texture2D" uid="uid://ccwri7ry3bhar" path="res://assets/character_art/redSlime/Slime_Red_Default_Attack_f4.png" id="11_yuo2x"]
+[ext_resource type="Texture2D" uid="uid://brkiyv6q6x2gc" path="res://assets/character_art/mageEnemy/Mage_Enemy_Idle_f2.png" id="12_v0d4m"]
+[ext_resource type="Texture2D" uid="uid://cfliuvaix4du7" path="res://assets/character_art/mageEnemy/Mage_Enemy_Default_Attack__f2.png" id="14_mttu1"]
+[ext_resource type="Texture2D" uid="uid://caksow3fm6wrh" path="res://assets/character_art/mageEnemy/Mage_Enemy_Default_Attack__f3.png" id="15_cla2n"]
 [ext_resource type="AudioStream" uid="uid://cxlk418h85qrq" path="res://characters/Beholder/beholderAudio.tres" id="21_haarf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s4pr6"]
@@ -65,6 +69,67 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a5lvk"]
 _data = {
 &"RESET": SubResource("Animation_kj6bn")
+}
+
+[sub_resource type="Animation" id="Animation_2bl5i"]
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("11_2bl5i"), ExtResource("14_mttu1"), ExtResource("15_cla2n")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-2.23517e-08),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -76)]
+}
+
+[sub_resource type="Animation" id="Animation_rb1av"]
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("11_hpj27"), ExtResource("12_v0d4m")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -24)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mttu1"]
+_data = {
+&"attack": SubResource("Animation_2bl5i"),
+&"idle": SubResource("Animation_rb1av")
 }
 
 [sub_resource type="Animation" id="Animation_1ynkq"]
@@ -212,7 +277,7 @@ libraries = {
 &"knightAnimations": ExtResource("4_jg2tr"),
 &"knightEnemyAnimations": ExtResource("9_ijenq"),
 &"mageAnimations": ExtResource("5_a5lvk"),
-&"mageEnemyAnimations": ExtResource("11_jvd5u"),
+&"mageEnemyAnimations": SubResource("AnimationLibrary_mttu1"),
 &"redSlimeAnimations": SubResource("AnimationLibrary_haarf"),
 &"slimeAnimations": SubResource("AnimationLibrary_ni625")
 }

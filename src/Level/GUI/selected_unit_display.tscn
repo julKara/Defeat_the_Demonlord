@@ -1,0 +1,241 @@
+[gd_scene load_steps=12 format=3 uid="uid://duc4fa4lsuh3c"]
+
+[ext_resource type="Script" uid="uid://dphxgq5nfqtio" path="res://src/Level/GUI/selected_unit_display.gd" id="1_figuq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e27of"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.152941, 0.152941, 0.152941, 0.901961)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.368627, 0.219608, 0.109804, 0.901961)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_figuq"]
+bg_color = Color(0.258824, 0.258824, 0.258824, 0.901961)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bjl4o"]
+bg_color = Color(0.380392, 0.694118, 0.176471, 0.901961)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_glo4g"]
+content_margin_left = 3.0
+content_margin_top = 2.0
+content_margin_right = 3.0
+content_margin_bottom = 2.0
+bg_color = Color(0.682353, 0.25098, 0.85098, 0.901961)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lnr5w"]
+content_margin_left = 3.0
+content_margin_top = 2.0
+content_margin_right = 3.0
+content_margin_bottom = 2.0
+bg_color = Color(0.313726, 0.564706, 0.827451, 0.901961)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hon8j"]
+content_margin_left = 3.0
+content_margin_top = 2.0
+content_margin_right = 3.0
+content_margin_bottom = 2.0
+bg_color = Color(0.392157, 0.32549, 0.286275, 0.901961)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.596078, 0.384314, 0.0901961, 0.901961)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2rci"]
+content_margin_left = 3.0
+content_margin_top = 2.0
+content_margin_right = 3.0
+content_margin_bottom = 2.0
+bg_color = Color(0.392157, 0.32549, 0.286275, 0.901961)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.596078, 0.384314, 0.0901961, 0.901961)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u37lq"]
+content_margin_left = 3.0
+content_margin_top = 2.0
+content_margin_right = 3.0
+content_margin_bottom = 2.0
+bg_color = Color(0.392157, 0.32549, 0.286275, 0.901961)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.596078, 0.384314, 0.0901961, 0.901961)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xugv6"]
+content_margin_left = 3.0
+content_margin_top = 2.0
+content_margin_right = 3.0
+content_margin_bottom = 2.0
+bg_color = Color(0.392157, 0.32549, 0.286275, 0.901961)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.596078, 0.384314, 0.0901961, 0.901961)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lfcah"]
+content_margin_left = 3.0
+content_margin_top = 2.0
+content_margin_right = 3.0
+content_margin_bottom = 2.0
+bg_color = Color(0.392157, 0.32549, 0.286275, 0.901961)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.596078, 0.384314, 0.0901961, 0.901961)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+anti_aliasing = false
+
+[node name="SelectDisplay" type="PanelContainer"]
+offset_right = 176.0
+offset_bottom = 96.0
+mouse_filter = 1
+script = ExtResource("1_figuq")
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_e27of")
+
+[node name="MainHBox" type="HBoxContainer" parent="Panel"]
+layout_mode = 2
+
+[node name="LeftCol" type="VBoxContainer" parent="Panel/MainHBox"]
+layout_mode = 2
+
+[node name="Portrait" type="TextureRect" parent="Panel/MainHBox/LeftCol"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MainHBox/LeftCol"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="Panel/MainHBox/LeftCol/VBoxContainer"]
+layout_mode = 2
+text = "John"
+
+[node name="ClassLabel" type="Label" parent="Panel/MainHBox/LeftCol/VBoxContainer"]
+layout_mode = 2
+text = "Mage"
+
+[node name="Lv" type="Label" parent="Panel/MainHBox/LeftCol/VBoxContainer"]
+layout_mode = 2
+text = "Lv. 1"
+
+[node name="CenterCol" type="VBoxContainer" parent="Panel/MainHBox"]
+layout_mode = 2
+
+[node name="HPBar" type="ProgressBar" parent="Panel/MainHBox/CenterCol"]
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_figuq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bjl4o")
+value = 70.0
+
+[node name="RangeRow" type="GridContainer" parent="Panel/MainHBox/CenterCol"]
+layout_mode = 2
+columns = 2
+
+[node name="AttackRangeLabel" type="Label" parent="Panel/MainHBox/CenterCol/RangeRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_glo4g")
+text = "range: 1"
+horizontal_alignment = 1
+
+[node name="MoveRangeLabel" type="Label" parent="Panel/MainHBox/CenterCol/RangeRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_lnr5w")
+text = "range: 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatsGrid" type="GridContainer" parent="Panel/MainHBox/CenterCol"]
+layout_mode = 2
+columns = 2
+
+[node name="PAtkLabel" type="Label" parent="Panel/MainHBox/CenterCol/StatsGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_hon8j")
+text = "Att: 100"
+horizontal_alignment = 1
+
+[node name="MAtkLabel" type="Label" parent="Panel/MainHBox/CenterCol/StatsGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_h2rci")
+text = "M_Att: 1"
+horizontal_alignment = 1
+
+[node name="PDefLabel" type="Label" parent="Panel/MainHBox/CenterCol/StatsGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_u37lq")
+text = "Def: 1"
+horizontal_alignment = 1
+
+[node name="MDefLabel" type="Label" parent="Panel/MainHBox/CenterCol/StatsGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_xugv6")
+text = "M_Def: 1"
+horizontal_alignment = 1
+
+[node name="CritLabel" type="Label" parent="Panel/MainHBox/CenterCol/StatsGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_lfcah")
+text = "Crit: 1"
+horizontal_alignment = 1

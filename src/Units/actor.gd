@@ -295,6 +295,11 @@ func tick_effects() -> void:
 			if effect.skill and effect.skill.has_method("remove_effect"):
 				effect.skill.remove_effect(self, effect)	# Remove effect on skills
 			active_effects.remove_at(i)	# Remove from list
+			
+	# Refresh display if this actor is currently shown # MAYBE REMOVE
+	#var turn_stats = get_tree().get_first_node_in_group("TurnStatsDisplay")
+	#if turn_stats and turn_stats.current_actor == self:
+		#turn_stats.refresh_current()
 
 # Called each turn to decrement cooldowns of skills
 func tick_cooldowns() -> void:
@@ -306,13 +311,22 @@ func tick_cooldowns() -> void:
 		if s and s.current_cooldown > 0:
 			s.current_cooldown -= 1	# Decrement cooldown
 			
-			# Just in canse
+			# Just in case
 			if s.current_cooldown < 0:
 				s.current_cooldown = 0
-
+	
+	# Refresh display if this actor is currently shown # MAYBE REMOVE
+	#var turn_stats = get_tree().get_first_node_in_group("TurnStatsDisplay")
+	#if turn_stats and turn_stats.current_actor == self:
+		#turn_stats.refresh_current()
+		
+	
 # --- Get functions ---
 func get_stats_resource() -> CharacterStats:
 	return stats
+
+func get_profile() -> UnitProfile:
+	return profile
 
 func get_sprite() -> Sprite2D:
 	return sprite_2d
