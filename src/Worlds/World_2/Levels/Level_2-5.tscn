@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=4 uid="uid://hkpgcieteteq"]
+[gd_scene load_steps=50 format=4 uid="uid://hkpgcieteteq"]
 
 [ext_resource type="Texture2D" uid="uid://bqmtavn12rhj2" path="res://assets/test_map5.png" id="1_vv3df"]
 [ext_resource type="PackedScene" uid="uid://cats61ytkbbvj" path="res://src/PathVisuals/draw_path.tscn" id="2_iwxyq"]
@@ -16,7 +16,10 @@
 [ext_resource type="Script" uid="uid://c5xlaf1onfe67" path="res://src/Level/GUI/use_skill_button.gd" id="12_wnk3o"]
 [ext_resource type="Script" uid="uid://b6oemt0bk5jyw" path="res://src/Level/GUI/stand_button.gd" id="13_kepf7"]
 [ext_resource type="Resource" uid="uid://b0ar83lqod7e4" path="res://characters/Healer/healerProfile.tres" id="13_n3xv8"]
+[ext_resource type="Resource" uid="uid://byndvh2eojkeh" path="res://characters/Mage/mageEnemyStats.tres" id="13_piprm"]
 [ext_resource type="Resource" uid="uid://b0nthq3t1klg" path="res://characters/DemonLord/demonLordProfile.tres" id="13_rh6du"]
+[ext_resource type="Resource" uid="uid://bephnmy5s5urh" path="res://characters/DemonLord/demonLordStats.tres" id="13_vm506"]
+[ext_resource type="Resource" uid="uid://b5bmi1atp4dnb" path="res://characters/Mage/mageEnemyProfile.tres" id="14_1rtpf"]
 [ext_resource type="Script" uid="uid://dous6wk318f1t" path="res://src/Level/GUI/victory_screen.gd" id="15_6pnqh"]
 [ext_resource type="PackedScene" uid="uid://d3enl3nxco4pd" path="res://src/Level/TurnTransition.tscn" id="15_cqthp"]
 [ext_resource type="Script" uid="uid://sddm7u5ng6mx" path="res://src/Level/GUI/game_over_screen.gd" id="16_q5u82"]
@@ -355,35 +358,6 @@ mag_def_gain = 1
 crit_gain = 1
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_piprm"]
-script = ExtResource("7_cqthp")
-curr_health = 500
-max_health = 500
-original_max_health = 500
-phys_attack = 50
-original_phys_attack = 50
-mag_attack = 50
-original_mag_attack = 50
-phys_defense = 90
-original_phys_defense = 90
-mag_defense = 90
-original_mag_defense = 90
-crit_chance = 10
-original_crit_chance = 10
-attack_range = 5
-original_attack_range = 5
-mobility = 0
-original_mobility = 0
-level = 0
-speed = 0.0
-health_gain = 0
-phys_atk_gain = 0
-phys_def_gain = 0
-mag_atk_gain = 0
-mag_def_gain = 0
-crit_gain = 0
-metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
-
 [sub_resource type="GDScript" id="GDScript_mfmxk"]
 script/source = "extends CanvasLayer
 
@@ -444,9 +418,11 @@ layer_1/name = "Effects2"
 tile_set = SubResource("TileSet_f3sb7")
 
 [node name="CharacterManager" type="Node2D" parent="TileMapLayer"]
+visible = false
 script = ExtResource("4_2fkj7")
 
 [node name="TurnManager" type="Node2D" parent="TileMapLayer"]
+visible = false
 script = ExtResource("5_3nfj0")
 max_turns = 25
 
@@ -473,15 +449,20 @@ profile = ExtResource("13_n3xv8")
 enemy_level = 5
 is_friendly = true
 
+[node name="enemy_unit2" parent="TileMapLayer/Actors" instance=ExtResource("6_rh6du")]
+position = Vector2(552, 648)
+stats = ExtResource("13_piprm")
+profile = ExtResource("14_1rtpf")
+enemy_level = 1
+
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("6_rh6du")]
 position = Vector2(1752, 456)
-stats = SubResource("Resource_piprm")
+stats = ExtResource("13_vm506")
 profile = ExtResource("13_rh6du")
 enemy_level = 1
 is_demon_lord = true
 
 [node name="ForegroundTileMapLayer2" type="TileMapLayer" parent="."]
-visible = false
 tile_map_data = PackedByteArray("AAAAAAsACAAAAAEAAAAAAAwACAAAAAIAAAAAAA0ACAAAAAMAAAAAAA4ACAAAAAQAAAAAAA8ACAAAAAQAAAAAABAACAAAAAQAAAABAAsACAABAAEAAAABAAwACAABAAIAAAABAA0ACAABAAMAAAABAA4ACAABAAQAAAABAA8ACAABAAQAAAABABAACAACAAQAAAACAAwACAABAAAAAAACAA0ACAADAAMAAAACAA4ACAAAAAQAAAACAA8ACAAAAAQAAAACABAACAADAAQAAAADAAwACAABAAAAAAADAA0ACAADAAMAAAADAA4ACAACAAQAAAADAA8ACAACAAQAAAADABAACAACAAQAAAAEAAwACAABAAAAAAAEAA0ACAADAAMAAAAEAA4ACAADAAQAAAAEAA8ACAADAAQAAAAEABAACAADAAQAAAAFAAwACAABAAAAAAAFAA0ACAAAAAMAAAAFAA4ACAABAAQAAAAFAA8ACAABAAQAAAAFABAACAABAAQAAAAGAAwACAABAAAAAAAGAA0ACAABAAMAAAAGAA4ACAAAAAQAAAAGAA8ACAACAAQAAAAGABAACAACAAQAAAAHAAwACAABAAAAAAAHAA0ACAAAAAMAAAAHAA4ACAABAAQAAAAHAA8ACAADAAQAAAAHABAACAADAAQAAAAIAAwACAABAAEAAAAIAA0ACAABAAAAAAAIAA4ACAABAAAAAAAIAA8ACAAAAAIAAAAIABAACAACAAQAAAAJAA8ACAABAAAAAAAJABAACAADAAQAAAAKAA8ACAABAAAAAAAKABAACAADAAQAAAALAA8ACAADAAAAAAALABAACAADAAQAAAAMAA8ACAADAAAAAAAMABAACAADAAQAAAANAA8ACAABAAAAAAANABAACAABAAQAAAAOAA8ACAADAAIAAAAOABAACAAAAAQAAAAOAAwACAAAAAEAAAAOAA0ACAABAAAAAAAOAA4ACAABAAAAAAAPAAwACAABAAAAAAAPAA0ACAAAAAMAAAAPAA4ACAABAAQAAAAPAA8ACAABAAQAAAAPABAACAACAAQAAAAQAAwACAABAAAAAAAQAA0ACAABAAMAAAAQAA4ACAAAAAQAAAAQAA8ACAAAAAQAAAAQABAACAACAAQAAAARAAwACAABAAAAAAARAA0ACAAAAAMAAAARAA4ACAABAAQAAAARAA8ACAABAAQAAAARABAACAACAAQAAAASAAwACAABAAAAAAASAA0ACAABAAMAAAASAA4ACAAAAAQAAAASAA8ACAAAAAQAAAASABAACAAAAAQAAAATAAwACAABAAEAAAATAA0ACAABAAAAAAATAA4ACAABAAAAAAATAA8ACAABAAAAAAATABAACAAAAAIAAAAUAA8ACAABAAEAAAAUABAACAABAAIAAAAVAA8ACAABAAAAAAAVABAACAAAAAMAAAAWAA8ACAABAAAAAAAWABAACAABAAMAAAAXAA8ACAABAAAAAAAXABAACAADAAMAAAAYAA8ACAADAAAAAAAYABAACAADAAMAAAAZAA8ACAABAAAAAAAZABAACAAAAAMAAAAaAA8ACAABAAAAAAAaABAACAABAAMAAAAbAA8ACAAAAAAAAAAbABAACAAAAAMAAAAcAA8ACAAAAAIAAAAcABAACAABAAMAAAAdAA8ACAABAAIAAAAdABAACAAAAAMAAAAeAA8ACAAAAAAAAAAeABAACAABAAMAAAAfAA8ACAABAAAAAAAfABAACAAAAAMAAAAgAA8ACAABAAAAAAAgABAACAABAAMAAAAhAA8ACAADAAAAAAAhABAACAAAAAMAAAAiAA8ACAADAAAAAAAiABAACAABAAMAAAAjAA8ACAADAAAAAAAjABAACAADAAMAAAAkAA8ACAAAAAAAAAAkABAACAABAAMAAAAlAA8ACAAAAAEAAAAlABAACAAAAAIAAAAmAA8ACAABAAEAAAAmABAACAABAAIAAAAnAA8ACAAAAAAAAAAnABAACAAAAAMAAAAcAA4ACAAAAAEAAAAdAA4ACAABAAEAAAA=")
 tile_set = SubResource("TileSet_f3sb7")
 
@@ -490,6 +471,7 @@ tile_map_data = PackedByteArray("AAADAAIAAQAEAAEAAAADAAMAAQAEAAIAAAAJAAMAAQAEAAI
 tile_set = SubResource("TileSet_2fkj7")
 
 [node name="GUI" type="CanvasLayer" parent="."]
+visible = false
 script = SubResource("GDScript_mfmxk")
 
 [node name="Margin" type="MarginContainer" parent="GUI"]
@@ -687,8 +669,10 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 
 [node name="TurnTransitionCanvas" parent="." instance=ExtResource("15_cqthp")]
+visible = false
 
 [node name="WinLossCondition" type="Node2D" parent="."]
+visible = false
 script = ExtResource("23_ff31n")
 
 [node name="WorldHandler" type="Node" parent="."]
@@ -696,6 +680,7 @@ script = ExtResource("24_5cnm2")
 world_script = ExtResource("25_fux7y")
 
 [node name="CameraController" type="Node2D" parent="."]
+visible = false
 script = ExtResource("26_nmv3c")
 
 [node name="Camera" type="Camera2D" parent="CameraController"]
