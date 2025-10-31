@@ -18,7 +18,7 @@ func apply(caster: Actor, target: Actor, skill: SkillResource) -> void:
 		return
 
 	# --- 1️. Heal logic
-	var heal_amount := caster_stats.curr_mag_defense
+	var heal_amount := caster_stats.curr_mag_defense * 0.8
 	target_stats.recieve_healing(heal_amount)
 
 	# --- 2. Update healthbar

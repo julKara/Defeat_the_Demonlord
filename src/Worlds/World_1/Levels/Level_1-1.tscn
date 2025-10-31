@@ -591,6 +591,11 @@ script = ExtResource("9_0yevp")
 [node name="VBoxContainer" type="VBoxContainer" parent="GUI/Margin/ActionsMenu"]
 layout_mode = 2
 
+[node name="Default_Attack" type="Button" parent="GUI/Margin/ActionsMenu/VBoxContainer"]
+layout_mode = 2
+text = "Attack"
+script = ExtResource("10_rveb5")
+
 [node name="Use_Skill" type="Button" parent="GUI/Margin/ActionsMenu/VBoxContainer"]
 layout_mode = 2
 text = "Skill"
@@ -624,11 +629,6 @@ layout_mode = 2
 
 [node name="PhysDefence" type="Label" parent="GUI/Margin/ActorInfo/VBoxContainer"]
 layout_mode = 2
-
-[node name="Default_Attack" type="Button" parent="GUI/Margin/ActorInfo"]
-layout_mode = 2
-text = "Attack"
-script = ExtResource("10_rveb5")
 
 [node name="VictoryScreen" type="PanelContainer" parent="GUI/Margin"]
 process_mode = 3

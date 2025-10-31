@@ -24,7 +24,7 @@
 [ext_resource type="Script" uid="uid://lvdowlbqk6fe" path="res://src/Level/GUI/actions_menu.gd" id="21_msbho"]
 [ext_resource type="Script" uid="uid://duw38t7v0nrgf" path="res://src/Level/GUI/default_attack.gd" id="22_sy66n"]
 [ext_resource type="Resource" uid="uid://b5bmi1atp4dnb" path="res://characters/Mage/mageEnemyProfile.tres" id="22_tmqri"]
-[ext_resource type="Resource" path="res://characters/Knight/knightEnemyProfile.tres" id="23_0n14j"]
+[ext_resource type="Resource" uid="uid://kcaxutpbj358" path="res://characters/Knight/knightEnemyProfile.tres" id="23_0n14j"]
 [ext_resource type="Script" uid="uid://c5xlaf1onfe67" path="res://src/Level/GUI/use_skill_button.gd" id="23_7qt81"]
 [ext_resource type="Script" uid="uid://b6oemt0bk5jyw" path="res://src/Level/GUI/stand_button.gd" id="24_tpdg8"]
 [ext_resource type="Script" uid="uid://dso7okpirndht" path="res://src/Level/GUI/actor_info.gd" id="25_dd76a"]
@@ -1094,7 +1094,7 @@ texture_region_size = Vector2i(48, 48)
 tile_size = Vector2i(48, 48)
 sources/1 = SubResource("TileSetAtlasSource_tlwt5")
 
-[sub_resource type="Resource" id="Resource_0n14j"]
+[sub_resource type="Resource" id="Resource_tmqri"]
 resource_name = "knightStats"
 script = ExtResource("16_0dq81")
 curr_health = 100
@@ -1124,7 +1124,7 @@ mag_def_gain = 0
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_tmqri"]
+[sub_resource type="Resource" id="Resource_6rdha"]
 resource_name = "mageStats"
 script = ExtResource("16_0dq81")
 curr_health = 100
@@ -1154,7 +1154,7 @@ mag_def_gain = 10
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_6rdha"]
+[sub_resource type="Resource" id="Resource_taonq"]
 resource_name = "healerStats"
 script = ExtResource("16_0dq81")
 curr_health = 90
@@ -1184,17 +1184,17 @@ mag_def_gain = 10
 crit_gain = 5
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_taonq"]
+[sub_resource type="Resource" id="Resource_b1xfh"]
 script = ExtResource("16_0dq81")
 curr_health = 150
 max_health = 150
 original_max_health = 150
 phys_attack = 20
 original_phys_attack = 20
-mag_attack = 100
-original_mag_attack = 100
-phys_defense = 40
-original_phys_defense = 40
+mag_attack = 90
+original_mag_attack = 90
+phys_defense = 30
+original_phys_defense = 30
 mag_defense = 80
 original_mag_defense = 80
 crit_chance = 15
@@ -1213,7 +1213,7 @@ mag_def_gain = 10
 crit_gain = 2
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_b1xfh"]
+[sub_resource type="Resource" id="Resource_y1god"]
 script = ExtResource("16_0dq81")
 curr_health = 90
 max_health = 130
@@ -1242,7 +1242,7 @@ mag_def_gain = 10
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_y1god"]
+[sub_resource type="Resource" id="Resource_w4e25"]
 script = ExtResource("16_0dq81")
 curr_health = 70
 max_health = 110
@@ -1271,7 +1271,7 @@ mag_def_gain = 5
 crit_gain = 1
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_w4e25"]
+[sub_resource type="Resource" id="Resource_gq15f"]
 script = ExtResource("16_0dq81")
 curr_health = 150
 max_health = 160
@@ -1300,7 +1300,7 @@ mag_def_gain = 5
 crit_gain = 2
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_gq15f"]
+[sub_resource type="Resource" id="Resource_3wtic"]
 script = ExtResource("16_0dq81")
 curr_health = 90
 max_health = 130
@@ -1329,7 +1329,7 @@ mag_def_gain = 10
 crit_gain = 0
 metadata/_custom_type_script = "uid://dfeqtmcp7uacl"
 
-[sub_resource type="Resource" id="Resource_3wtic"]
+[sub_resource type="Resource" id="Resource_07rh0"]
 script = ExtResource("16_0dq81")
 curr_health = 150
 max_health = 160
@@ -1431,55 +1431,55 @@ y_sort_enabled = true
 
 [node name="playable_unit2" parent="TileMapLayer/Actors" instance=ExtResource("15_7ivxv")]
 position = Vector2(168, 360)
-stats = SubResource("Resource_0n14j")
+stats = SubResource("Resource_tmqri")
 profile = ExtResource("18_8o57f")
 is_friendly = true
 
 [node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("15_7ivxv")]
 position = Vector2(72, 360)
-stats = SubResource("Resource_tmqri")
+stats = SubResource("Resource_6rdha")
 profile = ExtResource("17_vfokj")
 is_friendly = true
 
 [node name="playable_unit3" parent="TileMapLayer/Actors" instance=ExtResource("15_7ivxv")]
 position = Vector2(120, 456)
-stats = SubResource("Resource_6rdha")
+stats = SubResource("Resource_taonq")
 profile = ExtResource("19_sj2th")
 is_friendly = true
 
 [node name="enemy_unit" parent="TileMapLayer/Actors" instance=ExtResource("15_7ivxv")]
 position = Vector2(1032, 312)
-stats = SubResource("Resource_taonq")
+stats = SubResource("Resource_b1xfh")
 profile = ExtResource("19_yxt2i")
 enemy_level = 1
 
 [node name="enemy_unit3" parent="TileMapLayer/Actors" instance=ExtResource("15_7ivxv")]
 position = Vector2(1032, 408)
-stats = SubResource("Resource_b1xfh")
+stats = SubResource("Resource_y1god")
 profile = ExtResource("22_tmqri")
-enemy_level = 5
+enemy_level = 4
 
 [node name="enemy_unit4" parent="TileMapLayer/Actors" instance=ExtResource("15_7ivxv")]
-position = Vector2(648, 408)
-stats = SubResource("Resource_y1god")
+position = Vector2(552, 456)
+stats = SubResource("Resource_w4e25")
 profile = ExtResource("20_g357e")
 enemy_level = 5
 
 [node name="enemy_unit5" parent="TileMapLayer/Actors" instance=ExtResource("15_7ivxv")]
-position = Vector2(504, 504)
-stats = SubResource("Resource_w4e25")
+position = Vector2(456, 552)
+stats = SubResource("Resource_gq15f")
 profile = ExtResource("23_0n14j")
 enemy_level = 2
 
 [node name="enemy_unit6" parent="TileMapLayer/Actors" instance=ExtResource("15_7ivxv")]
 position = Vector2(360, 408)
-stats = SubResource("Resource_gq15f")
+stats = SubResource("Resource_3wtic")
 profile = ExtResource("22_tmqri")
-enemy_level = 5
+enemy_level = 4
 
 [node name="enemy_unit7" parent="TileMapLayer/Actors" instance=ExtResource("15_7ivxv")]
-position = Vector2(888, 504)
-stats = SubResource("Resource_3wtic")
+position = Vector2(936, 504)
+stats = SubResource("Resource_07rh0")
 profile = ExtResource("23_0n14j")
 enemy_level = 2
 

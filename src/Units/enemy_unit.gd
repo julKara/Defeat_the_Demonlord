@@ -180,6 +180,7 @@ func avoid_penalty(id_path: Array[Vector2i]):
 		
 	if move_pos != enemy_pos:
 		final_path.append(move_pos)	
+		print(final_path)
 		await perform_movement(final_path, 0)
 		# Looks better when it doesn't move too fast
 		await get_tree().create_timer(0.1).timeout
@@ -236,7 +237,7 @@ func check_if_occupied(id_path: Array[Vector2i]) -> bool:
 
 func perform_movement(id_path: Array[Vector2i], target_dist: int):
 	
-	if id_path.is_empty() == false && id_path.size() > 2:
+	if id_path.is_empty() == false and mobility > 0:
 		# Flip sprite based on move direction
 		calculate_direction(id_path)
 		

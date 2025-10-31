@@ -18,8 +18,8 @@ func apply(caster: Actor, _target: Actor, skill: SkillResource) -> void:
 		"curr_mobility": 2
 	}  
 	var buff_multiplier := {
-		"curr_mag_attack": 1.5, 
-		"curr_mag_defense": 1.5
+		"curr_mag_attack": 1.3, 
+		"curr_mag_defense": 1.3
 	}
 	
 	# Apply immediately (like in skill_resource)
