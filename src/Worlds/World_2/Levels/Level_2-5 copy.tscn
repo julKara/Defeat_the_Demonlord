@@ -723,7 +723,6 @@ position = Vector2(312, 456)
 stats = SubResource("Resource_2fcyv")
 profile = ExtResource("10_negw4")
 is_friendly = true
-turn_to_start_act = 0
 
 [node name="playable_unit" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
 position = Vector2(264, 504)
@@ -731,7 +730,6 @@ stats = SubResource("Resource_amktc")
 profile = ExtResource("11_4v0m7")
 enemy_level = 5
 is_friendly = true
-turn_to_start_act = 0
 
 [node name="playable_unit3" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
 position = Vector2(264, 408)
@@ -739,7 +737,6 @@ stats = SubResource("Resource_u4ocy")
 profile = ExtResource("12_vxxiq")
 enemy_level = 5
 is_friendly = true
-turn_to_start_act = 0
 
 [node name="enemy_unit2" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
 position = Vector2(552, 648)
@@ -753,7 +750,6 @@ position = Vector2(72, 456)
 stats = SubResource("Resource_2bk3a")
 profile = ExtResource("15_s1w74")
 enemy_level = 1
-turn_to_start_act = 0
 
 [node name="enemy_unit4" parent="TileMapLayer/Actors" instance=ExtResource("8_gtrv1")]
 position = Vector2(1608, 456)
@@ -810,7 +806,6 @@ stats = SubResource("Resource_kxehu")
 profile = ExtResource("14_mt6p0")
 enemy_level = 1
 is_demon_lord = true
-turn_to_start_act = 0
 
 [node name="GUI" type="CanvasLayer" parent="."]
 script = SubResource("GDScript_mfmxk")

@@ -142,10 +142,10 @@ func _calculate_damage(atk: CharacterStats, def: CharacterStats) -> float:
 		#print("Using magic")
 		damage = max(1, atk.curr_mag_attack - def.curr_mag_defense)
 	
-	# Doubles damage if preforming a crit
-	if randf() < float(atk.curr_crit_chance) / 100.0:
-		damage *= 1.4
-		print("\t\t\tCritical hit!")
+	## Doubles damage if preforming a crit	# SET BACK
+	#if randf() < float(atk.curr_crit_chance) / 100.0:
+		#damage *= 1.4
+		#print("\t\t\tCritical hit!")
 	
 	return damage
 	
@@ -154,10 +154,10 @@ func _calculate_demon_damage(atk: CharacterStats, def: CharacterStats) -> float:
 	
 	damage = max(1, atk.curr_phys_attack - def.curr_phys_defense) + max(1, atk.curr_mag_attack - def.curr_mag_defense)
 	
-	# Doubles damage if preforming a crit
-	if randf() < float(atk.curr_crit_chance) / 100.0:
-		damage *= 1.4
-		print("\t\t\tCritical hit!")
+	## Doubles damage if preforming a crit	SET BACK
+	#if randf() < float(atk.curr_crit_chance) / 100.0:
+		#damage *= 1.4
+		#print("\t\t\tCritical hit!")
 	
 	return damage
 
