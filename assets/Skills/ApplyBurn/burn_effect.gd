@@ -52,7 +52,6 @@ func tick_effect(effect: Dictionary, target: Actor) -> void:
 			target.stats.take_damage(dmg)
 			target.healthbar._set_health(target.get_stats_resource().curr_health)
 			_play_damage_sfx(target)
-			print("Took " , dmg, " nr of dmg!")
 	else:
 		# Just print if no take_damage yet implemented
 		print("Something wrong with burn_effect!")
