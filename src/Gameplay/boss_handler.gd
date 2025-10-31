@@ -31,3 +31,18 @@ func buff_demon_lord():
 	hp_bar.damagebar.max_value = demon_lord.stats.max_health
 	hp_bar.max_value = demon_lord.stats.max_health
 	hp_bar._set_health(demon_lord.stats.curr_health)
+
+# When killing an enemy, trigger debuff on demonlord (does stack - triggered by death-battle handler)
+func debuff_demon_lord():
+	
+	# Negate health-gain
+	demon_lord.stats.curr_health -= 5
+	demon_lord.stats.max_health -= 5
+	
+	# Debuff/Negate stat-gain for 2 rounds
+	demon_lord.stats.curr_mag_attack -= 4
+	demon_lord.stats.curr_mag_defense -= 4
+	demon_lord.stats.curr_phys_attack -= 4
+	demon_lord.stats.curr_phys_defense -= 4
+	
+	print("Demonlord debuffed!")

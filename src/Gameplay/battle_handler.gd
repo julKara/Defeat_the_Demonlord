@@ -12,6 +12,7 @@ var character_manager: Node2D
 var turn_manager: Node2D
 var win_loss_condition: Node2D
 var pause_button: Button
+var boss_handler: Node
 
 func _ready() -> void:
 	# Create our own AnimationTimer if not already present
@@ -177,6 +178,11 @@ func _handle_death(dead_actor: Actor) -> void:
 	
 	# Check if a win/loss condition has been met
 	win_loss_condition.check_conditions()
+	
+	# If there is a demonlord, when an enemy unit dies, debuff him
+	if boss_handler != null:
+		if dead_actor.is_friendly == false:
+			boss_handler.debuff_demon_lord()
 
 # --- UTIL ---
 func _find_level_nodes() -> void:
@@ -189,6 +195,12 @@ func _find_level_nodes() -> void:
 	# Find active level root (first child under root that isn’t an autoload)
 	for node in get_tree().root.get_children():
 		if node.name.begins_with("Level_"):  # adjust to your naming
+			var bh = node.get_node_or_null("BossHandler")
+			if bh:
+				#print("Is boss-fight")
+				boss_handler = bh
+			else:
+				boss_handler = null
 			var tilemap_layer = node.get_node_or_null("TileMapLayer")
 			if tilemap_layer:
 				character_manager = tilemap_layer.get_node_or_null("CharacterManager")

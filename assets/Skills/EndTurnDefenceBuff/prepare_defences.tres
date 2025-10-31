@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("1_njd11")
 skill_name = "Prepare Defences"
-description = "By passing a turn without attacking or using a skill, recieve a 30% heal and 20% defence(s) buff."
+description = "By passing a turn without attacking or using a skill, receive a 30% heal and 20% defence(s) buff."
 icon = ExtResource("2_pqw3n")
 skill_type = "Passive"
 ends_turn = false
@@ -25,4 +25,3 @@ stat_multiplier = {
 "curr_phys_defense": 0.0
 }
 effect_script = ExtResource("1_rrj5k")
-metadata/_custom_type_script = "uid://bnlafpamei5gh"

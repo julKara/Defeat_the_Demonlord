@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_nycdk")
 skill_name = "Pocket Sand"
-description = "Decreases targeted the enemy's physical stats by 20% and magic stats by 25%."
+description = "Decreases targeted the enemy's attack stats by 20% and defence stats by 25%."
 icon = ExtResource("1_35mf3")
 skill_type = "Active"
 ends_turn = true
