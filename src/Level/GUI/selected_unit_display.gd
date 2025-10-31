@@ -8,6 +8,7 @@ class_name SelectDisplay
 @onready var lv_label: Label = $Panel/MainHBox/LeftCol/VBoxContainer/Lv
 
 @onready var hp_bar: ProgressBar = $Panel/MainHBox/CenterCol/HPBar
+@onready var h_ptext: Label = $Panel/MainHBox/CenterCol/HPBar/HPtext
 @onready var atk_range_label: Label = $Panel/MainHBox/CenterCol/RangeRow/AttackRangeLabel
 @onready var move_range_label: Label = $Panel/MainHBox/CenterCol/RangeRow/MoveRangeLabel
 
@@ -99,14 +100,21 @@ func show_for_actor(actor: Node) -> void:
 # Update HP bar
 func _update_hp(stats) -> void:
 	
-	var curr_he = stats.curr_health if "curr_health" in stats else 0
-	var max_he = stats.max_health if "max_health" in stats else 1
-	
-	var percent = 0.0
+	var curr_he : int = stats.curr_health if "curr_health" in stats else 0
+	var max_he :int = stats.max_health if "max_health" in stats else 1
+
+	var percent := 0.0
 	if max_he > 0:
 		percent = float(curr_he) / float(max_he) * 100.0
+
+	# Make sure the ProgressBar's range matches percent (0..100)
+	hp_bar.min_value = 0
+	hp_bar.max_value = 100
 	hp_bar.value = clamp(percent, 0.0, 100.0)
-	hp_bar.tooltip_text = "%d / %d" % [curr_he, max_he]
+
+	# Update overlay label
+	h_ptext.text = "%d / %d" % [curr_he, max_he]
+
 
 # Update ranges row
 func _update_ranges(stats) -> void:

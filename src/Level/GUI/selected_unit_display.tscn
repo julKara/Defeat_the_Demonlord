@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://duc4fa4lsuh3c"]
+[gd_scene load_steps=13 format=3 uid="uid://duc4fa4lsuh3c"]
 
 [ext_resource type="Script" uid="uid://dphxgq5nfqtio" path="res://src/Level/GUI/selected_unit_display.gd" id="1_figuq"]
 
@@ -20,6 +20,7 @@ corner_radius_bottom_left = 1
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_figuq"]
+content_margin_top = 16.0
 bg_color = Color(0.258824, 0.258824, 0.258824, 0.901961)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bjl4o"]
@@ -29,6 +30,10 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 anti_aliasing = false
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_figuq"]
+content_margin_top = 2.0
+content_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_glo4g"]
 content_margin_left = 3.0
@@ -178,9 +183,27 @@ layout_mode = 2
 
 [node name="HPBar" type="ProgressBar" parent="Panel/MainHBox/CenterCol"]
 layout_mode = 2
+size_flags_vertical = 1
 theme_override_styles/background = SubResource("StyleBoxFlat_figuq")
 theme_override_styles/fill = SubResource("StyleBoxFlat_bjl4o")
 value = 70.0
+show_percentage = false
+
+[node name="HPtext" type="Label" parent="Panel/MainHBox/CenterCol/HPBar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -26.5
+offset_top = -8.0
+offset_right = 26.5
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_figuq")
+text = "70/100"
 
 [node name="RangeRow" type="GridContainer" parent="Panel/MainHBox/CenterCol"]
 layout_mode = 2
