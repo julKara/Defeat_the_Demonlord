@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_ycuwj")
 skill_name = "Hold Person"
-description = "Reduce enemy targets mobility-range to 0 for a turn."
+description = "Reduce targets mobility-range to 0 for a turn."
 skill_type = "Active"
 ends_turn = true
 target_type = "Enemy"
